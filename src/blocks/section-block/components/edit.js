@@ -31,7 +31,7 @@ export default class Edit extends Component {
         <Placeholder
           key="placeholder"
           label={__(
-            "Responsive Block Editor Addons",
+            "Responsive Template Library",
             "responsive-block-editor-addons"
           )}
           instructions={__(
