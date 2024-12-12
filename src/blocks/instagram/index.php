@@ -88,7 +88,7 @@ function rbea_instagram_render_callback( array $attributes ) {
 		$insta_posts = $result->data;
 	}
 
-	$image_container = '<div class="responsive-block-editor-addons-block-instagram block-' . $attributes['block_id'] . '">
+	$image_container = '<div class="responsive-block-editor-addons-block-instagram block-' . esc_attr( $attributes['block_id'] ) . '">
     <div class="responsive-block-editor-addons-instagram-wrapper">
 	<div class="responsive-block-editor-addons-instagram-posts-container responsive-block-editor-addons-grid">';
 
