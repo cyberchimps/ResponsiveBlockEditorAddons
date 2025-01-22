@@ -1657,84 +1657,79 @@ export default class Inspector extends Component {
               title={__("Spacing", "responsive-block-editor-addons")}
               initialOpen={false}
             >
-              <PanelBody
-                title={__("Margin", "responsive-block-editor-addons")}
-                initialOpen={true}
-              >
                 <ResponsiveNewMarginControl
                   attrNameTemplate="block%s"
                   resetValues={blockMarginResetValues}
                   {...this.props}
                 />
-              </PanelBody>
-
-              <PanelBody
-                initialOpen={false}
-                title={__("Padding", "responsive-block-editor-addons")}
-              >
-                <TabPanel
-                  className="responsive-block-editor-addons-inspect-tabs 
-                  responsive-block-editor-addons-inspect-tabs-col-2  
-                  responsive-block-editor-addons-color-inspect-tabs"
-                  activeClass="active-tab"
-                  initialTabName="front" // Set the default active tab here
-                  tabs={[
-                    {
-                      name: "empty",
-                      title: __("", "responsive-block-editor-addons"),
-                      className: "responsive-block-editor-addons-empty-tab",
-                    },
-                    {
-                      name: "front",
-                      title: __("Front", "responsive-block-editor-addons"),
-                      className: "responsive-block-editor-addons-normal-tab",
-                    },
-                    {
-                      name: "empty",
-                      title: __("", "responsive-block-editor-addons"),
-                      className: "responsive-block-editor-addons-empty-tab",
-                    },
-                    {
-                      name: "back",
-                      title: __("Back", "responsive-block-editor-addons"),
-                      className: "responsive-block-editor-addons-hover-tab",
-                    },
-                    {
-                      name: "empty",
-                      title: __("", "responsive-block-editor-addons"),
-                      className: "responsive-block-editor-addons-empty-tab",
-                    },
-                  ]}
-                >
-                  {(tabName) => {
-                    let tabout;
-                    if ("back" === tabName.name) {
-                      tabout = (
-                        <Fragment>
-                          <ResponsiveNewPaddingControl
-                            attrNameTemplate="back%s"
-                            resetValues={backFlipPaddingResetValues}
-                            {...this.props}
-                          />
-                        </Fragment>
-                      );
-                    } else if( "front" === tabName.name ) {
-                      tabout = (
-                        <Fragment>
-                          <ResponsiveNewPaddingControl
-                            attrNameTemplate="front%s"
-                            resetValues={frontFlipPaddingResetValues}
-                            {...this.props}
-                          />
-                        </Fragment>
-                      );
-                    } else {
-                      tabout = emptyColorControl;
-                    }
-                    return <div>{tabout}</div>;
-                  }}
-                </TabPanel>
-              </PanelBody>
+                <div className="responsive-block-editor-addons-spacing-inspect-tabs-control-container">
+                  <TabPanel
+                    className="responsive-block-editor-addons-inspect-tabs 
+                    responsive-block-editor-addons-inspect-tabs-col-2  
+                    responsive-block-editor-addons-color-inspect-tabs"
+                    activeClass="active-tab"
+                    initialTabName="front" // Set the default active tab here
+                    tabs={[
+                      {
+                        name: "empty-1",
+                        title: __("", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-empty-tab",
+                      },
+                      {
+                        name: "front",
+                        title: __("Front", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-normal-tab",
+                      },
+                      {
+                        name: "empty-2",
+                        title: __("", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-empty-tab",
+                      },
+                      {
+                        name: "back",
+                        title: __("Back", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-hover-tab",
+                      },
+                      {
+                        name: "empty-3",
+                        title: __("", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-empty-tab",
+                      },
+                    ]}
+                  >
+                    {(tabName) => {
+                      let tabout;
+                      if ("back" === tabName.name) {
+                        tabout = (
+                          <Fragment>
+                            <div className="responsive-block-editor-addons-flipbox-inspector-tabs">
+                              <ResponsiveNewPaddingControl
+                                attrNameTemplate="back%s"
+                                resetValues={backFlipPaddingResetValues}
+                                {...this.props}
+                              />
+                            </div>
+                          </Fragment>
+                        );
+                      } else if( "front" === tabName.name ) {
+                        tabout = (
+                          <Fragment>
+                            <div className="responsive-block-editor-addons-flipbox-inspector-tabs">
+                              <ResponsiveNewPaddingControl
+                                attrNameTemplate="front%s"
+                                resetValues={frontFlipPaddingResetValues}
+                                {...this.props}
+                              />
+                            </div>
+                          </Fragment>
+                        );
+                      } else {
+                        tabout = emptyColorControl;
+                      }
+                      return <div>{tabout}</div>;
+                    }}
+                  </TabPanel>
+                </div>
             </PanelBody>
           </InspectorTab>
           <InspectorTab key={"advance"}>

@@ -151,3 +151,28 @@
     flex-basis: 25%;
   }
 }
+
+.rbea-inspector-tab {
+  .responsive-block-editor-addons-spacing-inspect-tabs-control-container {
+    margin-top: 32px;
+    .responsive-block-editor-addons-color-inspect-tabs {
+      .components-tab-panel__tabs {
+        margin-bottom: 0px;
+      }
+    }
+    .responsive-block-editor-addons-flipbox-inspector-tabs {
+        > .responsive-size-type-field__common-tabs {
+          .components-tab-panel__tabs {
+            position: relative;
+            text-align: right;
+            margin-left: 0px;
+            margin-right: 20px;
+            margin-bottom: 0px;
+            top: 22px;
+            width: auto;
+            display: block;
+          }
+      }
+    }
+  }
+}

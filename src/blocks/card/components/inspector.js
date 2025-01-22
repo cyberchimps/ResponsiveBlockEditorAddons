@@ -1490,7 +1490,7 @@ export default class Inspector extends Component {
                   initialTabName="normal" // Set the default active tab here
                   tabs={[
                     {
-                      name: "empty",
+                      name: "empty-1",
                       title: __("", "responsive-block-editor-addons"),
                       className: "responsive-block-editor-addons-empty-tab",
                     },
@@ -1500,7 +1500,7 @@ export default class Inspector extends Component {
                       className: "responsive-block-editor-addons-normal-tab",
                     },
                     {
-                      name: "empty",
+                      name: "empty-2",
                       title: __("", "responsive-block-editor-addons"),
                       className: "responsive-block-editor-addons-empty-tab",
                     },
@@ -1510,7 +1510,7 @@ export default class Inspector extends Component {
                       className: "responsive-block-editor-addons-hover-tab",
                     },
                     {
-                      name: "empty",
+                      name: "empty-3",
                       title: __("", "responsive-block-editor-addons"),
                       className: "responsive-block-editor-addons-empty-tab",
                     },
