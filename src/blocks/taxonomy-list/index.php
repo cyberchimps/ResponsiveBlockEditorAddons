@@ -551,10 +551,11 @@ add_action( 'init', 'responsive_block_editor_addons_register_taxonomy_list' );
  */
 function responsive_block_editor_addons_render_taxonomy_list( $attributes ) {
 	$layout     = $attributes['layout'];
-	$block_id   = $attributes['block_id'];
+	$helper     = Responsive_Block_Editor_Addons_Helper::get_instance();
+	$block_id   = $helper->rba_sanitize_uuid( $attributes['block_id'] );
 	$main_class = 'responsive-block-editor-addons-block-taxonomy-list block-' . $block_id;
 	if ( isset( $attributes['className'] ) ) {
-		$main_class .= ' ' . $attributes['className'];
+		$main_class .= ' ' . sanitize_html_class( $attributes['className'] );
 	}
 	ob_start();
 	?>
@@ -595,6 +596,10 @@ function responsive_block_editor_addons_render_grid_layout( $attributes ) {
 	$taxonomy_type = $attributes['taxonomyType'];
 	$show_count    = $attributes['showPostCount'];
 	$title_tag     = $attributes['titleTag'];
+
+	$helper                = Responsive_Block_Editor_Addons_Helper::get_instance();
+	$array_of_allowed_HTML = array( 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' );
+	$title_tag             = $helper->rbea_post_title_tag_allowed_html( $title_tag, $array_of_allowed_HTML, 'section' );
 
 	$pt            = get_post_type_object( $post_type );
 	$singular_name = $pt->labels->singular_name;
@@ -659,6 +664,10 @@ function responsive_block_editor_addons_render_list_layout( $attributes ) {
 	$show_count      = $attributes['showPostCount'];
 	$title_tag       = $attributes['titleTag'];
 	$separator_style = $attributes['separatorStyle'];
+
+	$helper                = Responsive_Block_Editor_Addons_Helper::get_instance();
+	$array_of_allowed_HTML = array( 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' );
+	$title_tag             = $helper->rbea_post_title_tag_allowed_html( $title_tag, $array_of_allowed_HTML, 'section' );
 
 	$pt            = get_post_type_object( $post_type );
 	$singular_name = $pt->labels->singular_name;
@@ -729,10 +738,10 @@ function responsive_block_editor_addons_render_list_layout( $attributes ) {
  * @return array $attributes
  */
 function responsive_block_editor_addons_sanitize_title_tag_taxonomy_list( $attributes ) {
-	$main_rbea_class         = new Responsive_Block_Editor_Addons();
+	$helper                  = Responsive_Block_Editor_Addons_Helper::get_instance();
 	$array_of_allowed_HTML   = array( 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', );
 	$taxonomy_list_title_tag = $attributes['titleTag'];
-	$taxonomy_list_title_tag = $main_rbea_class->rbea_post_title_tag_allowed_html( $taxonomy_list_title_tag, $array_of_allowed_HTML, 'div' );
+	$taxonomy_list_title_tag = $helper->rbea_post_title_tag_allowed_html( $taxonomy_list_title_tag, $array_of_allowed_HTML, 'div' );
 	$attributes['titleTag']  = $taxonomy_list_title_tag;
 	return $attributes;
 }

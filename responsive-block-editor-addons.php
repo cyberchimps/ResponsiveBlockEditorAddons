@@ -21,6 +21,9 @@ define( 'RESPONSIVE_BLOCK_EDITOR_ADDONS_SEVEN_DAYS_IN_SECONDS', 604800 );
 // Responsive Block Editor Addons plugin's main file.
 require plugin_dir_path( __FILE__ ) . 'includes/class-responsive-block-editor-addons.php';
 
+// Responsive Block Editor Addons plugin's helper file.
+require plugin_dir_path( __FILE__ ) . 'helper/class-responsive-block-editor-addons-helper.php';
+
 /**
  * The code that runs during plugin activation.
  */
