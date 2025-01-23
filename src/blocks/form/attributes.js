@@ -128,13 +128,8 @@ const attributes = {
     }
   },
   formButtonBorderRadius: {
-    type: "object",
-    default: {
-      top: '4px',
-      left: '4px',
-      right: '4px',
-      bottom: '4px',
-    }
+    type: "number",
+    default: 4,
   },
   formButtonTopRadius: {
     type: "number",
@@ -241,13 +236,8 @@ const attributes = {
     default: "",
   },
   formBorderRadius: {
-    type: "object",
-    default: {
-      top: '4px',
-      left: '4px',
-      right: '4px',
-      bottom: '4px',
-    }
+    type: "number",
+    default: 4,
   },
   formTopRadius: {
     type: "number",

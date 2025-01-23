@@ -8,6 +8,8 @@ import renderSVG from "../../../renderIcon";
 import ResponsiveBlocksIcon from "../../../ResponsiveBlocksIcon.json";
 import React from "react";
 import EditorStyles from "./editor-styles";
+import counterUp from "counterup2";
+require("waypoints/lib/noframework.waypoints.js");
 
 /**
  * WordPress dependencies
@@ -55,13 +57,42 @@ export default class Edit extends Component {
     this.props.setAttributes({ block_id: this.props.clientId });
     this.props.setAttributes({ classMigrate: true });
 
-    // Pushing Style tag for this block css.
     const $style = document.createElement("style");
-    $style.setAttribute(
-      "id",
-      "responsive-block-editor-addons-count-up-style-" + this.props.clientId
-    );
+    $style.setAttribute("id", `responsive-block-editor-addons-count-up-style-${this.props.clientId}`);
     document.head.appendChild($style);
+
+    // Using MutationObserver instead of setTimeout
+    const observer = new MutationObserver(() => {
+      this.handleAmountChange();
+      observer.disconnect(); // Stop observing once changes are detected and handled
+    });
+  
+    // Observe the editor for changes in child nodes
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    }); 
+  }
+
+  handleAmountChange() {
+    const elems = document.querySelectorAll(`[id^="responsive-count-item__amount-${this.props.clientId}-"]`);
+
+    // Initialize Intersection Observer for better performance
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const elem = entry.target;
+                elem.classList.add("responsive-countup--hide");
+                
+                counterUp(elem); // Start the animation
+                elem.classList.remove("responsive-countup--hide");
+                observer.unobserve(elem); // Stop observing after animation triggers
+            }
+        });
+    }, { threshold: 0.75 }); // Trigger when 75% of the element is visible
+
+    // Observe all targeted elements
+    elems.forEach(elem => observer.observe(elem));
   }
 
   render() {
@@ -157,6 +188,7 @@ export default class Edit extends Component {
                   <RichText
                   key={`count-up-price-${index}`}
                     tagName="div"
+                    id={`responsive-count-item__amount-${this.props.clientId}-${index}`}
                     className="responsive-count-item__amount"
                     data-duration="1000"
                     data-delay="16"

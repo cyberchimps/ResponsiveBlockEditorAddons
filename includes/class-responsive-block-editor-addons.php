@@ -1129,7 +1129,7 @@ class Responsive_Block_Editor_Addons {
 		} elseif ( false === (bool) get_transient( 'responsive_block_editor_addons_ask_review_flag' ) && false === get_option( 'responsive_block_editor_addons_review_notice_dismissed' ) ) {
 			$image_url = plugins_url( 'admin/images/responsive-blocks.svg', __DIR__ );
 			echo sprintf(
-				'<div class="notice rbea-notice-warning rbea-ask-for-review-notice">
+				'<div class="notice notice-info rbea-ask-for-review-notice">
 					<div class="rbea-notice-content-wrapper">
 						<div class="rbea-notice-image">
 							<img src="%8$s" class="custom-logo" alt="Responsive Blocks" itemprop="logo">

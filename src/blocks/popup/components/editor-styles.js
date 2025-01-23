@@ -486,6 +486,7 @@ function EditorStyles(props) {
       'margin-right': generateCSSUnit(buttonRightMargin, "px"),
       'margin-bottom': generateCSSUnit(buttonBottomMargin, "px"),
       'margin-left': generateCSSUnit(buttonLeftMargin, "px"),
+      'justify-content': popupTriggerAlign,
     };
     mobile_selectors[" .responsive-block-editor-addons-popup-trigger-wrap"]= {
       'padding-top': generateCSSUnit(buttonTopPaddingMobile, "px"),
@@ -496,6 +497,7 @@ function EditorStyles(props) {
       'margin-right': generateCSSUnit(buttonRightMarginMobile, "px"),
       'margin-bottom': generateCSSUnit(buttonBottomMarginMobile, "px"),
       'margin-left': generateCSSUnit(buttonLeftMarginMobile, "px"),
+      'justify-content': popupTriggerAlignMobile,
     };
     tablet_selectors[" .responsive-block-editor-addons-popup-trigger-wrap"]= {
       'padding-top': generateCSSUnit(buttonTopPaddingTablet, "px"),
@@ -506,6 +508,7 @@ function EditorStyles(props) {
       'margin-right': generateCSSUnit(buttonRightMarginTablet, "px"),
       'margin-bottom': generateCSSUnit(buttonBottomMarginTablet, "px"),
       'margin-left': generateCSSUnit(buttonLeftMarginTablet, "px"),
+      "justify-content": popupTriggerAlignTablet,
     };
   }
 

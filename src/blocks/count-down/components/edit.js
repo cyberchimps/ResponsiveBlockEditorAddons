@@ -49,6 +49,55 @@ class Edit extends Component {
 		 "responsive-block-editor-addons-count-down-style-" + this.props.clientId
 	   );
 	   document.head.appendChild($style);
+
+	   // Start the timer after block gets mounted
+	   this.startTimer();
+	 }
+
+	 startTimer() {
+	   const { clientId, setAttributes } = this.props;
+	   const { date } = this.props.attributes;
+
+	   let dateObj = new Date();
+	   dateObj.setDate(dateObj.getDate() + 30);
+	   if ( date ) {
+		dateObj = new Date( date );
+	   }
+
+		// ignore invalid date
+		if (!dateObj) return;
+		
+		let time = dateObj.getTime();
+  
+		const counter = () => {
+		  let now = new Date().getTime();
+		  let currentUtcOffset = moment(dateObj).utcOffset() * 60 * 1000;
+  
+		  let timer = new Date(time - now - currentUtcOffset);
+  
+		  if (time < now) {
+			setAttributes({ days: "0", hours: "0", minutes: "0", seconds: "0" });
+			return;
+		  }
+  
+		  // Calculate days, hours, minutes and seconds
+		  let oneDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * miliseconds
+		  let days = Math.floor((time - now) / oneDay).toString();
+		  let hours = timer.getHours().toString();
+		  let minutes = timer.getMinutes().toString();
+		  let seconds = timer.getSeconds().toString();
+  
+		  setAttributes({days, hours, minutes, seconds });
+		};
+  
+		// Clear interval if countdown already exists
+		if (window[clientId]) {
+		  clearInterval(window[clientId]);
+		}
+
+		if (clientId) {
+		  window[clientId] = setInterval(counter, 1000);
+		}
 	 }
 
 	render() {

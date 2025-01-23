@@ -77,11 +77,6 @@
     position: relative;
 }
 
-.rbea-ask-for-review-notice.rbea-notice-warning {
-    border-left-color: #00a32a;
-    border-left-width: 6px;
-}
-
 .rbea-ask-for-review-notice .rbea-notice-content-wrapper {
     display: flex;
     gap: 30px;

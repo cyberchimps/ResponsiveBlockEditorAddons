@@ -134,6 +134,8 @@ class LatestPostsBlock extends Component {
     };
 
     function NextArrow(props) {
+      const { onClick } = props;
+
       return (
         <button
           type="button"
@@ -142,6 +144,7 @@ class LatestPostsBlock extends Component {
           aria-label="Next"
           tabIndex="0"
           role="button"
+          onClick={ onClick }
         >
           <Dashicon
             icon="arrow-right-alt2"
@@ -154,6 +157,8 @@ class LatestPostsBlock extends Component {
     }
 
     function PrevArrow(props) {
+      const { onClick } = props;
+
       return (
         <button
           type="button"
@@ -162,6 +167,7 @@ class LatestPostsBlock extends Component {
           aria-label="Previous"
           tabIndex="0"
           role="button"
+          onClick={ onClick }
         >
           <Dashicon
             icon="arrow-left-alt2"
@@ -194,8 +200,8 @@ class LatestPostsBlock extends Component {
       dots: dots,
       rtl: false,
       draggable: false,
-      nextArrow: <NextArrow arrowSize={arrowSize} />,
-      prevArrow: <PrevArrow arrowSize={arrowSize} />,
+      nextArrow: <NextArrow arrowSize={arrowSize} onClick={() => this.next()}/>,
+      prevArrow: <PrevArrow arrowSize={arrowSize} onClick={() => this.previous()}/>,
       responsive: [
         {
           breakpoint: 976,

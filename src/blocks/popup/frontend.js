@@ -36,7 +36,8 @@
             }
 
             $('.responsive-block-editor-addons-popup-modal-trigger').on('click', function(e) {
-                popupId = e.target.dataset.triggerId.replace(/^trigger-/i, "")
+                let targetElement = e.target.closest('.responsive-block-editor-addons-popup-modal-trigger');
+                popupId = targetElement.dataset.triggerId.replace(/^trigger-/i, "")
                 openModal(popupId)
             });
 

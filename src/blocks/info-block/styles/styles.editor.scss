@@ -1204,6 +1204,9 @@ i.fipicon-angle-left:before {
   color: #424242;
 }
 
+.components-button.editor-document-bar__back.is-compact.has-text.has-icon{
+  z-index: 9999;
+}
 .components-toggle-control__help {
   margin-left: 0px;
 }
