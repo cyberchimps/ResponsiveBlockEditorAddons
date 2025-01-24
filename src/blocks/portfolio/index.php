@@ -132,9 +132,9 @@ function responsive_block_editor_addons_render_block_core_latest_posts_portfolio
 				}
 			}
 
-			$main_class = new Responsive_Block_Editor_Addons();
+			$helper                = Responsive_Block_Editor_Addons_Helper::get_instance();
 			$array_of_allowed_HTML = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'span', 'p');
-			$post_title_tag        = $main_class->rbea_post_title_tag_allowed_html( $post_title_tag, $array_of_allowed_HTML, 'h3' );
+			$post_title_tag        = $helper->rbea_post_title_tag_allowed_html( $post_title_tag, $array_of_allowed_HTML, 'h3' );
 
 			/* Get the featured image */
 
@@ -160,7 +160,7 @@ function responsive_block_editor_addons_render_block_core_latest_posts_portfolio
 		$class = "block-id-{$attributes['block_id']} responsive-block-editor-addons-block-portfolio featured{$attributes['postType']}";
 
 		if ( isset( $attributes['className'] ) ) {
-			$class .= ' ' . $attributes['className'];
+			$class .= ' ' . sanitize_html_class( $attributes['className'] );
 		}
 
 		/* Layout orientation class */
@@ -189,8 +189,6 @@ function responsive_block_editor_addons_render_block_core_latest_posts_portfolio
 		} else {
 			$section_title = null;
 		}
-
-		$main_class = new Responsive_Block_Editor_Addons();
 
 		$paginations_markup = '';
 
