@@ -611,7 +611,7 @@ if (!gridIsRadiusValueUpdated) {
                       {
                         name: "empty-2",
                         title: __("", "responsive-block-editor-addons"),
-                        className: "responsive-block-editor-addons-empty-tab",
+                        className: "responsive-block-editor-addons-empty-tab-middle",
                       },
                       {
                         name: "hover",

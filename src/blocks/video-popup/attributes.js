@@ -312,5 +312,9 @@ const attributes = {
 		type: "number",
 		default: '',
 	},
+  videoUploadType: {
+    type: "string",
+    default: "none",
+  },
 };
 export default attributes;

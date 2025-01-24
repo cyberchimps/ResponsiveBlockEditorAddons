@@ -574,343 +574,42 @@ export default class Inspector extends Component {
 					{...this.props}
 				/>
 				{resctaType === "text" && (
-					<PanelBody
-						title={__(
-						"CTA Text Typography",
-						"responsive-block-editor-addons"
-						)}
-						initialOpen={false}
-					>
-						<SelectControl
-						label={__("Font Family", "responsive-block-editor-addons")}
-						options={fontOptions}
-						value={buttonTextFontFamily}
-						onChange={(value) => {
-							setAttributes({
-							buttonTextFontFamily: value,
-							}),
-							loadGoogleFont(value);
-						}}
-						/>
-						<TabPanel
-						className=" responsive-size-type-field-tabs  responsive-size-type-field__common-tabs  responsive-inline-margin"
-						activeClass="active-tab"
-						tabs={[
-							{
-							name: "desktop",
-							title: <Dashicon icon="desktop" />,
-							className:
-								" responsive-desktop-tab  responsive-responsive-tabs",
-							},
-							{
-							name: "tablet",
-							title: <Dashicon icon="tablet" />,
-							className:
-								" responsive-tablet-tab  responsive-responsive-tabs",
-							},
-							{
-							name: "mobile",
-							title: <Dashicon icon="smartphone" />,
-							className:
-								" responsive-mobile-tab  responsive-responsive-tabs",
-							},
-						]}
-						>
-						{(tab) => {
-							let tabout;
-
-							if ("mobile" === tab.name) {
-							tabout = (
-								<Fragment>
-								<RbeaRangeControl
-									label={__(
-									"Font Size",
-									"responsive-block-editor-addons"
-									)}
-									min={0}
-									max={500}
-									value={buttonTextFontSizeMobile}
-									onChange={(value) =>
-									setAttributes({
-										buttonTextFontSizeMobile: value,
-									})
-									}
-								/>
-								</Fragment>
-							);
-							} else if ("tablet" === tab.name) {
-							tabout = (
-								<Fragment>
-								<RbeaRangeControl
-									label={__(
-									"Font Size",
-									"responsive-block-editor-addons"
-									)}
-									min={0}
-									max={500}
-									value={buttonTextFontSizeTablet}
-									onChange={(value) =>
-									setAttributes({
-										buttonTextFontSizeTablet: value,
-									})
-									}
-								/>
-								</Fragment>
-							);
-							} else {
-							tabout = (
-								<Fragment>
-								<RbeaRangeControl
-									label={__(
-									"Font Size",
-									"responsive-block-editor-addons"
-									)}
-									min={0}
-									max={500}
-									value={buttonTextFontSize}
-									onChange={(value) =>
-									setAttributes({
-										buttonTextFontSize: value,
-									})
-									}
-								/>
-								</Fragment>
-							);
-							}
-
-							return <div>{tabout}</div>;
-						}}
-						</TabPanel>
-						<SelectControl
-						label={__("Font Weight", "responsive-block-editor-addons")}
-						options={[
-							{
-							value: "100",
-							label: __("100", "responsive-block-editor-addons"),
-							},
-							{
-							value: "200",
-							label: __("200", "responsive-block-editor-addons"),
-							},
-							{
-							value: "300",
-							label: __("300", "responsive-block-editor-addons"),
-							},
-							{
-							value: "400",
-							label: __("400", "responsive-block-editor-addons"),
-							},
-							{
-							value: "500",
-							label: __("500", "responsive-block-editor-addons"),
-							},
-							{
-							value: "600",
-							label: __("600", "responsive-block-editor-addons"),
-							},
-							{
-							value: "700",
-							label: __("700", "responsive-block-editor-addons"),
-							},
-							{
-							value: "800",
-							label: __("800", "responsive-block-editor-addons"),
-							},
-							{
-							value: "900",
-							label: __("900", "responsive-block-editor-addons"),
-							},
-						]}
-						value={buttonTextFontWeight}
-						onChange={(value) =>
-							this.props.setAttributes({
-							buttonTextFontWeight: value !== undefined ? value : 900,
-							})
-						}
-						/>
-						<RbeaRangeControl
-						label={__("Line Height", "responsive-block-editor-addons")}
-						value={buttonTextLineHeight}
-						onChange={(value) =>
-							this.props.setAttributes({
-							buttonTextLineHeight: value,
-							})
-						}
-						min={0}
-						max={100}
-						step={0.0001}
-						/>
-					</PanelBody>
+          <TypographyHelperControl
+					title={__("CTA Text Typography", "responsive-block-editor-addons")}
+					attrNameTemplate="buttonText%s"
+					values={{
+						family: buttonTextFontFamily,
+						size: buttonTextFontSize,
+						sizeMobile: buttonTextFontSizeMobile,
+						sizeTablet: buttonTextFontSizeTablet,
+						weight: buttonTextFontWeight,
+						height: buttonTextLineHeight,
+					}}
+					showLetterSpacing={false}
+					showTextTransform={false}
+          showTextBottomSpacing={false}
+					setAttributes={setAttributes}
+					{...this.props}
+				/>
 				)}
 				{resctaType === "button" && (
-					<PanelBody
-						title={__(
-						"Button Typography",
-						"responsive-block-editor-addons"
-						)}
-						initialOpen={false}
-					>
-						<SelectControl
-						label={__("Font Family", "responsive-block-editor-addons")}
-						options={fontOptions}
-						value={buttonTextFontFamily}
-						onChange={(value) => {
-							setAttributes({
-							buttonTextFontFamily: value,
-							}),
-							loadGoogleFont(value);
-						}}
-						/>
-						<TabPanel
-						className=" responsive-size-type-field-tabs  responsive-size-type-field__common-tabs  responsive-inline-margin"
-						activeClass="active-tab"
-						tabs={[
-							{
-							name: "desktop",
-							title: <Dashicon icon="desktop" />,
-							className:
-								" responsive-desktop-tab  responsive-responsive-tabs",
-							},
-							{
-							name: "tablet",
-							title: <Dashicon icon="tablet" />,
-							className:
-								" responsive-tablet-tab  responsive-responsive-tabs",
-							},
-							{
-							name: "mobile",
-							title: <Dashicon icon="smartphone" />,
-							className:
-								" responsive-mobile-tab  responsive-responsive-tabs",
-							},
-						]}
-						>
-						{(tab) => {
-							let tabout;
-
-							if ("mobile" === tab.name) {
-							tabout = (
-								<Fragment>
-								<RbeaRangeControl
-									label={__(
-									"Font Size",
-									"responsive-block-editor-addons"
-									)}
-									min={0}
-									max={500}
-									value={buttonTextFontSizeMobile}
-									onChange={(value) =>
-									setAttributes({
-										buttonTextFontSizeMobile: value,
-									})
-									}
-								/>
-								</Fragment>
-							);
-							} else if ("tablet" === tab.name) {
-							tabout = (
-								<Fragment>
-								<RbeaRangeControl
-									label={__(
-									"Font Size",
-									"responsive-block-editor-addons"
-									)}
-									min={0}
-									max={500}
-									value={buttonTextFontSizeTablet}
-									onChange={(value) =>
-									setAttributes({
-										buttonTextFontSizeTablet: value,
-									})
-									}
-								/>
-								</Fragment>
-							);
-							} else {
-							tabout = (
-								<Fragment>
-								<RbeaRangeControl
-									label={__(
-									"Font Size",
-									"responsive-block-editor-addons"
-									)}
-									min={0}
-									max={500}
-									value={buttonTextFontSize}
-									onChange={(value) =>
-									setAttributes({
-										buttonTextFontSize: value,
-									})
-									}
-								/>
-								</Fragment>
-							);
-							}
-
-							return <div>{tabout}</div>;
-						}}
-						</TabPanel>
-						<SelectControl
-						label={__("Font Weight", "responsive-block-editor-addons")}
-						options={[
-							{
-							value: "100",
-							label: __("100", "responsive-block-editor-addons"),
-							},
-							{
-							value: "200",
-							label: __("200", "responsive-block-editor-addons"),
-							},
-							{
-							value: "300",
-							label: __("300", "responsive-block-editor-addons"),
-							},
-							{
-							value: "400",
-							label: __("400", "responsive-block-editor-addons"),
-							},
-							{
-							value: "500",
-							label: __("500", "responsive-block-editor-addons"),
-							},
-							{
-							value: "600",
-							label: __("600", "responsive-block-editor-addons"),
-							},
-							{
-							value: "700",
-							label: __("700", "responsive-block-editor-addons"),
-							},
-							{
-							value: "800",
-							label: __("800", "responsive-block-editor-addons"),
-							},
-							{
-							value: "900",
-							label: __("900", "responsive-block-editor-addons"),
-							},
-						]}
-						value={buttonTextFontWeight}
-						onChange={(value) =>
-							this.props.setAttributes({
-							buttonTextFontWeight: value !== undefined ? value : 900,
-							})
-						}
-						/>
-						<RbeaRangeControl
-						label={__("Line Height", "responsive-block-editor-addons")}
-						value={buttonTextLineHeight}
-						onChange={(value) =>
-							this.props.setAttributes({
-							buttonTextLineHeight: value,
-							})
-						}
-						min={0}
-						max={100}
-						step={0.0001}
-            allowReset
-						/>
-					</PanelBody>
+          <TypographyHelperControl
+				  	title={__("Button Typography", "responsive-block-editor-addons")}
+				  	attrNameTemplate="buttonText%s"
+				  	values={{
+				  		family: buttonTextFontFamily,
+				  		size: buttonTextFontSize,
+				  		sizeMobile: buttonTextFontSizeMobile,
+				  		sizeTablet: buttonTextFontSizeTablet,
+				  		weight: buttonTextFontWeight,
+				  		height: buttonTextLineHeight,
+				  	}}
+				  	showLetterSpacing={false}
+				  	showTextTransform={false}
+            showTextBottomSpacing={false}
+				  	setAttributes={setAttributes}
+				  	{...this.props}
+				  />
 				)}
             <PanelBody
               title={__("Background", "responsive-block-editor-addons")}

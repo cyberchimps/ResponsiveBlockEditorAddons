@@ -181,11 +181,11 @@ class SizeControl extends Component {
 
     return (
       <div className="rbea-size-control-container">
-        <div className="rbea-control__header">
-          <div className="uag-responsive-label-wrap">
+        {/* <div className="rbea-control__header"> */}
+          {/* <div className="uag-responsive-label-wrap">
               <span className="uag-control-label">{__(`${label}`, 'responsive-block-editor-addons')}</span>
           </div>
-          {reset && (
+          {/* {reset && (
               <div className="rbea-size-control-reset-icon-container">
                 <div className="rbea-control__actions">
                   <div tabIndex="0">
@@ -195,8 +195,8 @@ class SizeControl extends Component {
                   </div>
                 </div>
               </div>
-            )}
-        </div>
+            )} */}
+        {/* </div> */}
         <div className="rbea-size-control-control-container">
           {/* <ButtonGroup aria-label={__("Select size", "responsive-block-editor-addons")}>
             {map(this.getSizes(), ({ size, shortName }) => (
@@ -220,6 +220,9 @@ class SizeControl extends Component {
                 label: shortName,
               }))
             }
+            label={"Select size"}
+            defaultValue={resetValue}
+            allowReset={true}
           />
         </div>
       </div>

@@ -455,51 +455,57 @@ export default class Inspector extends Component {
 
                     if ("mobile" === tab.name) {
                       tabout = (
-                        <RbeaRangeControl
-                          label={__("Popup Width (Mobile)", "responsive-block-editor-addons")}
-                          value={popupContainerWidthMobile}
-                          onChange={(value) =>
-                            setAttributes({
-                              popupContainerWidthMobile: value !== undefined ? value : 600,
-                            })
-                          }
-                          min={0}
-                          max={1500}
-                          allowReset
-                          initialPosition={600}
-                        />
+                        <div className="rbea-pop-width-control-container">
+                          <RbeaRangeControl
+                            label={__("Popup Width (Mobile)", "responsive-block-editor-addons")}
+                            value={popupContainerWidthMobile}
+                            onChange={(value) =>
+                              setAttributes({
+                                popupContainerWidthMobile: value !== undefined ? value : 600,
+                              })
+                            }
+                            min={0}
+                            max={1500}
+                            allowReset
+                            initialPosition={600}
+                          />
+                        </div>
                       );
                     } else if ("tablet" === tab.name) {
                       tabout = (
-                        <RbeaRangeControl
-                          label={__("Popup Width (Tablet)", "responsive-block-editor-addons")}
-                          value={popupContainerWidthTablet}
-                          onChange={(value) =>
-                            setAttributes({
-                              popupContainerWidthTablet: value !== undefined ? value : 600,
-                            })
-                          }
-                          min={0}
-                          max={1500}
-                          allowReset
-                          initialPosition={600}
-                        />
+                        <div className="rbea-pop-width-control-container">
+                          <RbeaRangeControl
+                            label={__("Popup Width (Tablet)", "responsive-block-editor-addons")}
+                            value={popupContainerWidthTablet}
+                            onChange={(value) =>
+                              setAttributes({
+                                popupContainerWidthTablet: value !== undefined ? value : 600,
+                              })
+                            }
+                            min={0}
+                            max={1500}
+                            allowReset
+                            initialPosition={600}
+                          />
+                        </div>
                       );
                     } else {
                       tabout = (
-                        <RbeaRangeControl
-                          label={__("Popup Width", "responsive-block-editor-addons")}
-                          value={popupContainerWidth}
-                          onChange={(value) =>
-                            setAttributes({
-                              popupContainerWidth: value !== undefined ? value : 600,
-                            })
-                          }
-                          min={0}
-                          max={1500}
-                          allowReset
-                          initialPosition={600}
-                        />
+                          <div className="rbea-pop-width-control-container">
+                            <RbeaRangeControl
+                              label={__("Popup Width", "responsive-block-editor-addons")}
+                              value={popupContainerWidth}
+                              onChange={(value) =>
+                                setAttributes({
+                                  popupContainerWidth: value !== undefined ? value : 600,
+                                })
+                              }
+                              min={0}
+                              max={1500}
+                              allowReset
+                              initialPosition={600}
+                            />
+                        </div>
                       );
                     }
 
@@ -642,7 +648,7 @@ export default class Inspector extends Component {
 
                     if ("mobile" === tab.name) {
                       tabout = (
-                        <>
+                        <div className="responsive-block-editor-addons-alignment-matrix-control-container">
                           <Text variant="title.small" as="h3">{__("Screen Type (Mobile)", "responsive-block-editor-addons")}</Text>
                           <div className="responsive-block-editor-addons-alignment-matrix-control">
                             <AlignmentMatrixControl
@@ -652,11 +658,11 @@ export default class Inspector extends Component {
                               })}
                             />
                           </div>
-                        </>
+                        </div>
                       );
                     } else if ("tablet" === tab.name) {
                       tabout = (
-                        <>
+                        <div className="responsive-block-editor-addons-alignment-matrix-control-container">
                           <Text variant="title.small" as="h3">{__("Screen Type (Tablet)", "responsive-block-editor-addons")}</Text>
                           <div className="responsive-block-editor-addons-alignment-matrix-control">
                             <AlignmentMatrixControl
@@ -666,11 +672,11 @@ export default class Inspector extends Component {
                               })}
                             />
                           </div>
-                        </>
+                        </div>
                       );
                     } else {
                       tabout = (
-                        <>
+                        <div className="responsive-block-editor-addons-alignment-matrix-control-container">
                           <h3 className="responsive-block-editor-addons-alignment-matrix-control-title">{__("Screen Type", "responsive-block-editor-addons")}</h3>
                           <div className="responsive-block-editor-addons-alignment-matrix-control">
                             <AlignmentMatrixControl
@@ -682,7 +688,7 @@ export default class Inspector extends Component {
                               }}
                             />
                           </div>
-                        </>
+                        </div>
                       );
                     }
 
@@ -1394,7 +1400,7 @@ export default class Inspector extends Component {
                     {
                       name: "empty-2",
                       title: __("", "responsive-block-editor-addons"),
-                      className: "responsive-block-editor-addons-empty-tab",
+                      className: "responsive-block-editor-addons-empty-tab-middle",
                     },
                     {
                       name: "gradient",

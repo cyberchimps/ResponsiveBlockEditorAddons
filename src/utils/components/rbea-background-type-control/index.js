@@ -40,6 +40,8 @@ const RbeaBackgroundTypeControl = ({
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M9 15.75C12.7279 15.75 15.75 12.7279 15.75 9C15.75 5.27208 12.7279 2.25 9 2.25C5.27208 2.25 2.25 5.27208 2.25 9C2.25 12.7279 5.27208 15.75 9 15.75ZM8.53277 6.24043L11.9265 8.12584C12.6123 8.50685 12.6123 9.49315 11.9265 9.87416L8.53277 11.7596C7.73293 12.2039 6.75 11.6256 6.75 10.7106V7.28942C6.75 6.37444 7.73293 5.79607 8.53277 6.24043Z" fill="#666666"/>
                       </svg>
                     }
+                    {"link" == option.value && <div className = 'dashicons dashicons-admin-links rbea-radio-inline-tab-control-dashicons'></div>
+                    }
                 </div>
               </div>
             ),

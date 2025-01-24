@@ -420,7 +420,7 @@ const Header = () => {
     return (
         <div className="rbea-header">
             <div className="rbea-brand">
-                <img className="rbea-logo" src={rbealocalize.responsiveurl + 'admin/images/responsive-blocks-logo.png'} alt="responsive-thumbnail" />
+                <img className="rbea-logo" src={rbealocalize.responsiveurl + 'admin/images/responsive-blocks-logo.svg'} alt="responsive-thumbnail" />
                 <div className="rbea-version">{rbealocalize.rbea_version}</div>
             </div>
             <p className="rbea-brand-desc">{__( 'Thank You For Choosing Responsive Blocks – WordPress Gutenberg Blocks Plugin', 'responsive-block-editor-addons' )}</p>

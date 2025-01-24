@@ -342,45 +342,6 @@ export default class Inspector extends Component {
 								value={placeholder}
 								onChange={(value) => setAttributes({placeholder: value})}
 							/>
-              {/* <ButtonGroup
-                className="responsive-size-type-field"
-                aria-label={__("Size Type", "responsive-block-editor-addons")}
-              >
-                <Button
-                  key={"px"}
-                  className="responsive-size-btn"
-                  isSmall
-                  isPrimary={inputWidthType === "px"}
-                  aria-pressed={inputWidthType === "px"}
-                  min={0}
-                  max={500}
-                  onClick={() => setAttributes({ inputWidthType: "px" })}
-                >
-                  {"px"}
-                </Button>
-                <Button
-                  key={"%"}
-                  className="responsive-size-btn"
-                  isSmall
-                  isPrimary={inputWidthType === "%"}
-                  aria-pressed={inputWidthType === "%"}
-                  min={0}
-                  max={100}
-                  onClick={() => setAttributes({ inputWidthType: "%", inputWidth: 100 })}
-                >
-                  {"%"}
-                </Button>
-              </ButtonGroup> */}
-              {/* <RbeaRangeControl
-                label={__("Input Width", "responsive-block-editor-addons")}
-                value={inputWidth}
-                min={0}
-                max={"%" == inputWidthType ? 100 : 500}
-                onChange={(value) =>
-                  setAttributes({ inputWidth: value })
-                }
-                allowReset
-              /> */}
               <RbeaWidthRangeControl
                 label={__("Input Width", "responsive-block-editor-addons")}
                 value={inputWidth}
@@ -392,6 +353,7 @@ export default class Inspector extends Component {
                 beforeIcon=""
                 allowReset
                 initialPosition={0}
+                resetFallbackValue={100}
                 widthType={widthType}
                 extraControls={true}
                 setAttributes={setAttributes}
@@ -547,7 +509,7 @@ export default class Inspector extends Component {
                             {
                               name: "empty-2",
                               title: __("", "responsive-block-editor-addons"),
-                              className: "responsive-block-editor-addons-empty-tab",
+                              className: "responsive-block-editor-addons-empty-tab-middle",
                             },
                             {
                               name: "hover",
@@ -621,7 +583,7 @@ export default class Inspector extends Component {
                                 {
                                   name: "empty-2",
                                   title: __("", "responsive-block-editor-addons"),
-                                  className: "responsive-block-editor-addons-empty-tab",
+                                  className: "responsive-block-editor-addons-empty-tab-middle",
                                 },
                                 {
                                   name: "hover",

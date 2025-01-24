@@ -28,7 +28,6 @@ import RbeaBorderStyleTabControl from "../../../utils/components/rbea-border-sty
 import RbeaBorderRadiusControl from "../../../settings-components/RbeaBorderRadiusControl";
 import ResponsiveBorderWidthControl from "../../../settings-components/ResponsiveBorderWidthSettings";
 
-
 const { __ } = wp.i18n;
 const { compose } = wp.compose;
 const { select, withSelect } = wp.data;
@@ -777,236 +776,6 @@ class ResponsiveBlockEditorAddonsAccordionEdit extends Component {
         />
         {"none" != parentBlockBorderStyle && (
           <Fragment>
-          {/* <BaseControl.VisualLabel>
-              {__("Border Width:", "responsive-block-editor-addons")}
-            </BaseControl.VisualLabel>               
-          <TabPanel
-            className=" responsive-size-type-field-tabs  responsive-size-type-field__common-tabs  responsive-inline-margin"
-            activeClass="active-tab"
-            tabs={[
-              {
-                name: "desktop",
-                title: <Dashicon icon="desktop" />,
-                className:
-                  " responsive-desktop-tab  responsive-responsive-tabs",
-              },
-              {
-                name: "tablet",
-                title: <Dashicon icon="tablet" />,
-                className:
-                  " responsive-tablet-tab  responsive-responsive-tabs",
-              },
-              {
-                name: "mobile",
-                title: <Dashicon icon="smartphone" />,
-                className:
-                  " responsive-mobile-tab  responsive-responsive-tabs",
-              },
-            ]}
-          >
-            {(tab) => {
-              let tabout;
-
-              if ("mobile" === tab.name) {
-                tabout = (
-                  <Fragment>
-                    <RbeaRangeControl
-                      label={__(
-                        "Top (Mobile)",
-                        "responsive-block-editor-addons"
-                      )}
-                      min={0}
-                      max={2000}
-                      allowReset
-                      value={parentBlockBorderTopWidthMobile}
-                      onChange={(value) =>
-                        setAttributes({
-                          parentBlockBorderTopWidthMobile: value,
-                        })
-                      }
-                    />
-                    <RbeaRangeControl
-                      label={__(
-                        "Bottom (Mobile)",
-                        "responsive-block-editor-addons"
-                      )}
-                      min={0}
-                      max={2000}
-                      allowReset
-                      value={parentBlockBorderBottomWidthMobile}
-                      onChange={(value) =>
-                        setAttributes({
-                          parentBlockBorderBottomWidthMobile: value,
-                        })
-                      }
-                    />
-                    <RbeaRangeControl
-                      label={__(
-                        "Left (Mobile)",
-                        "responsive-block-editor-addons"
-                      )}
-                      min={0}
-                      max={2000}
-                      allowReset
-                      value={parentBlockBorderLeftWidthMobile}
-                      onChange={(value) =>
-                        setAttributes({
-                          parentBlockBorderLeftWidthMobile: value,
-                        })
-                      }
-                    />
-                    <RbeaRangeControl
-                      label={__(
-                        "Right (Mobile)",
-                        "responsive-block-editor-addons"
-                      )}
-                      min={0}
-                      max={2000}
-                      allowReset
-                      value={parentBlockBorderRightWidthMobile}
-                      onChange={(value) =>
-                        setAttributes({
-                          parentBlockBorderRightWidthMobile: value,
-                        })
-                      }
-                    />
-                  </Fragment>
-                );
-              } else if ("tablet" === tab.name) {
-                tabout = (
-                  <Fragment>
-                    <RbeaRangeControl
-                      label={__(
-                        "Top (Tablet)",
-                        "responsive-block-editor-addons"
-                      )}
-                      min={0}
-                      max={2000}
-                      allowReset
-                      value={parentBlockBorderTopWidthTablet}
-                      onChange={(value) =>
-                        setAttributes({
-                          parentBlockBorderTopWidthTablet: value,
-                        })
-                      }
-                    />
-                    <RbeaRangeControl
-                      label={__(
-                        "Bottom (Tablet)",
-                        "responsive-block-editor-addons"
-                      )}
-                      min={0}
-                      max={2000}
-                      allowReset
-                      value={parentBlockBorderBottomWidthTablet}
-                      onChange={(value) =>
-                        setAttributes({
-                          parentBlockBorderBottomWidthTablet: value,
-                        })
-                      }
-                    />
-                    <RbeaRangeControl
-                      label={__(
-                        "Left (Tablet)",
-                        "responsive-block-editor-addons"
-                      )}
-                      min={0}
-                      max={2000}
-                      allowReset
-                      value={parentBlockBorderLeftWidthTablet}
-                      onChange={(value) =>
-                        setAttributes({
-                          parentBlockBorderLeftWidthTablet: value,
-                        })
-                      }
-                    />
-                    <RbeaRangeControl
-                      label={__(
-                        "Right (Tablet)",
-                        "responsive-block-editor-addons"
-                      )}
-                      min={0}
-                      max={2000}
-                      allowReset
-                      value={parentBlockBorderRightWidthTablet}
-                      onChange={(value) =>
-                        setAttributes({
-                          parentBlockBorderRightWidthTablet: value,
-                        })
-                      }
-                    />
-                  </Fragment>
-                );
-              } else {
-                tabout = (
-                  <Fragment>
-                    <RbeaRangeControl
-                      label={__(
-                        "Top",
-                        "responsive-block-editor-addons"
-                      )}
-                      min={0}
-                      max={2000}
-                      allowReset
-                      value={parentBlockBorderTopWidth}
-                      onChange={(value) =>
-                        setAttributes({
-                          parentBlockBorderTopWidth: value,
-                        })
-                      }
-                    />
-                    <RbeaRangeControl
-                      label={__(
-                        "Bottom",
-                        "responsive-block-editor-addons"
-                      )}
-                      min={0}
-                      max={2000}
-                      allowReset
-                      value={parentBlockBorderBottomWidth}
-                      onChange={(value) =>
-                        setAttributes({
-                          parentBlockBorderBottomWidth: value,
-                        })
-                      }
-                    />
-                    <RbeaRangeControl
-                      label={__(
-                        "Left",
-                        "responsive-block-editor-addons"
-                      )}
-                      min={0}
-                      max={2000}
-                      allowReset
-                      value={parentBlockBorderLeftWidth}
-                      onChange={(value) =>
-                        setAttributes({
-                          parentBlockBorderLeftWidth: value,
-                        })
-                      }
-                    />
-                    <RbeaRangeControl
-                      label={__(
-                        "Right",
-                        "responsive-block-editor-addons"
-                      )}
-                      min={0}
-                      max={2000}
-                      allowReset
-                      value={parentBlockBorderRightWidth}
-                      onChange={(value) =>
-                        setAttributes({
-                          parentBlockBorderRightWidth: value,
-                        })
-                      }
-                    />
-                  </Fragment>
-                );
-              }
-              return <div>{tabout}</div>;
-            }}
-          </TabPanel> */}
-
           <ResponsiveBorderWidthControl
             attrNameTemplate="parentBlockBorder%s"
             resetValues={parentBlockBorderWidthValues}
@@ -1186,7 +955,7 @@ class ResponsiveBlockEditorAddonsAccordionEdit extends Component {
           {"accordion" === layout && (
             <Fragment>
               <hr className="responsive-block-editor-addons-editor__separator" />
-              <h2>{__("Icon Size")}</h2><TabPanel
+              <TabPanel
               className=" responsive-size-type-field-tabs  responsive-size-type-field__common-tabs  responsive-inline-margin"
               activeClass="active-tab"
               tabs={[
@@ -1244,6 +1013,7 @@ class ResponsiveBlockEditorAddonsAccordionEdit extends Component {
                       </ButtonGroup>
                       <p>{__("")}</p>
                       <RbeaRangeControl
+                      label={"Icon Size (Mobile)"}
                       value={iconSizeMobile}
                       onChange={(value) =>
                       setAttributes({ iconSizeMobile: value })
@@ -1288,6 +1058,7 @@ class ResponsiveBlockEditorAddonsAccordionEdit extends Component {
                       </ButtonGroup>
                       <p>{__("")}</p>
                       <RbeaRangeControl
+                      label={"Icon Size (Tablet)"}
                       value={iconSizeTablet}
                       onChange={(value) =>
                       setAttributes({ iconSizeTablet: value })
@@ -1332,6 +1103,7 @@ class ResponsiveBlockEditorAddonsAccordionEdit extends Component {
                       </ButtonGroup>
                       <p>{__("")}</p>
                       <RbeaRangeControl
+                      label={"Icon Size"}
                       value={iconSize}
                       onChange={(value) =>
                       setAttributes({ iconSize: value })

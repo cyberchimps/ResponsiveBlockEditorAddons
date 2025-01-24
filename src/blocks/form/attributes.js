@@ -542,6 +542,58 @@ const attributes = {
     type: "boolean",
     default: false,
   },
+  formBlockBorderTopWidth: {
+    type: "number",
+    default: 1,
+  },
+  formBlockBorderTopWidthMobile: {
+    type: "number",
+    default: 1,
+  },
+  formBlockBorderTopWidthTablet: {
+    type: "number",
+    default: 1,
+  },
+  formBlockBorderBottomWidth: {
+    type: "number",
+    default: 1,
+  },
+  formBlockBorderBottomWidthMobile: {
+    type: "number",
+    default: 1,
+  },
+  formBlockBorderBottomWidthTablet: {
+    type: "number",
+    default: 1,
+  },
+  formBlockBorderLeftWidth: {
+    type: "number",
+    default: 1,
+  },
+  formBlockBorderLeftWidthMobile: {
+    type: "number",
+    default: 1,
+  },
+  formBlockBorderLeftWidthTablet: {
+    type: "number",
+    default: 1,
+  },
+  formBlockBorderRightWidth: {
+    type: "number",
+    default: 1,
+  },
+  formBlockBorderRightWidthTablet: {
+    type: "number",
+    default: 1,
+  },
+  formBlockBorderRightWidthMobile: {
+    type: "number",
+    default: 1,
+  },
+  hasFormBlockBorderWidthValuesUpdated: {
+    type: "boolean",
+    default: false,
+  }
 };
 
 export default attributes;

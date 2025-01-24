@@ -285,7 +285,6 @@ const attributes = {
   },
   buttonbackgroundType: {
     type: "string",
-    default: "color",
   },
   buttoncolorLocation1: {
     type: "number",

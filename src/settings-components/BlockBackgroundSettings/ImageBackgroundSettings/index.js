@@ -179,31 +179,11 @@ class ImageBackgroundControl extends Component {
                                             onChange={(colorValue) => setAttributes({ gradientOverlayColor1: colorValue })}
                                             resetColor={() => setAttributes({ gradientOverlayColor1: "" })}
                                         />
-                                        <RbeaRangeControl
-                                            label={__("Location 1", "responsive-block-editor-addons")}
-                                            value={gradientOverlayLocation1}
-                                            onChange={(value) =>
-                                                setAttributes({ gradientOverlayLocation1: value })
-                                            }
-                                            min={0}
-                                            max={100}
-                                            allowReset
-                                        />
                                         <RbeaColorControl
                                             label = {__("Color 2", "responsive-block-editor-addons")}
                                             colorValue={gradientOverlayColor2}
                                             onChange={(colorValue) => setAttributes({ gradientOverlayColor2: colorValue })}
                                             resetColor={() => setAttributes({ gradientOverlayColor2: "" })}
-                                        />
-                                        <RbeaRangeControl
-                                            label={__("Location 2", "responsive-block-editor-addons")}
-                                            value={gradientOverlayLocation2}
-                                            onChange={(value) =>
-                                                setAttributes({ gradientOverlayLocation2: value })
-                                            }
-                                            min={0}
-                                            max={100}
-                                            allowReset
                                         />
                                         <RbeaTabRadioControl
                                             label={__("Type", "responsive-block-editor-addons")}
@@ -215,6 +195,26 @@ class ImageBackgroundControl extends Component {
                                                 { value: "linear", label: __("Linear", "responsive-block-editor-addons") },
                                                 { value: "radial", label: __("Radial", "responsive-block-editor-addons") },
                                             ]}
+                                        />
+                                        <RbeaRangeControl
+                                            label={__("Color Location 1", "responsive-block-editor-addons")}
+                                            value={gradientOverlayLocation1}
+                                            onChange={(value) =>
+                                                setAttributes({ gradientOverlayLocation1: value })
+                                            }
+                                            min={0}
+                                            max={100}
+                                            allowReset
+                                        />
+                                        <RbeaRangeControl
+                                            label={__("Color Location 2", "responsive-block-editor-addons")}
+                                            value={gradientOverlayLocation2}
+                                            onChange={(value) =>
+                                                setAttributes({ gradientOverlayLocation2: value })
+                                            }
+                                            min={0}
+                                            max={100}
+                                            allowReset
                                         />
                                         {"linear" == gradientOverlayType && (
                                             <RbeaAngleRangeControl

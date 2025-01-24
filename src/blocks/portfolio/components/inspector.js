@@ -313,13 +313,15 @@ export default class Inspector extends Component {
                       : Math.min(MAX_POSTS_COLUMNS, latestPosts.length)
                   }
                 />
-                <QueryControls
-                {...{ order, orderBy }}
-                numberOfItems={attributes.postsToShow}
-                onNumberOfItemsChange={(value) =>
-                  setAttributes({ postsToShow: value })
-                }
-              />
+                <div className="rbea-portfolio-block-number-of-items-control-container">
+                  <QueryControls
+                    {...{ order, orderBy }}
+                    numberOfItems={attributes.postsToShow}
+                    onNumberOfItemsChange={(value) =>
+                      setAttributes({ postsToShow: value })
+                    }
+                  />
+                </div>
               <div className = "rbea-repeat-selector-wrapper">
               <RbeaTabRadioControl
                   label={__("Image Size", "responsive-block-editor-addons")}

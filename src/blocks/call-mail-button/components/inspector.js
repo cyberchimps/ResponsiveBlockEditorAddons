@@ -342,7 +342,7 @@ export default class Inspector extends Component {
                     }}
                   />
                   {!isValidNumber && (
-                    <p style={{ color: "red" }}>
+                    <p className="rbea-tab-radio-options-help-text" style={{ color: "red" }}>
                       Please make sure your input is a valid phone number.
                     </p>
                   )}
@@ -363,7 +363,7 @@ export default class Inspector extends Component {
                     }}
                   />
                   {!isValidMail && (
-                    <p style={{ color: "red" }}>
+                    <p className="rbea-tab-radio-options-help-text" style={{ color: "red" }}>
                       Please enter a valid mail id.
                     </p>
                   )}
@@ -751,7 +751,7 @@ export default class Inspector extends Component {
                     {
                       name: "empty-2",
                       title: __("", "responsive-block-editor-addons"),
-                      className: "responsive-block-editor-addons-empty-tab",
+                      className: "responsive-block-editor-addons-empty-tab-middle",
                     },
                     {
                       name: "hover",

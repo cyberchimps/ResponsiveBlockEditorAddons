@@ -102,7 +102,7 @@ class ButtonColorControl extends Component {
                       {
                           name: "empty-2",
                           title: __("", "responsive-block-editor-addons"),
-                          className: "responsive-block-editor-addons-empty-tab",
+                          className: "responsive-block-editor-addons-empty-tab-middle",
                       },
                       {
                           name: "hover",
@@ -123,7 +123,7 @@ class ButtonColorControl extends Component {
                               <Fragment>
                                   <Fragment>
                                       <RbeaColorControl
-                                            label = {__("Text Color", "responsive-block-editor-addons")}
+                                            label = {__("Hover Text Color", "responsive-block-editor-addons")}
                                             colorValue={ctaHoverColor}
                                             onChange={(colorValue) => this.props.setAttributes({ ctaHoverColor: colorValue })}
                                             resetColor={() => this.props.setAttributes({ ctaHoverColor: "" })}
@@ -270,7 +270,7 @@ class ButtonColorControl extends Component {
                                       }
                                       options={buttonbackgroundTypeOptions}
                                   />
-                                  {"color" == buttonbackgroundType && (
+                                  {"color" === buttonbackgroundType && (
                                       <Fragment>
                                         <RbeaColorControl
                                             label = {__("Background Color", "responsive-block-editor-addons")}

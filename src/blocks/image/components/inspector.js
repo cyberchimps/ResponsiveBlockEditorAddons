@@ -29,6 +29,7 @@ const {__} = wp.i18n;
 
 import InspectorTab from "../../../components/InspectorTab";
 import InspectorTabs from "../../../components/InspectorTabs";
+import { RadioControl } from "@wordpress/components";
 
 export default class Inspector extends Component {
   render() {
@@ -214,6 +215,7 @@ export default class Inspector extends Component {
       captionLeftMarginMobile,
       captionRightMarginMobile,
       captionIsMarginControlConnected,
+      imagePositionTab,
     } = attributes;
 
     // To populate new control values with existing padding margin control values for backward compatibility.
@@ -467,6 +469,48 @@ if (!imageIsRadiusValueUpdated) {
       this.props.setAttributes({blockIsTypographyColorValueUpdated: true});
     }
 
+    const contentPositionOptions = [
+      {
+        value: "lefttop",
+        label: <div className = "rbea-background-image-positon-control-option">{__("Top Left", "responsive-block-editor-addons")}</div>,
+      },
+      {
+        value: "centertop",
+        label: <div className = "rbea-background-image-positon-control-option">{__("Top Center", "responsive-block-editor-addons")}</div>,
+      },
+      {
+        value: "righttop",
+        label: <div className = "rbea-background-image-positon-control-option">{__("Top Right", "responsive-block-editor-addons")}</div>,
+      },
+      {
+        value: "leftcenter",
+        label: <div className = "rbea-background-image-positon-control-option">{__("Center Left", "responsive-block-editor-addons")}</div>,
+      },
+      {
+        value: "centercenter",
+        label: <div className = "rbea-background-image-positon-control-option">{__("Center Center", "responsive-block-editor-addons")}</div>,
+      },
+      {
+        value: "rightcenter",
+        label: <div className = "rbea-background-image-positon-control-option">{__("Center Right", "responsive-block-editor-addons")}</div>,
+      },
+      {
+        value: "leftbottom",
+        label: <div className = "rbea-background-image-positon-control-option">{__("Bottom Left", "responsive-block-editor-addons")}</div>,
+      },
+      {
+        value: "centerbottom",
+        label: <div className = "rbea-background-image-positon-control-option">{__("Bottom Center", "responsive-block-editor-addons")}</div>,
+      },
+      {
+        value: "rightbottom",
+        label: <div className = "rbea-background-image-positon-control-option">{__("Bottom Right", "responsive-block-editor-addons")}</div>,
+      },
+    ];
+
+    // Background image URL
+    let background_image_url = imageUrl || '';
+
     return (
       <InspectorControls key="inspector">
         <InspectorTabs>
@@ -484,72 +528,6 @@ if (!imageIsRadiusValueUpdated) {
                 }}
                 mediaType={'image'}
               />
-              <SelectControl
-                  label={__(
-                    "Content Position",
-                    "responsive-block-editor-addons"
-                  )}
-                  value={LayoverContentPosition}
-                  onChange={(value) =>
-                    setAttributes({LayoverContentPosition: value})
-                  }
-                  options={[
-                    {
-                      value: "centertop",
-                      label: __("Center Top", "responsive-block-editor-addons"),
-                    },
-                    {
-                      value: "centercenter",
-                      label: __(
-                        "Center Center",
-                        "responsive-block-editor-addons"
-                      ),
-                    },
-                    {
-                      value: "centerbottom",
-                      label: __(
-                        "Center Bottom",
-                        "responsive-block-editor-addons"
-                      ),
-                    },
-                    {
-                      value: "lefttop",
-                      label: __("Left Top", "responsive-block-editor-addons"),
-                    },
-                    {
-                      value: "leftcenter",
-                      label: __(
-                        "Left Center",
-                        "responsive-block-editor-addons"
-                      ),
-                    },
-                    {
-                      value: "leftbottom",
-                      label: __(
-                        "Left Bottom",
-                        "responsive-block-editor-addons"
-                      ),
-                    },
-                    {
-                      value: "righttop",
-                      label: __("Right Top", "responsive-block-editor-addons"),
-                    },
-                    {
-                      value: "rightcenter",
-                      label: __(
-                        "Right Center",
-                        "responsive-block-editor-addons"
-                      ),
-                    },
-                    {
-                      value: "rightbottom",
-                      label: __(
-                        "Right Bottom",
-                        "responsive-block-editor-addons"
-                      ),
-                    },
-                  ]}
-                />
               <TabPanel
                 className=" responsive-size-type-field-tabs responsive-size-type-field__common-tabs responsive-inline-margin"
                 activeClass="active-tab"
@@ -1081,6 +1059,27 @@ if (!imageIsRadiusValueUpdated) {
                     },
                   ]}
                 /> */}
+                <div className = "rbea-tab-selector-label-wrapper">
+                  <label className  = "rbea-background-image-positon-control-label">{__("Content Position", "responsive-block-editor-addons")}</label>
+                </div>
+                  <Fragment>
+                    <div className = "rbea-background-image-positon-control"
+                    style={{
+                      backgroundImage: `url(${background_image_url})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition:  'center',
+                    }}>
+                      <RadioControl 
+                        className = "rbea-background-image-positon-control-options"
+                        selected={LayoverContentPosition}
+                        options={contentPositionOptions}
+                        onChange={(value) =>
+                          setAttributes({LayoverContentPosition: value})
+                        }
+                      />
+                    </div>
+                  </Fragment>
+
                 <RbeaBlockBorderHelperControl
                   attrNameTemplate="layoverimage%s"
                   values={{
@@ -1298,7 +1297,7 @@ if (!imageIsRadiusValueUpdated) {
             </PanelBody>
           </InspectorTab>
           <InspectorTab key={"style"}>
-            <PanelBody title="Border" initialOpen={true}>
+            <PanelBody title="Image" initialOpen={true}>
               <RbeaBlockBorderHelperControl
                 attrNameTemplate="image%s"
                 values={{

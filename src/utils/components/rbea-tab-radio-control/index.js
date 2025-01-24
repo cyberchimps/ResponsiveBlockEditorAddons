@@ -57,7 +57,7 @@ const RbeaTabRadioControl = ({ label, value, onChange, options, help = '', allow
                 2. Icons - SVGs
                 3. Dashicons - Wordpress Dashiconss
                */}
-              {option.icon ? <div className={`${optionHasBorder ? 'rbea-tab-radio-option-border': 'rbea-tab-radio-option-icon'}`}>{option.icon}</div> 
+              {option.icon ? <div className={`${optionHasBorder ? 'rbea-tab-radio-option-border': 'rbea-tab-radio-option-icon'}`}>{activeOption !== option.value ? option.icon : option.selectedIcon ? option.selectedIcon : option.icon}</div> 
               : hasDashIcons 
               ? <Dashicon icon={option.dashicon}/> 
               : option.label}
