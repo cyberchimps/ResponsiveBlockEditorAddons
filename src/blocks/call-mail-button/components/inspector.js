@@ -342,7 +342,7 @@ export default class Inspector extends Component {
                     }}
                   />
                   {!isValidNumber && (
-                    <p style={{ color: "red" }}>
+                    <p className="rbea-tab-radio-options-help-text" style={{ color: "red" }}>
                       Please make sure your input is a valid phone number.
                     </p>
                   )}
@@ -363,7 +363,7 @@ export default class Inspector extends Component {
                     }}
                   />
                   {!isValidMail && (
-                    <p style={{ color: "red" }}>
+                    <p className="rbea-tab-radio-options-help-text" style={{ color: "red" }}>
                       Please enter a valid mail id.
                     </p>
                   )}
@@ -739,7 +739,7 @@ export default class Inspector extends Component {
                   initialTabName="normal" // Set the default active tab here
                   tabs={[
                     {
-                      name: "empty",
+                      name: "empty-1",
                       title: __("", "responsive-block-editor-addons"),
                       className: "responsive-block-editor-addons-empty-tab",
                     },
@@ -749,9 +749,9 @@ export default class Inspector extends Component {
                       className: "responsive-block-editor-addons-normal-tab",
                     },
                     {
-                      name: "empty",
+                      name: "empty-2",
                       title: __("", "responsive-block-editor-addons"),
-                      className: "responsive-block-editor-addons-empty-tab",
+                      className: "responsive-block-editor-addons-empty-tab-middle",
                     },
                     {
                       name: "hover",
@@ -759,7 +759,7 @@ export default class Inspector extends Component {
                       className: "responsive-block-editor-addons-hover-tab",
                     },
                     {
-                      name: "empty",
+                      name: "empty-3",
                       title: __("", "responsive-block-editor-addons"),
                       className: "responsive-block-editor-addons-empty-tab",
                     },

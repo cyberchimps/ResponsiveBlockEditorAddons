@@ -17,6 +17,8 @@ const RbeaWidthRangeControl = ( props ) => {
         onChange(resetFallbackValue);
     };
 
+    console.log("widthType from Width Control: ", widthType);
+
     
     return (
         <div className="rbea-range-control">

@@ -380,7 +380,6 @@ const attributes = {
   },
   buttonbackgroundType: {
     type: "string",
-    default: "none",
   },
   icon_hcolor: {
     type: "string",

@@ -313,7 +313,7 @@ class Inspector extends Component {
                     />
                     <RbeaRangeControl
                       label={__(
-                        "Gradient Direction",
+                        "Angle",
                         "responsive-block-editor-addons"
                       )}
                       value={gradientDirection}

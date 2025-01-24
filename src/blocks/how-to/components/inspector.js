@@ -505,7 +505,7 @@ export default class Inspector extends Component {
                             initialOpen={false}
                         >
                             <Fragment>
-                                <p className="responsive-setting-label">
+                                <p className="responsive-setting-label"></p>
                                 <RbeaColorControl
                                     label = {__("Primary Heading Color", "responsive-block-editor-addons")}
                                     colorValue={mainHeadingColor}

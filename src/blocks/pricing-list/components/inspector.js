@@ -425,7 +425,7 @@ export default class Inspector extends Component {
                   />
                   <div className = "rbea-repeat-selector-wrapper">
                     <RbeaTabRadioControl
-                      label={__("Repeat", "responsive-block-editor-addons")}
+                      label={__("Image Size", "responsive-block-editor-addons")}
                       value={imageSize}
                       onChange={(value) =>
                         setAttributes({ imageSize: value })

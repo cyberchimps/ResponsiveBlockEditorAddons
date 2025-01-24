@@ -72,7 +72,7 @@ import RbeaColorControl from "../../../../utils/components/rbea-color-control";
        />
        <RbeaAngleRangeControl
        label={__(
-           "Gradient Direction",
+           "Angle",
            "responsive-block-editor-addons"
    )}
        value={hovergradientDirection}

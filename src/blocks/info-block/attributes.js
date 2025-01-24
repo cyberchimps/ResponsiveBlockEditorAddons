@@ -1102,5 +1102,13 @@ const attributes = {
     type: "boolean",
     default: false,
   },
+  widthType: {
+    type: "string",
+    default: "%"
+  },
+  widthTypeValueUpdated: {
+    type: "boolean",
+    default: false,
+  },
 };
 export default attributes;

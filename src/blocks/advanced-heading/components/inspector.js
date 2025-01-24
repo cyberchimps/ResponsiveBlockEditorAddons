@@ -521,11 +521,10 @@ export default class Inspector extends Component {
                   setAttributes({ seperatorPosition: value })
                 }
                 options={[
-                  { value: "belowTitle", label: __("Below Heading", "responsive-block-editor-addons"), icon: separatorPositionIcons.below_heading },
-                  { value: "belowDesc", label: __("Below Description", "responsive-block-editor-addons"), icon: separatorPositionIcons.below_description },
+                  { value: "belowTitle", label: __("Center", "responsive-block-editor-addons") },
+                  { value: "belowDesc", label: __("Bottom", "responsive-block-editor-addons") },
                 ]}
                 defaultValue={"belowTitle"}
-                hasIcon={true}
                 optionHasBorder={true}
               />
               <RbeaSeparatorStyleTabControl

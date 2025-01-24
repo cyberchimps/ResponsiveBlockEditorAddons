@@ -161,7 +161,7 @@ export default class Inspector extends Component {
                   setAttributes({ token: value });
                 }}
               />
-              <p>
+              <p className="rbea-tab-radio-options-help-text">
                 Note: This block requires you to obtain an Instagram Access
                 Token to connect Instagram with WordPress. You will need to use
                 your Instagram credentials to get access token.

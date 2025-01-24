@@ -27,6 +27,7 @@ import RbeaMediaUploadControl from "../../../utils/components/rbea-media-upload-
 import RbeaBlockBorderHelperControl from "../../../settings-components/RbeaBlockBorderSettings";
 import RbeaBorderRadiusControl from "../../../settings-components/RbeaBorderRadiusControl";
 import stackOnIcons from "../../../utils/components/rbea-tab-radio-control/rbea-stack-on-icons";
+import RbeaWidthRangeControl from "../../../utils/components/rbea-width-range-control";
 
 // Setup the block
 const { __ } = wp.i18n;
@@ -434,6 +435,8 @@ export default class Inspector extends Component {
         imagePositionTab,
         imageSizeTab,
         backgroundImageValueUpdated,
+        widthType,
+        widthTypeValueUpdated,
       },
       setAttributes,
     } = this.props;
@@ -1038,6 +1041,15 @@ export default class Inspector extends Component {
     // Background image URL
     let background_image_url = backgroundImage || '';
 
+    //widthType
+    if (!widthTypeValueUpdated) {
+      this.props.setAttributes(
+        {
+          widthType: resseparatorWidthType !== undefined ? resseparatorWidthType : widthType,
+        }
+      )
+      this.props.setAttributes({ widthTypeValueUpdated: true });
+    }
 
     return (
       <InspectorControls key="inspector">
@@ -1617,6 +1629,7 @@ export default class Inspector extends Component {
               title={__("Separator", "responsive-block-editor-addons")}
               initialOpen={false}
             >
+              <div className="responsive-block-editor-addons-typography-settings">
               <SelectControl
                 label={__("Position", "responsive-block-editor-addons")}
                 value={resseperatorPosition}
@@ -1648,35 +1661,36 @@ export default class Inspector extends Component {
                   },
                 ]}
               />
-              <SelectControl
-                label={__("Style", "responsive-block-editor-addons")}
-                value={resseperatorStyle}
-                onChange={(value) =>
-                  setAttributes({ resseperatorStyle: value })
-                }
-                options={[
-                  {
-                    value: "none",
-                    label: __("None", "responsive-block-editor-addons"),
-                  },
-                  {
-                    value: "solid",
-                    label: __("Solid", "responsive-block-editor-addons"),
-                  },
-                  {
-                    value: "double",
-                    label: __("Double", "responsive-block-editor-addons"),
-                  },
-                  {
-                    value: "dashed",
-                    label: __("Dashed", "responsive-block-editor-addons"),
-                  },
-                  {
-                    value: "dotted",
-                    label: __("Dotted", "responsive-block-editor-addons"),
-                  },
-                ]}
-              />
+              </div>
+              <div className = "rbea-repeat-selector-wrapper">
+                <RbeaTabRadioControl
+                  label={__("Style", "responsive-block-editor-addons")}
+                  value={resseperatorStyle}
+                  onChange={(value) =>
+                    setAttributes({ resseperatorStyle: value })
+                  }
+                  allowReset={true}
+                  defaultValue={"none"}
+                  options={[
+                    {
+                      value: "solid",
+                      label: __("Solid", "responsive-block-editor-addons"),
+                    },
+                    {
+                      value: "double",
+                      label: __("Double", "responsive-block-editor-addons"),
+                    },
+                    {
+                      value: "dashed",
+                      label: __("Dashed", "responsive-block-editor-addons"),
+                    },
+                    {
+                      value: "dotted",
+                      label: __("Dotted", "responsive-block-editor-addons"),
+                    },
+                  ]}
+                />
+              </div>
               {"none" !== resseperatorStyle && (
                 <Fragment>
                   <RbeaRangeControl
@@ -1692,7 +1706,7 @@ export default class Inspector extends Component {
                     beforeIcon=""
                     allowReset
                   />
-                  <ButtonGroup
+                  {/* <ButtonGroup
                     className="responsive-block-editor-addons-size-type-field"
                     aria-label={__(
                       "Size Type",
@@ -1723,8 +1737,8 @@ export default class Inspector extends Component {
                     >
                       {"%"}
                     </Button>
-                  </ButtonGroup>
-                  <RbeaRangeControl
+                  </ButtonGroup> */}
+                  {/* <RbeaRangeControl
                     label={__("Width", "responsive-block-editor-addons")}
                     value={resseperatorWidth}
                     onChange={(value) =>
@@ -1736,6 +1750,23 @@ export default class Inspector extends Component {
                     max={"%" == resseparatorWidthType ? 100 : 500}
                     beforeIcon=""
                     allowReset
+                  /> */}
+                  <RbeaWidthRangeControl
+                    label={__("Width", "responsive-block-editor-addons")}
+                    value={resseperatorWidth}
+                    onChange={(value) =>
+                      setAttributes({
+                        resseperatorWidth: value !== undefined ? value : 30,
+                      })
+                    }
+                    min={0}
+                    max={"%" == widthType ? 100 : 500}
+                    beforeIcon=""
+                    allowReset
+                    initialPosition={20}
+                    widthType={widthType}
+                    extraControls={true}
+                    setAttributes={setAttributes}
                   />
                   <RbeaColorControl
                     label = {__("Separator Color", "responsive-block-editor-addons")}

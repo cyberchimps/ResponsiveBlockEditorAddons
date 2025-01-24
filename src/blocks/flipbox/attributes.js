@@ -104,7 +104,6 @@ const attributes = {
   },
   buttonbackgroundType: {
     type: "string",
-    default: "none",
   },
   buttoncolorLocation1: {
     type: "number",

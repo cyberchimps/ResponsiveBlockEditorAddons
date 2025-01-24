@@ -1420,13 +1420,13 @@ export default class Inspector extends Component {
                     setAttributes={setAttributes}
                     {...this.props}
                   />
+                </PanelBody>
                 <PanelBody
                   title={__("Box Shadow", "responsive-block-editor-addons")}
                   initialOpen={false}
               >
                   {advancedControls}
               </PanelBody>
-                </PanelBody>
                 <PanelBody
                   title={__("Padding", "responsive-block-editor-addons")}
                   initialOpen={false}
@@ -1955,8 +1955,7 @@ export default class Inspector extends Component {
                 checked={showPlaceholder}
                 onChange={this.toggleShowPlaceholder}
               />
-              {showPlaceholder == true && (    
-                <PanelBody>          
+              {showPlaceholder == true && (         
               <RbeaColorControl
                 label = {__("Placeholder Color", "responsive-block-editor-addons")}
                 colorValue={placeholderColor}
@@ -1965,7 +1964,6 @@ export default class Inspector extends Component {
                 }
                 resetColor={() => setAttributes({ placeholderColor: "" })}
               />
-              </PanelBody>
               )}                         
             </PanelBody>
             <PanelBody

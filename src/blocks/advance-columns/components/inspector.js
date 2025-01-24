@@ -772,7 +772,7 @@ export default class Inspector extends Component {
                         </Fragment>
                       )}
 
-{"gradient" == overlayType && (
+                      {"gradient" == overlayType && (
                         <Fragment>
                           <RbeaColorControl
                             label = {"Color 1"}
@@ -784,15 +784,6 @@ export default class Inspector extends Component {
                             }
                             resetColor={() => setAttributes({ gradientOverlayColor1: "" })}
                           />
-                          <RbeaRangeControl
-                            label={__("Location 1", "responsive-block-editor-addons")}
-                            value={gradientOverlayLocation1}
-                            onChange={(value) =>
-                              setAttributes({ gradientOverlayLocation1: value })
-                            }
-                            min={0}
-                            max={100}
-                          />
                           <RbeaColorControl
                             label = {"Color 2"}
                             colorValue={gradientOverlayColor2}
@@ -802,15 +793,6 @@ export default class Inspector extends Component {
                               })
                             }
                             resetColor={() => setAttributes({ gradientOverlayColor2: "" })}
-                          />
-                          <RbeaRangeControl
-                            label={__("Location 2", "responsive-block-editor-addons")}
-                            value={gradientOverlayLocation2}
-                            onChange={(value) =>
-                              setAttributes({ gradientOverlayLocation2: value })
-                            }
-                            min={0}
-                            max={100}
                           />
                           <RbeaTabRadioControl
                             label={__("Type", "responsive-block-editor-addons")}
@@ -823,6 +805,24 @@ export default class Inspector extends Component {
                               { value: "radial", label: __("Radial", "responsive-block-editor-addons") },
                             ]}
                             defaultValue={"linear"}
+                          />
+                          <RbeaRangeControl
+                            label={__("Color Location 1", "responsive-block-editor-addons")}
+                            value={gradientOverlayLocation1}
+                            onChange={(value) =>
+                              setAttributes({ gradientOverlayLocation1: value })
+                            }
+                            min={0}
+                            max={100}
+                          />
+                          <RbeaRangeControl
+                            label={__("Color Location 2", "responsive-block-editor-addons")}
+                            value={gradientOverlayLocation2}
+                            onChange={(value) =>
+                              setAttributes({ gradientOverlayLocation2: value })
+                            }
+                            min={0}
+                            max={100}
                           />
                           {"linear" == gradientOverlayType && (
                             <RbeaAngleRangeControl

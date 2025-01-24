@@ -248,6 +248,7 @@ function EditorStyles(props) {
     backgroundSizeTablet,
     backgroundSizeMobile,
     backgroundRepeat,
+    widthType,
   } = props.attributes;
 
   var boxShadowPositionCSS = boxShadowPosition;
@@ -412,7 +413,7 @@ function EditorStyles(props) {
       "border-width": generateCSSUnit(resseperatorThickness, "px"),
       "border-color": resseperatorColor,
       "border-top-style": resseperatorStyle,
-      "width": generateCSSUnit(resseperatorWidth, resseparatorWidthType),
+      "width": generateCSSUnit(resseperatorWidth, widthType),
       "margin-bottom": generateCSSUnit(sepSpace, "px"),
     },
 

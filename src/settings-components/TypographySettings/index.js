@@ -201,46 +201,52 @@ class TypographyControl extends Component {
                             if ("mobile" === tab.name) {
                                 tabout = (
                                     <Fragment>
-                                        <RbeaRangeControl
-                                            label={__(
-                                                "Font Size",
-                                                "responsive-block-editor-addons"
-                                            )}
-                                            min={0}
-                                            max={500}
-                                            value={this.props.values.sizeMobile}
-                                            onChange={this.props.onChangeFontSizeMobile}
-                                        />
+                                        <div className="rbea-typography-font-size-control-container">
+                                            <RbeaRangeControl
+                                                label={__(
+                                                    "Font Size",
+                                                    "responsive-block-editor-addons"
+                                                )}
+                                                min={0}
+                                                max={500}
+                                                value={this.props.values.sizeMobile}
+                                                onChange={this.props.onChangeFontSizeMobile}
+                                            />
+                                        </div>
                                     </Fragment>
                                 );
                             } else if ("tablet" === tab.name) {
                                 tabout = (
                                     <Fragment>
-                                        <RbeaRangeControl
-                                            label={__(
-                                                "Font Size",
-                                                "responsive-block-editor-addons"
-                                            )}
-                                            min={0}
-                                            max={500}
-                                            value={this.props.values.sizeTablet}
-                                            onChange={this.props.onChangeFontSizeTablet}
-                                        />
+                                        <div className="rbea-typography-font-size-control-container">
+                                            <RbeaRangeControl
+                                                label={__(
+                                                    "Font Size",
+                                                    "responsive-block-editor-addons"
+                                                )}
+                                                min={0}
+                                                max={500}
+                                                value={this.props.values.sizeTablet}
+                                                onChange={this.props.onChangeFontSizeTablet}
+                                            />
+                                        </div>
                                     </Fragment>
                                 );
                             } else {
                                 tabout = (
                                     <Fragment>
-                                        <RbeaRangeControl
-                                            label={__(
-                                                "Font Size",
-                                                "responsive-block-editor-addons"
-                                            )}
-                                            min={0}
-                                            max={500}
-                                            value={this.props.values.size}
-                                            onChange={this.props.onChangeFontSize}
-                                        />
+                                        <div className="rbea-typography-font-size-control-container">
+                                            <RbeaRangeControl
+                                                label={__(
+                                                    "Font Size",
+                                                    "responsive-block-editor-addons"
+                                                )}
+                                                min={0}
+                                                max={500}
+                                                value={this.props.values.size}
+                                                onChange={this.props.onChangeFontSize}
+                                            />
+                                        </div>
                                     </Fragment>
                                 );
                             }
@@ -248,12 +254,14 @@ class TypographyControl extends Component {
                             return <div>{tabout}</div>;
                         }}
                     </TabPanel>
-                    <SelectControl
-                        label={__("Font Weight", "responsive-block-editor-addons")}
-                        options={fontWeightOptions}
-                        value={this.props.values.weight}
-                        onChange={this.props.onChangeFontWeight}
-                    />
+                    <div className="rbea-font-weight-control-container">
+                        <SelectControl
+                            label={__("Font Weight", "responsive-block-editor-addons")}
+                            options={fontWeightOptions}
+                            value={this.props.values.weight}
+                            onChange={this.props.onChangeFontWeight}
+                        />
+                    </div>
                     <RbeaRangeControl
                         label={__("Line Height", "responsive-block-editor-addons")}
                         value={this.props.values.height}
@@ -382,7 +390,7 @@ class TypographyControl extends Component {
                             initialTabName="normal" // Set the default active tab here
                             tabs={[
                                 {
-                                    name: "empty",
+                                    name: "empty-1",
                                     title: __("", "responsive-block-editor-addons"),
                                     className: "responsive-block-editor-addons-empty-tab",
                                 },
@@ -392,9 +400,9 @@ class TypographyControl extends Component {
                                     className: "responsive-block-editor-addons-normal-tab",
                                 },
                                 {
-                                    name: "empty",
+                                    name: "empty-2",
                                     title: __("", "responsive-block-editor-addons"),
-                                    className: "responsive-block-editor-addons-empty-tab",
+                                    className: "responsive-block-editor-addons-empty-tab-middle",
                                 },
                                 {
                                     name: "hover",
@@ -402,7 +410,7 @@ class TypographyControl extends Component {
                                     className: "responsive-block-editor-addons-hover-tab",
                                 },
                                 {
-                                    name: "empty",
+                                    name: "empty-3",
                                     title: __("", "responsive-block-editor-addons"),
                                     className: "responsive-block-editor-addons-empty-tab",
                                 },

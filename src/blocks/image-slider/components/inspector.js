@@ -242,6 +242,7 @@ class Inspector extends Component {
                     onChange={this.setSizeControl}
                     value={gridSize}
                     resetValue={"xlrg"}
+                    reset={true}
                   />
                   {gridSize !== null &&
                     (align === "wide" || align === "full") && (

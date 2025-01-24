@@ -261,7 +261,6 @@ const attributes = {
   },
   buttonbackgroundType: {
     type: "string",
-    default: "color",
   },
   boxShadowColor: {
     type: "string",

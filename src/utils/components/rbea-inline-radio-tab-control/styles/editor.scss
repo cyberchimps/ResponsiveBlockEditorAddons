@@ -47,6 +47,19 @@
     .rbea-inline-radio-tab-option.is-active .responsive-blocks-editor-addons-design-panel-item {
       background-color: #666666;
     }
+
+    .rbea-inline-radio-tab-option .rbea-radio-inline-tab-control-dashicons {
+      color: #666666;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .rbea-inline-radio-tab-option.is-active .rbea-radio-inline-tab-control-dashicons {
+      color: white;
+    }    
     
     .rbea-inline-radio-tab-option.is-active .rbea-radio-inline-tab-control-icons  path {
       fill: white;

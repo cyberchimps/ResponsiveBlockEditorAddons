@@ -40,7 +40,7 @@
 		padding: 6px 12px 6px 12px;
 		gap: 12px;
 		border-radius: 4px;
-		border: 1px solid #ddd;
+		// border: 1px solid #ddd;
 		text-transform: none;
 	}
 }
@@ -92,3 +92,13 @@
 	  }
 	}
   }
+
+.rbea-font-weight-control-container {
+	.components-input-control__container {
+		max-width: 105px;
+	}
+}
+
+.rbea-typography-font-size-control-container {
+	margin-bottom: 24px;
+}

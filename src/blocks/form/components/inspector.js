@@ -4,7 +4,7 @@
 
 // Setup the block
 const { __ } = wp.i18n;
-const { Component } = wp.element;
+const { Component, Fragment } = wp.element;
 import InspectorTab from "../../../components/InspectorTab";
 import InspectorTabs from "../../../components/InspectorTabs";
 import { __experimentalText as Text, FontSizePicker, __experimentalBoxControl as BoxControl, __experimentalToggleGroupControl as ToggleGroupControl, __experimentalToggleGroupControlOption as ToggleGroupControlOption, __experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon } from '@wordpress/components';
@@ -17,6 +17,7 @@ import ResponsiveNewMarginControl from "../../../settings-components/ResponsiveN
 import RbeaRangeControl from "../../../utils/components/rbea-range-control";
 import RbeaColorControl from "../../../utils/components/rbea-color-control";
 import RbeaBorderRadiusControl from "../../../settings-components/RbeaBorderRadiusControl";
+import ResponsiveBorderWidthControl from "../../../settings-components/ResponsiveBorderWidthSettings";
 
 // Import block components
 const { InspectorControls, PanelColorSettings, AlignmentToolbar } = wp.blockEditor
@@ -217,6 +218,21 @@ export default class Inspector extends Component {
         inputFieldRightPaddingMobile,
         isInputFieldPaddingMarginValueUpdated,
         isFormButtonPaddingMarginValueUpdated,
+
+        //Form block border width
+        formBlockBorderTopWidth,
+        formBlockBorderTopWidthMobile,
+        formBlockBorderTopWidthTablet,
+        formBlockBorderBottomWidth,
+        formBlockBorderBottomWidthMobile,
+        formBlockBorderBottomWidthTablet,
+        formBlockBorderLeftWidth,
+        formBlockBorderLeftWidthMobile,
+        formBlockBorderLeftWidthTablet,
+        formBlockBorderRightWidth,
+        formBlockBorderRightWidthTablet,
+        formBlockBorderRightWidthMobile,
+        hasFormBlockBorderWidthValuesUpdated,
       },
       setAttributes,
       clientId
@@ -250,6 +266,20 @@ export default class Inspector extends Component {
       marginMobileBottom: 0,
       marginMobileLeft: 0,
     }
+    const formBlockBorderWidthValues = {
+			paddingTop: 1,
+			paddingRight: 1,
+			paddingBottom: 1,
+			paddingLeft: 1,
+			paddingTabletTop: 1,
+			paddingTabletRight: 1,
+			paddingTabletBottom: 1,
+			paddingTabletLeft: 1,
+			paddingMobileTop: 1,
+			paddingMobileRight: 1,
+			paddingMobileBottom: 1,
+			paddingMobileLeft: 1,
+		}
 
     const inputFieldActions = {
       select: ( blockId ) => {
@@ -465,6 +495,27 @@ export default class Inspector extends Component {
       this.props.setAttributes({isInputFieldPaddingMarginValueUpdated: true});
     }
 
+    // Form Border Width New Control Backward Compatibility
+    if (!hasFormBlockBorderWidthValuesUpdated) {
+      this.props.setAttributes(
+        {
+          formBlockBorderTopWidth:          formBorderWidth.top !== undefined ? formBorderWidth.top : formBlockBorderTopWidth,
+          formBlockBorderBottomWidth:       formBorderWidth.bottom !== undefined ? formBorderWidth.bottom : formBlockBorderBottomWidth,
+          formBlockBorderLeftWidth:         formBorderWidth.left !== undefined ? formBorderWidth.left : formBlockBorderLeftWidth,
+          formBlockBorderRightWidth:        formBorderWidth.right !== undefined ? formBorderWidth.right : formBlockBorderRightWidth,
+          formBlockBorderTopWidthTablet:    formBorderWidth.top !== undefined ? formBorderWidth.top : formBlockBorderTopWidthTablet,
+          formBlockBorderBottomWidthTablet: formBorderWidth.bottom !== undefined ? formBorderWidth.bottom : formBlockBorderBottomWidthTablet,
+          formBlockBorderRightWidthTablet:  formBorderWidth.right !== undefined ? formBorderWidth.right : formBlockBorderRightWidthTablet,
+          formBlockBorderLeftWidthTablet:   formBorderWidth.left !== undefined ? formBorderWidth.left : formBlockBorderLeftWidthTablet,
+          formBlockBorderTopWidthMobile:    formBorderWidth.top !== undefined ? formBorderWidth.top : formBlockBorderTopWidthMobile,
+          formBlockBorderBottomWidthMobile: formBorderWidth.bottom !== undefined ? formBorderWidth.bottom : formBlockBorderBottomWidthMobile,
+          formBlockBorderLeftWidthMobile:   formBorderWidth.left !== undefined ? formBorderWidth.left : formBlockBorderLeftWidthMobile,
+          formBlockBorderRightWidthMobile:  formBorderWidth.right !== undefined ? formBorderWidth.right : formBlockBorderRightWidthMobile,
+        }
+      )
+      this.props.setAttributes({hasFormBlockBorderWidthValuesUpdated: true});
+    }
+
     return (
       <InspectorControls key="inspector">
         <InspectorTabs>
@@ -639,7 +690,7 @@ export default class Inspector extends Component {
                 initialTabName="normal" // Set the default active tab here
                 tabs={[
                   {
-                    name: "empty",
+                    name: "empty-1",
                     title: __("", "responsive-block-editor-addons"),
                     className: "responsive-block-editor-addons-empty-tab",
                   },
@@ -649,9 +700,9 @@ export default class Inspector extends Component {
                     className: "responsive-block-editor-addons-normal-tab",
                   },
                   {
-                    name: "empty",
+                    name: "empty-2",
                     title: __("", "responsive-block-editor-addons"),
-                    className: "responsive-block-editor-addons-empty-tab",
+                    className: "responsive-block-editor-addons-empty-tab-middle",
                   },
                   {
                     name: "hover",
@@ -659,7 +710,7 @@ export default class Inspector extends Component {
                     className: "responsive-block-editor-addons-hover-tab",
                   },
                   {
-                    name: "empty",
+                    name: "empty-3",
                     title: __("", "responsive-block-editor-addons"),
                     className: "responsive-block-editor-addons-empty-tab",
                   },
@@ -830,11 +881,6 @@ export default class Inspector extends Component {
               title={__("Colors", "responsive-block-editor-addons")}
               initialOpen={false}
             >
-
-              <PanelBody
-                title={__("Colors", "responsive-block-editor-addons")}
-                initialOpen={false}
-              >
                  <RbeaColorControl
 									label = {__("Label", "responsive-block-editor-addons")}
 									colorValue={formLabelColor}
@@ -891,8 +937,6 @@ export default class Inspector extends Component {
 									}
 									resetColor={() => setAttributes({ formErrorMessageColor: "" })}
 								/>
-              </PanelBody>
-
             </PanelBody>
 
             <PanelBody
@@ -914,13 +958,13 @@ export default class Inspector extends Component {
                 />
               </div>
 
-              <BoxControl
-                label={__("Border Width", "responsive-block-editor-addons")}
-                values={formBorderWidth}
-                units={[{ value: 'px', label: 'px', default: 1 }]}
-                onChange={ ( value ) => {setAttributes({ formBorderWidth: value })} }
-                resetValues={{ top: '1px', right: '1px', bottom: '1px', left: '1px' }}
-              />
+              <Fragment>
+                <ResponsiveBorderWidthControl
+                  attrNameTemplate="formBlockBorder%s"
+                  resetValues={formBlockBorderWidthValues}
+                  {...this.props}
+                />
+              </Fragment>
 
             </PanelBody>
 

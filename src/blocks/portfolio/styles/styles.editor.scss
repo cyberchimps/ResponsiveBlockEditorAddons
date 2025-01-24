@@ -89,3 +89,30 @@
 .responsive-block-editor-addons-block-portfolio-excerpt .read-more {
   display: none;
 }
+
+.rbea-portfolio-block-number-of-items-control-container {
+  margin-bottom: 24px;
+  .components-flex.components-h-stack.components-v-stack.components-query-controls {
+    .components-range-control {
+      .components-base-control__field {
+        .components-base-control__label {
+          font-family: Roboto;
+          font-size: 13px;
+          font-weight: 400;
+          line-height: 16px;
+          text-transform: capitalize;
+        }
+
+        .components-range-control__root {
+          .components-input-control.components-number-control.components-range-control__number {
+            .components-input-base {
+              .components-input-control__container {
+                width: calc(64px);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

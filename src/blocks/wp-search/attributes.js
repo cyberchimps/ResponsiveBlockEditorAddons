@@ -13,7 +13,7 @@ const attributes = {
     },
     inputWidth: {
       type: "number",
-      default: 100
+      default: 100,
     },
     inputWidthType: {
       type: "string",
