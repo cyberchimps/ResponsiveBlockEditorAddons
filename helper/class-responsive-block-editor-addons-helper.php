@@ -14,7 +14,7 @@
  *
  * @since      2.0.0
  * @package    Responsive_Block_Editor_Addons
- * @subpackage Responsive_Block_Editor_Addons/includes
+ * @subpackage Responsive_Block_Editor_Addons/helper
  * @author     CyberChimps <support@cyberchimps.com>
  */
 class Responsive_Block_Editor_Addons_Helper {
