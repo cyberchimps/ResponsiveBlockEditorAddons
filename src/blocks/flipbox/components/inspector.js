@@ -353,6 +353,20 @@ export default class Inspector extends Component {
         blockIsTypographyColorValueUpdated,
         frontTitleTypographyColor,
         backTitleTypographyColor,
+
+        ctaButtonTopPadding,
+        ctaButtonBottomPadding,
+        ctaButtonLeftPadding,
+        ctaButtonRightPadding,
+        ctaButtonTopPaddingTablet,
+        ctaButtonBottomPaddingTablet,
+        ctaButtonRightPaddingTablet,
+        ctaButtonLeftPaddingTablet,
+        ctaButtonTopPaddingMobile,
+        ctaButtonBottomPaddingMobile,
+        ctaButtonLeftPaddingMobile,
+        ctaButtonRightPaddingMobile,
+        isCtaButtonPaddingMarginValueUpdated,
       },
       setAttributes,
     } = this.props;
@@ -789,18 +803,20 @@ export default class Inspector extends Component {
                 max={1000}
                 allowReset
               />
-              <RbeaTabRadioControl
-                label={__("Flip Style", "responsive-block-editor-addons")}
-                options={flipStyleOptions}
-                value={flipStyleSelected}
-                onChange={(value) =>
-                  this.props.setAttributes({
-                    flipStyleSelected: value,
-                  })
-                }
-                defaultValue={"LTR"}
-              />
-
+              <div className = "rbea-repeat-selector-wrapper">
+                <RbeaTabRadioControl
+                  label={__("Flip Style", "responsive-block-editor-addons")}
+                  options={flipStyleOptions}
+                  value={flipStyleSelected}
+                  onChange={(value) =>
+                    this.props.setAttributes({
+                      flipStyleSelected: value,
+                    })
+                  }
+                  allowReset={true}
+                  defaultValue={"LTR"}
+                />
+              </div>
               <RbeaRangeControl
                 label={__(
                   "Transition Speed (ms)",

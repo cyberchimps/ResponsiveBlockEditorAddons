@@ -1187,7 +1187,7 @@ export default class Inspector extends Component {
               {bgGradient && (
                 <RbeaAngleRangeControl
                   label={__(
-                    "Gradient Degree",
+                    "Angle",
                     "responsive-block-editor-addons"
                   )}
                   value={gradientDegree}
@@ -1259,7 +1259,7 @@ export default class Inspector extends Component {
               {hoverBgGradient && (
                 <RbeaAngleRangeControl
                   label={__(
-                    "Gradient Degree",
+                    "Angle",
                     "responsive-block-editor-addons"
                   )}
                   value={hoverGradientDegree}

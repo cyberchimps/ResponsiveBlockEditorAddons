@@ -11,6 +11,7 @@ import RbeaRangeControl from "../../../utils/components/rbea-range-control";
 import RbeaColorControl from "../../../utils/components/rbea-color-control";
 import RbeaTabRadioControl from "../../../utils/components/rbea-tab-radio-control";
 import RbeaBlockBorderHelperControl from "../../../settings-components/RbeaBlockBorderSettings";
+import RbeaSeparatorStyleTabControl from "../../../utils/components/rbea-separator-style-tab-control";
 
 /**
  * Inspector Controls
@@ -39,7 +40,8 @@ const {
   ToggleControl,
   TabPanel,
   Dashicon,
-  BaseControl
+  BaseControl,
+  RadioControl,
 } = wp.components;
 
 /**
@@ -748,12 +750,13 @@ if (!gridIsRadiusValueUpdated) {
               )}
               {"list" === layout && (
                 <Fragment>
-                  <SelectControl
+                  {/* <RadioControl
                     label={__(
                       "Separator Style",
                       "resposive-block-editor-addons"
                     )}
-                    value={separatorStyle}
+                    className="rbea-border-style-selector"
+                    selected={separatorStyle}
                     onChange={(value) =>
                       setAttributes({ separatorStyle: value })
                     }
@@ -795,6 +798,10 @@ if (!gridIsRadiusValueUpdated) {
                         label: __("Ridge", "resposive-block-editor-addons"),
                       },
                     ]}
+                  /> */}
+                  <RbeaSeparatorStyleTabControl
+                    selected={separatorStyle}
+                    onChange={(value) => setAttributes({ separatorStyle: value })}
                   />
                   {"none" !== separatorStyle && (
                     <Fragment>

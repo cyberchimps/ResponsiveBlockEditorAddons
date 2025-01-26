@@ -5883,6 +5883,28 @@ if ( ! class_exists( 'Responsive_Block_Editor_Addons_Frontend_Styles' ) ) {
 				}
 			}
 
+			$newButtonPaddingKeys = [
+				'ctaButtonTopPadding' 	=> 'ctaVpadding' ? 'ctaVpadding' : 10,
+				'ctaButtonBottomPadding' 	=> 'ctaVpadding' ? 'ctaVpadding' : 10,
+				'ctaButtonLeftPadding' 	=> 'ctaHpadding' ? 'ctaHpadding' : 20,
+				'ctaButtonRightPadding' 	=> 'ctaHpadding' ? 'ctaHpadding' : 20,
+				'ctaButtonTopPaddingTablet' 	=> 'ctaVpaddingTablet' ? 'ctaVpaddingTablet' : 15,
+				'ctaButtonBottomPaddingTablet' 	=> 'ctaVpaddingTablet' ? 'ctaVpaddingTablet' : 15,
+				'ctaButtonRightPaddingTablet' 	=> 'ctaHpaddingTablet' ? 'ctaHpaddingTablet' : 30,
+				'ctaButtonLeftPaddingTablet' 	=> 'ctaHpaddingTablet' ? 'ctaHpaddingTablet' : 30,
+				'ctaButtonTopPaddingMobile' 	=> 'ctaVpaddingMobile' ? 'ctaVpaddingMobile' : 15,
+				'ctaButtonBottomPaddingMobile' 	=> 'ctaVpaddingMobile' ? 'ctaVpaddingMobile' : 15,
+				'ctaButtonLeftPaddingMobile' 	=> 'ctaHpaddingMobile' ? 'ctaHpaddingMobile' : 30,
+				'ctaButtonRightPaddingMobile' 	=> 'ctaHpaddingMobile' ? 'ctaHpaddingMobile' : 30,
+			];
+
+			// To populate new control values with existing padding margin control values for backward compatibility.
+			foreach ($newButtonPaddingKeys as $attrKey => $defaultKey) {
+				if (array_key_exists($attrKey, $defaults)) {
+					$defaults[$attrKey] = isset($attr[$defaultKey]) ? $attr[$defaultKey] : $defaults[$attrKey];
+				}
+			}
+
 			$attr     = array_merge( $defaults, (array) $attr );
 
 			$mobile_selectors = array();
@@ -6142,10 +6164,10 @@ if ( ! class_exists( 'Responsive_Block_Editor_Addons_Frontend_Styles' ) ) {
 					'border-width'     => self::get_css_value( $attr['ctaBorderWidth'], 'px' ),
 					'border-radius'    => self::get_css_value( $attr['ctaBorderRadius'], 'px' ),
 					'border-color'     => $attr['ctaBorderColor'],
-					'padding-left'     => 999 !== $attr['buttonHPadding'] && 20 !== $attr['ctaHpadding'] ? self::get_css_value( $attr['buttonHPadding'], 'px' ) : self::get_css_value( $attr['ctaHpadding'], 'px' ), // For compatibility with v1.3.2.
-					'padding-right'    => 999 !== $attr['buttonHPadding'] && 20 !== $attr['ctaHpadding'] ? self::get_css_value( $attr['buttonHPadding'], 'px' ) : self::get_css_value( $attr['ctaHpadding'], 'px' ), // For compatibility with v1.3.2.
-					'padding-top'      => 999 !== $attr['buttonVPadding'] && 10 !== $attr['ctaHpadding'] ? self::get_css_value( $attr['buttonVPadding'], 'px' ) : self::get_css_value( $attr['ctaVpadding'], 'px' ), // For compatibility with v1.3.2.
-					'padding-bottom'   => 999 !== $attr['buttonVPadding'] && 10 !== $attr['ctaHpadding'] ? self::get_css_value( $attr['buttonVPadding'], 'px' ) : self::get_css_value( $attr['ctaVpadding'], 'px' ), // For compatibility with v1.3.2.
+					'padding-top'      => self::get_css_value( $attr['ctaButtonTopPadding'], 'px' ),
+					'padding-bottom'   => self::get_css_value( $attr['ctaButtonBottomPadding'], 'px' ),
+					'padding-left'     => self::get_css_value( $attr['ctaButtonLeftPadding'], 'px' ),
+					'padding-right'    => self::get_css_value( $attr['ctaButtonRightPadding'], 'px' ),
 					'background-image' => $background_image_gradient,
 					'background-color' => $btn_color . '!important',
 					'opacity'          => $btn_opacity / 100,
@@ -6520,6 +6542,19 @@ if ( ! class_exists( 'Responsive_Block_Editor_Addons_Frontend_Styles' ) ) {
 				'blockRightMarginTablet'      => '',
 				'frontTitleTypographyColor' => '',
         		'backTitleTypographyColor' => '',
+
+				'ctaButtonTopPadding'	=> 10,
+        		'ctaButtonBottomPadding'	=> 10,
+        		'ctaButtonLeftPadding'	=> 20,
+        		'ctaButtonRightPadding'	=> 20,
+        		'ctaButtonTopPaddingTablet'	=> 15,
+        		'ctaButtonBottomPaddingTablet'	=> 15,
+        		'ctaButtonRightPaddingTablet'	=> 30,
+        		'ctaButtonLeftPaddingTablet'	=> 30,
+        		'ctaButtonTopPaddingMobile'	=> 15,
+        		'ctaButtonBottomPaddingMobile'	=> 15,
+        		'ctaButtonLeftPaddingMobile'	=> 30,
+        		'ctaButtonRightPaddingMobile'	=> 30,
 			);
 		}
 
@@ -10908,7 +10943,7 @@ if ( ! class_exists( 'Responsive_Block_Editor_Addons_Frontend_Styles' ) ) {
 				}
 			}
 
-			$imgopacity = $attr['opacity'] / 100;
+			$imgopacity = 1 - ( $attr['opacity'] / 100 );
 			
 			$background_image_effect = '';
 			$updated_background_image = '';
@@ -10916,7 +10951,7 @@ if ( ! class_exists( 'Responsive_Block_Editor_Addons_Frontend_Styles' ) ) {
 			$color_type = '';
 			if ( 'color' === $attr['overlayType'] || '' === $attr['overlayType'] || 'none' === $attr['overlayType'] ) {
 			    $color_type = self::hex_to_rgba(
-			        $attr['backgroundImageColor'],
+			        $attr['backgroundImageColor'] || "#fff",
 			        $imgopacity
 			    );
 			
@@ -11105,7 +11140,7 @@ if ( ! class_exists( 'Responsive_Block_Editor_Addons_Frontend_Styles' ) ) {
 						? self::hex_to_rgb( $attr['backgroundColor'], $imgopacity )
 						: '',
 					'background-image' =>
-    					'gradient' == $attr['overlayType'] && 'image' == $attr['backgroundType']
+    					'image' == $attr['backgroundType'] && 'gradient' == $attr['overlayType']
     					? $background_image_effect
     					: (
     					    'gradient' == $attr['backgroundType']
@@ -18606,7 +18641,7 @@ if ( ! class_exists( 'Responsive_Block_Editor_Addons_Frontend_Styles' ) ) {
 					'background-color' =>
 						'color' === $attr['backgroundType']
 							? self::hex_to_rgb( $attr['backgroundColor'], $columnbackcoloropacity )
-							: '#fff',
+							: '',
 					'background-image' =>
 						'gradient' === $attr['backgroundType']
 							? self::generate_background_image_effect(

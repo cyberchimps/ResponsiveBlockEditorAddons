@@ -343,14 +343,14 @@ function EditorStyles(props) {
       "border-bottom-right-radius": generateCSSUnit(blockBottomRadius, "px"),
       "border-bottom-left-radius": generateCSSUnit(blockLeftRadius, "px"),
       "background-color":
-        backgroundType == "color"
+        backgroundType === "color"
           ? `${hexToRgba(
               backgroundColor || "#fff",
               columnbackcoloropacity || 0
             )}`
-          : "#fff",
+          : undefined,
       "background-image":
-        backgroundType == "gradient"
+        backgroundType === "gradient"
           ? generateBackgroundImageEffect(
               `${hexToRgba(
                 backgroundColor1 || "#fff",

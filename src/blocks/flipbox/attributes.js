@@ -886,6 +886,58 @@ const attributes = {
   backTitleTypographyColor: {
     type: "",
   },
+  ctaButtonTopPadding: {
+    type: "number",
+    default: 10,
+  },
+  ctaButtonBottomPadding: {
+    type: "number",
+    default: 10,
+  },
+  ctaButtonLeftPadding: {
+    type: "number",
+    default: 20,
+  },
+  ctaButtonRightPadding: {
+    type: "number",
+    default: 20,
+  },
+  ctaButtonTopPaddingTablet: {
+    type: "number",
+    default: 15,
+  },
+  ctaButtonBottomPaddingTablet: {
+    type: "number",
+    default: 15,
+  },
+  ctaButtonRightPaddingTablet: {
+    type: "number",
+    default: 30,
+  },
+  ctaButtonLeftPaddingTablet: {
+    type: "number",
+    default: 30,
+  },
+  ctaButtonTopPaddingMobile: {
+    type: "number",
+    default: 15,
+  },
+  ctaButtonBottomPaddingMobile: {
+    type: "number",
+    default: 15,
+  },
+  ctaButtonLeftPaddingMobile: {
+    type: "number",
+    default: 30,
+  },
+  ctaButtonRightPaddingMobile: {
+    type: "number",
+    default: 30,
+  },
+  isCtaButtonPaddingMarginValueUpdated: {
+    type: "boolean",
+    default: false,
+  },
 };
 
 export default attributes;

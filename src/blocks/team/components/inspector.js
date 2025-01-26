@@ -628,7 +628,7 @@ export default class Inspector extends Component {
                   {
                     value: "mobile",
                     label: __("Mobile", "responsive-block-editor-addons"),
-                    icon: stackOnIcons.tablet,
+                    icon: stackOnIcons.mobile,
                   },
                 ]}
                 onChange={(value) => setAttributes({ stack: value })}
