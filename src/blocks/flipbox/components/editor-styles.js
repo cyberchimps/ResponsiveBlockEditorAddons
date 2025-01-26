@@ -221,6 +221,19 @@ function EditorStyles(props) {
     ctaButtonBottomPaddingMobile,
     ctaButtonLeftPaddingMobile,
     ctaButtonRightPaddingMobile,
+
+    ctaBlockTopRadius,
+    ctaBlockRightRadius,
+    ctaBlockBottomRadius,
+    ctaBlockLeftRadius,
+    ctaBlockTopRadiusTablet,
+    ctaBlockRightRadiusTablet,
+    ctaBlockBottomRadiusTablet,
+    ctaBlockLeftRadiusTablet,
+    ctaBlockTopRadiusMobile,
+    ctaBlockRightRadiusMobile,
+    ctaBlockBottomRadiusMobile,
+    ctaBlockLeftRadiusMobile,
   } = props.attributes;
 
   var boxShadowPositionCSS = boxShadowPosition;
@@ -465,7 +478,10 @@ function EditorStyles(props) {
     " .wp-block-responsive-block-editor-addons-flipbox-item__button.wp-block-button__link": {
       "border-style": ctaBorderStyle,
       "border-width": generateCSSUnit(ctaBorderWidth, "px"),
-      "border-radius": generateCSSUnit(ctaBorderRadius, "px"),
+      "border-top-left-radius": generateCSSUnit(ctaBlockTopRadius, "px"),
+      "border-top-right-radius": generateCSSUnit(ctaBlockRightRadius, "px"),
+      "border-bottom-right-radius": generateCSSUnit(ctaBlockBottomRadius, "px"),
+      "border-bottom-left-radius": generateCSSUnit(ctaBlockLeftRadius, "px"),
       "border-color": ctaBorderColor,
       "padding-top": generateCSSUnit(ctaButtonTopPadding, "px"),
       "padding-bottom": generateCSSUnit(ctaButtonBottomPadding, "px"),
@@ -555,6 +571,10 @@ function EditorStyles(props) {
       "padding-bottom": generateCSSUnit(ctaButtonBottomPaddingMobile, "px"),
       "padding-left": generateCSSUnit(ctaButtonLeftPaddingMobile, "px"),
       "padding-right": generateCSSUnit(ctaButtonRightPaddingMobile, "px"),
+      "border-top-left-radius": generateCSSUnit(ctaBlockTopRadiusMobile, "px"),
+      "border-top-right-radius": generateCSSUnit(ctaBlockRightRadiusMobile, "px"),
+      "border-bottom-right-radius": generateCSSUnit(ctaBlockBottomRadiusMobile, "px"),
+      "border-bottom-left-radius": generateCSSUnit(ctaBlockLeftRadiusMobile, "px"),
     },
   };
 
@@ -615,6 +635,10 @@ function EditorStyles(props) {
       "padding-bottom": generateCSSUnit(ctaButtonBottomPaddingTablet, "px"),
       "padding-left": generateCSSUnit(ctaButtonLeftPaddingTablet, "px"),
       "padding-right": generateCSSUnit(ctaButtonRightPaddingTablet, "px"),
+      "border-top-left-radius": generateCSSUnit(ctaBlockTopRadiusTablet, "px"),
+      "border-top-right-radius": generateCSSUnit(ctaBlockRightRadiusTablet, "px"),
+      "border-bottom-right-radius": generateCSSUnit(ctaBlockBottomRadiusTablet, "px"),
+      "border-bottom-left-radius": generateCSSUnit(ctaBlockLeftRadiusTablet, "px"),
     },
   };
 

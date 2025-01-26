@@ -300,6 +300,7 @@ const attributes = {
   },
   buttonbackgroundColor1: {
     type: "string",
+    default: "#fff",
   },
   buttonbackgroundColor2: {
     type: "string",
@@ -714,6 +715,46 @@ const attributes = {
   isCtaButtonPaddingMarginValueUpdated: {
     type: "boolean",
     default: false,
-  }
+  },
+  ctaBlockTopRadius: {
+    type: "number",
+  },
+  ctaBlockRightRadius: {
+    type: "number",
+  },
+  ctaBlockBottomRadius: {
+    type: "number",
+  },
+  ctaBlockLeftRadius: {
+    type: "number",
+  },
+  ctaBlockTopRadiusTablet: {
+    type: "number",
+  },
+  ctaBlockRightRadiusTablet: {
+    type: "number",
+  },
+  ctaBlockBottomRadiusTablet: {
+    type: "number",
+  },
+  ctaBlockLeftRadiusTablet: {
+    type: "number",
+  },
+  ctaBlockTopRadiusMobile: {
+    type: "number",
+  },
+  ctaBlockRightRadiusMobile: {
+    type: "number",
+  },
+  ctaBlockBottomRadiusMobile: {
+    type: "number",
+  },
+  ctaBlockLeftRadiusMobile: {
+    type: "number",
+  },
+  isCtaButtonBorderRadiusValueUpdated: {
+    type: "boolean",
+    default: false,
+  },
 };
 export default attributes;

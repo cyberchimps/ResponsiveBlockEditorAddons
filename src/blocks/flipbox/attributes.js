@@ -938,6 +938,58 @@ const attributes = {
     type: "boolean",
     default: false,
   },
+  ctaBlockTopRadius: {
+    type: "number",
+    default: 0,
+  },
+  ctaBlockRightRadius: {
+    type: "number",
+    default: 0,
+  },
+  ctaBlockBottomRadius: {
+    type: "number",
+    default: 0,
+  },
+  ctaBlockLeftRadius: {
+    type: "number",
+    default: 0,
+  },
+  ctaBlockTopRadiusTablet: {
+    type: "number",
+    default: 0,
+  },
+  ctaBlockRightRadiusTablet: {
+    type: "number",
+    default: 0,
+  },
+  ctaBlockBottomRadiusTablet: {
+    type: "number",
+    default: 0,
+  },
+  ctaBlockLeftRadiusTablet: {
+    type: "number",
+    default: 0,
+  },
+  ctaBlockTopRadiusMobile: {
+    type: "number",
+    default: 0,
+  },
+  ctaBlockRightRadiusMobile: {
+    type: "number",
+    default: 0,
+  },
+  ctaBlockBottomRadiusMobile: {
+    type: "number",
+    default: 0,
+  },
+  ctaBlockLeftRadiusMobile: {
+    type: "number",
+    default: 0,
+  },
+  isCtaButtonBorderRadiusValueUpdated: {
+    type: "boolean",
+    default: false,
+  }
 };
 
 export default attributes;

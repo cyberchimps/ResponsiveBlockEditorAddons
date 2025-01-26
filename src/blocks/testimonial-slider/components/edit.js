@@ -1293,7 +1293,7 @@ class edit extends Component {
               }}
               onChange={(newValue) => {
                   setAttributes({
-                      image_val: newValue,
+                      image_val: newValue.url,
                   });
               }}
               mediaType={'image'}
@@ -1399,21 +1399,6 @@ class edit extends Component {
       }
     });
 
-    // // backward compatibility for typography color control
-    // if (!backgroundImageValueUpdated) {
-    //   this.props.setAttributes(
-    //     {
-    //       backgroundRepeat: backgroundImageRepeat !== undefined ? backgroundImageRepeat : backgroundRepeat,
-    //       backgroundPosition: backgroundImagePosition !== undefined ? backgroundImagePosition : backgroundPosition,
-    //       backgroundPositionMobile: backgroundImagePosition !== undefined ? backgroundImagePosition : backgroundPositionMobile,
-    //       backgroundPositionTablet: backgroundImagePosition !== undefined ? backgroundImagePosition : backgroundPositionTablet,
-    //       backgroundSize: backgroundImageSize !== undefined ? backgroundImageSize : backgroundSize,
-    //       backgroundSizeMobile: backgroundImageSize !== undefined ? backgroundImageSize : backgroundSizeMobile,
-    //       backgroundSizeTablet: backgroundImageSize !== undefined ? backgroundImageSize : backgroundSizeTablet,
-    //     }
-    //   )
-    //   this.props.setAttributes({backgroundImageValueUpdated: true});
-    // }
 
     // Global Controls.
     const inspect_control = (
