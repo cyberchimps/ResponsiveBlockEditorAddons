@@ -20674,6 +20674,19 @@ if ( ! class_exists( 'Responsive_Block_Editor_Addons_Frontend_Styles' ) ) {
 				'iconContainerBottomPaddingMobile'	=> 5,
 				'iconContainerLeftPaddingMobile'	=> 5,
 				'iconContainerRightPaddingMobile'	=> 5,
+				
+				'ctaButtonTopPadding' => 5,
+        		'ctaButtonBottomPadding' => 5,
+        		'ctaButtonLeftPadding' => 5,
+        		'ctaButtonRightPadding' => 5,
+        		'ctaButtonTopPaddingTablet' => 5,
+        		'ctaButtonBottomPaddingTablet' => 5,
+        		'ctaButtonRightPaddingTablet' => 5,
+        		'ctaButtonLeftPaddingTablet' => 5,
+        		'ctaButtonTopPaddingMobile' => 5,
+        		'ctaButtonBottomPaddingMobile' => 5,
+        		'ctaButtonLeftPaddingMobile' => 5,
+        		'ctaButtonRightPaddingMobile' => 5,
 			);
 		}
 		public static function get_responsive_block_image_css($attr, $id)
