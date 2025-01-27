@@ -20055,7 +20055,7 @@ if ( ! class_exists( 'Responsive_Block_Editor_Addons_Frontend_Styles' ) ) {
 				' .wpcf7 input.wpcf7-form-control.wpcf7-submit' => array(
 					'font-size'      => self::get_css_value( $attr['submitButtonFontSizeMobile'], 'px' ),
 					'padding-top'    => self::get_css_value( $attr['ctaButtonTopPaddingMobile'], 'px' ),
-					'padding-bottom' => self::get_css_value( $attr['ctaButtonButtonPaddingMobile'], 'px' ),
+					'padding-bottom' => self::get_css_value( $attr['ctaButtonBottomPaddingMobile'], 'px' ),
 					'padding-left'   => self::get_css_value( $attr['ctaButtonLeftPaddingMobile'], 'px' ),
 					'padding-right'  => self::get_css_value( $attr['ctaButtonRightPaddingMobile'], 'px' ),
 					'width'          => self::get_css_value( $attr['submitButtonWidthMobile'], '%' ),
@@ -20199,7 +20199,7 @@ if ( ! class_exists( 'Responsive_Block_Editor_Addons_Frontend_Styles' ) ) {
 				' .wpcf7 input.wpcf7-form-control.wpcf7-submit' => array(
 					'font-size'      => self::get_css_value( $attr['submitButtonFontSizeTablet'], 'px' ),
 					'padding-top'    => self::get_css_value( $attr['ctaButtonTopPaddingTablet'], 'px' ),
-					'padding-bottom' => self::get_css_value( $attr['ctaButtonButtonPaddingTablet'], 'px' ),
+					'padding-bottom' => self::get_css_value( $attr['ctaButtonBottomPaddingTablet'], 'px' ),
 					'padding-left'   => self::get_css_value( $attr['ctaButtonLeftPaddingTablet'], 'px' ),
 					'padding-right'  => self::get_css_value( $attr['ctaButtonRightPaddingTablet'], 'px' ),
 					'width'          => self::get_css_value( $attr['submitButtonWidthTablet'], '%' ),
@@ -20674,7 +20674,7 @@ if ( ! class_exists( 'Responsive_Block_Editor_Addons_Frontend_Styles' ) ) {
 				'iconContainerBottomPaddingMobile'	=> 5,
 				'iconContainerLeftPaddingMobile'	=> 5,
 				'iconContainerRightPaddingMobile'	=> 5,
-				
+
 				'ctaButtonTopPadding' => 5,
         		'ctaButtonBottomPadding' => 5,
         		'ctaButtonLeftPadding' => 5,
