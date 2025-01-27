@@ -57,6 +57,9 @@ export default class Edit extends Component {
       setAttributes,
     } = this.props;
 
+
+    console.log("overlayType: ", overlayType);
+    console.log("backgroundType: ", backgroundType);
     const CustomTag = `${sectionTag}`;
 
     return [

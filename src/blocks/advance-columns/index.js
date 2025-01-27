@@ -276,6 +276,7 @@ registerBlockType("responsive-block-editor-addons/advance-columns", {
     },
     overlayType: {
       type: "string",
+      default: "color",
     },
     gradientOverlayColor1: {
       type: "string",
