@@ -237,12 +237,7 @@ export default class Inspector extends Component {
     const taxonomy_list_setting = showEmptyTaxonomy ? taxonomyList : termsList;
 
     if ("" != taxonomy_list_setting && undefined != taxonomy_list_setting) {
-      var taxonomyListOptions = [
-        {
-          value: "",
-          label: __("Select Taxonomy", "responsive-block-editor-addons"),
-        },
-      ];
+      var taxonomyListOptions = [];
       Object.keys(taxonomy_list_setting).map((item, thisIndex) => {
         return taxonomyListOptions.push({
           value: taxonomyList[item]["name"],
