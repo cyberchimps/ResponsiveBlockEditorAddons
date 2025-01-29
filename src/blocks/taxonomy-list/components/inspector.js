@@ -11,6 +11,7 @@ import RbeaRangeControl from "../../../utils/components/rbea-range-control";
 import RbeaColorControl from "../../../utils/components/rbea-color-control";
 import RbeaTabRadioControl from "../../../utils/components/rbea-tab-radio-control";
 import RbeaBlockBorderHelperControl from "../../../settings-components/RbeaBlockBorderSettings";
+import RbeaSeparatorStyleTabControl from "../../../utils/components/rbea-separator-style-tab-control";
 
 /**
  * Inspector Controls
@@ -39,7 +40,8 @@ const {
   ToggleControl,
   TabPanel,
   Dashicon,
-  BaseControl
+  BaseControl,
+  RadioControl,
 } = wp.components;
 
 /**
@@ -235,12 +237,7 @@ export default class Inspector extends Component {
     const taxonomy_list_setting = showEmptyTaxonomy ? taxonomyList : termsList;
 
     if ("" != taxonomy_list_setting && undefined != taxonomy_list_setting) {
-      var taxonomyListOptions = [
-        {
-          value: "",
-          label: __("Select Taxonomy", "responsive-block-editor-addons"),
-        },
-      ];
+      var taxonomyListOptions = [];
       Object.keys(taxonomy_list_setting).map((item, thisIndex) => {
         return taxonomyListOptions.push({
           value: taxonomyList[item]["name"],
@@ -748,12 +745,13 @@ if (!gridIsRadiusValueUpdated) {
               )}
               {"list" === layout && (
                 <Fragment>
-                  <SelectControl
+                  {/* <RadioControl
                     label={__(
                       "Separator Style",
                       "resposive-block-editor-addons"
                     )}
-                    value={separatorStyle}
+                    className="rbea-border-style-selector"
+                    selected={separatorStyle}
                     onChange={(value) =>
                       setAttributes({ separatorStyle: value })
                     }
@@ -795,6 +793,10 @@ if (!gridIsRadiusValueUpdated) {
                         label: __("Ridge", "resposive-block-editor-addons"),
                       },
                     ]}
+                  /> */}
+                  <RbeaSeparatorStyleTabControl
+                    selected={separatorStyle}
+                    onChange={(value) => setAttributes({ separatorStyle: value })}
                   />
                   {"none" !== separatorStyle && (
                     <Fragment>

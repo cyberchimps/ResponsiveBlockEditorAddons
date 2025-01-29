@@ -1706,51 +1706,6 @@ export default class Inspector extends Component {
                     beforeIcon=""
                     allowReset
                   />
-                  {/* <ButtonGroup
-                    className="responsive-block-editor-addons-size-type-field"
-                    aria-label={__(
-                      "Size Type",
-                      "responsive-block-editor-addons"
-                    )}
-                  >
-                    <Button
-                      key={"px"}
-                      className="responsive-block-editor-addons-size-btn"
-                      isSmall
-                      isPrimary={resseparatorWidthType === "px"}
-                      aria-pressed={resseparatorWidthType === "px"}
-                      onClick={() =>
-                        setAttributes({ resseparatorWidthType: "px" })
-                      }
-                    >
-                      {"px"}
-                    </Button>
-                    <Button
-                      key={"%"}
-                      className="responsive-block-editor-addons-size-btn"
-                      isSmall
-                      isPrimary={resseparatorWidthType === "%"}
-                      aria-pressed={resseparatorWidthType === "%"}
-                      onClick={() =>
-                        setAttributes({ resseparatorWidthType: "%" })
-                      }
-                    >
-                      {"%"}
-                    </Button>
-                  </ButtonGroup> */}
-                  {/* <RbeaRangeControl
-                    label={__("Width", "responsive-block-editor-addons")}
-                    value={resseperatorWidth}
-                    onChange={(value) =>
-                      setAttributes({
-                        resseperatorWidth: value !== undefined ? value : 30,
-                      })
-                    }
-                    min={0}
-                    max={"%" == resseparatorWidthType ? 100 : 500}
-                    beforeIcon=""
-                    allowReset
-                  /> */}
                   <RbeaWidthRangeControl
                     label={__("Width", "responsive-block-editor-addons")}
                     value={resseperatorWidth}

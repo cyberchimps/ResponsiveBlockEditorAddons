@@ -684,7 +684,6 @@ export default class Inspector extends Component {
                       </TabPanel>
                     </div>
                     {imageSizeTab === "desktop" && (
-                      <>
                       <RbeaTabRadioControl
                         label={__("", "responsive-block-editor-addons")}
                         value={backgroundSize}
@@ -698,7 +697,6 @@ export default class Inspector extends Component {
                         ]}
                         defaultValue={"cover"}
                       />
-                    </>
                     )}
                     {imageSizeTab === "tablet" && (
                       <RbeaTabRadioControl

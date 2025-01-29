@@ -9,6 +9,7 @@ const { ColorPalette } = wp.blockEditor;
 import RbeaRangeControl from "../../../../../utils/components/rbea-range-control";
 import RbeaColorControl from "../../../../../utils/components/rbea-color-control";
 import RbeaBackgroundTypeControl from "../../../../../utils/components/rbea-background-type-control";
+import RbeaAngleRangeControl from "../../../../../utils/components/rbea-angle-range-control";
 
 const { SelectControl, RangeControl, PanelBody, TabPanel } = wp.components;
 
@@ -232,7 +233,7 @@ class ButtonColorControl extends Component {
                                                   setAttributes({ buttonHcolorLocation2: value })
                                               }
                                           />
-                                          <RbeaRangeControl
+                                          <RbeaAngleRangeControl
                                               label={__(
                                                   "Angle",
                                                   "responsive-block-editor-addons"
@@ -356,14 +357,14 @@ class ButtonColorControl extends Component {
                                                   setAttributes({ buttoncolorLocation2: value })
                                               }
                                           />
-                                          <RbeaRangeControl
+                                          <RbeaAngleRangeControl
                                               label={__(
                                                   "Angle",
                                                   "responsive-block-editor-addons"
                                               )}
                                               value={buttongradientDirection}
                                               min={0}
-                                              max={100}
+                                              max={360}
                                               onChange={(value) =>
                                                   setAttributes({ buttongradientDirection: value })
                                               }

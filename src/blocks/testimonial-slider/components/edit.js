@@ -87,15 +87,10 @@ class edit extends Component {
       imag_url = media;
     }
 
-    if (!media.type || "image" !== media.type) {
-      imag_url = null;
-    }
 
-    let copyArray = test_block.map(e => {return {...e}})
-
-    const newItems = copyArray.map((item, thisIndex) => {
+    const newItems = test_block.map((item, thisIndex) => {
       if (index === thisIndex) {
-        item["image"] = imag_url;
+        item["image"] = imag_url, (item["imageUrl"] = imag_url);
       }
       return item;
     });
@@ -112,9 +107,9 @@ class edit extends Component {
     const { test_block } = this.props.attributes;
     const { setAttributes } = this.props;
 
-    let copyArray = test_block.map(e => {return {...e}})
 
-    const newItems = copyArray.map((item, thisIndex) => {
+
+    const newItems = test_block.map((item, thisIndex) => {
       if (index === thisIndex) {
         item["image"] = null;
       }
@@ -1258,6 +1253,7 @@ class edit extends Component {
     };
 
 
+    //TODO
     let image_enable = false;
     // Set testinomial image panel
     const tmControls = (index) => {
@@ -1272,49 +1268,16 @@ class edit extends Component {
           initialOpen={true}
           className={"responsive-block-editor-addons-repeater-panel"}
         >
-          {/* <BaseControl className="editor-bg-image-control" label={__("", "responsive-block-editor-addons")}> */}
-            {/* <MediaUpload
-              title={__("Select Image" + (index + 1), "responsive-block-editor-addons")}
-              onSelect={(media) => {
-                this.onSelectTestImage(media, index);
-              }}
-              allowedTypes={["image"]}
-              value={image_val}
-              render={({ open }) => (
-                <Button isDefault onClick={open}>
-                  {this.getImageName(test_block[index]["image"])}
-                </Button>
-              )}
-            /> */}
             <RbeaMediaUploadControl
               label={__("Select Image" + (index + 1), "responsive-block-editor-addons")}
               value={{
-                  url: image_val || '',
+                url: test_block[index]["image"]? test_block[index]["image"].url : '',
               }}
-              onChange={(newValue) => {
-                  setAttributes({
-                      image_val: newValue,
-                  });
+              onChange={(media) => {
+                this.onSelectTestImage(media, index);
               }}
               mediaType={'image'}
             />
-            {console.log("Image Value: ", image_val)}
-            {/* {image_val &&
-              test_block[index]["image"].url !== null &&
-              test_block[index]["image"].url !== "" && (
-                <Button
-                  className="responsive-block-editor-addons-rm-btn"
-                  key={index}
-                  onClick={(value) => {
-                    this.onRemoveTestImage(index);
-                  }}
-                  isLink
-                  isDestructive
-                >
-                  {__("Remove Image", "responsive-block-editor-addons")}
-                </Button>
-              )} */}
-          {/* </BaseControl> */}
         </PanelBody>
       );
     };
@@ -1399,21 +1362,6 @@ class edit extends Component {
       }
     });
 
-    // // backward compatibility for typography color control
-    // if (!backgroundImageValueUpdated) {
-    //   this.props.setAttributes(
-    //     {
-    //       backgroundRepeat: backgroundImageRepeat !== undefined ? backgroundImageRepeat : backgroundRepeat,
-    //       backgroundPosition: backgroundImagePosition !== undefined ? backgroundImagePosition : backgroundPosition,
-    //       backgroundPositionMobile: backgroundImagePosition !== undefined ? backgroundImagePosition : backgroundPositionMobile,
-    //       backgroundPositionTablet: backgroundImagePosition !== undefined ? backgroundImagePosition : backgroundPositionTablet,
-    //       backgroundSize: backgroundImageSize !== undefined ? backgroundImageSize : backgroundSize,
-    //       backgroundSizeMobile: backgroundImageSize !== undefined ? backgroundImageSize : backgroundSizeMobile,
-    //       backgroundSizeTablet: backgroundImageSize !== undefined ? backgroundImageSize : backgroundSizeTablet,
-    //     }
-    //   )
-    //   this.props.setAttributes({backgroundImageValueUpdated: true});
-    // }
 
     // Global Controls.
     const inspect_control = (
