@@ -267,11 +267,14 @@ export default class Edit extends Component {
                   }
 
                   var post_date = t_date[index].title;
-                  if ("custom" != dateFormat) {
+                  if ("custom" !== dateFormat) {
                     post_date = dateI18n(dateFormat, moment( t_date[index].title, 'MM/DD/YYYY' ).format("YYYY-MM-DD"));
                     if (post_date === "Invalid date") {
                       post_date = t_date[index].title;
                     }
+                  } else {
+                    post_date = t_date[index].title;
+                    isCenter = post_date;
                   }
 
                   return (

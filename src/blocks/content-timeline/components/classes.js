@@ -7,7 +7,9 @@ function ContentTmClasses(attributes) {
   var arrow_align_class = "responsive-timeline__arrow-top" + " ";
   if (attributes.arrowlinAlignment == "center") {
     arrow_align_class = "responsive-timeline__arrow-center" + " ";
-  } else if (attributes.arrowlinAlignment == "bottom") {
+  } else if (attributes.arrowlinAlignment == "right") {
+    /* AlignmentToolbar take the value as {left, center, right} so we can not change that
+    but we need to get the arrow at bottom, so added this bottom class on matching with right*/
     arrow_align_class = "responsive-timeline__arrow-bottom" + " ";
   }
 
