@@ -7,14 +7,14 @@
  * Author URI:		https://cyberchimps.com/responsive-blocks/
  * Text Domain:     responsive-block-editor-addons
  * Domain Path:     /languages
- * Version:         1.9.9
+ * Version:         2.0.0
  *
  * @package         Responsive_Block_Editor_Addons
  */
 
 define( 'RESPONSIVE_BLOCK_EDITOR_ADDONS_URL', trailingslashit( plugin_dir_url( __FILE__ ) ) );
 define( 'RESPONSIVE_BLOCK_EDITOR_ADDONS_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
-define( 'RESPONSIVE_BLOCK_EDITOR_ADDONS_VER', '1.9.9' );
+define( 'RESPONSIVE_BLOCK_EDITOR_ADDONS_VER', '2.0.0' );
 define( 'RESPONSIVE_BLOCK_EDITOR_ADDONS_BASENAME', plugin_basename( __FILE__ ) );
 define( 'RESPONSIVE_BLOCK_EDITOR_ADDONS_SEVEN_DAYS_IN_SECONDS', 604800 );
 
