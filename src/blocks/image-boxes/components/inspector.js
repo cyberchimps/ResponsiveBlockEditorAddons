@@ -284,6 +284,9 @@ export default class Inspector extends Component {
         titleBottomSpacing,
         titleBottomSpacingMobile,
         titleBottomSpacingTablet,
+        boxBackgroundPositionUpdated,
+        boxBackgroundRepeatUpdated,
+        boxBackgroundSizeUpdated,
         contentAlignMobile,
         contentAlignTablet,
         verticalAlignmentMobile,
@@ -484,7 +487,52 @@ export default class Inspector extends Component {
       { value: "bottom center", label: <div className = "rbea-background-image-positon-control-option">{__("Bottom Center", "responsive-block-editor-addons")}</div> },
       { value: "bottom right", label: <div className = "rbea-background-image-positon-control-option">{__("Bottom Right", "responsive-block-editor-addons")}</div> },
     ];
+    //In previous version it was used in reverse way to resolve the issue in newer versions
+    const reversedBackgroundPositionMap = {
+      "left top": "top left",
+      "center top": "top center",
+      "right top": "top right",
+      "left center": "center left",
+      "right center": "center right",
+      "left bottom": "bottom left",
+      "center bottom": "bottom center",
+      "right bottom": "bottom right"
+    };
 
+    //backward compatibility for image position control
+    if(!boxBackgroundPositionUpdated){
+      this.props.setAttributes
+      (
+        {
+          boxImagePosition: backgroundPosition !== undefined ? reversedBackgroundPositionMap[backgroundPosition] : boxImagePosition,
+          boxImagePositionMobile: backgroundPosition !== undefined ? reversedBackgroundPositionMap[backgroundPosition] : boxImagePositionMobile,
+          boxImagePositionTablet: backgroundPosition !== undefined ? reversedBackgroundPositionMap[backgroundPosition] : boxImagePositionTablet,
+        }
+      )
+      this.props.setAttributes({backgroundPosition: reversedBackgroundPositionMap[backgroundPosition]})
+      this.props.setAttributes({boxBackgroundPositionUpdated: true});
+    }
+    if(!boxBackgroundRepeatUpdated){
+      this.props.setAttributes
+      (
+        {
+          boxImageRepeat: backgroundRepeat !== undefined ? backgroundRepeat : boxImageRepeat,
+        }
+      )
+      this.props.setAttributes({boxBackgroundRepeatUpdated: true});
+    }
+
+    if(!boxBackgroundSizeUpdated){
+      this.props.setAttributes
+      (
+        {
+          boxImageSize: backgroundSize !== undefined ? backgroundSize : boxImageSize,
+          boxImageSizeMobile: backgroundSize !== undefined ? backgroundSize : boxImageSizeMobile,
+          boxImageSizeTablet: backgroundSize !== undefined ? backgroundSize : boxImageSizeTablet,
+        }
+      )
+      this.props.setAttributes({boxBackgroundSizeUpdated: true});
+    }
     let box_image_url = backgroundImageOne != null && backgroundImageOne != '' ? backgroundImageOne : 
     backgroundImageTwo !== null && backgroundImageTwo != '' ? backgroundImageTwo : 
     backgroundImageThree !== null && backgroundImageThree != '' ? backgroundImageThree :
@@ -1096,7 +1144,7 @@ export default class Inspector extends Component {
                       </TabPanel>
                     </div>
                     {boxImageSizeTab === "desktop" && (
-                      <>
+                      <div className="rbea-select-control-grid5-container">
                         <RbeaTabRadioControl
                           label={__("", "responsive-block-editor-addons")}
                           value={boxImageSize}
@@ -1107,10 +1155,12 @@ export default class Inspector extends Component {
                             { value: "auto", label: __("Auto", "responsive-block-editor-addons") },
                             { value: "cover", label: __("Cover", "responsive-block-editor-addons") },
                             { value: "contain", label: __("Contain", "responsive-block-editor-addons") },
+                            { value: "initial", label: __("Initial", "responsive-block-editor-addons") },
+                            { value: "inherit", label: __("Inherit", "responsive-block-editor-addons") },
                           ]}
                           defaultValue={"cover"}
                         />
-                      </>
+                      </div>
                     )}
                     {boxImageSizeTab === "tablet" && (
                       <RbeaTabRadioControl

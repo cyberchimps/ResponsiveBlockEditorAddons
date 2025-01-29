@@ -220,7 +220,7 @@ const attributes = {
   },
   backgroundPosition: {
     type: "string",
-    default: "center-center",
+    default: "center center",
   },
   backgroundPositionMobile: {
     type: "string",

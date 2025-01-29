@@ -412,6 +412,18 @@ const attributes = {
 		type: "boolean",
 		default: false,
 	},
+  boxBackgroundPositionUpdated: {
+    type: "boolean",
+    default: false,
+  },
+  boxBackgroundRepeatUpdated: {
+    type: "boolean",
+    default: false,
+  },
+  boxBackgroundSizeUpdated: {
+    type: "boolean",
+    default: false,
+  },
   blockTopPadding: {
     type: "number",
     default: '',
@@ -462,6 +474,7 @@ const attributes = {
   },
   boxImagePositionTab: {
     type: "string",
+    default: "desktop",
   },
   boxImageSize: {
     type: "string",
@@ -477,15 +490,15 @@ const attributes = {
   },
   boxImagePosition: {
     type: "string",
-    default: 'center center'
+    default: "center center"
   },
   boxImagePositionMobile: {
     type: "string",
-    default: 'center center'
+    default: "center center"
   },
   boxImagePositionTablet: {
     type: "string",
-    default: 'center center'
+    default: "center center"
   },
   boxImageSizeTab: {
     type: "string",

@@ -367,3 +367,31 @@
 .wp-block-responsive-block-editor-addons-image-boxes-block__inner a {
   width: 100%;
 }
+
+.rbea-select-control-grid5-container {
+  > .rbea-tab-radio-control-wrapper {
+    > .rbea-tab-radio-options {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr); /* Creates 3 columns */
+      
+      /* Adjust grid item positioning */
+      .rbea-tab-radio-option:first-child {
+        border-radius: 6px 0 0 0;
+        grid-column: span 2;
+      }
+      .rbea-tab-radio-option:nth-child(2),
+      .rbea-tab-radio-option:nth-child(3) {
+        grid-column: span 2;
+      }
+
+      .rbea-tab-radio-option:nth-child(4) {
+        grid-column: span 3;
+      }
+
+      .rbea-tab-radio-option:last-child {
+        border-radius: 0 0 6px 0;
+        grid-column: span 3;
+      }
+    }
+  }
+}
