@@ -47,3 +47,15 @@
 .components-range-control .components-range-control__slider {
   width: auto;
 }
+
+.rbea-size-control-container {
+  margin-top: 5px;
+  margin-bottom: 24px;
+  .rbea-size-control-reset-icon-container {
+    .components-button.rbea-reset {
+      .dashicons-image-rotate {
+        font-size: 11px;
+      }
+    }
+  }
+}

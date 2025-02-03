@@ -6,6 +6,7 @@ import InspectorTabs from "../../../components/InspectorTabs";
 import ResponsiveNewPaddingControl from "../../../settings-components/ResponsiveNewSpacingSettings/ResponsiveNewPaddingControl/index";
 import ResponsiveNewMarginControl from "../../../settings-components/ResponsiveNewSpacingSettings/ResponsiveNewMarginControl/index";
 import RbeaTabRadioControl from "../../../utils/components/rbea-tab-radio-control";
+import stackOnIcons from "../../../utils/components/rbea-tab-radio-control/rbea-stack-on-icons";
 
 // Setup the block
 const { __ } = wp.i18n;
@@ -223,15 +224,18 @@ export default class Inspector extends Component {
 								label={__("Stack on", "responsive-block-editor-addons")}
 								value={stack}
 								options={[
-									{ value: "none", label: __("None", "responsive-block-editor-addons") },
-									{ value: "desktop", label: __("Desktop", "responsive-block-editor-addons") },
-									{ value: "tablet", label: __("Tablet", "responsive-block-editor-addons") },
-									{ value: "mobile", label: __("Mobile", "responsive-block-editor-addons") },
+									{ value: "desktop", icon: stackOnIcons.desktop, label: __("Desktop", "responsive-block-editor-addons") },
+									{ value: "tablet", icon: stackOnIcons.tablet, label: __("Tablet", "responsive-block-editor-addons") },
+									{ value: "mobile", icon: stackOnIcons.mobile, label: __("Mobile", "responsive-block-editor-addons") },
 								]}
 								onChange={(value) => setAttributes({ stack: value })}
 								help={__(
 									"Note: Choose breakpoint on which the buttons will stack.", "responsive-block-editor-addons"
 								)}
+								allowReset={true}
+								defaultValue={"none"}
+								hasIcon={true}
+								optionHasBorder={true}
 							/>
 						</PanelBody>
 					</InspectorTab>

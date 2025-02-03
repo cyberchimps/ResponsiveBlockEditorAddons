@@ -82,6 +82,7 @@ class BlockBorderControl extends Component {
                     <>
                         <RbeaBorderRadiusControl
                         attrNameTemplate={this.props.attrNameTemplate}
+                        label="Border Radius"
                         {...this.props}
                         />
                     </>

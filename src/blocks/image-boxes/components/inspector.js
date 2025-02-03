@@ -25,7 +25,7 @@ import { RadioControl} from "@wordpress/components";
 // Setup the block
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
-const { MediaUpload, InspectorControls, PanelColorSettings, ColorPalette } = wp.blockEditor;
+const { MediaUpload, InspectorControls, PanelColorSettings, ColorPalette, AlignmentToolbar } = wp.blockEditor;
 
 // Import Inspector components
 const {
@@ -284,6 +284,24 @@ export default class Inspector extends Component {
         titleBottomSpacing,
         titleBottomSpacingMobile,
         titleBottomSpacingTablet,
+        contentAlignMobile,
+        contentAlignTablet,
+        verticalAlignmentMobile,
+        verticalAlignmentTablet,
+        IsAlignmentValueUpdated,
+        boxRightPadding,
+        boxLeftPadding,
+        boxTopPadding,
+        boxBottomPadding,
+        boxRightPaddingTablet,
+        boxLeftPaddingTablet,
+        boxTopPaddingTablet,
+        boxBottomPaddingTablet,
+        boxRightPaddingMobile,
+        boxLeftPaddingMobile,
+        boxTopPaddingMobile,
+        boxBottomPaddingMobile,
+        blockIsPaddingValueUpdated,
       },
       setAttributes,
     } = this.props;
@@ -315,6 +333,21 @@ export default class Inspector extends Component {
 			paddingMobileRight: 0,
 			paddingMobileBottom: 0,
 			paddingMobileLeft: 0,
+		}
+
+    const boxPaddingResetValues = {
+			paddingTop: 15,
+			paddingRight: 15,
+			paddingBottom: 15,
+			paddingLeft: 15,
+			paddingTabletTop: 15,
+			paddingTabletRight: 15,
+			paddingTabletBottom: 15,
+			paddingTabletLeft: 15,
+			paddingMobileTop: 15,
+			paddingMobileRight: 15,
+			paddingMobileBottom: 15,
+			paddingMobileLeft: 15,
 		}
 
     const gutterOptions = [
@@ -474,6 +507,42 @@ export default class Inspector extends Component {
       this.props.setAttributes({blockIsTypographyColorValueUpdated: true});
     }
 
+    // backward compatibility for Image Box Alignment Control
+    if (!IsAlignmentValueUpdated) {
+      this.props.setAttributes
+      (
+        {
+          contentAlignMobile:       contentAlign !== undefined ? contentAlign : contentAlignMobile,
+          contentAlignTablet:         contentAlign !== undefined ? contentAlign : contentAlignTablet,
+          verticalAlignmentMobile:    verticalAlignment !== undefined ? verticalAlignment : verticalAlignmentMobile,
+          verticalAlignmentTablet: verticalAlignment !== undefined ? verticalAlignment : verticalAlignmentTablet,
+        }
+      )
+      this.props.setAttributes({IsAlignmentValueUpdated: true});
+    }
+
+    // backward compatibility for Image Boxes Box Padding Control
+    if (!blockIsPaddingValueUpdated) {
+      this.props.setAttributes
+      (
+        {
+          boxTopPadding:         boxPaddingTop !== undefined ? boxPaddingTop : boxTopPadding,
+          boxRightPadding:          boxPaddingRight !== undefined ? boxPaddingRight : boxRightPadding,
+          boxLeftPadding:       boxPaddingLeft !== undefined ? boxPaddingLeft : boxLeftPadding,
+          boxBottomPadding:        boxPaddingBottom !== undefined ? boxPaddingBottom : boxBottomPadding,
+          boxTopPaddingTablet:   boxPaddingTop !== undefined ? boxPaddingTop : boxTopPaddingTablet,
+          boxRightPaddingTablet:    boxPaddingRight !== undefined ? boxPaddingRight : boxRightPaddingTablet,
+          boxLeftPaddingTablet: boxPaddingLeft !== undefined ? boxPaddingLeft : boxLeftPaddingTablet,
+          boxBottomPaddingTablet:  boxPaddingBottom !== undefined ? boxPaddingBottom : boxBottomPaddingTablet,
+          boxTopPaddingMobile:   boxPaddingTop !== undefined ? boxPaddingTop : boxTopPaddingMobile,
+          boxRightPaddingMobile:    boxPaddingRight !== undefined ? boxPaddingRight : boxRightPaddingMobile,
+          boxLeftPaddingMobile: boxPaddingLeft !== undefined ? boxPaddingLeft : boxLeftPaddingMobile,
+          boxBottomPaddingMobile:  boxPaddingBottom !== undefined ? boxPaddingBottom : boxBottomPaddingMobile,
+        }
+      )
+      this.props.setAttributes({blockIsPaddingValueUpdated: true});
+    }
+
     return (
       <InspectorControls key="inspector">
         <InspectorTabs>
@@ -538,6 +607,19 @@ export default class Inspector extends Component {
                   onChange={(newGutter) => setAttributes({ gutter: newGutter })}
                 />
               )}
+              <RbeaTabRadioControl
+                label={__("Title Heading Tag", "responsive-block-editor-addons")}
+                value={titleHeadingTag}
+                onChange={onChangeTitleHeadingTag}
+                options={[
+                  { value: "h1", label: __("H1", "responsive-block-editor-addons") },
+                  { value: "h2", label: __("H2", "responsive-block-editor-addons") },
+                  { value: "h3", label: __("H3", "responsive-block-editor-addons") },
+                  { value: "h4", label: __("H4", "responsive-block-editor-addons") },
+                  { value: "h5", label: __("H5", "responsive-block-editor-addons") },
+                  { value: "h6", label: __("H6", "responsive-block-editor-addons") },
+                ]}
+              />
             </PanelBody>
 
             <PanelBody
@@ -565,7 +647,215 @@ export default class Inspector extends Component {
               title={__("Alignment", "responsive-block-editor-addons")}
               initialOpen={false}
             >
-              <RbeaTabRadioControl
+              <TabPanel
+                className=" responsive-size-type-field-tabs  responsive-size-type-field__common-tabs  responsive-inline-margin"
+                activeClass="active-tab"
+                tabs={[
+                  {
+                    name: "desktop",
+                    title: <Dashicon icon="desktop" />,
+                    className:
+                      " responsive-desktop-tab  responsive-responsive-tabs",
+                  },
+                  {
+                    name: "tablet",
+                    title: <Dashicon icon="tablet" />,
+                    className:
+                      " responsive-tablet-tab  responsive-responsive-tabs",
+                  },
+                  {
+                    name: "mobile",
+                    title: <Dashicon icon="smartphone" />,
+                    className:
+                      " responsive-mobile-tab  responsive-responsive-tabs",
+                  },
+                ]}
+              >
+                {(tab) => {
+                  let tabout;
+
+                  if ("mobile" === tab.name) {
+                    tabout = (
+                      <Fragment>
+                        <BaseControl>
+                          <p>
+                            {__(
+                              "Horizontal Alignment",
+                              "responsive-block-editor-addons"
+                            )}
+                          </p>
+                          <div className="responsive-block-editor-addons-alignment-mobile">
+                            <AlignmentToolbar
+                              value={contentAlignMobile}
+                              onChange={(value) =>
+                                setAttributes({
+                                  contentAlignMobile: value,
+                                })
+                              }
+                              controls={["left", "center", "right"]}
+                              isCollapsed={false}
+                            />
+                          </div>
+                        </BaseControl>
+                      </Fragment>
+                    );
+                  } else if ("tablet" === tab.name) {
+                    tabout = (
+                      <Fragment>
+                        <BaseControl>
+                          <p>
+                            {__(
+                              "Horizontal Alignment",
+                              "responsive-block-editor-addons"
+                            )}
+                          </p>
+                          <div className="responsive-block-editor-addons-alignment-tablet">
+                            <AlignmentToolbar
+                              value={contentAlignTablet}
+                              onChange={(value) =>
+                                setAttributes({
+                                  contentAlignTablet: value,
+                                })
+                              }
+                              controls={["left", "center", "right"]}
+                              isCollapsed={false}
+                            />
+                          </div>
+                        </BaseControl>
+                      </Fragment>
+                    );
+                  } else {
+                    tabout = (
+                      <Fragment>
+                        <BaseControl>
+                          <p>
+                            {__("Horizontal Alignment", "responsive-block-editor-addons")}
+                          </p>
+                          <div className="responsive-block-editor-addons-alignment">
+                            <AlignmentToolbar
+                              value={contentAlign}
+                              onChange={(value) =>
+                                setAttributes({
+                                  contentAlign: value,
+                                })
+                              }
+                              controls={["left", "center", "right"]}
+                              isCollapsed={false}
+                            />
+                          </div>
+                        </BaseControl>
+                      </Fragment>
+                    );
+                  }
+
+                  return <div>{tabout}</div>;
+                }}
+              </TabPanel>
+              <TabPanel
+                className=" responsive-size-type-field-tabs  responsive-size-type-field__common-tabs  responsive-inline-margin"
+                activeClass="active-tab"
+                tabs={[
+                  {
+                    name: "desktop",
+                    title: <Dashicon icon="desktop" />,
+                    className:
+                      " responsive-desktop-tab  responsive-responsive-tabs",
+                  },
+                  {
+                    name: "tablet",
+                    title: <Dashicon icon="tablet" />,
+                    className:
+                      " responsive-tablet-tab  responsive-responsive-tabs",
+                  },
+                  {
+                    name: "mobile",
+                    title: <Dashicon icon="smartphone" />,
+                    className:
+                      " responsive-mobile-tab  responsive-responsive-tabs",
+                  },
+                ]}
+              >
+                {(tab) => {
+                  let tabout;
+
+                  if ("mobile" === tab.name) {
+                    tabout = (
+                      <Fragment>
+                        <BaseControl>
+                          <p>
+                            {__(
+                              "Vertical Alignment",
+                              "responsive-block-editor-addons"
+                            )}
+                          </p>
+                          <div className="responsive-block-editor-addons-alignment-mobile">
+                            <AlignmentToolbar
+                              value={verticalAlignmentMobile}
+                              onChange={(value) =>
+                                setAttributes({
+                                  verticalAlignmentMobile: value,
+                                })
+                              }
+                              controls={["left", "center", "right"]}
+                              isCollapsed={false}
+                            />
+                          </div>
+                        </BaseControl>
+                      </Fragment>
+                    );
+                  } else if ("tablet" === tab.name) {
+                    tabout = (
+                      <Fragment>
+                        <BaseControl>
+                          <p>
+                            {__(
+                              "Vertical Alignment",
+                              "responsive-block-editor-addons"
+                            )}
+                          </p>
+                          <div className="responsive-block-editor-addons-alignment-tablet">
+                            <AlignmentToolbar
+                              value={verticalAlignmentTablet}
+                              onChange={(value) =>
+                                setAttributes({
+                                  verticalAlignmentTablet: value,
+                                })
+                              }
+                              controls={["left", "center", "right"]}
+                              isCollapsed={false}
+                            />
+                          </div>
+                        </BaseControl>
+                      </Fragment>
+                    );
+                  } else {
+                    tabout = (
+                      <Fragment>
+                        <BaseControl>
+                          <p>
+                            {__("Vertical Alignment", "responsive-block-editor-addons")}
+                          </p>
+                          <div className="responsive-block-editor-addons-alignment">
+                            <AlignmentToolbar
+                              value={verticalAlignment}
+                              onChange={(value) =>
+                                setAttributes({
+                                  verticalAlignment: value,
+                                })
+                              }
+                              controls={["left", "center", "right"]}
+                              isCollapsed={false}
+                            />
+                          </div>
+                        </BaseControl>
+                      </Fragment>
+                    );
+                  }
+
+                  return <div>{tabout}</div>;
+                }}
+              </TabPanel>
+              {/* <RbeaTabRadioControl
                 label={__("Horizontal Alignment", "responsive-block-editor-addons")}
                 value={contentAlign}
                 onChange={onChangeContentAlign}
@@ -586,7 +876,7 @@ export default class Inspector extends Component {
                   { value: "flex-end", label: __("Bottom", "responsive-block-editor-addons") },
                 ]}
                 defaultValue={"center"}
-              />
+              /> */}
             </PanelBody>
 
             <PanelBody
@@ -660,6 +950,7 @@ export default class Inspector extends Component {
               title={__("Image", "responsive-block-editor-addons")}
               initialOpen={false}
             >
+              <div className = "rbea-repeat-selector-wrapper">
               <RbeaTabRadioControl
                 label={__("Image Size", "responsive-block-editor-addons")}
                 value={imageSize}
@@ -671,6 +962,7 @@ export default class Inspector extends Component {
                   { value: "large", label: __("Large", "responsive-block-editor-addons") },
                 ]}
               />
+              </div>
               <div className="rbea-tab-selector-label-wrapper">
                       <label className="rbea-background-image-positon-control-label">{__("Image Position", "responsive-block-editor-addons")}</label>
                       <TabPanel
@@ -895,7 +1187,7 @@ export default class Inspector extends Component {
               {bgGradient && (
                 <RbeaAngleRangeControl
                   label={__(
-                    "Gradient Degree",
+                    "Angle",
                     "responsive-block-editor-addons"
                   )}
                   value={gradientDegree}
@@ -967,7 +1259,7 @@ export default class Inspector extends Component {
               {hoverBgGradient && (
                 <RbeaAngleRangeControl
                   label={__(
-                    "Gradient Degree",
+                    "Angle",
                     "responsive-block-editor-addons"
                   )}
                   value={hoverGradientDegree}
@@ -996,49 +1288,31 @@ export default class Inspector extends Component {
                 allowReset
               />
             </PanelBody>
-			<PanelBody
-				title={__("Text Colors", "responsive-block-editor-addons")}
-				initialOpen={false}
-			>
-                <RbeaColorControl
-                    label = {__("Title Color", "responsive-block-editor-addons")}
-                    colorValue={titleColor}
-                    onChange={(colorValue) =>
-                      setAttributes({
-                        titleColor: colorValue ,
-                      })
-                    }
-                    resetColor={() => setAttributes({ titleColor: "" })}
-                />
-                <RbeaColorControl
-                    label = {__("Description Color", "responsive-block-editor-addons")}
-                    colorValue={descriptionColor}
-                    onChange={(colorValue) =>
-                      setAttributes({
-                        descriptionColor: colorValue ,
-                      })
-                    }
-                    resetColor={() => setAttributes({ descriptionColor: "" })}
-                  />
-			</PanelBody>
-            <PanelBody
-              title={__("Typography", "responsive-block-editor-addons")}
-              initialOpen={false}
-            >
-                <RbeaTabRadioControl
-                  label={__("Title Heading Tag", "responsive-block-editor-addons")}
-                  value={titleHeadingTag}
-                  onChange={onChangeTitleHeadingTag}
-                  options={[
-                    { value: "h1", label: __("H1", "responsive-block-editor-addons") },
-                    { value: "h2", label: __("H2", "responsive-block-editor-addons") },
-                    { value: "h3", label: __("H3", "responsive-block-editor-addons") },
-                    { value: "h4", label: __("H4", "responsive-block-editor-addons") },
-                    { value: "h5", label: __("H5", "responsive-block-editor-addons") },
-                    { value: "h6", label: __("H6", "responsive-block-editor-addons") },
-                  ]}
-                />
-            </PanelBody>
+			    <PanelBody
+			    	title={__("Text Colors", "responsive-block-editor-addons")}
+			    	initialOpen={false}
+			    >
+            <RbeaColorControl
+                label = {__("Title Color", "responsive-block-editor-addons")}
+                colorValue={titleColor}
+                onChange={(colorValue) =>
+                  setAttributes({
+                    titleColor: colorValue ,
+                  })
+                }
+                resetColor={() => setAttributes({ titleColor: "" })}
+            />
+            <RbeaColorControl
+                label = {__("Description Color", "responsive-block-editor-addons")}
+                colorValue={descriptionColor}
+                onChange={(colorValue) =>
+                  setAttributes({
+                    descriptionColor: colorValue ,
+                  })
+                }
+                resetColor={() => setAttributes({ descriptionColor: "" })}
+              />
+		  	  </PanelBody>
             <TypographyHelperControl
 					title={__("Title Typography", "responsive-block-editor-addons")}
 					attrNameTemplate="title%s"
@@ -1087,7 +1361,7 @@ export default class Inspector extends Component {
               title={__("Padding", "responsive-block-editor-addons")}
               initialOpen={false}
             >
-              <RbeaRangeControl
+              {/* <RbeaRangeControl
                 label={__("Box Top Padding", "responsive-block-editor-addons")}
                 value={boxPaddingTop}
                 onChange={(newCount) => {
@@ -1132,6 +1406,12 @@ export default class Inspector extends Component {
                 min={1}
                 max={500}
                 step={1}
+              /> */}
+
+              <ResponsiveNewPaddingControl
+                attrNameTemplate="box%s"
+                resetValues={boxPaddingResetValues}
+                {...this.props}
               />
 
             </PanelBody>

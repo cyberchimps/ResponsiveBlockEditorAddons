@@ -212,10 +212,7 @@ export default class Inspector extends Component {
       <InspectorControls key="inspector">
         <InspectorTabs>
           <InspectorTab key={"content"}>
-            <PanelBody
-              title={__("General", "responsive-block-editor-addons")}
-              initialOpen={false}
-            >
+            <PanelBody>
               <ToggleControl
                 label={__("Title", "responsive-block-editor-addons")}
                 checked={showTitle}

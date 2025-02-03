@@ -137,6 +137,7 @@ function EditorStyles(props) {
     subHeadingTitleBottomSpacingTablet,
     headingTitleTextDecoration,
     subHeadingTitleTextDecoration,
+    widthType,
   } = props.attributes;
 
   var selectors = {
@@ -165,7 +166,7 @@ function EditorStyles(props) {
     " .responsive-heading-seperator": {
       "border-top-style": seperatorStyle,
       "border-top-width": generateCSSUnit(separatorHeight, "px"),
-      "width": generateCSSUnit( separatorWidth, separatorWidthType ),
+      "width": generateCSSUnit( separatorWidth, widthType ),
       "border-color": separatorColor,
       "margin-bottom": generateCSSUnit(separatorSpacing, "px"),
     },

@@ -199,6 +199,32 @@ function EditorStyles(props) {
       blockRightMarginTablet,
       titleTypographyColor,
       descTypographyColor,
+
+      ctaButtonTopPadding,
+      ctaButtonBottomPadding,
+      ctaButtonLeftPadding,
+      ctaButtonRightPadding,
+      ctaButtonTopPaddingTablet,
+      ctaButtonBottomPaddingTablet,
+      ctaButtonRightPaddingTablet,
+      ctaButtonLeftPaddingTablet,
+      ctaButtonTopPaddingMobile,
+      ctaButtonBottomPaddingMobile,
+      ctaButtonLeftPaddingMobile,
+      ctaButtonRightPaddingMobile,
+
+      ctaBlockTopRadius,
+      ctaBlockRightRadius,
+      ctaBlockBottomRadius,
+      ctaBlockLeftRadius,
+      ctaBlockTopRadiusTablet,
+      ctaBlockRightRadiusTablet,
+      ctaBlockBottomRadiusTablet,
+      ctaBlockLeftRadiusTablet,
+      ctaBlockTopRadiusMobile,
+      ctaBlockRightRadiusMobile,
+      ctaBlockBottomRadiusMobile,
+      ctaBlockLeftRadiusMobile,
   } = props.attributes;
 
   var boxShadowPositionCSS = boxShadowPosition;
@@ -231,6 +257,7 @@ function EditorStyles(props) {
   let imgopacity = opacity / 100;
   let blockimgopacity = blockopacity / 100;
   let columnbackcoloropacity = columnBackColorOpacity / 100;
+  let gradientOpacity = opacity / 100;
 
   var selectors = {
     " .wp-block-responsive-block-editor-addons-feature-grid-item__button": {
@@ -241,12 +268,15 @@ function EditorStyles(props) {
       "margin-left": "left" == blockAlign ? 0 : "",
       "margin-right": "right" == blockAlign ? 0 : "",
       "margin-bottom": generateCSSUnit(buttonSpace, "px"),
-      "padding-left": generateCSSUnit(ctaHpadding, "px"),
-      "padding-right": generateCSSUnit(ctaHpadding, "px"),
-      "padding-top": generateCSSUnit(ctaVpadding, "px"),
-      "padding-bottom": generateCSSUnit(ctaVpadding, "px"),
+      "padding-left": generateCSSUnit(ctaButtonLeftPadding, "px"),
+      "padding-right": generateCSSUnit(ctaButtonRightPadding, "px"),
+      "padding-top": generateCSSUnit(ctaButtonTopPadding, "px"),
+      "padding-bottom": generateCSSUnit(ctaButtonBottomPadding, "px"),
       "border-color": ctaBorderColor,
-      "border-radius": generateCSSUnit(ctaBorderRadius, "px"),
+      "border-top-left-radius": generateCSSUnit(ctaBlockTopRadius, "px"),
+      "border-top-right-radius": generateCSSUnit(ctaBlockRightRadius, "px"),
+      "border-bottom-right-radius": generateCSSUnit(ctaBlockBottomRadius, "px"),
+      "border-bottom-left-radius": generateCSSUnit(ctaBlockLeftRadius, "px"),
       "border-width": generateCSSUnit(ctaBorderWidth, "px"),
       "border-style": ctaBorderStyle,
       "line-height": ctaLineHeight,
@@ -329,22 +359,22 @@ function EditorStyles(props) {
       "border-bottom-right-radius": generateCSSUnit(blockBottomRadius, "px"),
       "border-bottom-left-radius": generateCSSUnit(blockLeftRadius, "px"),
       "background-color":
-        backgroundType == "color"
+        backgroundType === "color"
           ? `${hexToRgba(
               backgroundColor || "#fff",
               columnbackcoloropacity || 0
             )}`
-          : "#fff",
+          : undefined,
       "background-image":
-        backgroundType == "gradient"
+        backgroundType === "gradient"
           ? generateBackgroundImageEffect(
               `${hexToRgba(
                 backgroundColor1 || "#fff",
-                columnbackcoloropacity || 0
+                gradientOpacity || 0
               )}`,
               `${hexToRgba(
                 backgroundColor2 || "#fff",
-                columnbackcoloropacity || 0
+                gradientOpacity || 0
               )}`,
               gradientDirection,
               colorLocation1,
@@ -436,10 +466,14 @@ function EditorStyles(props) {
       "margin-bottom": generateCSSUnit(descSpaceMobile, "px"),
     },
     " .wp-block-responsive-block-editor-addons-feature-grid-item__button": {
-      "padding-left": generateCSSUnit(ctaHpaddingMobile, "px"),
-      "padding-right": generateCSSUnit(ctaHpaddingMobile, "px"),
-      "padding-top": generateCSSUnit(ctaVpaddingMobile, "px"),
-      "padding-bottom": generateCSSUnit(ctaVpaddingMobile, "px"),
+      "padding-left": generateCSSUnit(ctaButtonLeftPaddingMobile, "px"),
+      "padding-right": generateCSSUnit(ctaButtonRightPaddingMobile, "px"),
+      "padding-top": generateCSSUnit(ctaButtonTopPaddingMobile, "px"),
+      "padding-bottom": generateCSSUnit(ctaButtonBottomPaddingMobile, "px"),
+      "border-top-left-radius": generateCSSUnit(ctaBlockTopRadiusMobile, "px"),
+      "border-top-right-radius": generateCSSUnit(ctaBlockRightRadiusMobile, "px"),
+      "border-bottom-right-radius": generateCSSUnit(ctaBlockBottomRadiusMobile, "px"),
+      "border-bottom-left-radius": generateCSSUnit(ctaBlockLeftRadiusMobile, "px"),
       "font-size": generateCSSUnit(ctaFontSizeMobile, "px"),
       "margin-bottom": generateCSSUnit(buttonSpaceMobile, "px"),
     },
@@ -483,10 +517,14 @@ function EditorStyles(props) {
       "margin-bottom": generateCSSUnit(descSpaceTablet, "px"),
     },
     " .wp-block-responsive-block-editor-addons-feature-grid-item__button": {
-      "padding-left": generateCSSUnit(ctaHpaddingTablet, "px"),
-      "padding-right": generateCSSUnit(ctaHpaddingTablet, "px"),
-      "padding-top": generateCSSUnit(ctaVpaddingTablet, "px"),
-      "padding-bottom": generateCSSUnit(ctaVpaddingTablet, "px"),
+      "padding-left": generateCSSUnit(ctaButtonLeftPaddingTablet, "px"),
+      "padding-right": generateCSSUnit(ctaButtonRightPaddingTablet, "px"),
+      "padding-top": generateCSSUnit(ctaButtonTopPaddingTablet, "px"),
+      "padding-bottom": generateCSSUnit(ctaButtonBottomPaddingTablet, "px"),
+      "border-top-left-radius": generateCSSUnit(ctaBlockTopRadiusTablet, "px"),
+      "border-top-right-radius": generateCSSUnit(ctaBlockRightRadiusTablet, "px"),
+      "border-bottom-right-radius": generateCSSUnit(ctaBlockBottomRadiusTablet, "px"),
+      "border-bottom-left-radius": generateCSSUnit(ctaBlockLeftRadiusTablet, "px"),
       "font-size": generateCSSUnit(ctaFontSizeTablet, "px"),
       "margin-bottom": generateCSSUnit(buttonSpaceTablet, "px"),
     },

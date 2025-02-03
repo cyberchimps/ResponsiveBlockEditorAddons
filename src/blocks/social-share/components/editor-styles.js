@@ -83,6 +83,19 @@ function EditorStyles(props) {
     hideWidgetTablet,
     hideWidgetMobile,
     labelTypographyColor,
+
+    iconContainerTopPadding,
+    iconContainerBottomPadding,
+    iconContainerLeftPadding,
+    iconContainerRightPadding,
+    iconContainerTopPaddingTablet,
+    iconContainerBottomPaddingTablet,
+    iconContainerRightPaddingTablet,
+    iconContainerLeftPaddingTablet,
+    iconContainerTopPaddingMobile,
+    iconContainerBottomPaddingMobile,
+    iconContainerLeftPaddingMobile,
+    iconContainerRightPaddingMobile,
   } = props.attributes;
 
   var boxShadowPositionCSS = boxShadowPosition;
@@ -147,10 +160,10 @@ function EditorStyles(props) {
           : "",
       display: "flex",
       "justify-content": "center",
-      "padding-top": generateCSSUnit(iconContainerHeight, "px"),
-      "padding-bottom": generateCSSUnit(iconContainerHeight, "px"),
-      "padding-left": generateCSSUnit(iconContainerSize, "px"),
-      "padding-right": generateCSSUnit(iconContainerSize, "px"),
+      "padding-top": generateCSSUnit(iconContainerTopPadding, "px"),
+      "padding-bottom": generateCSSUnit(iconContainerBottomPadding, "px"),
+      "padding-left": generateCSSUnit(iconContainerLeftPadding, "px"),
+      "padding-right": generateCSSUnit(iconContainerRightPadding, "px"),
       width: "fit-content"
     },
     " .responsive-block-editor-addons-social-icon > a:first-child": {
@@ -258,7 +271,13 @@ function EditorStyles(props) {
       "grid-template-columns":
         iconColumnsMobile !== "auto" ? `repeat(${iconColumnsMobile} , auto)` : "",
         "grid-auto-flow": iconColumnsMobile !== "auto" ? "unset" : "column",
-    }
+    },
+    " .responsive-block-editor-addons-social-icon": {
+      "padding-top": generateCSSUnit(iconContainerTopPaddingMobile, "px"),
+      "padding-bottom": generateCSSUnit(iconContainerBottomPaddingMobile, "px"),
+      "padding-left": generateCSSUnit(iconContainerLeftPaddingMobile, "px"),
+      "padding-right": generateCSSUnit(iconContainerRightPaddingMobile, "px"),
+    },
   };
 
   var tablet_selectors = {
@@ -284,7 +303,13 @@ function EditorStyles(props) {
       "grid-template-columns":
         iconColumnsTablet !== "auto" ? `repeat(${iconColumnsTablet} , auto)` : "",
       "grid-auto-flow": iconColumnsTablet !== "auto" ? "unset" : "column",
-    }
+    },
+    " .responsive-block-editor-addons-social-icon": {
+      "padding-top": generateCSSUnit(iconContainerTopPaddingTablet, "px"),
+      "padding-bottom": generateCSSUnit(iconContainerBottomPaddingTablet, "px"),
+      "padding-left": generateCSSUnit(iconContainerLeftPaddingTablet, "px"),
+      "padding-right": generateCSSUnit(iconContainerRightPaddingTablet, "px"),
+    },
   };
 
   var styling_css = "";

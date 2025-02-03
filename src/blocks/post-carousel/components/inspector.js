@@ -768,16 +768,18 @@ export default class Inspector extends Component {
                 min={100}
                 max={5000}
               />
-              <SelectControl
-                label={__("Show Arrows & Dots", "responsive-block-editor-addons")}
-                value={arrowDots}
-                onChange={(value) => setAttributes({ arrowDots: value })}
-                options={[
-                  { value: "arrows", label: __("Only Arrows", "responsive-block-editor-addons") },
-                  { value: "dots", label: __("Only Dots", "responsive-block-editor-addons") },
-                  { value: "arrows_dots", label: __("Both Arrows & Dots", "responsive-block-editor-addons") },
-                ]}
-              />
+              <div className="responsive-block-editor-addons-post-carousel-tab-select-container">
+                <RbeaTabRadioControl
+                  label={__("Show Arrows & Dots", "responsive-block-editor-addons")}
+                  value={arrowDots}
+                  onChange={(value) => setAttributes({ arrowDots: value })}
+                  options={[
+                    { value: "arrows", label: __("Only Arrows", "responsive-block-editor-addons") },
+                    { value: "dots", label: __("Only Dots", "responsive-block-editor-addons") },
+                    { value: "arrows_dots", label: __("Both Arrows & Dots", "responsive-block-editor-addons") },
+                  ]}
+                />
+              </div>
               {"dots" != arrowDots && (
                 <Fragment>
                   <RbeaRangeControl

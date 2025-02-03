@@ -36,6 +36,7 @@ const {
   PanelColorSettings,
   MediaUpload,
   ColorPalette,
+  AlignmentToolbar,
 } = wp.blockEditor;
 
 // Import Inspector components
@@ -428,6 +429,9 @@ export default class Inspector extends Component {
         contentTypographyColor,
         titleTypographyColor,
         nameTypographyColor,
+        isAlignmentValueUpdated,
+        testimonialCiteAlignTablet,
+        testimonialCiteAlignMobile,
     },
       setAttributes,
     } = this.props;
@@ -521,7 +525,16 @@ export default class Inspector extends Component {
       this.props.setAttributes({blockIsTypographyColorValueUpdated: true});
     }
 
-
+    if (!isAlignmentValueUpdated) {
+      this.props.setAttributes(
+        {
+          testimonialCiteAlign:          testimonialCiteAlign !== undefined ? testimonialCiteAlign : testimonialCiteAlign,
+          testimonialCiteAlignTablet:       testimonialCiteAlign !== undefined ? testimonialCiteAlign : testimonialCiteAlignTablet,
+          testimonialCiteAlignMobile:         testimonialCiteAlign !== undefined ? testimonialCiteAlign : testimonialCiteAlignMobile,
+        }
+      )
+      this.props.setAttributes({isAlignmentValueUpdated: true});
+    }
 
     // Background image URL
     let background_image_url = backgroundImage || '';
@@ -581,20 +594,110 @@ export default class Inspector extends Component {
                 />
               )}
 
-              <RbeaTabRadioControl
-                label={__("Cite Alignment", "responsive-block-editor-addons")}
-                description={__(
-                  "Left, center or right align the cite name and title.",
-                  "responsive-block-editor-addons"
-                )}
-                options={citeAlignOptions}
-                value={testimonialCiteAlign}
-                onChange={(value) =>
-                  this.props.setAttributes({
-                    testimonialCiteAlign: value,
-                  })
-                }
-              />
+              <TabPanel
+                className=" responsive-size-type-field-tabs  responsive-size-type-field__common-tabs  responsive-inline-margin"
+                activeClass="active-tab"
+                tabs={[
+                  {
+                    name: "desktop",
+                    title: <Dashicon icon="desktop" />,
+                    className:
+                      " responsive-desktop-tab  responsive-responsive-tabs",
+                  },
+                  {
+                    name: "tablet",
+                    title: <Dashicon icon="tablet" />,
+                    className:
+                      " responsive-tablet-tab  responsive-responsive-tabs",
+                  },
+                  {
+                    name: "mobile",
+                    title: <Dashicon icon="smartphone" />,
+                    className:
+                      " responsive-mobile-tab  responsive-responsive-tabs",
+                  },
+                ]}
+              >
+                {(tab) => {
+                  let tabout;
+
+                  if ("mobile" === tab.name) {
+                    tabout = (
+                      <Fragment>
+                        <BaseControl>
+                          <p>
+                            {__(
+                              "Alignment Mobile",
+                              "responsive-block-editor-addons"
+                            )}
+                          </p>
+                          <div className="responsive-block-editor-addons-alignment-mobile">
+                            <AlignmentToolbar
+                              value={testimonialCiteAlignMobile}
+                              onChange={(value) =>
+                                setAttributes({
+                                  testimonialCiteAlignMobile: value,
+                                })
+                              }
+                              controls={["left", "center", "right"]}
+                              isCollapsed={false}
+                            />
+                          </div>
+                        </BaseControl>
+                      </Fragment>
+                    );
+                  } else if ("tablet" === tab.name) {
+                    tabout = (
+                      <Fragment>
+                        <BaseControl>
+                          <p>
+                            {__(
+                              "Alignment Tablet",
+                              "responsive-block-editor-addons"
+                            )}
+                          </p>
+                          <div className="responsive-block-editor-addons-alignment-tablet">
+                            <AlignmentToolbar
+                              value={testimonialCiteAlignTablet}
+                              onChange={(value) =>
+                                setAttributes({
+                                  testimonialCiteAlignTablet: value,
+                                })
+                              }
+                              controls={["left", "center", "right"]}
+                              isCollapsed={false}
+                            />
+                          </div>
+                        </BaseControl>
+                      </Fragment>
+                    );
+                  } else {
+                    tabout = (
+                      <Fragment>
+                        <BaseControl>
+                          <p>
+                            {__("Alignment", "responsive-block-editor-addons")}
+                          </p>
+                          <div className="responsive-block-editor-addons-alignment">
+                            <AlignmentToolbar
+                              value={testimonialCiteAlign}
+                              onChange={(value) =>
+                                setAttributes({
+                                  testimonialCiteAlign: value,
+                                })
+                              }
+                              controls={["left", "center", "right"]}
+                              isCollapsed={false}
+                            />
+                          </div>
+                        </BaseControl>
+                      </Fragment>
+                    );
+                  }
+
+                  return <div>{tabout}</div>;
+                }}
+              </TabPanel>
             </PanelBody>
             <PanelBody
               title={__("Image", "responsive-block-editor-addons")}
@@ -627,6 +730,17 @@ export default class Inspector extends Component {
                     onChange={(newColor) => setAttributes({ backgroundColor: newColor })}
                     resetColor={() => setAttributes({ backgroundColor: "" })}
                   />
+                  {(backgroundColor && backgroundColor != '') && (
+                    <RbeaRangeControl
+                      label={__("Opacity", "responsive-block-editor-addons")}
+                      value={opacity}
+                      onChange={(value) =>
+                        setAttributes({ opacity: value !== undefined ? value : 20 })
+                      }
+                      min={0}
+                      max={100}
+                    />
+                  )}
                 </Fragment>
               )}
               {"gradient" == backgroundType && (
@@ -878,15 +992,6 @@ export default class Inspector extends Component {
                             }
                             resetColor={() => setAttributes({ gradientOverlayColor1: "" })}
                           />
-                          <RbeaRangeControl
-                            label={__("Location 1", "responsive-block-editor-addons")}
-                            value={gradientOverlayLocation1}
-                            onChange={(value) =>
-                              setAttributes({ gradientOverlayLocation1: value })
-                            }
-                            min={0}
-                            max={100}
-                          />
                           <RbeaColorControl
                             label = {"Color 2"}
                             colorValue={gradientOverlayColor2}
@@ -896,15 +1001,6 @@ export default class Inspector extends Component {
                               })
                             }
                             resetColor={() => setAttributes({ gradientOverlayColor2: "" })}
-                          />
-                          <RbeaRangeControl
-                            label={__("Location 2", "responsive-block-editor-addons")}
-                            value={gradientOverlayLocation2}
-                            onChange={(value) =>
-                              setAttributes({ gradientOverlayLocation2: value })
-                            }
-                            min={0}
-                            max={100}
                           />
                           <RbeaTabRadioControl
                             label={__("Type", "responsive-block-editor-addons")}
@@ -917,6 +1013,24 @@ export default class Inspector extends Component {
                               { value: "radial", label: __("Radial", "responsive-block-editor-addons") },
                             ]}
                             defaultValue={"linear"}
+                          />
+                          <RbeaRangeControl
+                            label={__("Color Location 1", "responsive-block-editor-addons")}
+                            value={gradientOverlayLocation1}
+                            onChange={(value) =>
+                              setAttributes({ gradientOverlayLocation1: value })
+                            }
+                            min={0}
+                            max={100}
+                          />
+                          <RbeaRangeControl
+                            label={__("Color Location 2", "responsive-block-editor-addons")}
+                            value={gradientOverlayLocation2}
+                            onChange={(value) =>
+                              setAttributes({ gradientOverlayLocation2: value })
+                            }
+                            min={0}
+                            max={100}
                           />
                           {"linear" == gradientOverlayType && (
                             <RbeaAngleRangeControl
@@ -976,10 +1090,21 @@ export default class Inspector extends Component {
                       )}
                     </Fragment>
                   )}
+                  {backgroundImage && (
+                    <RbeaRangeControl
+                    label={__("Opacity", "responsive-block-editor-addons")}
+                    value={opacity}
+                    onChange={(value) =>
+                      setAttributes({ opacity: value !== undefined ? value : 20 })
+                    }
+                    min={0}
+                    max={100}
+                  />
+                  )}
                 </Fragment>
               )}
               {"video" == backgroundType && (
-                <>
+                <Fragment>
                     <RbeaMediaUploadControl
                       label={__('Video', 'responsive-block-editor-addons')}
                       value={{
@@ -992,19 +1117,19 @@ export default class Inspector extends Component {
                       }}
                       mediaType={'video'}
                     />
-                </>
+                    {(backgroundVideo && backgroundVideo.url) && (
+                    <RbeaRangeControl
+                    label={__("Opacity", "responsive-block-editor-addons")}
+                    value={opacity}
+                    onChange={(value) =>
+                      setAttributes({ opacity: value !== undefined ? value : 20 })
+                    }
+                    min={0}
+                    max={100}
+                  />
+                  )}
+                </Fragment>
               )}
-              {backgroundType && backgroundType !== 'none' &&
-                <RbeaRangeControl
-                  label={__("Opacity", "responsive-block-editor-addons")}
-                  value={opacity}
-                  onChange={(value) =>
-                    setAttributes({ opacity: value !== undefined ? value : 20 })
-                  }
-                  min={0}
-                  max={100}
-                />
-              }
             </PanelBody>
 				      <TypographyHelperControl
 				      	title={__("Content Typography", "responsive-block-editor-addons")}
@@ -1132,16 +1257,20 @@ export default class Inspector extends Component {
                 resetValues={blockContentPaddingResetValues}
                 {...this.props}
               />
-              <ResponsiveNewMarginControl
-                attrNameTemplate="block%s"
-                resetValues={blockMarginResetValues}
-                {...this.props}
-              />
-              <ResponsiveNewPaddingControl
-                attrNameTemplate="block%s"
-                resetValues={blockPaddingResetValues}
-                {...this.props}
-              />
+              <hr />
+              <div className="rbea-spacing-secondary-container">
+                <h3 className="rbea-spacing-secondary-container-title">Container</h3>
+                <ResponsiveNewMarginControl
+                  attrNameTemplate="block%s"
+                  resetValues={blockMarginResetValues}
+                  {...this.props}
+                />
+                <ResponsiveNewPaddingControl
+                  attrNameTemplate="block%s"
+                  resetValues={blockPaddingResetValues}
+                  {...this.props}
+                />
+              </div>
             </PanelBody>
             
           </InspectorTab>

@@ -52,7 +52,7 @@ class RBEATaxonomyList extends Component {
 
     componentDidMount() {
         this.props.setAttributes({
-            block_id: this.props.clientId.substr(0, 8),
+            block_id: this.props.clientId
         });
 
         // Pushing Style tag for this block css.
@@ -129,8 +129,7 @@ class RBEATaxonomyList extends Component {
             <Fragment>
                 <style id={`responsive-block-editor-addons-taxonomy-list-style-${this.props.clientId}-inner`}>{EditorStyles(this.props)}</style>
 
-                <InspectorControls></InspectorControls>
-                <Inspector key="inspector" {...{ setAttributes, ...this.props }} />
+                <Inspector key="taxonomy-list-inspector" {...{ setAttributes, ...this.props }} />
                 <div key={`rbea-taxonomy-${block_id}`}
                     className={classnames(
                         this.props.className,

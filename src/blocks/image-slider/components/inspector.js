@@ -242,6 +242,7 @@ class Inspector extends Component {
                     onChange={this.setSizeControl}
                     value={gridSize}
                     resetValue={"xlrg"}
+                    reset={true}
                   />
                   {gridSize !== null &&
                     (align === "wide" || align === "full") && (
@@ -293,35 +294,37 @@ class Inspector extends Component {
                     />
                   )}
                   {!responsiveHeight && (
-                    <BaseControl
-                      label={__(
-                        "Height in pixels",
-                        "responsive-block-editor-addons"
-                      )}
-                      className={"block-height-control"}
-                    >
-                      <input
-                        type="number"
-                        className={"block-height-control__input"}
-                        onChange={(event) => {
-                          const unprocessedValue = event.target.value;
-                          const inputValue =
-                            unprocessedValue !== ""
-                              ? parseInt(event.target.value, 10)
-                              : undefined;
-                          if (inputValue < 0 && inputValue !== undefined) {
-                            this.setTemporayInput(inputValue);
-                            this.setHeightTo(0);
-                            return;
-                          }
-                          this.setTemporayInput(null);
-                          this.setHeightTo(inputValue);
-                        }}
-                        value={temporaryInput || height}
-                        min={0}
-                        step="10"
-                      />
-                    </BaseControl>
+                    <div className="responsive-block-editor-addons-text-control-container">
+                      <BaseControl
+                        label={__(
+                          "Height in pixels",
+                          "responsive-block-editor-addons"
+                        )}
+                        className={"block-height-control"}
+                      >
+                        <input
+                          type="number"
+                          className={"block-height-control__input"}
+                          onChange={(event) => {
+                            const unprocessedValue = event.target.value;
+                            const inputValue =
+                              unprocessedValue !== ""
+                                ? parseInt(event.target.value, 10)
+                                : undefined;
+                            if (inputValue < 0 && inputValue !== undefined) {
+                              this.setTemporayInput(inputValue);
+                              this.setHeightTo(0);
+                              return;
+                            }
+                            this.setTemporayInput(null);
+                            this.setHeightTo(inputValue);
+                          }}
+                          value={temporaryInput || height}
+                          min={0}
+                          step="10"
+                        />
+                      </BaseControl>
+                    </div>
                   )}
                   <ToggleControl
                     label={__("Small Images", "responsive-block-editor-addons")}

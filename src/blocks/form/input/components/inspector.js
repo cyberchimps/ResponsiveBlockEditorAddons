@@ -11,6 +11,7 @@ import { debounce } from 'lodash';
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 import RbeaColorControl from "../../../../utils/components/rbea-color-control";
+import RbeaTabRadioControl from "../../../../utils/components/rbea-tab-radio-control";
 
 // Import block components
 const { InspectorControls, PanelColorSettings, RichText } = wp.blockEditor
@@ -148,10 +149,7 @@ export default class Inspector extends Component {
       <InspectorControls key="inspector">
         <InspectorTabs>
           <InspectorTab key={"content"}>
-            <PanelBody
-              title={__("Field Settings", "responsive-block-editor-addons")}
-              initialOpen={true}
-            >
+            <PanelBody>
 
               <Button
                 variant="secondary"
@@ -191,15 +189,25 @@ export default class Inspector extends Component {
 
               {formInputFieldType === 'checkbox' && CheckBox()}
 
-              {formInputFieldType !== 'checkbox' &&
-              <ToggleGroupControl label="Width" value={formInputWidth} onChange={(value) => setAttributes({ formInputWidth: value }) } isBlock>
-                <ToggleGroupControlOption value={100} label="100%" />
-                <ToggleGroupControlOption value={75} label="75%" />
-                <ToggleGroupControlOption value={66} label="66%" />
-                <ToggleGroupControlOption value={50} label="50%" />
-                <ToggleGroupControlOption value={33} label="33%" />
-                <ToggleGroupControlOption value={25} label="25%" />
-              </ToggleGroupControl>}
+              {formInputFieldType !== "checkbox" && (
+                  <RbeaTabRadioControl
+                    label={__("Width", "responsive-block-editor-addons")}
+                    value={formInputWidth}
+                    onChange={(value) =>
+                      setAttributes({ formInputWidth: value })
+                    }
+                    options={[
+                      { value: 100, label: __("100%", "responsive-block-editor-addons") },
+                      { value: 75, label: __("75%", "responsive-block-editor-addons") },
+                      { value: 66, label: __("66%", "responsive-block-editor-addons") },
+                      { value: 50, label: __("50%", "responsive-block-editor-addons") },
+                      { value: 33, label: __("33%", "responsive-block-editor-addons") },
+                      { value: 25, label: __("25%", "responsive-block-editor-addons") },
+                    ]}
+                    allowReset={false}
+                    defaultValue={100}
+                  />
+              )}
 
               {(formInputFieldType === 'text' || formInputFieldType === 'textarea' || formInputFieldType === 'email' || formInputFieldType === 'url' || formInputFieldType === 'number') &&
               <TextControl

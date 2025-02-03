@@ -715,6 +715,58 @@ const attributes = {
         type: "boolean",
         default: false,
     },
+    popupTopPadding: {
+      type: "number",
+      default: 20,
+    },
+    popupTopPaddingMobile: {
+      type: "number",
+      default: 10,
+    },
+    popupTopPaddingTablet: {
+      type: "number",
+      default: 15,
+    },
+    popupBottomPadding: {
+      type: "number",
+      default: 20,
+    },
+    popupBottomPaddingMobile: {
+      type: "number",
+      default: 10,
+    },
+    popupBottomPaddingTablet: {
+      type: "number",
+      default: 15,
+    },
+    popupLeftPadding: {
+      type: "number",
+      default: 20,
+    },
+    popupLeftPaddingMobile: {
+      type: "number",
+      default: 10,
+    },
+    popupLeftPaddingTablet: {
+      type: "number",
+      default: 15,
+    },
+    popupRightPadding: {
+      type: "number",
+      default: 20,
+    },
+    popupRightPaddingMobile: {
+      type: "number",
+      default: 10,
+    },
+    popupRightPaddingTablet: {
+      type: "number",
+      default: 15,
+    },
+    popupIsPaddingControlConnected: {
+      type: "boolean",
+      default: false,
+    },
 };
 
 export default attributes;

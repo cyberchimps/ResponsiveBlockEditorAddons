@@ -37,6 +37,7 @@ const {
   SelectControl,
   ToggleControl,
   TabPanel,
+  BaseControl,
   Dashicon,
 } = wp.components;
 
@@ -94,6 +95,18 @@ export default class Inspector extends Component {
         };
       })
     );
+  }
+
+  /*
+   * Title Html Tag Change
+   */
+  onTagChange(value) {
+    const { setAttributes } = this.props;
+
+    let level_val = parseInt(value.replace("h", ""));
+
+    setAttributes({ level: level_val });
+    setAttributes({ postTitleTag: value });
   }
 
   render() {
@@ -208,15 +221,12 @@ export default class Inspector extends Component {
     const hasPosts = Array.isArray(latestPosts) && latestPosts.length;
 
     // Add instruction text to the select
-    const abImageSizeSelect = {
-      value: "selectimage",
-      label: __("Select image size", "responsive-block-editor-addons"),
-    };
+    // const abImageSizeSelect = [];
 
     // Get the image size options
     const imageSizeOptions = this.imageSizeSelect();
 
-    imageSizeOptions.unshift(abImageSizeSelect);
+    // imageSizeOptions.unshift(abImageSizeSelect);
 
     const imageSizeValue = () => {
       for (let i = 0; i < imageSizeOptions.length; i++) {
@@ -303,13 +313,16 @@ export default class Inspector extends Component {
                       : Math.min(MAX_POSTS_COLUMNS, latestPosts.length)
                   }
                 />
-                <QueryControls
-                {...{ order, orderBy }}
-                numberOfItems={attributes.postsToShow}
-                onNumberOfItemsChange={(value) =>
-                  setAttributes({ postsToShow: value })
-                }
-              />
+                <div className="rbea-portfolio-block-number-of-items-control-container">
+                  <QueryControls
+                    {...{ order, orderBy }}
+                    numberOfItems={attributes.postsToShow}
+                    onNumberOfItemsChange={(value) =>
+                      setAttributes({ postsToShow: value })
+                    }
+                  />
+                </div>
+              <div className = "rbea-repeat-selector-wrapper">
               <RbeaTabRadioControl
                   label={__("Image Size", "responsive-block-editor-addons")}
                   value={imageSizeValue()}
@@ -320,6 +333,7 @@ export default class Inspector extends Component {
                     })
                   }
                 />
+                </div>
                 <RbeaRangeControl
                   label={__("Item Ratio", "responsive-block-editor-addons")}
                   value={attributes.itemRatio}
@@ -338,18 +352,15 @@ export default class Inspector extends Component {
                 }
               />
               {attributes.displayPostTitle && (
-                <SelectControl
-                  label={__(
-                    "Title HTML Tag",
-                    "responsive-block-editor-addons"
-                  )}
+                <RbeaTabRadioControl
+                  label={__("Title HTML Tag", "responsive-block-editor-addons")}
                   options={sectionTitleTags}
                   value={attributes.postTitleTag}
-                  onChange={(value) =>
+                  onChange={(value) => {
                     this.props.setAttributes({
                       postTitleTag: value,
                     })
-                  }
+                  }}
                 />
               )}
             </PanelBody>
@@ -376,31 +387,41 @@ export default class Inspector extends Component {
               title={__("Item Overlay", "responsive-block-editor-addons")}
               initialOpen={false}
             >
-              <h2>{__("Alignment", "responsive-block-editor-addons")}</h2>
-    <BlockAlignmentToolbar
-            label={__("Block Alignment", "responsive-block-editor-addons")}
-            value={attributes.overlayTextAlign}
-            onChange={(value) => {
-              setAttributes({ overlayTextAlign: value });
-            }}
-            controls={["left", "center", "right"]}
-          />
-          <span className={"responsive-block-editor-addons-portfolio-alignment"}></span>
+            <Fragment>
+              <BaseControl>
+                <p>
+                  {__(
+                    "Horizontal Alignment",
+                    "responsive-block-editor-addons"
+                  )}
+                </p>
+                <div className="responsive-block-editor-addons-alignment-mobile">
+                  <AlignmentToolbar
+                    value={attributes.overlayTextAlign}
+                    onChange={(value) =>
+                      setAttributes({
+                        overlayTextAlign: value,
+                      })
+                    }
+                    controls={["left", "center", "right"]}
+                    isCollapsed={false}
+                  />
+                </div>
+              </BaseControl>
+            </Fragment>
 
-          <BlockVerticalAlignmentToolbar
-					value={ attributes.overlayTextVerticalAlign }
-					onChange={ ( nextAlign ) => {
-            if ( 'top' === nextAlign){
-						  setAttributes( { overlayTextVerticalAlign: 'flex-start' } );
-            }
-            if ( 'center' === nextAlign){
-						  setAttributes( { overlayTextVerticalAlign: 'center' } );
-            } 
-            if ( 'bottom' === nextAlign){
-						  setAttributes( { overlayTextVerticalAlign: 'flex-end' } );
-            }
-					} }
-				/>
+              <RbeaTabRadioControl
+                label={__("Vertical Alignment", "responsive-block-editor-addons")}
+                value={attributes.overlayTextVerticalAlign}
+                onChange={(value) =>
+                  setAttributes({ overlayTextVerticalAlign: value })
+                }
+                options={[
+                  { value: "flex-start", label: __("Top", "responsive-block-editor-addons") },
+                  { value: "center", label: __("Center", "responsive-block-editor-addons") },
+                  { value: "flex-end", label: __("Bottom", "responsive-block-editor-addons") },
+                ]}
+              />
               <RbeaColorControl
                 label = {__("Background Color", "responsive-block-editor-addons")}
                 colorValue={attributes.overlayBackgroundColor}

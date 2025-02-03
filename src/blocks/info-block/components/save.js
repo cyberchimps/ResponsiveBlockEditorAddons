@@ -107,6 +107,11 @@ export default class Save extends Component {
       <div className="responsive-block-editor-addons-ifb-image-content"></div>;
     }
 
+    let alt = "";
+    if(iconImage && (iconImage.alt !== "" && typeof iconImage.alt !== "undefined")) {
+      alt = iconImage.alt;
+    }
+
     // Get icon/Image components.
     let is_image = "";
     if (source_type === "icon" && icon !== "") {
@@ -125,7 +130,7 @@ export default class Save extends Component {
         <div className="responsive-block-editor-addons-ifb-image-icon-content responsive-block-editor-addons-ifb-imgicon-wrap">
           <div className="responsive-block-editor-addons-ifb-image">
             <div className="responsive-block-editor-addons-ifb-image-content">
-              <img className="" src={url} alt="" />
+              <img className="" src={url} alt={alt} />
             </div>
           </div>
         </div>

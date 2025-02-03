@@ -13,7 +13,7 @@ const attributes = {
     },
     inputWidth: {
       type: "number",
-      default: 100
+      default: 100,
     },
     inputWidthType: {
       type: "string",
@@ -393,6 +393,14 @@ const attributes = {
     },
     inputTypographyColor: {
       type: 'string',
+    },
+    widthType: {
+      type: "string",
+      default: "%"
+    },
+    widthTypeValueUpdated: {
+      type: "boolean",
+      default: false,
     },
   };
   

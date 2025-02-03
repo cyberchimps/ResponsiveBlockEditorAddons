@@ -31,6 +31,7 @@
   .responsive-block-editor-addons-alignment-mobile  {
     max-height: 32px;
     height: 100%;
+    margin-top: 8px;
 
     .components-toolbar {
       width: 100%;
@@ -83,50 +84,6 @@
     }
   }
 
-}
-
-.rbea-tab-radio-control-wrapper-with-icon {
-  label {
-    font-family: Roboto;
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 16.41px;
-    text-align: left;
-  }
-  .rbea-tab-radio-options {
-    gap: 5px;
-    .rbea-tab-radio-option {
-      max-width: 105px;
-      width: 100%;
-      padding: 0px;
-      margin: 0px;
-      .rbea-tab-radio-option-icon {
-        width: 100%;
-        padding: 5px;
-      }
-
-      .rbea-tab-radio-option-border {
-        border: 1px solid #D9D9D9;
-        border-radius: 4px;
-      }
-    }
-    .rbea-tab-radio-option.is-active {
-      background-color: white;
-      max-width: 105px;
-      width: 100%;
-      .rbea-tab-radio-option-icon {
-        width: 100%;
-        background-color: #007CBA;
-        color: #FFFFFF;
-      }
-
-      .rbea-tab-radio-option-border {
-        background-color: #F1FAFF;
-        border: 1px solid #007CBA;
-        border-radius: 4px;
-      }
-    }
-  }
 }
 
 .components-base-control {

@@ -339,6 +339,7 @@
   .responsive-block-editor-addons-alignment-mobile  {
     max-height: 32px;
     height: 100%;
+    margin-top: 8px;
 
     .components-toolbar {
       width: 100%;
@@ -391,4 +392,47 @@
     }
   }
 
+}
+
+.rbea-repeat-selector-wrapper-five-grid {
+  .rbea-tab-radio-control-wrapper {
+    .rbea-tab-radio-options{
+      display: flex;
+      gap: 0;
+      box-shadow: inset 0 0 0 0.5px #C9C8C8;
+      border-radius: 6px; 
+      overflow: hidden;
+      box-sizing: border-box;
+    
+      .rbea-tab-radio-option  {
+        font-family: Roboto;
+        color: #666;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 16.41px;
+        text-align: center;
+        padding: 8px;
+        display: block;
+        flex: 1;
+        height: 32px;
+        border: unset;
+        border-radius: 0;
+        cursor: pointer;
+        box-shadow: inset 0 0 0 0.5px #C9C8C8;
+      }
+    
+      .rbea-tab-radio-option:first-child {
+        border-radius: 6px 0px 0px 0px;
+      }
+      .rbea-tab-radio-option:last-child {
+        border-radius: 0px 0px 6px 0px;
+      }
+      .rbea-tab-radio-option.is-active {
+        background-color: #007CBA;
+        color: white;
+        box-shadow: inset 0 0 0 0.5px #007CBA;
+        border-color: #007CBA;
+      }
+    }
+  }
 }

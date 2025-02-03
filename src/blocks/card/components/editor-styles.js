@@ -200,6 +200,31 @@ function EditorStyles(props) {
     contentBottomSpacing,
     contentBottomSpacingMobile,
     contentBottomSpacingTablet,
+
+    ctaButtonTopPadding,
+    ctaButtonBottomPadding,
+    ctaButtonLeftPadding,
+    ctaButtonRightPadding,
+    ctaButtonTopPaddingTablet,
+    ctaButtonBottomPaddingTablet,
+    ctaButtonRightPaddingTablet,
+    ctaButtonLeftPaddingTablet,
+    ctaButtonTopPaddingMobile,
+    ctaButtonBottomPaddingMobile,
+    ctaButtonLeftPaddingMobile,
+    ctaButtonRightPaddingMobile,
+    ctaButtonTopMargin,
+    ctaButtonBottomMargin,
+    ctaButtonLeftMargin,
+    ctaButtonRightMargin,
+    ctaButtonTopMarginTablet,
+    ctaButtonBottomMarginTablet,
+    ctaButtonRightMarginTablet,
+    ctaButtonLeftMarginTablet,
+    ctaButtonTopMarginMobile,
+    ctaButtonBottomMarginMobile,
+    ctaButtonLeftMarginMobile,
+    ctaButtonRightMarginMobile,
   } = props.attributes;
 
   var boxShadowPositionCSS = boxShadowPosition;
@@ -414,14 +439,14 @@ function EditorStyles(props) {
     },
 
     " .responsive-block-editor-addons-card-button-inner": {
-      "padding-top": vPadding !== 999 && ctaVpadding === 10 ? generateCSSUnit(vPadding, "px") : generateCSSUnit(ctaVpadding, "px"), //For compatibility with v1.3.2.
-      "padding-bottom": vPadding !== 999 && ctaVpadding === 10 ? generateCSSUnit(vPadding, "px") : generateCSSUnit(ctaVpadding, "px"), //For compatibility with v1.3.2.
-      "padding-left": hPadding !== 999 && ctaHpadding === 14 ? generateCSSUnit(hPadding, "px") : generateCSSUnit(ctaHpadding, "px"), //For compatibility with v1.3.2.
-      "padding-right": hPadding !== 999 && ctaHpadding === 14 ? generateCSSUnit(hPadding, "px") : generateCSSUnit(ctaHpadding, "px"), //For compatibility with v1.3.2.
-      "margin-top": generateCSSUnit(vMargin, "px"),
-      "margin-bottom": generateCSSUnit(vMargin, "px"),
-      "margin-left": generateCSSUnit(hMargin, "px"),
-      "margin-right": generateCSSUnit(hMargin, "px"),
+      "padding-top": generateCSSUnit(ctaButtonTopPadding, "px"),
+      "padding-bottom": generateCSSUnit(ctaButtonBottomPadding, "px"),
+      "padding-left": generateCSSUnit(ctaButtonLeftPadding, "px"),
+      "padding-right": generateCSSUnit(ctaButtonRightPadding, "px"),
+      "margin-top": generateCSSUnit(ctaButtonTopMargin, "px"),
+      "margin-bottom": generateCSSUnit(ctaButtonBottomMargin, "px"),
+      "margin-left": generateCSSUnit(ctaButtonLeftMargin, "px"),
+      "margin-right": generateCSSUnit(ctaButtonRightMargin, "px"),
       "border-style": butborderStyle !== "empty" && ctaBorderStyle === "none" ? butborderStyle : ctaBorderStyle ? ctaBorderStyle : "none", //For compatibility with v1.3.2.
       "border-color": ctaBorderColor,
       "border-radius": butborderRadius !== 999 && ctaBorderRadius === 2 ? bgenerateCSSUnit(butborderRadius, "px") : ctaBorderRadius //For compatibility with v1.3.2.
@@ -461,14 +486,14 @@ function EditorStyles(props) {
         "margin-bottom": generateCSSUnit(contentBottomSpacingMobile, "px"),
     },
   " .responsive-block-editor-addons-card-button-inner": {
-    "padding-top": generateCSSUnit(ctaVpaddingMobile, "px"),
-    "padding-bottom": generateCSSUnit(ctaVpaddingMobile, "px"),
-    "padding-left": generateCSSUnit(ctaHpaddingMobile, "px"),
-    "padding-right": generateCSSUnit(ctaHpaddingMobile, "px"),
-    "margin-top": generateCSSUnit(vMarginMobile, "px"),
-    "margin-bottom": generateCSSUnit(vMarginMobile, "px"),
-    "margin-left": generateCSSUnit(hMarginMobile, "px"),
-    "margin-right": generateCSSUnit(hMarginMobile, "px"),
+    "padding-top": generateCSSUnit(ctaButtonTopPaddingMobile, "px"),
+    "padding-bottom": generateCSSUnit(ctaButtonBottomPaddingMobile, "px"),
+    "padding-left": generateCSSUnit(ctaButtonLeftPaddingMobile, "px"),
+    "padding-right": generateCSSUnit(ctaButtonRightPaddingMobile, "px"),
+    "margin-top": generateCSSUnit(ctaButtonTopMarginMobile, "px"),
+    "margin-bottom": generateCSSUnit(ctaButtonBottomMarginMobile, "px"),
+    "margin-left": generateCSSUnit(ctaButtonLeftMarginMobile, "px"),
+    "margin-right": generateCSSUnit(ctaButtonRightMarginMobile, "px"),
   },
   " .wp-block-responsive-block-editor-addons-card-item": {
       "border-top-left-radius": generateCSSUnit(blockTopRadiusMobile, "px"),
@@ -513,14 +538,14 @@ function EditorStyles(props) {
         "margin-bottom": generateCSSUnit(contentBottomSpacingTablet, "px"),
     },
   " .responsive-block-editor-addons-card-button-inner": {
-    "padding-top": generateCSSUnit(ctaVpaddingTablet, "px"),
-    "padding-bottom": generateCSSUnit(ctaVpaddingTablet, "px"),
-    "padding-left": generateCSSUnit(ctaHpaddingTablet, "px"),
-    "padding-right": generateCSSUnit(ctaHpaddingTablet, "px"),
-    "margin-top": generateCSSUnit(vMarginTablet, "px"),
-    "margin-bottom": generateCSSUnit(vMarginTablet, "px"),
-    "margin-left": generateCSSUnit(hMarginTablet, "px"),
-    "margin-right": generateCSSUnit(hMarginTablet, "px"),
+    "padding-top": generateCSSUnit(ctaButtonTopPaddingTablet, "px"),
+    "padding-bottom": generateCSSUnit(ctaButtonBottomPaddingTablet, "px"),
+    "padding-left": generateCSSUnit(ctaButtonLeftPaddingTablet, "px"),
+    "padding-right": generateCSSUnit(ctaButtonRightPaddingTablet, "px"),
+    "margin-top": generateCSSUnit(ctaButtonTopMarginTablet, "px"),
+    "margin-bottom": generateCSSUnit(ctaButtonBottomMarginTablet, "px"),
+    "margin-left": generateCSSUnit(ctaButtonLeftMarginTablet, "px"),
+    "margin-right": generateCSSUnit(ctaButtonRightMarginTablet, "px"),
   },
   " .wp-block-responsive-block-editor-addons-card-item": {
       "border-top-left-radius": generateCSSUnit(blockTopRadiusTablet, "px"),

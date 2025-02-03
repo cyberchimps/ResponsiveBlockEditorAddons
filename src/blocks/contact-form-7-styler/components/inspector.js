@@ -516,6 +516,20 @@ export default class Inspector extends Component {
         labelBottomSpacing,
         labelBottomSpacingTablet,
         labelBottomSpacingMobile,
+
+        ctaButtonTopPadding,
+        ctaButtonBottomPadding,
+        ctaButtonLeftPadding,
+        ctaButtonRightPadding,
+        ctaButtonTopPaddingTablet,
+        ctaButtonBottomPaddingTablet,
+        ctaButtonRightPaddingTablet,
+        ctaButtonLeftPaddingTablet,
+        ctaButtonTopPaddingMobile,
+        ctaButtonBottomPaddingMobile,
+        ctaButtonLeftPaddingMobile,
+        ctaButtonRightPaddingMobile,
+        isCtaButtonPaddingMarginValueUpdated,
       },
       setAttributes,
     } = this.props;
@@ -562,6 +576,36 @@ export default class Inspector extends Component {
       marginMobileBottom: 0,
       marginMobileLeft: 0,
     }
+
+    const afterSubmitPaddingResetValues = {
+			paddingTop: 10,
+			paddingRight: 10,
+			paddingBottom: 10,
+			paddingLeft: 10,
+			paddingTabletTop: 10,
+			paddingTabletRight: 10,
+			paddingTabletBottom: 10,
+			paddingTabletLeft: 10,
+			paddingMobileTop: 10,
+			paddingMobileRight: 10,
+			paddingMobileBottom: 10,
+			paddingMobileLeft: 10,
+		}
+
+    const afterSubmitMarginResetValues = {
+			paddingTop: 10,
+			paddingRight: 10,
+			paddingBottom: 10,
+			paddingLeft: 10,
+			paddingTabletTop: 10,
+			paddingTabletRight: 10,
+			paddingTabletBottom: 10,
+			paddingTabletLeft: 10,
+			paddingMobileTop: 10,
+			paddingMobileRight: 10,
+			paddingMobileBottom: 10,
+			paddingMobileLeft: 10,
+		}
 
      // To populate new control values with existing padding margin control values for backward compatibility.
      if (!formNewSpacingValuesUpdated) {
@@ -1071,17 +1115,20 @@ export default class Inspector extends Component {
                   showHoverGradient={true}
                 />
               )}
+
+              {backgroundType && backgroundType !== 'none' && (
+                <RbeaRangeControl
+                  label={__("Opacity", "responsive-block-editor-addons")}
+                  value={opacity}
+                  onChange={(value) =>
+                    setAttributes({ opacity: value !== undefined ? value : 20 })
+                  }
+                  min={0}
+                  max={100}
+                  allowReset
+                />
+              )}
              
-              <RbeaRangeControl
-                label={__("Opacity", "responsive-block-editor-addons")}
-                value={opacity}
-                onChange={(value) =>
-                  setAttributes({ opacity: value !== undefined ? value : 20 })
-                }
-                min={0}
-                max={100}
-                allowReset
-              />
             </PanelBody>              
               <PanelBody
               title={__("Spacing", "responsive-block-editor-addons")}
@@ -1263,22 +1310,40 @@ export default class Inspector extends Component {
                   return <div>{tabout}</div>;
                 }}
               </TabPanel>
-              <SelectControl
+              <RbeaTabRadioControl
                 label={__("Title Tag", "responsive-block-editor-addons")}
                 value={formTitleTag}
                 onChange={(value) => {
-                  this.onTagChange(value);
+                  this.onTagChange(value)
                 }}
                 options={[
-                  { value: "h1", label: __("H1", "responsive-block-editor-addons") },
-                  { value: "h2", label: __("H2", "responsive-block-editor-addons") },
-                  { value: "h3", label: __("H3", "responsive-block-editor-addons") },
-                  { value: "h4", label: __("H4", "responsive-block-editor-addons") },
-                  { value: "h5", label: __("H5", "responsive-block-editor-addons") },
-                  { value: "h6", label: __("H6", "responsive-block-editor-addons") },
+                  {
+                    value: "h1",
+                    label: __("H1", "responsive-block-editor-addons"),
+                  },
+                  {
+                    value: "h2",
+                    label: __("H2", "responsive-block-editor-addons"),
+                  },
+                  {
+                    value: "h3",
+                    label: __("H3", "responsive-block-editor-addons"),
+                  },
+                  {
+                    value: "h4",
+                    label: __("H4", "responsive-block-editor-addons"),
+                  },
+                  {
+                    value: "h5",
+                    label: __("H5", "responsive-block-editor-addons"),
+                  },
+                  {
+                    value: "h6",
+                    label: __("H6", "responsive-block-editor-addons"),
+                  },
                 ]}
-                defaultValue = "h1"
               />
+              <hr className="responsive-block-editor-addons-editor__separator" />
               <TypographyHelperControl
                 title={__(
                   "Form Title Typography",
@@ -1355,13 +1420,13 @@ export default class Inspector extends Component {
                     setAttributes={setAttributes}
                     {...this.props}
                   />
+                </PanelBody>
                 <PanelBody
                   title={__("Box Shadow", "responsive-block-editor-addons")}
                   initialOpen={false}
               >
                   {advancedControls}
               </PanelBody>
-                </PanelBody>
                 <PanelBody
                   title={__("Padding", "responsive-block-editor-addons")}
                   initialOpen={false}
@@ -1890,8 +1955,7 @@ export default class Inspector extends Component {
                 checked={showPlaceholder}
                 onChange={this.toggleShowPlaceholder}
               />
-              {showPlaceholder == true && (    
-                <PanelBody>          
+              {showPlaceholder == true && (         
               <RbeaColorControl
                 label = {__("Placeholder Color", "responsive-block-editor-addons")}
                 colorValue={placeholderColor}
@@ -1900,7 +1964,6 @@ export default class Inspector extends Component {
                 }
                 resetColor={() => setAttributes({ placeholderColor: "" })}
               />
-              </PanelBody>
               )}                         
             </PanelBody>
             <PanelBody
@@ -1928,8 +1991,6 @@ export default class Inspector extends Component {
                 beforeIcon=""
                 allowReset
               />
-              
-              
               <TypographyHelperControl
                 title={__(
                   "Typography",
@@ -1999,7 +2060,7 @@ export default class Inspector extends Component {
                 {...this.props}
               />
               <RbeaBorderRadiusControl
-                label={__("Radio Buttons Border Radius", "responsive-block-editor-addons")}
+                label={__("Radio Border Radius", "responsive-block-editor-addons")}
                 attrNameTemplate="radioButtonBorder%s"
                 {...this.props}
               /> 
@@ -2322,6 +2383,8 @@ export default class Inspector extends Component {
                 setAttributes={setAttributes}
                 {...this.props}
               />
+
+              {/* Button Settings */}
               <ButtonSettingsControl
                   {...this.props}
                   showMarginControls={false}
@@ -2416,464 +2479,16 @@ export default class Inspector extends Component {
               title={__("Spacing", "responsive-block-editor-addons")}
               initialOpen={false}
             >
-                  <TabPanel
-                  className=" responsive-size-type-field-tabs  responsive-size-type-field__common-tabs  responsive-inline-margin"
-                  activeClass="active-tab"
-                  tabs={[
-                      {
-                          name: "desktop",
-                          title: <Dashicon icon="desktop" />,
-                      className:
-                          " responsive-desktop-tab  responsive-responsive-tabs",
-                  },
-                  {
-                      name: "tablet",
-                      title: <Dashicon icon="tablet" />,
-                      className: " responsive-tablet-tab  responsive-responsive-tabs",
-              },
-                  {
-                      name: "mobile",
-                          title: <Dashicon icon="smartphone" />,
-                      className: " responsive-mobile-tab  responsive-responsive-tabs",
-                  },
-              ]}
-              >
-                  {(tab) => {
-                      let tabout;
-
-                      if ("mobile" === tab.name) {
-                          tabout = (
-                              <Fragment>
-                              <p>{__("Padding Mobile", "responsive-block-editor-addons")}</p>
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Top",
-                                          "responsive-block-editor-addons"
-                                        )}
-                                      min={0}
-                                      max={2000}
-                                      allowReset={true}
-                                      value={afterSubmitTopPaddingMobile}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitTopPaddingMobile: value,
-                                      })
-                                    }
-                                  />
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Bottom",
-                                          "responsive-block-editor-addons"
-                                        )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitBottomPaddingMobile}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitBottomPaddingMobile: value,
-                                      })
-                                    }
-                                  />
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Left",
-                                          "responsive-block-editor-addons"
-                                        )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitLeftPaddingMobile}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitLeftPaddingMobile: value,
-                                      })
-                                    }
-                                  />
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Right",
-                                          "responsive-block-editor-addons"
-                                        )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitRightPaddingMobile}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitRightPaddingMobile: value,
-                                      })
-                                    }
-                                  />
-                              </Fragment>
-                      );
-                      } else if ("tablet" === tab.name) {
-                          tabout = (
-                              <Fragment>
-                              <p>{__("Padding Tablet", "responsive-block-editor-addons")}</p>
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Top",
-                                          "responsive-block-editor-addons"
-                                    )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitTopPaddingTablet}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitTopPaddingTablet: value,
-                                      })
-                                    }
-                                  />
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Bottom",
-                                          "responsive-block-editor-addons"
-                                    )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitBottomPaddingTablet}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitBottomPaddingTablet: value,
-                                      })
-                                    }
-                                  />
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Left",
-                                          "responsive-block-editor-addons"
-                                    )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitLeftPaddingTablet}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitLeftPaddingTablet: value,
-                                      })
-                                    }
-                                  />
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Right",
-                                          "responsive-block-editor-addons"
-                                    )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitRightPaddingTablet}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitRightPaddingTablet: value,
-                                      })
-                                    }
-                                  />
-                              </Fragment>
-                      );
-                      } else {
-                          tabout = (
-                              <Fragment>
-                              <p>{__("Padding", "responsive-block-editor-addons")}</p>
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Top",
-                                          "responsive-block-editor-addons"
-                                    )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitTopPadding}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitTopPadding: value,
-                                      })
-                                    }
-                                  />
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Bottom",
-                                          "responsive-block-editor-addons"
-                                    )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitBottomPadding}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitBottomPadding: value,
-                                      })
-                                    }
-                                  />
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Left",
-                                          "responsive-block-editor-addons"
-                                    )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitLeftPadding}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitLeftPadding: value,
-                                      })
-                                    }
-                                  />
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Right",
-                                          "responsive-block-editor-addons"
-                                    )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitRightPadding}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitRightPadding: value,
-                                      })
-                                    }
-                                  />
-
-                              </Fragment>
-                      );
-                      }
-
-                      return <div>{tabout}</div>;
-                  }}
-              </TabPanel>
-              <TabPanel
-                  className=" responsive-size-type-field-tabs  responsive-size-type-field__common-tabs  responsive-inline-margin"
-                  activeClass="active-tab"
-                  tabs={[
-                      {
-                          name: "desktop",
-                          title: <Dashicon icon="desktop" />,
-                      className:
-                          " responsive-desktop-tab  responsive-responsive-tabs",
-                  },
-                  {
-                      name: "tablet",
-                      title: <Dashicon icon="tablet" />,
-                      className: " responsive-tablet-tab  responsive-responsive-tabs",
-              },
-                  {
-                      name: "mobile",
-                          title: <Dashicon icon="smartphone" />,
-                      className: " responsive-mobile-tab  responsive-responsive-tabs",
-                  },
-              ]}
-              >
-                  {(tab) => {
-                      let tabout;
-
-                      if ("mobile" === tab.name) {
-                          tabout = (
-                              <Fragment>
-                              <p>{__("Margin Mobile", "responsive-block-editor-addons")}</p>
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Top",
-                                          "responsive-block-editor-addons"
-                                        )}
-                                      min={0}
-                                      max={2000}
-                                      allowReset={true}
-                                      value={afterSubmitTopMarginMobile}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitTopMarginMobile: value,
-                                      })
-                                    }
-                                  />
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Bottom",
-                                          "responsive-block-editor-addons"
-                                        )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitBottomMarginMobile}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitBottomMarginMobile: value,
-                                      })
-                                    }
-                                  />
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Left",
-                                          "responsive-block-editor-addons"
-                                        )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitLeftMarginMobile}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitLeftMarginMobile: value,
-                                      })
-                                    }
-                                  />
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Right",
-                                          "responsive-block-editor-addons"
-                                        )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitRightMarginMobile}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitRightMarginMobile: value,
-                                      })
-                                    }
-                                  />
-                              </Fragment>
-                      );
-                      } else if ("tablet" === tab.name) {
-                          tabout = (
-                              <Fragment>
-                              <p>{__("Margin Tablet", "responsive-block-editor-addons")}</p>
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Top",
-                                          "responsive-block-editor-addons"
-                                    )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitTopMarginTablet}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitTopMarginTablet: value,
-                                      })
-                                    }
-                                  />
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Bottom",
-                                          "responsive-block-editor-addons"
-                                    )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitBottomMarginTablet}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitBottomMarginTablet: value,
-                                      })
-                                    }
-                                  />
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Left",
-                                          "responsive-block-editor-addons"
-                                    )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitLeftMarginTablet}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitLeftMarginTablet: value,
-                                      })
-                                    }
-                                  />
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Right",
-                                          "responsive-block-editor-addons"
-                                    )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitRightMarginTablet}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitRightMarginTablet: value,
-                                      })
-                                    }
-                                  />
-                              </Fragment>
-                      );
-                      } else {
-                          tabout = (
-                              <Fragment>
-                              <p>{__("Margin", "responsive-block-editor-addons")}</p>
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Top",
-                                          "responsive-block-editor-addons"
-                                    )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitTopMargin}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitTopMargin: value,
-                                      })
-                                    }
-                                  />
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Bottom",
-                                          "responsive-block-editor-addons"
-                                    )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitBottomMargin}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitBottomMargin: value,
-                                      })
-                                    }
-                                  />
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Left",
-                                          "responsive-block-editor-addons"
-                                    )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitLeftMargin}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitLeftMargin: value,
-                                      })
-                                    }
-                                  />
-                                  <RbeaRangeControl
-                                      label={__(
-                                          "Right",
-                                          "responsive-block-editor-addons"
-                                    )}
-                                      min={0}
-                                      max={2000}
-                          allowReset={true}
-                                      value={afterSubmitRightMargin}
-                                      onChange={(value) =>
-                                      setAttributes({
-                                        afterSubmitRightMargin: value,
-                                      })
-                                    }
-                                  />
-
-                              </Fragment>
-                      );
-                      }
-
-                      return <div>{tabout}</div>;
-                  }}
-              </TabPanel>             
+              <ResponsiveNewPaddingControl
+                attrNameTemplate="afterSubmit%s"
+                resetValues={afterSubmitPaddingResetValues}
+                {...this.props}
+              />
+              <ResponsiveNewMarginControl
+                attrNameTemplate="afterSubmit%s"
+                resetValues={afterSubmitMarginResetValues}
+                {...this.props}
+              />           
             </PanelBody>
             <PanelBody
               title={__("Border", "responsive-block-editor-addons")}
@@ -2895,7 +2510,42 @@ export default class Inspector extends Component {
             </PanelBody>
           </InspectorTab>
           <InspectorTab key={"advance"}>
-          <PanelBody
+            <PanelBody
+              title={__("Responsive Conditions", "responsive-block-editor-addons")}
+              initialOpen={false}
+            >
+              <ToggleControl
+                label={__(
+                  "Hide on Desktop",
+                  "responsive-block-editor-addons"
+                )}
+                checked={hideWidget}
+                onChange={(value) =>
+                  setAttributes({ hideWidget: !hideWidget })
+                }
+              />
+              <ToggleControl
+                label={__(
+                  "Hide on Tablet",
+                  "responsive-block-editor-addons"
+                )}
+                checked={hideWidgetTablet}
+                onChange={(value) =>
+                  setAttributes({ hideWidgetTablet: !hideWidgetTablet })
+                }
+              />
+              <ToggleControl
+                label={__(
+                  "Hide on Mobile",
+                  "responsive-block-editor-addons"
+                )}
+                checked={hideWidgetMobile}
+                onChange={(value) =>
+                  setAttributes({ hideWidgetMobile: !hideWidgetMobile })
+                }
+              />
+            </PanelBody>
+            <PanelBody
               title={__("Z Index", "responsive-block-editor-addons")}
               initialOpen={false}
             >
@@ -2974,43 +2624,6 @@ export default class Inspector extends Component {
                   }}
               </TabPanel>
           </PanelBody>
-          </InspectorTab>
-          <InspectorTab key={"advance"}>
-            <PanelBody
-              title={__("Responsive Conditions", "responsive-block-editor-addons")}
-              initialOpen={false}
-            >
-              <ToggleControl
-                label={__(
-                  "Hide on Desktop",
-                  "responsive-block-editor-addons"
-                )}
-                checked={hideWidget}
-                onChange={(value) =>
-                  setAttributes({ hideWidget: !hideWidget })
-                }
-              />
-              <ToggleControl
-                label={__(
-                  "Hide on Tablet",
-                  "responsive-block-editor-addons"
-                )}
-                checked={hideWidgetTablet}
-                onChange={(value) =>
-                  setAttributes({ hideWidgetTablet: !hideWidgetTablet })
-                }
-              />
-              <ToggleControl
-                label={__(
-                  "Hide on Mobile",
-                  "responsive-block-editor-addons"
-                )}
-                checked={hideWidgetMobile}
-                onChange={(value) =>
-                  setAttributes({ hideWidgetMobile: !hideWidgetMobile })
-                }
-              />
-            </PanelBody>
           </InspectorTab>
         </InspectorTabs>
       </InspectorControls>

@@ -133,7 +133,7 @@ class SpacerEdit extends Component {
         <InspectorControls>
           <InspectorTabs hasStyle={false}>
             <InspectorTab key={"content"}>
-              <PanelBody title={__("Spacer settings", "responsive-block-editor-addons")}>
+              <PanelBody>
                 <TabPanel
                   className=" responsive-size-type-field-tabs  responsive-size-type-field__common-tabs  responsive-inline-margin"
                   activeClass="active-tab"

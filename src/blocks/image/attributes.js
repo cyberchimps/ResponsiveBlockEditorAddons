@@ -658,6 +658,58 @@ const attributes = {
   captionTypographyColor : {
     type: 'string',
   },
+  captionTopMargin: {
+    type: "number",
+    default: 0,
+  },
+  captionBottomMargin: {
+    type: "number",
+    default: 0,
+  },
+  captionLeftMargin: {
+    type: "number",
+    default: 0,
+  },
+  captionRightMargin: {
+    type: "number",
+    default: 0,
+  },
+  captionTopMarginTablet: {
+    type: "number",
+    default: 0,
+  },
+  captionBottomMarginTablet: {
+    type: "number",
+    default: 0,
+  },
+  captionLeftMarginTablet: {
+    type: "number",
+    default: 0,
+  },
+  captionRightMarginTablet: {
+    type: "number",
+    default: 0,
+  },
+  captionTopMarginMobile: {
+    type: "number",
+    default: 0,
+  },
+  captionBottomMarginMobile: {
+    type: "number",
+    default: 0,
+  },
+  captionLeftMarginMobile: {
+    type: "number",
+    default: 0,
+  },
+  captionRightMarginMobile: {
+    type: "number",
+    default: 0,
+  },
+  captionIsMarginControlConnected: {
+    type: "boolean",
+    default: false,
+  }
 };
 
 export default attributes;

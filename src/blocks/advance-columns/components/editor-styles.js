@@ -117,6 +117,10 @@ function EditorStyles(props) {
   boxRightMargin,
   boxRightMarginTablet,
   boxRightMarginMobile,
+  backgroundSizeTablet,
+  backgroundSizeMobile,
+  backgroundPositionMobile,
+  backgroundPositionTablet,
   } = props.attributes;
 
   var boxShadowPositionCSS = boxShadowPosition;
@@ -155,10 +159,10 @@ function EditorStyles(props) {
               imgopacity || 0
             )}),url(${backgroundImage})`
           : "",
-      "background-position": backgroundPosition !== "empty" && backgroundImagePosition === "center-center" ? backgroundPosition : backgroundImagePosition, // For compatibility with v1.3.2.
+      "background-position": backgroundPosition,
       "background-attachment": backgroundAttachment,
-      "background-repeat": backgroundRepeat !== "empty" && backgroundImageRepeat === "no-repeat" ? backgroundRepeat : backgroundImageRepeat, // For compatibility with v1.3.2.
-      "background-size": backgroundSize !== "empty" && backgroundImageSize === "cover" ? backgroundSize : backgroundImageSize, // For compatibility with v1.3.2.
+      "background-repeat": backgroundRepeat,
+      "background-size": backgroundSize,
       "z-index": z_index,
     },
     " .responsive-block-editor-addons-block-columns.overlay-type-color": {
@@ -242,6 +246,10 @@ function EditorStyles(props) {
     " ": {
       "opacity": hideWidgetMobile? 0.2 : 1,
     },
+    " .background-type-image": {
+      "background-position": backgroundPositionMobile,
+      "background-size": backgroundSizeMobile,
+    },
     " .responsive-block-editor-addons-block-columns": {
       "padding-top": generateCSSUnit(boxTopPaddingMobile, "px"),
       "padding-bottom": generateCSSUnit(boxBottomPaddingMobile, "px"),
@@ -262,6 +270,10 @@ function EditorStyles(props) {
   var tablet_selectors = {
     " ": {
       "opacity": hideWidgetTablet? 0.2 : 1,
+    },
+    " .background-type-image": {
+      "background-position": backgroundPositionTablet,
+      "background-size": backgroundSizeTablet,
     },
     " .responsive-block-editor-addons-block-columns": {
       "padding-top": generateCSSUnit(boxTopPaddingTablet, "px"),

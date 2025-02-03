@@ -380,7 +380,6 @@ const attributes = {
   },
   buttonbackgroundType: {
     type: "string",
-    default: "none",
   },
   icon_hcolor: {
     type: "string",
@@ -850,6 +849,106 @@ const attributes = {
   contentBottomSpacingTablet: {
     type: 'number',
     default: 16,
+  },
+  ctaButtonTopPadding: {
+    type: "number",
+    default: 5,
+  },
+  ctaButtonBottomPadding: {
+    type: "number",
+    default: 5,
+  },
+  ctaButtonLeftPadding: {
+    type: "number",
+    default: 5,
+  },
+  ctaButtonRightPadding: {
+    type: "number",
+    default: 5,
+  },
+  ctaButtonTopPaddingTablet: {
+    type: "number",
+    default: 5,
+  },
+  ctaButtonBottomPaddingTablet: {
+    type: "number",
+    default: 5,
+  },
+  ctaButtonRightPaddingTablet: {
+    type: "number",
+    default: 5,
+  },
+  ctaButtonLeftPaddingTablet: {
+    type: "number",
+    default: 5,
+  },
+  ctaButtonTopPaddingMobile: {
+    type: "number",
+    default: 5,
+  },
+  ctaButtonBottomPaddingMobile: {
+    type: "number",
+    default: 5,
+  },
+  ctaButtonLeftPaddingMobile: {
+    type: "number",
+    default: 5,
+  },
+  ctaButtonRightPaddingMobile: {
+    type: "number",
+    default: 5,
+  },
+  ctaButtonTopMargin: {
+    type: "number",
+    default: 10,
+  },
+  ctaButtonBottomMargin: {
+    type: "number",
+    default: 10,
+  },
+  ctaButtonLeftMargin: {
+    type: "number",
+    default: 0,
+  },
+  ctaButtonRightMargin: {
+    type: "number",
+    default: 0,
+  },
+  ctaButtonTopMarginTablet: {
+    type: "number",
+    default: 10,
+  },
+  ctaButtonBottomMarginTablet: {
+    type: "number",
+    default: 10,
+  },
+  ctaButtonRightMarginTablet: {
+    type: "number",
+    default: 0,
+  },
+  ctaButtonLeftMarginTablet: {
+    type: "number",
+    default: 0,
+  },
+  ctaButtonTopMarginMobile: {
+    type: "number",
+    default: 10,
+  },
+  ctaButtonBottomMarginMobile: {
+    type: "number",
+    default: 10,
+  },
+  ctaButtonLeftMarginMobile: {
+    type: "number",
+    default: 0,
+  },
+  ctaButtonRightMarginMobile: {
+    type: "number",
+    default: 0,
+  },
+  isCtaButtonPaddingMarginValueUpdated: {
+    type: "boolean",
+    default: false,
   },
 };
 export default attributes;

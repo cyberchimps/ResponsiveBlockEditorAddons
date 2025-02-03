@@ -17,6 +17,7 @@ import RbeaRangeControl from "../../../utils/components/rbea-range-control";
 import RbeaColorControl from "../../../utils/components/rbea-color-control";
 import RbeaTabRadioControl from "../../../utils/components/rbea-tab-radio-control";
 import RbeaMediaUploadControl from "../../../utils/components/rbea-media-upload-control";
+import RbeaSeparatorStyleTabControl from "../../../utils/components/rbea-separator-style-tab-control";
 
 // Setup the block
 const { __ } = wp.i18n;
@@ -237,6 +238,21 @@ export default class Inspector extends Component {
 			paddingMobileLeft: 0,
 		}
 
+    const blockPaddingResetValues = {
+			paddingTop: 0,
+			paddingRight: 0,
+			paddingBottom: 0,
+			paddingLeft: 0,
+			paddingTabletTop: 0,
+			paddingTabletRight: 0,
+			paddingTabletBottom: 0,
+			paddingTabletLeft: 0,
+			paddingMobileTop: 0,
+			paddingMobileRight: 0,
+			paddingMobileBottom: 0,
+			paddingMobileLeft: 0,
+		}
+
     const tmControls = (index) => {
       let image_val = null;
       if (pricingList[index] && typeof pricingList[index] !== "undefined") {
@@ -407,18 +423,21 @@ export default class Inspector extends Component {
                       { value: "right", label: __("Right", "responsive-block-editor-addons") },
                     ]}
                   />
-
-                  <SelectControl
-                    label={__("Image Size", "responsive-block-editor-addons")}
-                    options={[
-                      { value: "full", label: __("Full", "responsive-block-editor-addons") },
-                      { value: "thumbnail", label: __("Thumbnail", "responsive-block-editor-addons") },
-                      { value: "medium", label: __("Medium", "responsive-block-editor-addons") },
-                      { value: "large", label: __("Large", "responsive-block-editor-addons") },
-                    ]}
-                    value={imageSize}
-                    onChange={(value) => setAttributes({ imageSize: value })}
-                  />
+                  <div className = "rbea-repeat-selector-wrapper">
+                    <RbeaTabRadioControl
+                      label={__("Image Size", "responsive-block-editor-addons")}
+                      value={imageSize}
+                      onChange={(value) =>
+                        setAttributes({ imageSize: value })
+                      }
+                      options={[
+                        { value: "full", label: __("Full", "responsive-block-editor-addons") },
+                        { value: "thumbnail", label: __("Thumbnail", "responsive-block-editor-addons") },
+                        { value: "medium", label: __("Medium", "responsive-block-editor-addons") },
+                        { value: "large", label: __("Large", "responsive-block-editor-addons") },
+                      ]}
+                    />
+                  </div>
                   <RbeaRangeControl
                     label={__("Width", "responsive-block-editor-addons")}
                     value={imageWidth}
@@ -433,7 +452,7 @@ export default class Inspector extends Component {
           </InspectorTab>
           <InspectorTab key={"style"}>
             <PanelBody title={__("Separator", "responsive-block-editor-addons")} initialOpen={false}>
-              <SelectControl
+              {/* <SelectControl
                 label={__("Separator Style", "responsive-block-editor-addons")}
                 value={seperatorStyle}
                 onChange={(value) => setAttributes({ seperatorStyle: value })}
@@ -448,6 +467,10 @@ export default class Inspector extends Component {
                   { value: "outset", label: __("Outset", "responsive-block-editor-addons") },
                   { value: "ridge", label: __("Ridge", "responsive-block-editor-addons") },
                 ]}
+              /> */}
+              <RbeaSeparatorStyleTabControl
+                selected={seperatorStyle}
+                onChange={(value) => setAttributes({ seperatorStyle: value })}
               />
               {"none" != seperatorStyle && (
                 <Fragment>
@@ -611,36 +634,9 @@ export default class Inspector extends Component {
                 setAttributes={setAttributes}
                 {...this.props}
               />
-              <ResponsiveSpacingControl
-                title={"Title Bottom Margin"}
-                attrNameTemplate="titleSpace%s"
-                values={{
-                  desktop: titleSpace,
-                  tablet: titleSpaceTablet,
-                  mobile: titleSpaceMobile,
-                }}
-                setAttributes={setAttributes}
-                {...this.props}
-              />
-              <ResponsivePaddingControl
+              <ResponsiveNewPaddingControl
                 attrNameTemplate="block%s"
-                values={{
-                  desktopTop: blockTopPadding,
-                  desktopBottom: blockBottomPadding,
-                  desktopLeft: blockLeftPadding,
-                  desktopRight: blockRightPadding,
-
-                  tabletTop: blockTopPaddingTablet,
-                  tabletBottom: blockBottomPaddingTablet,
-                  tabletLeft: blockLeftPaddingTablet,
-                  tabletRight: blockRightPaddingTablet,
-
-                  mobileTop: blockTopPaddingMobile,
-                  mobileBottom: blockBottomPaddingMobile,
-                  mobileLeft: blockLeftPaddingMobile,
-                  mobileRight: blockRightPaddingMobile,
-                }}
-                setAttributes={setAttributes}
+                resetValues={blockPaddingResetValues}
                 {...this.props}
               />
             </PanelBody>

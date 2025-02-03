@@ -278,6 +278,14 @@ const attributes = {
 		type: "boolean",
 		default: false,
 	},
+	buttonStyleToggle: {
+		type: "string",
+		default: "",
+	},
+	hasButtonStyleToggleUpdated: {
+		type: "boolean",
+		default: false,
+	},
   };
   
   export default attributes;

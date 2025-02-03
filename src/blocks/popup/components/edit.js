@@ -148,17 +148,17 @@ export default class Edit extends Component {
 
               {popupTextTypographyFontFamily && loadGoogleFont(popupTextTypographyFontFamily)}
               {popupTriggerType === 'text' &&
-                <p onClick={() => this.setState({ isModalOpen: true })} className="responsive-block-editor-addons-popup-text-trigger responsive-popup-trigger-anchor responsive-block-editor-addons-popup-modal-trigger">{popupTextTrigger}</p>
+                <p onClick={() => this.setState({ isModalOpen: true })} className="responsive-block-editor-addons-popup-text-trigger responsive-popup-trigger-anchor responsive-block-editor-addons-popup-modal-trigger" data-trigger-id={`trigger-${block_id}`}>{popupTextTrigger}</p>
               }
 
               {popupTriggerType === 'icon' &&
-                <div onClick={() => this.setState({ isModalOpen: true })} className="responsive-block-editor-addons-popup-modal-trigger responsive-popup-trigger-anchor responsive-block-editor-addons-popup-icon-trigger">
+                <p onClick={() => this.setState({ isModalOpen: true })} className="responsive-block-editor-addons-popup-modal-trigger responsive-popup-trigger-anchor responsive-block-editor-addons-popup-icon-trigger" data-trigger-id={`trigger-${block_id}`}>
                   {renderSVG(popupIconTrigger)}
-                </div>
+                </p>
               }
 
               {popupTriggerType === 'image' && popupImageTrigger == undefined && <p>Please Select Image</p>}
-              {popupTriggerType === 'image' && popupImageTrigger != undefined && <img onClick={() => this.setState({ isModalOpen: true })} className="responsive-block-editor-addons-popup-modal-trigger responsive-popup-trigger-anchor responsive-block-editor-addons-popup-image-trigger" src={popupImageTrigger} alt="popupImageTrigger" />}
+              {popupTriggerType === 'image' && popupImageTrigger != undefined && <img onClick={() => this.setState({ isModalOpen: true })} className="responsive-block-editor-addons-popup-modal-trigger responsive-popup-trigger-anchor responsive-block-editor-addons-popup-image-trigger" src={popupImageTrigger} alt="popupImageTrigger" data-trigger-id={`trigger-${block_id}`}/>}
 
             </div>
             <div className={`responsive-block-editor-addons-popup-modal-wrap ${this.state.isModalOpen ? 'responsive-block-editor-popup-modal-show' : 'responsive-block-editor-popup-modal-hide'}`} data-trigger-type={popupTrigger} data-trigger-delay={'load' === popupTrigger ? popupTriggerDelay : 'none'} data-popup-id={`popup-${block_id}`}>

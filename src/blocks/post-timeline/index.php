@@ -58,6 +58,8 @@ function responsive_block_editor_addons_post_timeline_render_latest_posts( $attr
 		'<div class="responsive-block-editor-addons-timeline__days">'
 	);
 
+	$helper = Responsive_Block_Editor_Addons_Helper::get_instance();
+
 	$grid_query = new WP_Query( $grid_query );
 
 	/* Start the loop */
@@ -225,9 +227,8 @@ function responsive_block_editor_addons_post_timeline_render_latest_posts( $attr
 					$post_title_tag = 'h2';
 				}
 
-				$main_class = new Responsive_Block_Editor_Addons();
 				$array_of_allowed_HTML = array( 'h2', 'h3', 'h4', 'h5', 'h6', );
-				$post_title_tag        = $main_class->rbea_post_title_tag_allowed_html( $post_title_tag, $array_of_allowed_HTML, 'h3' );
+				$post_title_tag        = $helper->rbea_post_title_tag_allowed_html( $post_title_tag, $array_of_allowed_HTML, 'h3' );
 
 				$post_grid_markup .= sprintf(
 					'<%3$s class="responsive-block-editor-addons-block-post-timeline-title"><a class="responsive-block-editor-addons-block-post-timeline-title-heading" href="%1$s" rel="bookmark">%2$s</a></%3$s>',
@@ -409,7 +410,7 @@ function responsive_block_editor_addons_post_timeline_render_latest_posts( $attr
 		$class = "responsive-block-editor-addons-block-post-timeline block-{$attributes['block_id']} wp-block-responsive-block-editor-addons-post-timeline featured{$attributes['postType']} align{$attributes['align']} responsive-block-editor-addons-timeline";
 
 		if ( isset( $attributes['className'] ) ) {
-			$class .= ' ' . $attributes['className'];
+			$class .= ' ' . sanitize_html_class( $attributes['className'] );
 		}
 
 		$sec_classes = 'responsive-block-editor-addons-block-post-timeline';
@@ -447,9 +448,8 @@ function responsive_block_editor_addons_post_timeline_render_latest_posts( $attr
 				$section_title_tag = 'h2';
 			}
 
-			$main_class            = new Responsive_Block_Editor_Addons();
 			$array_of_allowed_HTML = array( 'h2', 'h3', 'h4', 'h5', 'h6', );
-			$section_title_tag     = $main_class->rbea_post_title_tag_allowed_html( $section_title_tag, $array_of_allowed_HTML, 'h2' );
+			$section_title_tag     = $helper->rbea_post_title_tag_allowed_html( $section_title_tag, $array_of_allowed_HTML, 'h2' );
 
 			$section_title = '<' . esc_attr( $section_title_tag ) . ' class="responsive-block-editor-addons-post-grid-section-title">' . esc_html( $attributes['sectionTitle'] ) . '</' . esc_attr( $section_title_tag ) . '>';
 		} else {
@@ -459,6 +459,8 @@ function responsive_block_editor_addons_post_timeline_render_latest_posts( $attr
 		/* Post grid section tag */
 		if ( isset( $attributes['sectionTag'] ) ) {
 			$section_tag = $attributes['sectionTag'];
+			$array_of_allowed_HTML = array( 'div', 'header', 'section', 'article', 'main', 'aside', 'footer' );
+			$section_tag           = $helper->rbea_post_title_tag_allowed_html( $section_tag, $array_of_allowed_HTML, 'section' );
 		} else {
 			$section_tag = 'section';
 		}

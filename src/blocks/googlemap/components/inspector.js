@@ -123,7 +123,7 @@ export default class Inspector extends Component {
 			<InspectorControls key="inspector">
 				<InspectorTabs>
 					<InspectorTab key={"content"}>
-						<PanelBody title={__("Map settings", "responsive-block-editor-addons")}>
+						<PanelBody>
 							<RbeaRangeControl
 								label={__("Zoom", "responsive-block-editor-addons")}
 								value={zoom}

@@ -1,3 +1,5 @@
+import { type } from "jquery";
+
 const attributes = {
   block_id: {
     type: "string",
@@ -677,6 +679,110 @@ titleTypographyColor : {
   type: "string",
   default: '#313131',
 },
+separatorWidthType: {
+  type: "string",
+  default: "px",
+},
+  blockTitleLeftPadding: {
+    type: "number",
+    default: 10,
+  },
+  blockTitleLeftPaddingTablet: {
+    type: "number",
+    default: 10,
+  },
+  blockTitleLeftPaddingMobile: {
+    type: "number",
+    default: 10,
+  },
+  blockTitleTopPadding: {
+    type: "number",
+    default: 10,
+  },
+  blockTitleTopPaddingTablet: {
+    type: "number",
+    default: 10,
+  },
+  blockTitleTopPaddingMobile: {
+    type: "number",
+    default: 10,
+  },
+  blockTitleBottomPadding: {
+    type: "number",
+    default: 10,
+  },
+  blockTitleBottomPaddingTablet: {
+    type: "number",
+    default: 10,
+  },
+  blockTitleBottomPaddingMobile: {
+    type: "number",
+    default: 10,
+  },
+  blockTitleRightPadding: {
+    type: "number",
+    default: 10,
+  },
+  blockTitleRightPaddingTablet: {
+    type: "number",
+    default: 10,
+  },
+  blockTitleRightPaddingMobile: {
+    type: "number",
+    default: 10,
+  },
+  titleContentIsPaddingControlConnected: {
+    type: "boolean",
+    default: false,
+  },
+  contentLeftPadding: {
+    type: "number",
+    default: 10,
+  },
+  contentLeftPaddingTablet: {
+    type: "number",
+    default: 10,
+  },
+  contentLeftPaddingMobile: {
+    type: "number",
+    default: 10,
+  },
+  contentTopPadding: {
+    type: "number",
+    default: 10,
+  },
+  contentTopPaddingTablet: {
+    type: "number",
+    default: 10,
+  },
+  contentTopPaddingMobile: {
+    type: "number",
+    default: 10,
+  },
+  contentBottomPadding: {
+    type: "number",
+    default: 10,
+  },
+  contentBottomPaddingTablet: {
+    type: "number",
+    default: 10,
+  },
+  contentBottomPaddingMobile: {
+    type: "number",
+    default: 10,
+  },
+  contentRightPadding: {
+    type: "number",
+    default: 10,
+  },
+  contentRightPaddingTablet: {
+    type: "number",
+    default: 10,
+  },
+  contentRightPaddingMobile: {
+    type: "number",
+    default: 10,
+  },
 };
 
 export default attributes;

@@ -258,12 +258,15 @@ export default class Inspector extends Component {
         z_indexMobile,
         blockIsPaddingControlConnected,
         blockIsMarginControlConnected,
+
+        buttonStyleToggle,
+        hasButtonStyleToggleUpdated,
       },
       setAttributes,
     } = this.props;
 
     // Border Color Component For Color&Hover Typography Control
-		const typographyColorControl = !buttonTransparent &&  (
+		const typographyColorControl = buttonStyleToggle !== "transparent" &&  (
         <RbeaColorControl
 				label={__("Button Text Color", "responsive-block-editor-addons")}
 				colorValue={buttonTextColor}
@@ -274,7 +277,7 @@ export default class Inspector extends Component {
 			/>
     );
 
-		const typographyColorControlHover = !buttonTransparent &&  (
+		const typographyColorControlHover = buttonStyleToggle !== "transparent" &&  (
 			<RbeaColorControl
 				label={__("Button Text Color Hover", "responsive-block-editor-addons")}
 				colorValue={buttonTextColorHover}
@@ -289,6 +292,17 @@ export default class Inspector extends Component {
 			<div className="responsive-block-editor-addons-empty-color-control"></div>
 		);
     
+    // backward compatibility for border radius control
+
+    if (!hasButtonStyleToggleUpdated) {
+      this.props.setAttributes(
+        {
+        buttonStyleToggle: buttonRounded ? "rounded" : buttonTransparent ? "transparent" : "",
+        }
+      )
+      this.props.setAttributes({hasButtonStyleToggleUpdated: true});
+    }
+
     return (
       <InspectorControls key="inspector">
         <InspectorTabs>
@@ -328,7 +342,7 @@ export default class Inspector extends Component {
                     }}
                   />
                   {!isValidNumber && (
-                    <p style={{ color: "red" }}>
+                    <p className="rbea-tab-radio-options-help-text" style={{ color: "red" }}>
                       Please make sure your input is a valid phone number.
                     </p>
                   )}
@@ -349,7 +363,7 @@ export default class Inspector extends Component {
                     }}
                   />
                   {!isValidMail && (
-                    <p style={{ color: "red" }}>
+                    <p className="rbea-tab-radio-options-help-text" style={{ color: "red" }}>
                       Please enter a valid mail id.
                     </p>
                   )}
@@ -494,14 +508,18 @@ export default class Inspector extends Component {
               title={__("Button Style", "responsive-block-editor-addons")}
               initialOpen={true}
             >
-              <ToggleControl
-                label={__("Rounded", "responsive-block-editor-addons")}
-                checked={buttonRounded}
+              <RbeaTabRadioControl
+                label={__("Button Style", "responsive-block-editor-addons")}
+                value={buttonStyleToggle}
                 onChange={(value) =>
-                  setAttributes({ buttonRounded: !buttonRounded })
+                  setAttributes({ buttonStyleToggle: value})
                 }
+                options={[
+                  { value: "rounded", label: __("Rounded", "responsive-block-editor-addons") },
+                  { value: "transparent", label: __("Transparent", "responsive-block-editor-addons") },
+                ]}
               />
-              {true === buttonRounded && (
+              {"rounded" === buttonStyleToggle && (
                 <RbeaRangeControl
                   label={__("Button Radius", "responsive-block-editor-addons")}
                   value={buttonRadius}
@@ -510,13 +528,6 @@ export default class Inspector extends Component {
                   max={100}
                 />
               )}
-              <ToggleControl
-                label={__("Transparent", "responsive-block-editor-addons")}
-                checked={buttonTransparent}
-                onChange={(value) =>
-                  setAttributes({ buttonTransparent: !buttonTransparent })
-                }
-              />
             </PanelBody>
             <PanelBody
               title={__("Button Icon", "responsive-block-editor-addons")}
@@ -720,22 +731,70 @@ export default class Inspector extends Component {
               title={__("Button Colors", "responsive-block-editor-addons")}
               initialOpen={false}
             >
-              <RbeaColorControl
-									label = {__("Button Color", "responsive-block-editor-addons")}
-									colorValue={buttonColor}
-									onChange={(colorValue) =>
-										setAttributes({ buttonColor: colorValue })
-									}
-									resetColor={() => setAttributes({ buttonColor: "" })}
-							/>
-              <RbeaColorControl
-									label = {__("Button Color Hover", "responsive-block-editor-addons")}
-									colorValue={buttonColorHover}
-									onChange={(colorValue) =>
-										setAttributes({ buttonColorHover: colorValue })
-									}
-									resetColor={() => setAttributes({ buttonColorHover: "" })}
-								/>
+                <TabPanel
+                  className="responsive-block-editor-addons-inspect-tabs 
+                  responsive-block-editor-addons-inspect-tabs-col-2  
+                  responsive-block-editor-addons-color-inspect-tabs"
+                  activeClass="active-tab"
+                  initialTabName="normal" // Set the default active tab here
+                  tabs={[
+                    {
+                      name: "empty-1",
+                      title: __("", "responsive-block-editor-addons"),
+                      className: "responsive-block-editor-addons-empty-tab",
+                    },
+                    {
+                      name: "normal",
+                      title: __("Normal", "responsive-block-editor-addons"),
+                      className: "responsive-block-editor-addons-normal-tab",
+                    },
+                    {
+                      name: "empty-2",
+                      title: __("", "responsive-block-editor-addons"),
+                      className: "responsive-block-editor-addons-empty-tab-middle",
+                    },
+                    {
+                      name: "hover",
+                      title: __("Hover", "responsive-block-editor-addons"),
+                      className: "responsive-block-editor-addons-hover-tab",
+                    },
+                    {
+                      name: "empty-3",
+                      title: __("", "responsive-block-editor-addons"),
+                      className: "responsive-block-editor-addons-empty-tab",
+                    },
+                  ]}
+                >
+                  {(tabName) => {
+                    let color_tab;
+                    if ("normal" === tabName.name) {
+                      color_tab = (
+                        <RbeaColorControl
+							          		label = {__("Button Color", "responsive-block-editor-addons")}
+							          		colorValue={buttonColor}
+							          		onChange={(colorValue) =>
+							          			setAttributes({ buttonColor: colorValue })
+							          		}
+							          		resetColor={() => setAttributes({ buttonColor: "" })}
+							          />
+                      );
+                    } else if("hover" === tabName.name) {
+                      color_tab = (
+                        <RbeaColorControl
+								        	label = {__("Button Color Hover", "responsive-block-editor-addons")}
+								        	colorValue={buttonColorHover}
+								        	onChange={(colorValue) =>
+								        		setAttributes({ buttonColorHover: colorValue })
+								        	}
+								        	resetColor={() => setAttributes({ buttonColorHover: "" })}
+								        />
+                      );
+                    } else {
+                      color_tab = emptyColorControl;
+                    }
+                    return <div>{color_tab}</div>;
+                  }}
+                </TabPanel>
             </PanelBody>
             <TypographyHelperControl
               title={__(

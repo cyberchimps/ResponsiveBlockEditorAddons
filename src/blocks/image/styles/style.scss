@@ -49,3 +49,13 @@
     background: rgba(0,0,0,.5);
     transition: 20;
 }
+
+.responsive-block-editor-addons-text-control-container {
+    .components-base-control {
+        width: 100%;
+
+        .components-base-control__field {
+            margin-bottom: 0px;
+        }
+    }
+}

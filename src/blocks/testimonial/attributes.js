@@ -107,7 +107,7 @@ const attributes = {
   },
   testimonialCiteAlign: {
     type: "string",
-    default: "left-aligned",
+    default: "left",
   },
   backgroundColor: {
     type: "string",
@@ -302,7 +302,7 @@ const attributes = {
   },
   gradientDirection: {
     type: "number",
-    default: 180,
+    default: 90,
   },
   bgGradient: {
     type: "boolean",
@@ -562,6 +562,7 @@ const attributes = {
   },
   backgroundImageColor: {
     type: "string",
+    default: "#fff",
   },
   overlayType: {
     type: "string",
@@ -729,6 +730,18 @@ const attributes = {
 		type: "number",
 		default: 20,
 	},
+  testimonialCiteAlignMobile: {
+    type: "string",
+    default: "left",
+  },
+  testimonialCiteAlignTablet: {
+    type: "string",
+    default: "left",
+  },
+  isAlignmentValueUpdated: {
+    type: "boolean",
+    default: false,
+  }
 };
 
 export default attributes;

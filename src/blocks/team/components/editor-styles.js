@@ -5,6 +5,7 @@
 import generateCSS from "../../../generateCSS";
 import generateCSSUnit from "../../../generateCSSUnit";
 import { hexToRgba } from "../../../utils/index.js";
+import generateBackgroundImageEffect from "../../../generateBackgroundImageEffect";
 
 function EditorStyles(props) {
   const {
@@ -153,39 +154,31 @@ function EditorStyles(props) {
     titleBottomSpacing,
     titleBottomSpacingMobile,
     titleBottomSpacingTablet,
+    backgroundPosition,
+    backgroundRepeat,
+    backgroundSize,
+    backgroundSizeTablet,
+    backgroundSizeMobile,
+    imagePositionTab,
+    imageSizeTab,
+    backgroundImageValueUpdated,
+    backgroundColor1,
+
+    backgroundType,
+    backgroundPositionMobile,
+    backgroundPositionTablet,
+    overlayType,
+    backgroundImageColor,
+    gradientOverlayColor1,
+    gradientOverlayLocation1,
+    gradientOverlayColor2,
+    gradientOverlayLocation2,
+    gradientOverlayType,
+    gradientOverlayAngle,
+    gradientOverlayPosition,
   } = props.attributes;
 
   let bgopacity = opacity / 100;
-
-  var tempsecondaryBackgroundColor = bgGradient
-    ? backgroundColor2
-    : backgroundColor;
-
-  var bggradient =
-    "linear-gradient(" +
-    gradientDirection +
-    "deg," +
-    hexToRgba(backgroundColor || "#ffffff", bgopacity || 0) +
-    colorLocation1 +
-    "% ," +
-    hexToRgba(tempsecondaryBackgroundColor || "#ffffff", bgopacity || 0) +
-    colorLocation2 +
-    "% )";
-
-  if (backgroundImage) {
-    bggradient =
-      "linear-gradient(" +
-      gradientDirection +
-      "deg," +
-      hexToRgba(backgroundColor || "#ffffff", bgopacity || 0) +
-      colorLocation1 +
-      "% ," +
-      hexToRgba(tempsecondaryBackgroundColor || "#ffffff", bgopacity || 0) +
-      colorLocation2 +
-      "% ),url(" +
-      backgroundImage +
-      ")";
-  }
 
   var boxShadowPositionCSS = boxShadowPosition;
 
@@ -205,6 +198,49 @@ function EditorStyles(props) {
       gutterMargin = '50px'
     }else {
       gutterMargin = '';
+    }
+  }
+
+  // New Background Image
+  let imgopacity = opacity / 100;
+
+  let updatedBackgroundImage = `url(${backgroundImage})`;
+  let backgroundImageEffect = "";
+  let colorType = "";
+  if (overlayType === "color" || overlayType === "") {
+    let colorType = `${hexToRgba(
+      backgroundImageColor || "#fff",
+      imgopacity || 0
+    )}`;
+
+    if(backgroundImage) {
+      updatedBackgroundImage = `linear-gradient(${hexToRgba(
+        backgroundImageColor || "#fff",
+        imgopacity || 0
+      )},${hexToRgba(
+        backgroundImageColor || "#fff",
+        imgopacity || 0
+      )}),url(${backgroundImage})`;
+    }
+    backgroundImageEffect = "";
+  }else {
+    if (gradientOverlayType === "linear") {
+      backgroundImageEffect = `linear-gradient(${gradientOverlayAngle}deg, ${hexToRgba(
+        gradientOverlayColor1 || "#fff",
+        imgopacity || 0
+      )} ${gradientOverlayLocation1}%, ${hexToRgba(
+        gradientOverlayColor2 || "#fff",
+        imgopacity || 0
+      )} ${gradientOverlayLocation2}%),url(${backgroundImage})`;
+    }
+    if (gradientOverlayType === "radial") {
+      backgroundImageEffect = `radial-gradient( at ${gradientOverlayPosition}, ${hexToRgba(
+        gradientOverlayColor1 || "#fff",
+        imgopacity || 0
+      )} ${gradientOverlayLocation1}%, ${hexToRgba(
+        gradientOverlayColor2 || "#fff",
+        imgopacity || 0
+      )} ${gradientOverlayLocation2}%),url(${backgroundImage})`;
     }
   }
 
@@ -340,10 +376,9 @@ function EditorStyles(props) {
     },
 
     " .wp-block-responsive-block-editor-addons-team": {
-      "background-image": bggradient,
-      "background-size": backgroundImageSize,
-      "background-repeat": backgroundImageRepeat,
-      "background-position": backgroundImagePosition,
+      "background-size": backgroundSize,
+      "background-repeat": backgroundRepeat,
+      "background-position": backgroundPosition,
       "background-attachment": backgroundAttachment,
       "border-width": generateCSSUnit(borderWidth, "px"),
       "border-color": borderColor,
@@ -353,6 +388,24 @@ function EditorStyles(props) {
       "border-bottom-left-radius": generateCSSUnit(blockLeftRadius, "px"),
       "padding": generateCSSUnit(padding, "px"),
       "text-align": alignment,
+      "background-color":
+        backgroundType == "color"
+          ? `${hexToRgba(backgroundColor || "#fff", imgopacity || 0)}`
+          : undefined,
+      "background-image": backgroundType === "image" && overlayType === "gradient"
+        ? backgroundImageEffect
+        : backgroundType === "gradient"
+        ? generateBackgroundImageEffect(
+            `${hexToRgba(backgroundColor1 || "#fff", imgopacity || 0)}`,
+            `${hexToRgba(backgroundColor2 || "#fff", imgopacity || 0)}`,
+            gradientDirection,
+            colorLocation1,
+            colorLocation2
+          )
+        : backgroundType === "image"
+        ? updatedBackgroundImage
+        : undefined,
+      opacity: backgroundType === "image" ? imgopacity : '',
       "box-shadow":
         generateCSSUnit(boxShadowHOffset, "px") +
         " " +
@@ -381,6 +434,8 @@ function EditorStyles(props) {
         'margin-left': generateCSSUnit(blockLeftMarginMobile, "px"),
     },
     " .wp-block-responsive-block-editor-addons-team": {
+      "background-size": backgroundSizeMobile,
+      "background-position": backgroundPositionMobile,
         "margin-bottom": gutterMargin,
         "border-top-left-radius": generateCSSUnit(blockTopRadiusMobile, "px"),
       "border-top-right-radius": generateCSSUnit(blockRightRadiusMobile, "px"),
@@ -438,6 +493,8 @@ function EditorStyles(props) {
         'margin-left': generateCSSUnit(blockLeftMarginTablet, "px"),
     },
     " .wp-block-responsive-block-editor-addons-team": {
+      "background-size": backgroundSizeTablet,
+      "background-position": backgroundPositionTablet,
       "margin-bottom": gutterMargin,
       "border-top-left-radius": generateCSSUnit(blockTopRadiusTablet, "px"),
       "border-top-right-radius": generateCSSUnit(blockRightRadiusTablet, "px"),

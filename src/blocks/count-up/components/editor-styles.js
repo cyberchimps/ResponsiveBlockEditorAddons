@@ -115,6 +115,9 @@ function EditorStyles(props) {
     contentTypographyColor,
     headingTypographyColor,
     dateTypographyColor,
+    contentAlign,
+    contentAlignMobile,
+    contentAlignTablet,
   } = props.attributes;
 
   let imgopacity = opacity / 100;
@@ -130,6 +133,7 @@ function EditorStyles(props) {
       "margin-right": generateCSSUnit(blockRightMargin, "px"),
       "margin-bottom": generateCSSUnit(blockBottomMargin, "px"),
       "margin-left": generateCSSUnit(blockLeftMargin, "px"),
+      "text-align": contentAlign,
     },
     ".responsive-count__inner .responsive-count-item__features li": {
       "line-height": contentLineHeight,
@@ -209,6 +213,7 @@ function EditorStyles(props) {
       "margin-right": generateCSSUnit(blockRightMarginMobile, "px"),
       "margin-bottom": generateCSSUnit(blockBottomMarginMobile, "px"),
       "margin-left": generateCSSUnit(blockLeftMarginMobile, "px"),
+      "text-align": contentAlignMobile,
     },
     ".responsive-count__inner .responsive-count-item__title": {
       "font-size": `${headingFontSizeMobile}px`,
@@ -252,6 +257,7 @@ function EditorStyles(props) {
       "margin-right": generateCSSUnit(blockRightMarginTablet, "px"),
       "margin-bottom": generateCSSUnit(blockBottomMarginTablet, "px"),
       "margin-left": generateCSSUnit(blockLeftMarginTablet, "px"),
+      "text-align": contentAlignTablet,
     },
     ".responsive-count__inner .responsive-count-item__title": {
       "font-size": `${headingFontSizeTablet}px`,

@@ -211,7 +211,7 @@ const attributes = {
   },
   quoteAlign: {
     type: "string",
-    default: "left-aligned",
+    default: "left",
   },
   quoteOpacity: {
     type: "number",
@@ -405,7 +405,19 @@ const attributes = {
   blockIsTypographyColorValueUpdated: {
     type: "boolean",
     default: false,
-  }
+  },
+  isAlignmentValueUpdated: {
+    type: "boolean",
+    default: false,
+  },
+  quoteAlignTablet: {
+    type: "string",
+    default: "left",
+  },
+  quoteAlignMobile: {
+    type: "string",
+    default: "left",
+  },
 };
 
 export default attributes;

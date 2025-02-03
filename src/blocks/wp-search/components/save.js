@@ -35,7 +35,7 @@
        >
         {layout === "minimal" && (
           <form className="responsive-block-editor-addons-search-form" onSubmit={this.formPreventDefault} role="search" action={responsive_globals.home_url} method="get">
-            <div className="responsive-block-editor-addons-search-form-container" role="tablist">
+            <div className="responsive-block-editor-addons-search-form-container">
               <span className="responsive-block-editor-addons-search-icon-wrap">
                 {renderSVG('fa fa-search')}
               </span>
@@ -48,7 +48,7 @@
         )}
         {layout === "classic" && (
           <form className="responsive-block-editor-addons-search-form" onSubmit={this.formPreventDefault} role="search" action={responsive_globals.home_url} method="get">
-            <div className="responsive-block-editor-addons-search-form-container" role="tablist">
+            <div className="responsive-block-editor-addons-search-form-container">
               <input
                 className="responsive-block-editor-addons-search-form__input" type="search" name="s" title="Search"
                 placeholder={placeholder}

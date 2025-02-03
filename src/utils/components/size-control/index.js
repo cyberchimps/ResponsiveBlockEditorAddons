@@ -2,7 +2,7 @@
  * External dependencies
  */
 import map from "lodash/map";
-
+import RbeaTabRadioControl from "../rbea-tab-radio-control";
 /**
  * WordPress dependencies
  */
@@ -180,12 +180,25 @@ class SizeControl extends Component {
     } = this.props;
 
     return (
-      <BaseControl
-        id="responsive-block-editor-addons-select-size"
-        label={label}
-      >
-        <PanelRow>
-          <ButtonGroup aria-label={__("Select size", "responsive-block-editor-addons")}>
+      <div className="rbea-size-control-container">
+        {/* <div className="rbea-control__header"> */}
+          {/* <div className="uag-responsive-label-wrap">
+              <span className="uag-control-label">{__(`${label}`, 'responsive-block-editor-addons')}</span>
+          </div>
+          {/* {reset && (
+              <div className="rbea-size-control-reset-icon-container">
+                <div className="rbea-control__actions">
+                  <div tabIndex="0">
+                      <button type="button" className="components-button rbea-reset is-secondary is-small" disabled="" onClick={() => onChange(resetValue)}>
+                          <span className="dashicon dashicons dashicons-image-rotate"></span>
+                      </button>
+                  </div>
+                </div>
+              </div>
+            )} */}
+        {/* </div> */}
+        <div className="rbea-size-control-control-container">
+          {/* <ButtonGroup aria-label={__("Select size", "responsive-block-editor-addons")}>
             {map(this.getSizes(), ({ size, shortName }) => (
               <Button
                 key={size}
@@ -198,14 +211,21 @@ class SizeControl extends Component {
                 {shortName}
               </Button>
             ))}
-          </ButtonGroup>
-          {reset && (
-            <Button isSmall isSecondary onClick={() => onChange(resetValue)}>
-              {__("Reset", "responsive-block-editor-addons")}
-            </Button>
-          )}
-        </PanelRow>
-      </BaseControl>
+          </ButtonGroup> */}
+          <RbeaTabRadioControl
+            value={value} // Pass the selected value from props
+            onChange={onChange} // Use the parent's onChange handler
+            options={this.getSizes().map(({ size, shortName }) => ({
+                value: size,
+                label: shortName,
+              }))
+            }
+            label={"Select size"}
+            defaultValue={resetValue}
+            allowReset={true}
+          />
+        </div>
+      </div>
     );
   }
 }

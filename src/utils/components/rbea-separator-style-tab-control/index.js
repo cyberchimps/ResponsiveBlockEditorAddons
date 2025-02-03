@@ -10,14 +10,14 @@ const RbeaSeparatorStyleTabControl = ({ selected, onChange }) => {
     }
 
     let options=[
-        { value: "solid", label: __(separatorStyleIcon.solid, "responsive-block-editor-addons") },
-        { value: "dotted", label: __(separatorStyleIcon.dotted, "responsive-block-editor-addons") },
-        { value: "dashed", label: __(separatorStyleIcon.dashed, "responsive-block-editor-addons") },
-        { value: "double", label: __(separatorStyleIcon.double, "responsive-block-editor-addons") },
-        { value: "groove", label: __(separatorStyleIcon.groove, "responsive-block-editor-addons") },
-        { value: "inset", label: __(separatorStyleIcon.inset, "responsive-block-editor-addons") },
-        { value: "outset", label: __(separatorStyleIcon.outset, "responsive-block-editor-addons") },
-        { value: "ridge", label: __(separatorStyleIcon.ridge, "responsive-block-editor-addons") },
+        { value: "solid", label: __("Solid", "responsive-block-editor-addons") },
+        { value: "dotted", label: __("Dotted", "responsive-block-editor-addons") },
+        { value: "dashed", label: __("Dashed", "responsive-block-editor-addons") },
+        { value: "double", label: __("Double", "responsive-block-editor-addons") },
+        { value: "groove", label: __("Groove", "responsive-block-editor-addons") },
+        { value: "inset", label: __("Inset", "responsive-block-editor-addons") },
+        { value: "outset", label: __("Outset", "responsive-block-editor-addons") },
+        { value: "ridge", label: __("Ridge", "responsive-block-editor-addons") },
     ];
 
     const fixedOptions = options.map((option) => {
@@ -34,25 +34,25 @@ const RbeaSeparatorStyleTabControl = ({ selected, onChange }) => {
   return (
     <Fragment>
         <div className = "rbea-separator-style-control">
-        <div className="rbea-control__header">
-            <div className="uag-responsive-label-wrap">
-                <span className="uag-control-label"> {__("Style", "responsive-block-editor-addons")}</span>
-            </div>
-            <div className="rbea-control__actions">
-                <div tabIndex="0">
-                    <button type="button" className="components-button rbea-reset is-secondary is-small" disabled="" onClick={handleOnReset}>
-                        <span className="dashicon dashicons dashicons-image-rotate"></span>
-                    </button>
+            <div className="rbea-control__header">
+                <div className="uag-responsive-label-wrap">
+                    <span className="uag-control-label"> {__("Style", "responsive-block-editor-addons")}</span>
+                </div>
+                <div className="rbea-control__actions">
+                    <div tabIndex="0">
+                        <button type="button" className="components-button rbea-reset is-secondary is-small" disabled="" onClick={handleOnReset}>
+                            <span className="dashicon dashicons dashicons-image-rotate"></span>
+                        </button>
+                    </div>
                 </div>
             </div>
+            <RadioControl 
+                className = "rbea-separator-style-selector"
+                selected={selected}
+                options = {fixedOptions}
+                onChange={onChange}
+            />
         </div>
-        <RadioControl 
-            className = "rbea-separator-style-selector"
-            selected={selected}
-            options = {fixedOptions}
-            onChange={onChange}
-        />
-    </div>
    </Fragment>
   );
 };

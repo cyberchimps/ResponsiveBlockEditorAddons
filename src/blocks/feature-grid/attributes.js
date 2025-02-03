@@ -285,7 +285,6 @@ const attributes = {
   },
   buttonbackgroundType: {
     type: "string",
-    default: "color",
   },
   buttoncolorLocation1: {
     type: "number",
@@ -301,6 +300,7 @@ const attributes = {
   },
   buttonbackgroundColor1: {
     type: "string",
+    default: "#fff",
   },
   buttonbackgroundColor2: {
     type: "string",
@@ -675,6 +675,86 @@ const attributes = {
   },
   descTypographyColor: {
     type: 'string',
+  },
+  ctaButtonTopPadding: {
+    type: "number",
+  },
+  ctaButtonBottomPadding: {
+    type: "number",
+  },
+  ctaButtonLeftPadding: {
+    type: "number",
+  },
+  ctaButtonRightPadding: {
+    type: "number",
+  },
+  ctaButtonTopPaddingTablet: {
+    type: "number",
+  },
+  ctaButtonBottomPaddingTablet: {
+    type: "number",
+  },
+  ctaButtonRightPaddingTablet: {
+    type: "number",
+  },
+  ctaButtonLeftPaddingTablet: {
+    type: "number",
+  },
+  ctaButtonTopPaddingMobile: {
+    type: "number",
+  },
+  ctaButtonBottomPaddingMobile: {
+    type: "number",
+  },
+  ctaButtonLeftPaddingMobile: {
+    type: "number",
+  },
+  ctaButtonRightPaddingMobile: {
+    type: "number",
+  },
+  isCtaButtonPaddingMarginValueUpdated: {
+    type: "boolean",
+    default: false,
+  },
+  ctaBlockTopRadius: {
+    type: "number",
+  },
+  ctaBlockRightRadius: {
+    type: "number",
+  },
+  ctaBlockBottomRadius: {
+    type: "number",
+  },
+  ctaBlockLeftRadius: {
+    type: "number",
+  },
+  ctaBlockTopRadiusTablet: {
+    type: "number",
+  },
+  ctaBlockRightRadiusTablet: {
+    type: "number",
+  },
+  ctaBlockBottomRadiusTablet: {
+    type: "number",
+  },
+  ctaBlockLeftRadiusTablet: {
+    type: "number",
+  },
+  ctaBlockTopRadiusMobile: {
+    type: "number",
+  },
+  ctaBlockRightRadiusMobile: {
+    type: "number",
+  },
+  ctaBlockBottomRadiusMobile: {
+    type: "number",
+  },
+  ctaBlockLeftRadiusMobile: {
+    type: "number",
+  },
+  isCtaButtonBorderRadiusValueUpdated: {
+    type: "boolean",
+    default: false,
   },
 };
 export default attributes;

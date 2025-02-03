@@ -39,9 +39,48 @@ class ButtonBorderControl extends Component {
               ctaBlockBottomRadiusMobile,
               ctaBlockLeftRadiusMobile,
               ctaBlockIsRadiusControlConnected,
+
+              isCtaButtonBorderRadiusValueUpdated,
           },
           setAttributes,
       } = this.props;
+
+    const ctaButtonBorderRadiusResetValues = {
+      borderTop: 0,
+      borderRight: 0,
+      borderBottom: 0,
+      borderLeft: 0,
+      borderTabletTop: 0,
+      borderTabletRight: 0,
+      borderTabletBottom: 0,
+      borderTabletLeft: 0,
+      borderMobileTop: 0,
+      borderMobileRight: 0,
+      borderMobileBottom: 0,
+      borderMobileLeft: 0,
+    }
+
+    // backward compatibility for icon container border radius control
+
+    if (!isCtaButtonBorderRadiusValueUpdated) {
+      this.props.setAttributes(
+        {
+          ctaBlockTopRadius:          ctaBorderRadius !== undefined ? ctaBorderRadius : ctaBlockTopRadius,
+          ctaBlockBottomRadius:       ctaBorderRadius !== undefined ? ctaBorderRadius : ctaBlockBottomRadius,
+          ctaBlockLeftRadius:         ctaBorderRadius !== undefined ? ctaBorderRadius : ctaBlockLeftRadius,
+          ctaBlockRightRadius:        ctaBorderRadius !== undefined ? ctaBorderRadius : ctaBlockRightRadius,
+          ctaBlockTopRadiusTablet:    ctaBorderRadius !== undefined ? ctaBorderRadius : ctaBlockTopRadiusTablet,
+          ctaBlockBottomRadiusTablet: ctaBorderRadius !== undefined ? ctaBorderRadius : ctaBlockBottomRadiusTablet,
+          ctaBlockRightRadiusTablet:  ctaBorderRadius !== undefined ? ctaBorderRadius : ctaBlockRightRadiusTablet,
+          ctaBlockLeftRadiusTablet:   ctaBorderRadius !== undefined ? ctaBorderRadius : ctaBlockLeftRadiusTablet,
+          ctaBlockTopRadiusMobile:    ctaBorderRadius !== undefined ? ctaBorderRadius : ctaBlockTopRadiusMobile,
+          ctaBlockBottomRadiusMobile: ctaBorderRadius !== undefined ? ctaBorderRadius : ctaBlockBottomRadiusMobile,
+          ctaBlockLeftRadiusMobile:   ctaBorderRadius !== undefined ? ctaBorderRadius : ctaBlockLeftRadiusMobile,
+          ctaBlockRightRadiusMobile:  ctaBorderRadius !== undefined ? ctaBorderRadius : ctaBlockRightRadiusMobile,
+        }
+      )
+      this.props.setAttributes({isCtaButtonBorderRadiusValueUpdated: true});
+    }
 
     var advancedControls;
       advancedControls = (
@@ -69,6 +108,8 @@ class ButtonBorderControl extends Component {
                       />
                         <RbeaBorderRadiusControl
                             attrNameTemplate="ctaBlock%s"
+                            label = 'Border Radius'
+                            resetValues={ctaButtonBorderRadiusResetValues}
                             {...this.props}
                         />
                   </Fragment>

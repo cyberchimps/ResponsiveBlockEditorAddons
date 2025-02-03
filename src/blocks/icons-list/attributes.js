@@ -20,7 +20,7 @@ for (var i = 1; i <= 2; i++) {
     icon_border_hover_color: "",
     link: "#",
     target: false,
-    disableLink: true,
+    disableLink: false,
     hideLabel: false,
   });
 }

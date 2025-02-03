@@ -187,6 +187,7 @@ ol.rbea-number {
 .responsive-block-editor-addons-alignment {
     max-height: 32px;
     height: 100%;
+	margin-top: 8px;
 
     .components-toolbar {
       width: 100%;
@@ -238,3 +239,10 @@ ol.rbea-number {
       }
     }
   }
+
+.responsive-block-editor-addons-table-of-contents-select-heading-container {
+	width: 100%;
+	.components-base-control {
+		width: 100%;
+	}
+}

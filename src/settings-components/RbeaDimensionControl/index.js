@@ -102,10 +102,7 @@ export default function ResponsiveDimensionControl(props) {
             'rbea-spacing-control-connected': isSpaceControlConnected,
         },
         'dashicons',
-        {
-            'dashicons-editor-unlink': !isSpaceControlConnected,
-            'dashicons-admin-links': isSpaceControlConnected,
-        },
+        'dashicons-admin-links',
     );
 
     let label = props.label ? props.label : controlNameCapitalCase;

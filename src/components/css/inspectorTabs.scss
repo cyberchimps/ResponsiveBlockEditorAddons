@@ -234,13 +234,13 @@ $border-color: #D6D9DD;
 .rbea-inspector-tab , .block-editor-block-inspector__advanced{
   .components-panel__body-title {
     .components-button{
-      padding: 20px 24px;      
+      padding: 16px;      
     }
   }
 
   .components-panel__body.is-opened{
     .components-panel__body-title{
-      margin: -20px -24px;
+      margin: -16px;
       margin-bottom: 0px;
     }
   }
@@ -320,8 +320,8 @@ $border-color: #D6D9DD;
 
   .responsive-block-editor-addons-typography-settings .responsive-block-editor-addons-typography-settings {
     .components-panel__body.is-opened{
-      padding-left: 24px;
-      padding-right: 24px;
+      padding-left: 16px;
+      padding-right: 16px;
     } 
   }
 

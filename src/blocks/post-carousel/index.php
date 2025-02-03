@@ -393,6 +393,8 @@ function responsive_block_editor_addons_render_block_core_latest_posts2( $attrib
 
 	$post_carousel_markup = '';
 
+	$helper = Responsive_Block_Editor_Addons_Helper::get_instance();
+
 	/* Start the loop */
 	if ( $carousel_query->have_posts() ) {
 
@@ -600,7 +602,7 @@ function responsive_block_editor_addons_render_block_core_latest_posts2( $attrib
 		$class = "responsive-block-editor-addons-block-post-carousel block-{$attributes['block_id']} responsive-post-grid  responsive-post__image-position-{$attributes['imagePosition']} featured{$attributes['postType']} align{$attributes['align']}";
 
 		if ( isset( $attributes['className'] ) ) {
-			$class .= ' ' . $attributes['className'];
+			$class .= ' ' . sanitize_html_class( $attributes['className'] );
 		}
 
 		/* Layout orientation class */
@@ -632,7 +634,9 @@ function responsive_block_editor_addons_render_block_core_latest_posts2( $attrib
 
 		/* Post carousel section tag */
 		if ( isset( $attributes['sectionTag'] ) ) {
-			$section_tag = $attributes['sectionTag'];
+			$section_tag           = $attributes['sectionTag'];
+			$array_of_allowed_HTML = array( 'div', 'header', 'section', 'article', 'main', 'aside', 'footer' );
+			$section_tag           = $helper->rbea_post_title_tag_allowed_html( $section_tag, $array_of_allowed_HTML, 'section' );
 		} else {
 			$section_tag = 'section';
 		}

@@ -9,6 +9,7 @@ const { ColorPalette } = wp.blockEditor;
 import RbeaRangeControl from "../../../../../utils/components/rbea-range-control";
 import RbeaColorControl from "../../../../../utils/components/rbea-color-control";
 import RbeaBackgroundTypeControl from "../../../../../utils/components/rbea-background-type-control";
+import RbeaAngleRangeControl from "../../../../../utils/components/rbea-angle-range-control";
 
 const { SelectControl, RangeControl, PanelBody, TabPanel } = wp.components;
 
@@ -75,6 +76,10 @@ class ButtonColorControl extends Component {
         }
       ];
 
+     const emptyColorControl = (
+        <div className="responsive-block-editor-addons-empty-color-control"></div>
+      );
+
     var advancedControls;
       advancedControls = (
           <PanelBody
@@ -82,18 +87,36 @@ class ButtonColorControl extends Component {
               initialOpen={false}
           >
               <TabPanel
-                  className="rbea-inspect-tabs rbea-inspect-tabs-col-2"
+                  className="responsive-block-editor-addons-inspect-tabs 
+                  responsive-block-editor-addons-inspect-tabs-col-2  
+                  responsive-block-editor-addons-color-inspect-tabs"
                   activeClass="active-tab"
+                  initialTabName="normal" // Set the default active tab here
                   tabs={[
                       {
-                          name: "normal",
-                          title: __("Normal", "responsive-block-editor-addons"),
-                          className: "rbea-normal-tab",
+                        name: "empty-1",
+                        title: __("", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-empty-tab",
                       },
                       {
-                          name: "hover",
-                          title: __("Hover", "responsive-block-editor-addons"),
-                          className: "rbea-focus-tab",
+                        name: "normal",
+                        title: __("Normal", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-normal-tab",
+                      },
+                      {
+                        name: "empty-2",
+                        title: __("", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-empty-tab-middle",
+                      },
+                      {
+                        name: "hover",
+                        title: __("Hover", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-hover-tab",
+                      },
+                      {
+                        name: "empty-3",
+                        title: __("", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-empty-tab",
                       },
                   ]}
               >
@@ -210,14 +233,14 @@ class ButtonColorControl extends Component {
                                                   setAttributes({ buttonHcolorLocation2: value })
                                               }
                                           />
-                                          <RbeaRangeControl
+                                          <RbeaAngleRangeControl
                                               label={__(
-                                                  "Gradient Direction",
+                                                  "Angle",
                                                   "responsive-block-editor-addons"
                                               )}
                                               value={buttonHgradientDirection}
                                               min={0}
-                                              max={100}
+                                              max={360}
                                               onChange={(value) =>
                                                   setAttributes({ buttonHgradientDirection: value })
                                               }
@@ -226,7 +249,7 @@ class ButtonColorControl extends Component {
                                   )}
                               </Fragment>
                           );
-                      } else {
+                      } else if ("normal" === tabName.name) {
                           tabout = (
                               <Fragment>
                                     <RbeaColorControl
@@ -334,14 +357,14 @@ class ButtonColorControl extends Component {
                                                   setAttributes({ buttoncolorLocation2: value })
                                               }
                                           />
-                                          <RbeaRangeControl
+                                          <RbeaAngleRangeControl
                                               label={__(
-                                                  "Gradient Direction",
+                                                  "Angle",
                                                   "responsive-block-editor-addons"
                                               )}
                                               value={buttongradientDirection}
                                               min={0}
-                                              max={100}
+                                              max={360}
                                               onChange={(value) =>
                                                   setAttributes({ buttongradientDirection: value })
                                               }
@@ -350,6 +373,8 @@ class ButtonColorControl extends Component {
                                   )}
                               </Fragment>
                           );
+                      } else {
+                        tabout = emptyColorControl;
                       }
                       return <div>{tabout}</div>;
                   }}

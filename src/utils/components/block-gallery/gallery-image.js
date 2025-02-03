@@ -110,6 +110,7 @@ class GalleryImage extends Component {
       fontSize,
       gutter,
       gutterMobile,
+      gutterTablet,
       id,
       isFirstItem,
       isLastItem,
@@ -178,15 +179,22 @@ class GalleryImage extends Component {
       [`${gutterUtility}`]: gutterUtility,
       [`has-margin-top-${gutter}`]: marginTop && gutter > 0,
       [`has-margin-top-mobile-${gutterMobile}`]: marginTop && gutterMobile > 0,
+      [`has-margin-top-tablet-${gutterTablet}`]: marginTop && gutterTablet > 0,
       [`has-margin-right-${gutter}`]: marginRight && gutter > 0,
       [`has-margin-right-mobile-${gutterMobile}`]:
         marginRight && gutterMobile > 0,
+        [`has-margin-right-tablet-${gutterTablet}`]:
+        marginRight && gutterTablet > 0,
       [`has-margin-bottom-${gutter}`]: marginBottom && gutter > 0,
       [`has-margin-bottom-mobile-${gutterMobile}`]:
         marginBottom && gutterMobile > 0,
+        [`has-margin-bottom-tablet-${gutterTablet}`]:
+        marginBottom && gutterTablet > 0,
       [`has-margin-left-${gutter}`]: marginLeft && gutter > 0,
       [`has-margin-left-mobile-${gutterMobile}`]:
         marginLeft && gutterMobile > 0,
+        [`has-margin-left-tablet-${gutterTablet}`]:
+        marginLeft && gutterTablet > 0,
     });
 
     const captionStyles = {

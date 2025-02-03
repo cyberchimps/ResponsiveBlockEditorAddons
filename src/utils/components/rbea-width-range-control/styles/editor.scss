@@ -6,9 +6,22 @@
             gap: 10px;
         
             .components-button-group {
+                .components-button.responsive-block-editor-addons-size-btn {
+                    color: #666666;
+                    box-shadow: none;
+                    font-family: Roboto;
+                    font-size: 12px;
+                    font-weight: 300;
+                    line-height: 14.06px;
+                    text-align: center;
+                    background-color: #ffffff;
+                    padding: 0px 4px;
+                    text-transform: uppercase;
+                }
                 .components-button.responsive-block-editor-addons-size-btn.is-pressed {
-                    background: #F1FAFF;
-                    color: #666;
+                    background-color: #ffffff;
+                    color: #007CBA;
+                    box-shadow: none;
                 }
             }
         }

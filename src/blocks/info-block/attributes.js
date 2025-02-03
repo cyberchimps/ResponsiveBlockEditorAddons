@@ -330,7 +330,7 @@ const attributes = {
     type: "object",
     default: {
       url: "",
-      alt: "InfoBlock placeholder img",
+      alt: "",
     },
   },
   imageSize: {
@@ -1069,6 +1069,46 @@ const attributes = {
   ctaTextBottomSpacingTablet: {
     type: "number",
     default: "",
+  },
+  backgroundPosition: {
+    type: 'string',
+    default: "center center",
+  },
+  backgroundPositionMobile: {
+    type: 'string',
+    default: "center center",
+  },
+  backgroundPositionTablet: {
+    type: 'string',
+    default: "center center",
+  },
+  backgroundRepeat: {
+    type: 'string',
+    default: "no-repeat",
+  },
+  backgroundSize: {
+    type: 'string',
+    default: "cover",
+  },
+  backgroundSizeTablet: {
+    type: 'string',
+    default: "cover",
+  },
+  backgroundSizeMobile: {
+    type: 'string',
+    default: "cover",
+  },
+  backgroundImageValueUpdated: {
+    type: "boolean",
+    default: false,
+  },
+  widthType: {
+    type: "string",
+    default: "%"
+  },
+  widthTypeValueUpdated: {
+    type: "boolean",
+    default: false,
   },
 };
 export default attributes;

@@ -9,13 +9,14 @@ import RbeaRangeControl from "../rbea-range-control";
  */
 import { __, sprintf } from "@wordpress/i18n";
 import { Component, Fragment } from "@wordpress/element";
-import { RangeControl, TabPanel } from "@wordpress/components";
+import { RangeControl, TabPanel, Dashicon } from "@wordpress/components";
 
 class ResponsiveTabsControl extends Component {
   constructor() {
     super(...arguments);
     this.setGutterTo = this.setGutterTo.bind(this);
     this.setGutterMobileTo = this.setGutterMobileTo.bind(this);
+    this.setGutterTabletTo = this.setGutterTabletTo.bind(this);
   }
 
   setGutterTo(value) {
@@ -26,6 +27,12 @@ class ResponsiveTabsControl extends Component {
     this.props.setAttributes({ gutterMobile: value });
   }
 
+  setGutterTabletTo(value) {
+    this.props.setAttributes({ gutterTablet: value });
+  }
+
+
+
   render() {
     const {
       attributes,
@@ -34,27 +41,34 @@ class ResponsiveTabsControl extends Component {
       min = 0,
       onChange = this.setGutterTo,
       onChangeMobile = this.setGutterMobileTo,
+      onChangeTablet = this.setGutterTabletTo,
       step = 5,
     } = this.props;
 
     return (
       <Fragment>
         <TabPanel
-          className="components-base-control components-responsive-block-editor-addons-responsive__tabs"
-          activeClass="is-primary"
+          className=" responsive-size-type-field-tabs  responsive-size-type-field__common-tabs  responsive-inline-margin"
+          activeClass="active-tab"
           initialTabName="desk"
           tabs={[
             {
               name: "desk",
-              title: icons.desktopChrome,
+              title: <Dashicon icon="desktop" />,
               className:
-                "components-responsive-block-editor-addons-responsive__tabs-item components-responsive-block-editor-addons-responsive__tabs-item--desktop components-button is-button is-default is-secondary",
+                " responsive-desktop-tab  responsive-responsive-tabs",
+            },
+            {
+              name: "tablet",
+              title: <Dashicon icon="tablet" />,
+              className:
+                " responsive-desktop-tab  responsive-responsive-tabs",
             },
             {
               name: "mobile",
-              title: icons.mobile,
+              title: <Dashicon icon="smartphone" />,
               className:
-                "components-responsive-block-editor-addons-responsive__tabs-item components-responsive-block-editor-addons-responsive__tabs-item--mobile components-button is-button is-default is-secondary",
+                " responsive-desktop-tab  responsive-responsive-tabs",
             },
           ]}
         >
@@ -74,17 +88,33 @@ class ResponsiveTabsControl extends Component {
                   step={step}
                 />
               );
+            } else if ("tablet" === tab.name) {
+              return (
+                <RbeaRangeControl
+                  label={sprintf(
+                    /* translators: %s: values associated with CSS syntax, 'Width', 'Gutter', 'Height in pixels', 'Width' */
+                    __("Tablet %s", "responsive-block-editor-addons"),
+                    label
+                  )}
+                  value={attributes.gutterTablet}
+                  onChange={(valueTablet) => onChangeTablet(valueTablet)}
+                  min={min}
+                  max={max}
+                  step={step}
+                />
+              );
+            } else {
+              return (
+                <RbeaRangeControl
+                  label={label}
+                  value={attributes.gutter}
+                  onChange={(value) => onChange(value)}
+                  min={min}
+                  max={max}
+                  step={step}
+                />
+              );
             }
-            return (
-              <RbeaRangeControl
-                label={label}
-                value={attributes.gutter}
-                onChange={(value) => onChange(value)}
-                min={min}
-                max={max}
-                step={step}
-              />
-            );
           }}
         </TabPanel>
       </Fragment>

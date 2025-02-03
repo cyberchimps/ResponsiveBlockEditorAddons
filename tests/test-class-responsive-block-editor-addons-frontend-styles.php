@@ -1695,6 +1695,7 @@ class Responsive_Block_Editor_Addons_Frontend_Styles_Test extends WP_UnitTestCas
 			'block_id'              => '',
 			'gutter'                => 5,
 			'gutterMobile'          => 5,
+			'gutterTablet'          => 5,
 			'gridSize'              => 'lrg',
 			'height'                => 400,
 			'width'                 => '',

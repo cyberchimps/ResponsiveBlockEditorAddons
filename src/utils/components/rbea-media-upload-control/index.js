@@ -11,7 +11,7 @@ const RbeaMediaUploadControl = ({ label, description, value, onChange , mediaTyp
     const mediaTypeCapitalCase = mediaType.charAt(0).toUpperCase() + mediaType.slice(1).toLowerCase();
     // Function to handle media selection from media library
     const handleMediaSelect = (media) => {
-        const updatedValue = { ...mediaData, url: media.url ,sizes: media.sizes};
+        const updatedValue = { ...mediaData, url: media.url ,sizes: media.sizes, alt: media.alt};
         setMediaData(updatedValue);
         onChange(updatedValue);
     };
@@ -37,7 +37,7 @@ const RbeaMediaUploadControl = ({ label, description, value, onChange , mediaTyp
 
     // Function to remove the selected media
     const removeMedia = () => {
-        const updatedValue = { ...mediaData, url: '' };
+        const updatedValue = { ...mediaData, url: '', alt: '' };
         setMediaData(updatedValue);
         onChange(updatedValue);
     };
@@ -65,7 +65,7 @@ const RbeaMediaUploadControl = ({ label, description, value, onChange , mediaTyp
                               <img
                               
                                src={mediaData.url}
-                               alt={__(`Selected ${mediaTypeCapitalCase}`, 'responsive-block-editor-addons')}
+                               alt={__(`${mediaData.alt}`, 'responsive-block-editor-addons')}
                               />
                             }
                             {mediaType == 'video' && 

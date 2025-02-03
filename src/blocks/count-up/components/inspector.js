@@ -181,6 +181,9 @@ export default class Inspector extends Component {
     contentTypographyColor,
     headingTypographyColor,
     dateTypographyColor,
+    contentAlignMobile,
+    contentAlignTablet,
+    isAlignmentValueUpdated,
       },
       setAttributes,
     } = this.props;
@@ -529,6 +532,17 @@ export default class Inspector extends Component {
       this.props.setAttributes({blockIsTypographyColorValueUpdated: true});
     }
 
+    if (!isAlignmentValueUpdated) {
+      this.props.setAttributes(
+        {
+          contentAlign:          contentAlign !== undefined ? contentAlign : contentAlign,
+          contentAlignTablet:       contentAlign !== undefined ? contentAlign : contentAlignTablet,
+          contentAlignMobile:         contentAlign !== undefined ? contentAlign : contentAlignMobile,
+        }
+      )
+      this.props.setAttributes({isAlignmentValueUpdated: true});
+    }
+
     return (
       <InspectorControls key="inspector">
         <InspectorTabs>
@@ -537,7 +551,7 @@ export default class Inspector extends Component {
               title={__("General", "responsive-block-editor-addons")}
               initialOpen={false}
             >
-              <BaseControl>
+              {/* <BaseControl>
                 <BaseControl.VisualLabel>
                   {__("Alignment", "responsive-block-editor-addons")}
                 </BaseControl.VisualLabel>
@@ -551,7 +565,111 @@ export default class Inspector extends Component {
                   controls={["left", "center", "right"]}
                   isCollapsed={false}
                 />
-              </BaseControl>
+              </BaseControl> */}
+              <TabPanel
+                className=" responsive-size-type-field-tabs  responsive-size-type-field__common-tabs  responsive-inline-margin"
+                activeClass="active-tab"
+                tabs={[
+                  {
+                    name: "desktop",
+                    title: <Dashicon icon="desktop" />,
+                    className:
+                      " responsive-desktop-tab  responsive-responsive-tabs",
+                  },
+                  {
+                    name: "tablet",
+                    title: <Dashicon icon="tablet" />,
+                    className:
+                      " responsive-tablet-tab  responsive-responsive-tabs",
+                  },
+                  {
+                    name: "mobile",
+                    title: <Dashicon icon="smartphone" />,
+                    className:
+                      " responsive-mobile-tab  responsive-responsive-tabs",
+                  },
+                ]}
+              >
+                {(tab) => {
+                  let tabout;
+
+                  if ("mobile" === tab.name) {
+                    tabout = (
+                      <Fragment>
+                        <BaseControl>
+                          <p>
+                            {__(
+                              "Alignment Mobile",
+                              "responsive-block-editor-addons"
+                            )}
+                          </p>
+                          <div className="responsive-block-editor-addons-alignment-mobile">
+                            <AlignmentToolbar
+                              value={contentAlignMobile}
+                              onChange={(value) =>
+                                setAttributes({
+                                  contentAlignMobile: value,
+                                })
+                              }
+                              controls={["left", "center", "right"]}
+                              isCollapsed={false}
+                            />
+                          </div>
+                        </BaseControl>
+                      </Fragment>
+                    );
+                  } else if ("tablet" === tab.name) {
+                    tabout = (
+                      <Fragment>
+                        <BaseControl>
+                          <p>
+                            {__(
+                              "Alignment Tablet",
+                              "responsive-block-editor-addons"
+                            )}
+                          </p>
+                          <div className="responsive-block-editor-addons-alignment-tablet">
+                            <AlignmentToolbar
+                              value={contentAlignTablet}
+                              onChange={(value) =>
+                                setAttributes({
+                                  contentAlignTablet: value,
+                                })
+                              }
+                              controls={["left", "center", "right"]}
+                              isCollapsed={false}
+                            />
+                          </div>
+                        </BaseControl>
+                      </Fragment>
+                    );
+                  } else {
+                    tabout = (
+                      <Fragment>
+                        <BaseControl>
+                          <p>
+                            {__("Alignment", "responsive-block-editor-addons")}
+                          </p>
+                          <div className="responsive-block-editor-addons-alignment">
+                            <AlignmentToolbar
+                              value={contentAlign}
+                              onChange={(value) =>
+                                setAttributes({
+                                  contentAlign: value,
+                                })
+                              }
+                              controls={["left", "center", "right"]}
+                              isCollapsed={false}
+                            />
+                          </div>
+                        </BaseControl>
+                      </Fragment>
+                    );
+                  }
+
+                  return <div>{tabout}</div>;
+                }}
+              </TabPanel>
 
               <RbeaRangeControl
                 label={__("Columns", "responsive-block-editor-addons")}

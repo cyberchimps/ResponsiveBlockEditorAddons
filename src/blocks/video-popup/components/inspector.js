@@ -13,7 +13,7 @@ import RbeaTabRadioControl from "../../../utils/components/rbea-tab-radio-contro
 import RbeaMediaUploadControl from "../../../utils/components/rbea-media-upload-control/index.js";
 import RbeaBorderStyleTabControl from "../../../utils/components/rbea-border-style-tab-control/index.js";
 import RbeaBorderRadiusControl from "../../../settings-components/RbeaBorderRadiusControl/index.js";
-
+import RbeaBackgroundTypeControl from "../../../utils/components/rbea-background-type-control/index.js";
 
 // Setup the block
 const { __ } = wp.i18n;
@@ -50,6 +50,7 @@ import {
 } from "../util/index.js";
 
 import BoxShadowControl from "../../../utils/components/box-shadow";
+import videoPlayButtonIcons from "./play-button-icons";
 
 /**
  * Inspector controls
@@ -141,6 +142,8 @@ export default class Inspector extends Component {
     blockRightPaddingTablet,
     blockIsMarginControlConnected,
     blockIsPaddingControlConnected,
+
+    videoUploadType,
     } = attributes;
 
     const blockMarginResetValues = {
@@ -272,40 +275,53 @@ export default class Inspector extends Component {
                 title={__("Popup Options", "responsive-block-editor-addons")}
                 initialOpen={true}
               >
-                <RbeaMediaUploadControl
-                  label={__('Upload Video', 'responsive-block-editor-addons')}
-                  value={{
-                      url: videoLink || '',
-                  }}
-                  onChange={(media) => {
-                    setAttributes({
-                      videoLink: media.url,
-                      videoID: media.url,
-                    });
-                  }}
-                  mediaType={'video'}
-                  help={__(
-                    "Use .mp4 format for videos",
-                    "responsive-block-editor-addons"
-                  )}
-                />
-                <TextControl
-                  label={__("Video URL", "responsive-block-editor-addons")}
-                  help={__(
-                    "Paste a Youtube / Vimeo URL",
-                    "responsive-block-editor-addons"
-                  )}
-                  placeholder={__("https://", "responsive-block-editor-addons")}
-                  value={!urlIsVideo(videoLink) ? videoLink : ""}
-                  onChange={(videoLink) =>
-                    setAttributes({
-                      videoLink,
-                      videoID: getVideoProviderFromURL(videoLink).id,
-                    })
-                  }
-                  min={1}
-                  max={4}
-                />
+                {<RbeaBackgroundTypeControl
+                  label = {"Type"}
+                  selectedValue={videoUploadType}
+                  options={[
+                    { label: "video", value: "video" },
+                    { label: "link", value: "link" },
+                  ]}
+                  onChange={(value) => setAttributes({ videoUploadType: value })}
+                />}
+                {"video" == videoUploadType && (
+                  <RbeaMediaUploadControl
+                    label={__('Upload Video', 'responsive-block-editor-addons')}
+                    value={{
+                        url: videoLink || '',
+                    }}
+                    onChange={(media) => {
+                      setAttributes({
+                        videoLink: media.url,
+                        videoID: media.url,
+                      });
+                    }}
+                    mediaType={'video'}
+                    help={__(
+                      "Use .mp4 format for videos",
+                      "responsive-block-editor-addons"
+                    )}
+                  />
+                )}
+                {"link" == videoUploadType && (
+                  <TextControl
+                    label={__("Video URL", "responsive-block-editor-addons")}
+                    help={__(
+                      "Paste a Youtube / Vimeo URL",
+                      "responsive-block-editor-addons"
+                    )}
+                    placeholder={__("https://", "responsive-block-editor-addons")}
+                    value={!urlIsVideo(videoLink) ? videoLink : ""}
+                    onChange={(videoLink) =>
+                      setAttributes({
+                        videoLink,
+                        videoID: getVideoProviderFromURL(videoLink).id,
+                      })
+                    }
+                    min={1}
+                    max={4}
+                  />
+                )}
               </PanelBody>
               <PanelBody
                 title={__("Container", "responsive-block-editor-addons")}
@@ -483,7 +499,7 @@ export default class Inspector extends Component {
                 title={__("Play Button", "responsive-block-editor-addons")}
                 initialOpen={false}
               >
-                <SelectControl
+                <RbeaTabRadioControl
                   label={__("Style", "responsive-block-editor-addons")}
                   value={playButtonType}
                   onChange={(value) => setAttributes({ playButtonType: value })}
@@ -494,6 +510,8 @@ export default class Inspector extends Component {
                         "Normal Play Button",
                         "responsive-block-editor-addons"
                       ),
+                      icon: videoPlayButtonIcons.normal_play_button,
+                      selectedIcon: videoPlayButtonIcons.normal_play_button_selected,
                     },
                     {
                       value: "circle",
@@ -501,6 +519,8 @@ export default class Inspector extends Component {
                         "Play Button with Circle",
                         "responsive-block-editor-addons"
                       ),
+                      icon: videoPlayButtonIcons.play_button_with_circle,
+                      selectedIcon: videoPlayButtonIcons.play_button_with_circle_selected,
                     },
                     {
                       value: "outline",
@@ -508,6 +528,8 @@ export default class Inspector extends Component {
                         "Outline Play Button",
                         "responsive-block-editor-addons"
                       ),
+                      icon: videoPlayButtonIcons.outline_play_button,
+                      selectedIcon: videoPlayButtonIcons.outline_play_button_selected,
                     },
                     {
                       value: "video",
@@ -515,6 +537,8 @@ export default class Inspector extends Component {
                         "Video Play Button",
                         "responsive-block-editor-addons"
                       ),
+                      icon: videoPlayButtonIcons.video_play_button,
+                      selectedIcon: videoPlayButtonIcons.video_play_button_selected,
                     },
                   ]}
                 />
@@ -584,6 +608,8 @@ export default class Inspector extends Component {
                     />
                   </Fragment>
                 )}
+              </PanelBody>
+              <PanelBody title={__("Box Shadow", "responsive-block-editor-addons")} initialOpen={false}>
                 <BoxShadowControl
                   setAttributes={setAttributes}
                   label={__("Box Shadow", "responsive-block-editor-addons")}

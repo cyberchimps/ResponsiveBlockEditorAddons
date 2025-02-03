@@ -367,6 +367,58 @@ const attributes = {
     type: "string",
     default: "#333",
   },
+  iconContainerTopPadding: {
+    type: "number",
+    default: 5,
+  },
+  iconContainerBottomPadding: {
+    type: "number",
+    default: 5,
+  },
+  iconContainerLeftPadding: {
+    type: "number",
+    default: 5,
+  },
+  iconContainerRightPadding: {
+    type: "number",
+    default: 5,
+  },
+  iconContainerTopPaddingTablet: {
+    type: "number",
+    default: 5,
+  },
+  iconContainerBottomPaddingTablet: {
+    type: "number",
+    default: 5,
+  },
+  iconContainerRightPaddingTablet: {
+    type: "number",
+    default: 5,
+  },
+  iconContainerLeftPaddingTablet: {
+    type: "number",
+    default: 5,
+  },
+  iconContainerTopPaddingMobile: {
+    type: "number",
+    default: 5,
+  },
+  iconContainerBottomPaddingMobile: {
+    type: "number",
+    default: 5,
+  },
+  iconContainerLeftPaddingMobile: {
+    type: "number",
+    default: 5,
+  },
+  iconContainerRightPaddingMobile: {
+    type: "number",
+    default: 5,
+  },
+  isCtaButtonPaddingMarginValueUpdated: {
+    type: "boolean",
+    default: false,
+  }
 };
 
 export default attributes;

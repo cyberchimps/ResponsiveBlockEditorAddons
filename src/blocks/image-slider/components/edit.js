@@ -100,6 +100,7 @@ class GalleryCarouselEdit extends Component {
       this.props.setAttributes({
         gutter: 0,
         gutterMobile: 0,
+        gutterTablet: 0,
       });
     }
   }
@@ -183,6 +184,7 @@ class GalleryCarouselEdit extends Component {
       gridSize,
       gutter,
       gutterMobile,
+      gutterTablet,
       height,
       images,
       pageDots,
@@ -235,16 +237,21 @@ class GalleryCarouselEdit extends Component {
         [`has-margin-bottom-${gutter}`]: thumbnails && gutter > 0,
         [`has-margin-bottom-mobile-${gutterMobile}`]:
           thumbnails && gutterMobile > 0,
+        [`has-margin-bottom-tablet-${gutterTablet}`]:
+        thumbnails && gutterTablet > 0,
       }
     );
 
     const navClasses = classnames("carousel-nav", {
       [`has-margin-top-${gutter}`]: gutter > 0,
       [`has-margin-top-mobile-${gutterMobile}`]: gutterMobile > 0,
+      [`has-margin-top-tablet-${gutterTablet}`]: gutterTablet > 0,
       [`has-negative-margin-left-${gutter}`]: gutter > 0,
       [`has-negative-margin-left-mobile-${gutterMobile}`]: gutterMobile > 0,
+      [`has-negative-margin-left-tablet-${gutterTablet}`]: gutterTablet > 0,
       [`has-negative-margin-right-${gutter}`]: gutter > 0,
       [`has-negative-margin-right-mobile-${gutterMobile}`]: gutterMobile > 0,
+      [`has-negative-margin-right-tablet-${gutterTablet}`]: gutterTablet > 0,
     });
 
     const flickityOptions = {
@@ -291,8 +298,10 @@ class GalleryCarouselEdit extends Component {
       {
         [`has-margin-left-${gutter}`]: gutter > 0,
         [`has-margin-left-mobile-${gutterMobile}`]: gutterMobile > 0,
+        [`has-margin-left-tablet-${gutterTablet}`]: gutterTablet > 0,
         [`has-margin-right-${gutter}`]: gutter > 0,
         [`has-margin-right-mobile-${gutterMobile}`]: gutterMobile > 0,
+        [`has-margin-right-tablet-${gutterTablet}`]: gutterTablet > 0,
       }
     );
 
@@ -381,6 +390,7 @@ class GalleryCarouselEdit extends Component {
                         id={img.id}
                         gutter={gutter}
                         gutterMobile={gutterMobile}
+                        gutterTablet={gutterTablet}
                         marginRight={true}
                         marginLeft={true}
                         isSelected={

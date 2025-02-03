@@ -243,3 +243,11 @@
     height: 100%;
   }
 }
+
+.block-height-control {
+  .components-base-control__field {
+    .block-height-control__input {
+      width: 100%;
+    }
+  }
+}

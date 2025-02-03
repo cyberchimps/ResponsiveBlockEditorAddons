@@ -20,6 +20,7 @@ import RbeaRangeControl from "../../../utils/components/rbea-range-control";
 import RbeaColorControl from "../../../utils/components/rbea-color-control";
 import RbeaTabRadioControl from "../../../utils/components/rbea-tab-radio-control";
 import RbeaBlockBorderHelperControl from "../../../settings-components/RbeaBlockBorderSettings";
+import RbeaWidthRangeControl from "../../../utils/components/rbea-width-range-control";
 
 // Import block components
 const {
@@ -207,6 +208,8 @@ export default class Inspector extends Component {
         blockIsTypographyColorValueUpdated,
         inputTypographyColor,
         buttonTypographyColor,
+        widthType,
+        widthTypeValueUpdated,
       },
       setAttributes,
     } = this.props;
@@ -310,14 +313,21 @@ export default class Inspector extends Component {
 			<div className="responsive-block-editor-addons-empty-color-control"></div>
 		);
 
+    //widthType
+    if (!widthTypeValueUpdated) {
+      this.props.setAttributes(
+        {
+          widthType: inputWidthType !== undefined ? inputWidthType : widthType,
+        }
+      )
+      this.props.setAttributes({ widthTypeValueUpdated: true });
+    }
+
     return (
       <InspectorControls key="inspector">
         <InspectorTabs>
           <InspectorTab key={'content'}>
-            <PanelBody
-              title={__("General", "responsive-block-editor-addons")}
-              initialOpen={true}
-            >
+            <PanelBody>
               <RbeaTabRadioControl
                 label={__("Layout", "responsive-block-editor-addons")}
                 value={layout}
@@ -332,44 +342,21 @@ export default class Inspector extends Component {
 								value={placeholder}
 								onChange={(value) => setAttributes({placeholder: value})}
 							/>
-              <ButtonGroup
-                className="responsive-size-type-field"
-                aria-label={__("Size Type", "responsive-block-editor-addons")}
-              >
-                <Button
-                  key={"px"}
-                  className="responsive-size-btn"
-                  isSmall
-                  isPrimary={inputWidthType === "px"}
-                  aria-pressed={inputWidthType === "px"}
-                  min={0}
-                  max={500}
-                  onClick={() => setAttributes({ inputWidthType: "px" })}
-                >
-                  {"px"}
-                </Button>
-                <Button
-                  key={"%"}
-                  className="responsive-size-btn"
-                  isSmall
-                  isPrimary={inputWidthType === "%"}
-                  aria-pressed={inputWidthType === "%"}
-                  min={0}
-                  max={100}
-                  onClick={() => setAttributes({ inputWidthType: "%", inputWidth: 100 })}
-                >
-                  {"%"}
-                </Button>
-              </ButtonGroup>
-              <RbeaRangeControl
+              <RbeaWidthRangeControl
                 label={__("Input Width", "responsive-block-editor-addons")}
                 value={inputWidth}
-                min={0}
-                max={"%" == inputWidthType ? 100 : 500}
                 onChange={(value) =>
                   setAttributes({ inputWidth: value })
                 }
+                min={0}
+                max={"%" == widthType ? 100 : 500}
+                beforeIcon=""
                 allowReset
+                initialPosition={0}
+                resetFallbackValue={100}
+                widthType={widthType}
+                extraControls={true}
+                setAttributes={setAttributes}
               />
             </PanelBody>
           </InspectorTab>
@@ -502,18 +489,66 @@ export default class Inspector extends Component {
                           min={0}
                           max={500}
                         />
-                        <RbeaColorControl
-                          label = {__("Background Color", "responsive-block-editor-addons")}
-                          colorValue={buttonBackgroundColor}
-                          onChange={(colorValue) => setAttributes({ buttonBackgroundColor: colorValue })}
-                          resetColor={() => setAttributes({ buttonBackgroundColor: "" })}
-                        />
-                        <RbeaColorControl
-                          label = {__("Background Hover Color", "responsive-block-editor-addons")}
-                          colorValue={buttonBackgroundHoverColor}
-                          onChange={(colorValue) => setAttributes({ buttonBackgroundHoverColor: colorValue })}
-                          resetColor={() => setAttributes({ buttonBackgroundHoverColor: "" })}
-                        />
+                        <TabPanel
+                          className="responsive-block-editor-addons-inspect-tabs 
+                          responsive-block-editor-addons-inspect-tabs-col-2  
+                          responsive-block-editor-addons-color-inspect-tabs"
+                          activeClass="active-tab"
+                          initialTabName="normal" // Set the default active tab here
+                          tabs={[
+                            {
+                              name: "empty-1",
+                              title: __("", "responsive-block-editor-addons"),
+                              className: "responsive-block-editor-addons-empty-tab",
+                            },
+                            {
+                              name: "normal",
+                              title: __("Normal", "responsive-block-editor-addons"),
+                              className: "responsive-block-editor-addons-normal-tab",
+                            },
+                            {
+                              name: "empty-2",
+                              title: __("", "responsive-block-editor-addons"),
+                              className: "responsive-block-editor-addons-empty-tab-middle",
+                            },
+                            {
+                              name: "hover",
+                              title: __("Hover", "responsive-block-editor-addons"),
+                              className: "responsive-block-editor-addons-hover-tab",
+                            },
+                            {
+                              name: "empty-3",
+                              title: __("", "responsive-block-editor-addons"),
+                              className: "responsive-block-editor-addons-empty-tab",
+                            },
+                          ]}
+                        >
+                          {(tabName) => {
+                            let color_tab;
+                            if ("normal" === tabName.name) {
+                              color_tab = (
+                                <RbeaColorControl
+                                  label = {__("Background Color", "responsive-block-editor-addons")}
+                                  colorValue={buttonBackgroundColor}
+                                  onChange={(colorValue) => setAttributes({ buttonBackgroundColor: colorValue })}
+                                  resetColor={() => setAttributes({ buttonBackgroundColor: "" })}
+                                />
+                              );
+                            } else if("hover" === tabName.name) {
+                              color_tab = (
+                                <RbeaColorControl
+                                  label = {__("Background Hover Color", "responsive-block-editor-addons")}
+                                  colorValue={buttonBackgroundHoverColor}
+                                  onChange={(colorValue) => setAttributes({ buttonBackgroundHoverColor: colorValue })}
+                                  resetColor={() => setAttributes({ buttonBackgroundHoverColor: "" })}
+                                />
+                              );
+                            } else {
+                              color_tab = emptyColorControl;
+                            }
+                            return <div>{color_tab}</div>;
+                          }}
+                        </TabPanel>
                       </PanelBody>
                       {
                         "button" == buttonType && (
@@ -528,18 +563,66 @@ export default class Inspector extends Component {
                               min={1}
                               max={500}
                             />
-                            <RbeaColorControl
-                              label = {__("Icon Color", "responsive-block-editor-addons")}
-                              colorValue={iconColor}
-                              onChange={(colorValue) => setAttributes({ iconColor: colorValue })}
-                              resetColor={() => setAttributes({ iconColor: "" })}
-                            />
-                            <RbeaColorControl
-                              label = {__("Icon Color Hover", "responsive-block-editor-addons")}
-                              colorValue={iconHoverColor}
-                              onChange={(colorValue) => setAttributes({ iconHoverColor: colorValue })}
-                              resetColor={() => setAttributes({ iconHoverColor: "" })}
-                            />
+                            <TabPanel
+                              className="responsive-block-editor-addons-inspect-tabs 
+                              responsive-block-editor-addons-inspect-tabs-col-2  
+                              responsive-block-editor-addons-color-inspect-tabs"
+                              activeClass="active-tab"
+                              initialTabName="normal" // Set the default active tab here
+                              tabs={[
+                                {
+                                  name: "empty-1",
+                                  title: __("", "responsive-block-editor-addons"),
+                                  className: "responsive-block-editor-addons-empty-tab",
+                                },
+                                {
+                                  name: "normal",
+                                  title: __("Normal", "responsive-block-editor-addons"),
+                                  className: "responsive-block-editor-addons-normal-tab",
+                                },
+                                {
+                                  name: "empty-2",
+                                  title: __("", "responsive-block-editor-addons"),
+                                  className: "responsive-block-editor-addons-empty-tab-middle",
+                                },
+                                {
+                                  name: "hover",
+                                  title: __("Hover", "responsive-block-editor-addons"),
+                                  className: "responsive-block-editor-addons-hover-tab",
+                                },
+                                {
+                                  name: "empty-3",
+                                  title: __("", "responsive-block-editor-addons"),
+                                  className: "responsive-block-editor-addons-empty-tab",
+                                },
+                              ]}
+                            >
+                              {(tabName) => {
+                                let color_tab;
+                                if ("normal" === tabName.name) {
+                                  color_tab = (
+                                    <RbeaColorControl
+                                      label = {__("Icon Color", "responsive-block-editor-addons")}
+                                      colorValue={iconColor}
+                                      onChange={(colorValue) => setAttributes({ iconColor: colorValue })}
+                                      resetColor={() => setAttributes({ iconColor: "" })}
+                                    />
+                                  );
+                                } else if("hover" === tabName.name) {
+                                  color_tab = (
+                                    <RbeaColorControl
+                                      label = {__("Icon Color Hover", "responsive-block-editor-addons")}
+                                      colorValue={iconHoverColor}
+                                      onChange={(colorValue) => setAttributes({ iconHoverColor: colorValue })}
+                                      resetColor={() => setAttributes({ iconHoverColor: "" })}
+                                    />
+                                  );
+                                } else {
+                                  color_tab = emptyColorControl;
+                                }
+                                return <div>{color_tab}</div>;
+                              }}
+                            </TabPanel>
                           </PanelBody>
                         )
                       }

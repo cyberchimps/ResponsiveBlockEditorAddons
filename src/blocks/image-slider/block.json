@@ -13,6 +13,10 @@
       "type": "number",
       "default": 5
     },
+    "gutterTablet": {
+      "type": "number",
+      "default": 5
+    },
     "gridSize": {
       "type": "string",
       "default": "lrg"

@@ -289,3 +289,16 @@
 		border-color: #d9d9d9 #d9d9d9 #dc3545 #dc3545 !important;
 	}
 }
+
+.responsive-block-editor-addons-tab-select-container {
+	.rbea-tab-radio-control-wrapper {
+		.rbea-tab-radio-options {
+			.rbea-tab-radio-option {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 42px;
+			}
+		}
+	}
+}

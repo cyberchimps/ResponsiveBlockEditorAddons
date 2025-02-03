@@ -199,6 +199,7 @@ class GalleryMasonryEdit extends Component {
       captions,
       gutter,
       gutterMobile,
+      gutterTablet,
       images,
       linkTo,
       lightbox,
@@ -227,6 +228,7 @@ class GalleryMasonryEdit extends Component {
       [`has-gutter-${gutter}`]: gutter > 0,
       [`has-gutter-null`]: gutter === 0,
       [`has-gutter-mobile-${gutterMobile}`]: gutterMobile > 0,
+      [`has-gutter-tablet-${gutterTablet}`]: gutterTablet > 0,
     });
 
     const masonryGalleryPlaceholder = (

@@ -304,6 +304,7 @@ export default class Inspector extends Component {
     ];
 
     const onDateTimeChange = (momentObj) => {
+      const { block_id } = this.props.attributes;
       let date = momentObj._d;
 
       // ignore invalid date
@@ -333,12 +334,12 @@ export default class Inspector extends Component {
       };
 
       // Clear interval if countdown already exists
-      if (window[id]) {
-        clearInterval(window[id]);
+      if (window[block_id]) {
+        clearInterval(window[block_id]);
       }
 
-      if (id) {
-        window[id] = setInterval(counter, 1000);
+      if (block_id) {
+        window[block_id] = setInterval(counter, 1000);
       }
     };
 

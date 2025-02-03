@@ -11,6 +11,7 @@ const { SelectControl, RangeControl, PanelBody, TabPanel } = wp.components;
 import RbeaRangeControl from "../../../utils/components/rbea-range-control";
 import RbeaColorControl from "../../../utils/components/rbea-color-control";
 import RbeaBackgroundTypeControl from "../../../utils/components/rbea-background-type-control";
+import RbeaAngleRangeControl from "../../../utils/components/rbea-angle-range-control";
 
 // Extend component
 const { Component, Fragment } = wp.element;
@@ -71,28 +72,50 @@ class ButtonColorControl extends Component {
         }
       ];
 
+        const emptyColorControl = (
+          <div className="responsive-block-editor-addons-empty-color-control"></div>
+        );
+
     var advancedControls;
       advancedControls = (
           <PanelBody
               title={__("Color Settings", "responsive-block-editor-addons")}
               initialOpen={false}
           >
-              <TabPanel
-                  className="rbea-inspect-tabs rbea-inspect-tabs-col-2"
-                  activeClass="active-tab"
-                  tabs={[
+                <TabPanel
+                    className="responsive-block-editor-addons-inspect-tabs 
+                    responsive-block-editor-addons-inspect-tabs-col-2  
+                    responsive-block-editor-addons-color-inspect-tabs"
+                    activeClass="active-tab"
+                    initialTabName="normal" // Set the default active tab here
+                    tabs={[
+                      {
+                          name: "empty-1",
+                          title: __("", "responsive-block-editor-addons"),
+                          className: "responsive-block-editor-addons-empty-tab",
+                      },
                       {
                           name: "normal",
                           title: __("Normal", "responsive-block-editor-addons"),
-                          className: "rbea-normal-tab",
+                          className: "responsive-block-editor-addons-normal-tab",
+                      },
+                      {
+                          name: "empty-2",
+                          title: __("", "responsive-block-editor-addons"),
+                          className: "responsive-block-editor-addons-empty-tab-middle",
                       },
                       {
                           name: "hover",
                           title: __("Hover", "responsive-block-editor-addons"),
-                          className: "rbea-focus-tab",
+                          className: "responsive-block-editor-addons-hover-tab",
                       },
-                  ]}
-              >
+                      {
+                          name: "empty-3",
+                          title: __("", "responsive-block-editor-addons"),
+                          className: "responsive-block-editor-addons-empty-tab",
+                      },
+                    ]}
+                >
                   {(tabName) => {
                       let tabout;
                       if ("hover" === tabName.name) {
@@ -100,7 +123,7 @@ class ButtonColorControl extends Component {
                               <Fragment>
                                   <Fragment>
                                       <RbeaColorControl
-                                            label = {__("Text Color", "responsive-block-editor-addons")}
+                                            label = {__("Hover Text Color", "responsive-block-editor-addons")}
                                             colorValue={ctaHoverColor}
                                             onChange={(colorValue) => this.props.setAttributes({ ctaHoverColor: colorValue })}
                                             resetColor={() => this.props.setAttributes({ ctaHoverColor: "" })}
@@ -119,17 +142,17 @@ class ButtonColorControl extends Component {
                                             resetColor={() => setAttributes({ ctaHoverBorderColor: "" })}
                                         />
                                   </Fragment>
-                                  <RbeaBackgroundTypeControl
-                                      label={__(
-                                          "Type",
-                                          "responsive-block-editor-addons"
-                                      )}
-                                      value={buttonHbackgroundType}
-                                      onChange={(value) =>
-                                          setAttributes({ buttonHbackgroundType: value })
-                                      }
-                                      options= {this.props.showGradientHover? buttonHoverbackgroundTypeAllOptions : buttonHoverbackgroundTypeOptions}
-                                  />
+                                    <RbeaBackgroundTypeControl
+                                        label={__(
+                                            "Type",
+                                            "responsive-block-editor-addons"
+                                        )}
+                                        value={buttonHbackgroundType}
+                                        onChange={(value) =>
+                                            setAttributes({ buttonHbackgroundType: value })
+                                        }
+                                        options= {this.props.showGradientHover? buttonHoverbackgroundTypeAllOptions : buttonHoverbackgroundTypeOptions}
+                                    />
                                   {"color" == buttonHbackgroundType && (
                                       <Fragment>
                                             <RbeaColorControl
@@ -196,23 +219,25 @@ class ButtonColorControl extends Component {
                                                   setAttributes({ buttonHcolorLocation2: value })
                                               }
                                           />
-                                          <RbeaRangeControl
-                                              label={__(
-                                                  "Gradient Direction",
-                                                  "responsive-block-editor-addons"
-                                              )}
-                                              value={buttonHgradientDirection}
-                                              min={0}
-                                              max={100}
-                                              onChange={(value) =>
-                                                  setAttributes({ buttonHgradientDirection: value })
-                                              }
-                                          />
+                                          <RbeaAngleRangeControl
+                                                    label={__(
+                                                        "Angle",
+                                                        "responsive-block-editor-addons"
+                                                )}
+                                                    value={buttonHgradientDirection}
+                                                    min={0}
+                                                    max={360}
+                                                    onChange={(value) =>
+                                                    setAttributes({
+                                                        buttonHgradientDirection: value !== undefined ? value : 90,
+                                                    })
+                                                }
+                                            />
                                       </Fragment>
                                   )}
                               </Fragment>
                           );
-                      } else {
+                      } else if ("normal" === tabName.name) {
                           tabout = (
                               <Fragment>
                                   <RbeaColorControl
@@ -245,7 +270,7 @@ class ButtonColorControl extends Component {
                                       }
                                       options={buttonbackgroundTypeOptions}
                                   />
-                                  {"color" == buttonbackgroundType && (
+                                  {"color" === buttonbackgroundType && (
                                       <Fragment>
                                         <RbeaColorControl
                                             label = {__("Background Color", "responsive-block-editor-addons")}
@@ -314,22 +339,26 @@ class ButtonColorControl extends Component {
                                                   setAttributes({ buttoncolorLocation2: value })
                                               }
                                           />
-                                          <RbeaRangeControl
-                                              label={__(
-                                                  "Gradient Direction",
-                                                  "responsive-block-editor-addons"
-                                              )}
-                                              value={buttongradientDirection}
-                                              min={0}
-                                              max={100}
-                                              onChange={(value) =>
-                                                  setAttributes({ buttongradientDirection: value })
-                                              }
-                                          />
+                                          <RbeaAngleRangeControl
+                                                    label={__(
+                                                        "Angle",
+                                                        "responsive-block-editor-addons"
+                                                )}
+                                                    value={buttongradientDirection}
+                                                    min={0}
+                                                    max={360}
+                                                    onChange={(value) =>
+                                                    setAttributes({
+                                                        buttongradientDirection: value !== undefined ? value : 90,
+                                                    })
+                                                }
+                                            />
                                       </Fragment>
                                   )}
                               </Fragment>
                           );
+                      } else {
+                        tabout = emptyColorControl;
                       }
                       return <div>{tabout}</div>;
                   }}

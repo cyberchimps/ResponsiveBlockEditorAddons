@@ -288,7 +288,7 @@ const attributes = {
   },
   gradientDirection: {
     type: "number",
-    default: 100,
+    default: 90,
   },
   colorLocation1: {
     type: "number",
@@ -306,7 +306,7 @@ const attributes = {
   },
   backgroundImagePosition: {
     type: "string",
-    default: "center-center",
+    default: "center center",
   },
   backgroundImageRepeat: {
     type: "string",
@@ -631,6 +631,81 @@ const attributes = {
   },
   titleBottomSpacingTablet: {
     type: "number",
+  },
+  backgroundImageValueUpdated: {
+    type: "boolean",
+    default: false,
+  },
+  backgroundPosition: {
+    type: "string",
+    default: "center center",
+  },
+  backgroundPositionMobile: {
+    type: "string",
+    default: "center center",
+  },
+  backgroundPositionTablet: {
+    type: "string",
+    default: "center center",
+  },
+  backgroundSize: {
+    type: "string",
+    default: "cover",
+  },
+  backgroundSizeTablet: {
+    type: "string",
+    default: 'cover',
+  },
+  backgroundSizeMobile: {
+    type: "string",
+    default: 'cover'
+  },
+  backgroundRepeat: {
+    type: "string",
+    default: "no-repeat",
+  },
+  backgroundImageColor: {
+    type: "string",
+  },
+  overlayType: {
+    type: "string",
+    default: "color",
+  },
+  gradientOverlayColor1: {
+    type: "string",
+  },
+  gradientOverlayColor2: {
+    type: "string",
+  },
+  gradientOverlayType: {
+    type: "string",
+    default: "linear",
+  },
+  gradientOverlayLocation1: {
+    type: "number",
+    default: 0,
+  },
+  gradientOverlayLocation2: {
+    type: "number",
+    default: 100,
+  },
+  gradientOverlayAngle: {
+    type: "number",
+    default: 0,
+  },
+  gradientOverlayPosition: {
+    type: "string",
+    default: "center center",
+  },
+  backgroundVideo: {
+    type: "object",
+  },
+  backgroundColor1: {
+    type: "string",
+  },
+  backgroundType: {
+    type: "string",
+    default: "none",
   },
 };
 export default attributes;

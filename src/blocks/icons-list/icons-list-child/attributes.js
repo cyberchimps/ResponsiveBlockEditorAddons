@@ -53,7 +53,7 @@ const attributes = {
   },
   disableLink: {
     type: "boolean",
-    default: true,
+    default: false,
   },
   block_id: {
     type: "string",

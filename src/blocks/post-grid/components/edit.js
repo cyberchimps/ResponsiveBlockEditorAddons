@@ -97,7 +97,7 @@ class LatestPostsBlock extends Component {
     // Check if there are posts
     const hasPosts = Array.isArray(latestPosts) && latestPosts.length;
 
-    let taxonomyListOptions = [{ value: "", label: __("Select Taxonomy", "responsive-block-editor-addons") }];
+    let taxonomyListOptions = [];
 
     let categoryListOptions = [{ value: "", label: __("All", "responsive-block-editor-addons") }];
 
@@ -206,36 +206,38 @@ class LatestPostsBlock extends Component {
 
 	let queryControls = (
 		<PanelBody title={__("Query", "responsive-block-editor-addons")} initialOpen={true}>
-			  <p>{__("Text Alignment", "responsive-block-editor-addons")}</p>
-        <Fragment>
-        <div className="responsive-block-editor-addons-alignment">
-			  <AlignmentToolbar
-				value={attributes.textAlignment}
-				onChange={(value) =>
-				  setAttributes({
-					textAlignment: value,
-				  })
-				}
-				controls={["left", "center", "right"]}
-				isCollapsed={false}
-			  />
+			  <div className="rbea-tab-radio-control-wrapper">
+          <label>{__("Text Alignment", "responsive-block-editor-addons")}</label>
+          <Fragment>
+            <div className="responsive-block-editor-addons-alignment">
+			        <AlignmentToolbar
+				      value={attributes.textAlignment}
+				      onChange={(value) =>
+				        setAttributes({
+				      	textAlignment: value,
+				        })
+				      }
+				      controls={["left", "center", "right"]}
+				      isCollapsed={false}
+			        />
+            </div>
+          </Fragment>
         </div>
-        </Fragment>
-			  <Fragment>
-			  <SelectControl
-				label={__("Content Type", "responsive-block-editor-addons")}
-				options={postTypeOptions}
-				value={attributes.postType}
-				onChange={(value) => setPostGridContentType(value)}
-			  />
-			  </Fragment>
+        <div className = "rbea-repeat-selector-wrapper">
+			    <RbeaTabRadioControl
+				  label={__("Content Type", "responsive-block-editor-addons")}
+				  options={postTypeOptions}
+				  value={attributes.postType}
+				  onChange={(value) => setPostGridContentType(value)}
+			    />
+        </div>
 			  {"" != taxonomyList && (
-				<SelectControl
-				  label={__("Taxonomy", "responsive-block-editor-addons")}
-				  value={attributes.taxonomyType}
-				  onChange={(value) => this.onSelectTaxonomyType(value)}
-				  options={taxonomyListOptions}
-				/>
+				  <RbeaTabRadioControl
+				    label={__("Taxonomy", "responsive-block-editor-addons")}
+				    value={attributes.taxonomyType}
+				    onChange={(value) => this.onSelectTaxonomyType(value)}
+				    options={taxonomyListOptions}
+				  />
 			  )}
 			  {"" != categoriesList && (
 				<Fragment>

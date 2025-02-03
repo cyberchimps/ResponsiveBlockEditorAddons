@@ -513,6 +513,17 @@ export default class Inspector extends Component {
                     onChange={(newColor) => setAttributes({ backgroundColor: newColor })}
                     resetColor={() => setAttributes({ backgroundColor: "" })}
                   />
+                  {(backgroundColor && backgroundColor != '') && (
+                    <RbeaRangeControl
+                    label={__("Opacity", "responsive-block-editor-addons")}
+                    value={opacity}
+                    onChange={(value) =>
+                      setAttributes({ opacity: value !== undefined ? value : 20 })
+                    }
+                    min={0}
+                    max={100}
+                  />
+                  )}
                 </Fragment>
               )}
               {"gradient" == backgroundType && (
@@ -764,15 +775,6 @@ export default class Inspector extends Component {
                             }
                             resetColor={() => setAttributes({ gradientOverlayColor1: "" })}
                           />
-                          <RbeaRangeControl
-                            label={__("Location 1", "responsive-block-editor-addons")}
-                            value={gradientOverlayLocation1}
-                            onChange={(value) =>
-                              setAttributes({ gradientOverlayLocation1: value })
-                            }
-                            min={0}
-                            max={100}
-                          />
                           <RbeaColorControl
                             label = {"Color 2"}
                             colorValue={gradientOverlayColor2}
@@ -782,15 +784,6 @@ export default class Inspector extends Component {
                               })
                             }
                             resetColor={() => setAttributes({ gradientOverlayColor2: "" })}
-                          />
-                          <RbeaRangeControl
-                            label={__("Location 2", "responsive-block-editor-addons")}
-                            value={gradientOverlayLocation2}
-                            onChange={(value) =>
-                              setAttributes({ gradientOverlayLocation2: value })
-                            }
-                            min={0}
-                            max={100}
                           />
                           <RbeaTabRadioControl
                             label={__("Type", "responsive-block-editor-addons")}
@@ -803,6 +796,24 @@ export default class Inspector extends Component {
                               { value: "radial", label: __("Radial", "responsive-block-editor-addons") },
                             ]}
                             defaultValue={"linear"}
+                          />
+                          <RbeaRangeControl
+                            label={__("Color Location 1", "responsive-block-editor-addons")}
+                            value={gradientOverlayLocation1}
+                            onChange={(value) =>
+                              setAttributes({ gradientOverlayLocation1: value })
+                            }
+                            min={0}
+                            max={100}
+                          />
+                          <RbeaRangeControl
+                            label={__("Color Location 2", "responsive-block-editor-addons")}
+                            value={gradientOverlayLocation2}
+                            onChange={(value) =>
+                              setAttributes({ gradientOverlayLocation2: value })
+                            }
+                            min={0}
+                            max={100}
                           />
                           {"linear" == gradientOverlayType && (
                             <RbeaAngleRangeControl
@@ -862,10 +873,21 @@ export default class Inspector extends Component {
                       )}
                     </Fragment>
                   )}
+                  {backgroundImage && (
+                    <RbeaRangeControl
+                    label={__("Opacity", "responsive-block-editor-addons")}
+                    value={opacity}
+                    onChange={(value) =>
+                      setAttributes({ opacity: value !== undefined ? value : 20 })
+                    }
+                    min={0}
+                    max={100}
+                  />
+                  )}
                 </Fragment>
               )}
               {"video" == backgroundType && (
-                <>
+                <Fragment>
                     <RbeaMediaUploadControl
                       label={__('Video', 'responsive-block-editor-addons')}
                       value={{
@@ -878,19 +900,19 @@ export default class Inspector extends Component {
                       }}
                       mediaType={'video'}
                     />
-                </>
+                    {(backgroundVideo && backgroundVideo.url) && (
+                    <RbeaRangeControl
+                    label={__("Opacity", "responsive-block-editor-addons")}
+                    value={opacity}
+                    onChange={(value) =>
+                      setAttributes({ opacity: value !== undefined ? value : 20 })
+                    }
+                    min={0}
+                    max={100}
+                  />
+                  )}
+                </Fragment>
               )}
-              {backgroundType && backgroundType !== 'none' &&
-                <RbeaRangeControl
-                  label={__("Opacity", "responsive-block-editor-addons")}
-                  value={opacity}
-                  onChange={(value) =>
-                    setAttributes({ opacity: value !== undefined ? value : 20 })
-                  }
-                  min={0}
-                  max={100}
-                />
-              }
             </PanelBody>
             <PanelBody
               title={__("Border", "responsive-block-editor-addons")}
@@ -898,6 +920,7 @@ export default class Inspector extends Component {
             >
                 <RbeaBlockBorderHelperControl
                     attrNameTemplate="block%s"
+                    label = 'Border Radius'
                     values={{
                         radius: blockBorderRadius,
                         style: blockBorderStyle,

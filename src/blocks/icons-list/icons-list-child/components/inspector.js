@@ -187,7 +187,7 @@ export default class Inspector extends Component {
         initialTabName="normal" // Set the default active tab here
         tabs={[
           {
-            name: "empty",
+            name: "empty-1",
             title: __("", "responsive-block-editor-addons"),
             className: "responsive-block-editor-addons-empty-tab",
           },
@@ -197,9 +197,9 @@ export default class Inspector extends Component {
             className: "responsive-block-editor-addons-normal-tab",
           },
           {
-            name: "empty",
+            name: "empty-2",
             title: __("", "responsive-block-editor-addons"),
-            className: "responsive-block-editor-addons-empty-tab",
+            className: "responsive-block-editor-addons-empty-tab-middle",
           },
           {
             name: "hover",
@@ -207,7 +207,7 @@ export default class Inspector extends Component {
             className: "responsive-block-editor-addons-hover-tab",
           },
           {
-            name: "empty",
+            name: "empty-3",
             title: __("", "responsive-block-editor-addons"),
             className: "responsive-block-editor-addons-empty-tab",
           },
@@ -305,7 +305,7 @@ export default class Inspector extends Component {
           initialTabName="normal" // Set the default active tab here
           tabs={[
             {
-              name: "empty",
+              name: "empty-1",
               title: __("", "responsive-block-editor-addons"),
               className: "responsive-block-editor-addons-empty-tab",
             },
@@ -315,9 +315,9 @@ export default class Inspector extends Component {
               className: "responsive-block-editor-addons-normal-tab",
             },
             {
-              name: "empty",
+              name: "empty-2",
               title: __("", "responsive-block-editor-addons"),
-              className: "responsive-block-editor-addons-empty-tab",
+              className: "responsive-block-editor-addons-empty-tab-middle",
             },
             {
               name: "hover",
@@ -325,7 +325,7 @@ export default class Inspector extends Component {
               className: "responsive-block-editor-addons-hover-tab",
             },
             {
-              name: "empty",
+              name: "empty-3",
               title: __("", "responsive-block-editor-addons"),
               className: "responsive-block-editor-addons-empty-tab",
             },
@@ -404,15 +404,14 @@ export default class Inspector extends Component {
                     <hr className="responsive-block-editor-addons-editor__separator" />
                   </Fragment>
                 )}
-                <hr className="responsive-block-editor-addons-editor__separator" />
                 <ToggleControl
-                  label={__("Disable Link", "responsive-block-editor-addons")}
-                  checked={disableLink}
+                  label={__("Link", "responsive-block-editor-addons")}
+                  checked={disableLink} // The "Disable Link" option has been changed to enabling the link. This functionality is inverted.
                   onChange={(value) =>
                     setAttributes({ disableLink: !disableLink })
                   }
                 />
-                {!disableLink && (
+                {disableLink && (
                   <Fragment>
                     <p className="components-base-control__label">
                       {__("URL", "responsive-block-editor-addons")}

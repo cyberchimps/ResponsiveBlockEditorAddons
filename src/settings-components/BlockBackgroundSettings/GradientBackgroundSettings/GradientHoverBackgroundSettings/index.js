@@ -28,6 +28,7 @@ import RbeaColorControl from "../../../../utils/components/rbea-color-control";
                hovercolorLocation1,
                hovercolorLocation2,
                hovergradientDirection,
+               opacity,
            },
            setAttributes,
        } = this.props;
@@ -71,7 +72,7 @@ import RbeaColorControl from "../../../../utils/components/rbea-color-control";
        />
        <RbeaAngleRangeControl
        label={__(
-           "Gradient Direction",
+           "Angle",
            "responsive-block-editor-addons"
    )}
        value={hovergradientDirection}
@@ -83,6 +84,17 @@ import RbeaColorControl from "../../../../utils/components/rbea-color-control";
        })
    }
        />
+       {((hoverbackgroundColor1 && hoverbackgroundColor1 != '') || (hoverbackgroundColor2 && hoverbackgroundColor2 != '')) && (
+          <RbeaRangeControl
+          label={__("Opacity", "responsive-block-editor-addons")}
+          value={opacity}
+          onChange={(value) =>
+            setAttributes({ opacity: value !== undefined ? value : 20 })
+          }
+          min={0}
+          max={100}
+        />
+        )}
        </Fragment>
        );
  

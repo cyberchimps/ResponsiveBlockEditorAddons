@@ -257,6 +257,8 @@ export default class Inspector extends Component {
         subHeadingTitleBottomSpacingTablet,
         headingTitleTextDecoration,
         subHeadingTitleTextDecoration,
+        widthTypeValueUpdated,
+        widthType,
       },
       setAttributes,
     } = this.props;
@@ -287,14 +289,21 @@ export default class Inspector extends Component {
       this.props.setAttributes({ blockIsBottomSpacingValueUpdated: true });
     }
 
+    //widthType
+    if (!widthTypeValueUpdated) {
+      this.props.setAttributes(
+        {
+          widthType: separatorWidthType !== undefined ? separatorWidthType : widthType,
+        }
+      )
+      this.props.setAttributes({ widthTypeValueUpdated: true });
+    }
+
     return (
       <InspectorControls key="inspector">
         <InspectorTabs>
           <InspectorTab key={"content"}>
-            <PanelBody
-              title={__("General", "responsive-block-editor-addons")}
-              initialOpen={false}
-            >
+            <PanelBody>
               <RbeaTabRadioControl
                 label={__("Heading Tag", "responsive-block-editor-addons")}
                 value={headingTag}
@@ -512,11 +521,10 @@ export default class Inspector extends Component {
                   setAttributes({ seperatorPosition: value })
                 }
                 options={[
-                  { value: "belowTitle", label: __("Below Heading", "responsive-block-editor-addons"), icon: separatorPositionIcons.below_heading },
-                  { value: "belowDesc", label: __("Below Description", "responsive-block-editor-addons"), icon: separatorPositionIcons.below_description },
+                  { value: "belowTitle", label: __("Center", "responsive-block-editor-addons") },
+                  { value: "belowDesc", label: __("Bottom", "responsive-block-editor-addons") },
                 ]}
                 defaultValue={"belowTitle"}
-                hasIcon={true}
                 optionHasBorder={true}
               />
               <RbeaSeparatorStyleTabControl
@@ -558,11 +566,11 @@ export default class Inspector extends Component {
                       setAttributes({ separatorWidth: value })
                     }
                     min={0}
-                    max={"%" == separatorWidthType ? 100 : 500}
+                    max={"%" == widthType ? 100 : 500}
                     beforeIcon=""
                     allowReset
                     initialPosition={20}
-                    separatorWidthType={separatorWidthType}
+                    widthType={widthType}
                     extraControls={true}
                     setAttributes={setAttributes}
                   />

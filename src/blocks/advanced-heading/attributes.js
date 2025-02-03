@@ -447,6 +447,14 @@ const attributes = {
     type: "string",
     default: 'none',
   },
+  widthType: {
+    type: "string",
+    default: "%"
+  },
+  widthTypeValueUpdated: {
+    type: "boolean",
+    default: false,
+  },
 };
 
 export default attributes;

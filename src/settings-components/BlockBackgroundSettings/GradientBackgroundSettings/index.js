@@ -29,6 +29,7 @@ class GradientBackgroundControl extends Component {
               colorLocation1,
               colorLocation2,
               gradientDirection,
+              opacity,
           },
           setAttributes,
       } = this.props;
@@ -80,7 +81,7 @@ class GradientBackgroundControl extends Component {
             />
             <RbeaAngleRangeControl
             label={__(
-                "Gradient Direction",
+                "Angle",
                 "responsive-block-editor-addons"
         )}
             value={gradientDirection}
@@ -92,6 +93,17 @@ class GradientBackgroundControl extends Component {
             })
         }
         />
+        {((backgroundColor1 && backgroundColor1 != '') || (backgroundColor2 && backgroundColor2 != '')) && (
+          <RbeaRangeControl
+          label={__("Opacity", "responsive-block-editor-addons")}
+          value={opacity}
+          onChange={(value) =>
+            setAttributes({ opacity: value !== undefined ? value : 20 })
+          }
+          min={0}
+          max={100}
+        />
+        )}
     </Fragment>
     )
 
@@ -99,27 +111,45 @@ class GradientBackgroundControl extends Component {
       advancedControls = (
           <Fragment>
               <TabPanel
-              className="responsive-block-editor-addons-inspect-tabs responsive-block-editor-addons-inspect-tabs-col-2"
-              activeClass="active-tab"
-              tabs={[
-                {
-                  name: "normal",
-                  title: __("Normal", "responsive-block-editor-addons"),
-                  className: "responsive-block-editor-addons-normal-tab",
-                },
-                {
-                  name: "hover",
-                  title: __("Hover", "responsive-block-editor-addons"),
-                  className: "responsive-block-editor-addons-hover-tab",
-                },
-              ]}
+              className="responsive-block-editor-addons-inspect-tabs 
+              responsive-block-editor-addons-inspect-tabs-col-2  
+              responsive-block-editor-addons-color-inspect-tabs"
+                activeClass="active-tab"
+                initialTabName="normal" // Set the default active tab here
+                tabs={[
+                    {
+                        name: "empty-1",
+                        title: __("", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-empty-tab",
+                    },
+                    {
+                        name: "normal",
+                        title: __("Normal", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-normal-tab",
+                    },
+                    {
+                        name: "empty-2",
+                        title: __("", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-empty-tab-middle",
+                    },
+                    {
+                        name: "hover",
+                        title: __("Hover", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-hover-tab",
+                    },
+                    {
+                        name: "empty-3",
+                        title: __("", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-empty-tab",
+                    },
+                ]}
               >
                 {(tabName) => {
                     let btn_color_tab;
                     if ("normal" === tabName.name) {
                     btn_color_tab =
                         gradientNormalOptions
-                    } else {
+                    } else if ("hover" === tabName.name) {
                     btn_color_tab = (
                         <Fragment>
                         <GradientHoverBackgroundControl
@@ -127,6 +157,8 @@ class GradientBackgroundControl extends Component {
                         />
                         </Fragment>
                     );
+                    } else {
+                      btn_color_tab = this.props.values.emptyColorControl;
                     }
                     return <div>{btn_color_tab}</div>;
                 }}

@@ -11,6 +11,7 @@ import RbeaRangeControl from "../../../utils/components/rbea-range-control";
 import RbeaColorControl from "../../../utils/components/rbea-color-control";
 import RbeaTabRadioControl from "../../../utils/components/rbea-tab-radio-control";
 import RbeaBlockBorderHelperControl from "../../../settings-components/RbeaBlockBorderSettings";
+import RbeaSeparatorStyleTabControl from "../../../utils/components/rbea-separator-style-tab-control";
 
 /**
  * Inspector Controls
@@ -39,7 +40,8 @@ const {
   ToggleControl,
   TabPanel,
   Dashicon,
-  BaseControl
+  BaseControl,
+  RadioControl,
 } = wp.components;
 
 /**
@@ -235,12 +237,7 @@ export default class Inspector extends Component {
     const taxonomy_list_setting = showEmptyTaxonomy ? taxonomyList : termsList;
 
     if ("" != taxonomy_list_setting && undefined != taxonomy_list_setting) {
-      var taxonomyListOptions = [
-        {
-          value: "",
-          label: __("Select Taxonomy", "responsive-block-editor-addons"),
-        },
-      ];
+      var taxonomyListOptions = [];
       Object.keys(taxonomy_list_setting).map((item, thisIndex) => {
         return taxonomyListOptions.push({
           value: taxonomyList[item]["name"],
@@ -349,10 +346,7 @@ if (!gridIsRadiusValueUpdated) {
       <InspectorControls>
         <InspectorTabs>
           <InspectorTab key={"content"}>
-            <PanelBody
-              title={__("General", "responsive-block-editor-addons")}
-              initialOpen={open}
-            >
+            <PanelBody>
               <RbeaTabRadioControl
                 label={__("Heading Tag", "responsive-block-editor-addons")}
                 value={titleTag}
@@ -495,39 +489,22 @@ if (!gridIsRadiusValueUpdated) {
                 </TabPanel>
               )}
               {"list" == layout && (
-                <Fragment>
-                  <p className="responsive-setting-label">
-                    {__("List Style", "responsive-block-editor-addons")}
-                  </p>
-                  <Button
-                    key={"bullet"}
-                    icon="editor-ul"
-                    label="Bullet"
-                    onClick={() => setAttributes({ listStyle: "disc" })}
-                    aria-pressed={"disc" === listStyle}
-                    isPrimary={"disc" === listStyle}
-                  />
-                  <Button
-                    key={"numbers"}
-                    icon="editor-ol"
-                    label="Numbers"
-                    onClick={() => setAttributes({ listStyle: "decimal" })}
-                    aria-pressed={"decimal" === listStyle}
-                    isPrimary={"decimal" === listStyle}
-                  />
-                  <Button
-                    key={"none"}
-                    icon="menu"
-                    label="None"
-                    onClick={() => setAttributes({ listStyle: "none" })}
-                    aria-pressed={"none" === listStyle}
-                    isPrimary={"none" === listStyle}
-                  />
-                </Fragment>
+                <RbeaTabRadioControl
+                  label={__("List Style", "responsive-block-editor-addons")}
+                  value={listStyle}
+                  onChange={(value) =>
+                    setAttributes({ listStyle: value })
+                  }
+                  options={[
+                    { value: "disc", dashicon:"editor-ul", label: __("Bullet", "responsive-block-editor-addons") },
+                    { value: "decimal", dashicon:"editor-ol", label: __("Numbers", "responsive-block-editor-addons") },
+                    { value: "none", dashicon:"menu", label: __("None", "responsive-block-editor-addons") },
+                  ]}
+                  hasDashIcons={true}
+                  defaultValue={"cover"}
+                />
               )}
-              <br/>
-              <br/>
-              <SelectControl
+              <RbeaTabRadioControl
                 label={__("Post Type", "responsive-block-editor-addons")}
                 value={postType}
                 onChange={(value) => setAttributes({ postType: value })}
@@ -611,18 +588,66 @@ if (!gridIsRadiusValueUpdated) {
               )}
               {"list" === layout && (
                 <Fragment>
-                  <RbeaColorControl
-                    label = {__("List Style Color", "responsive-block-editor-addons")}
-                    colorValue={listStyleColor}
-                    onChange={(colorValue) => setAttributes({ listStyleColor: colorValue })}
-                    resetColor={() => setAttributes({ listStyleColor: "" })}
-                  />
-                  <RbeaColorControl
-                    label = {__("List Style Color Hover", "responsive-block-editor-addons")}
-                    colorValue={listStyleColorHover}
-                    onChange={(colorValue) => setAttributes({ listStyleColorHover: colorValue })}
-                    resetColor={() => setAttributes({ listStyleColorHover: "" })}
-                  />
+                  <TabPanel
+                    className="responsive-block-editor-addons-inspect-tabs 
+                    responsive-block-editor-addons-inspect-tabs-col-2  
+                    responsive-block-editor-addons-color-inspect-tabs"
+                    activeClass="active-tab"
+                    initialTabName="normal" // Set the default active tab here
+                    tabs={[
+                      {
+                        name: "empty-1",
+                        title: __("", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-empty-tab",
+                      },
+                      {
+                        name: "normal",
+                        title: __("Normal", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-normal-tab",
+                      },
+                      {
+                        name: "empty-2",
+                        title: __("", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-empty-tab-middle",
+                      },
+                      {
+                        name: "hover",
+                        title: __("Hover", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-hover-tab",
+                      },
+                      {
+                        name: "empty-3",
+                        title: __("", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-empty-tab",
+                      },
+                    ]}
+                  >
+                    {(tabName) => {
+                      let color_tab;
+                      if ("normal" === tabName.name) {
+                        color_tab = (
+                          <RbeaColorControl
+                            label = {__("List Style Color", "responsive-block-editor-addons")}
+                            colorValue={listStyleColor}
+                            onChange={(colorValue) => setAttributes({ listStyleColor: colorValue })}
+                            resetColor={() => setAttributes({ listStyleColor: "" })}
+                          />
+                        );
+                      } else if("hover" === tabName.name) {
+                        color_tab = (
+                          <RbeaColorControl
+                            label = {__("List Style Color Hover", "responsive-block-editor-addons")}
+                            colorValue={listStyleColorHover}
+                            onChange={(colorValue) => setAttributes({ listStyleColorHover: colorValue })}
+                            resetColor={() => setAttributes({ listStyleColorHover: "" })}
+                          />
+                        );
+                      } else {
+                        color_tab = emptyColorControl;
+                      }
+                      return <div>{color_tab}</div>;
+                    }}
+                  </TabPanel>
                 </Fragment>
               )}
             </PanelBody>
@@ -720,12 +745,13 @@ if (!gridIsRadiusValueUpdated) {
               )}
               {"list" === layout && (
                 <Fragment>
-                  <SelectControl
+                  {/* <RadioControl
                     label={__(
                       "Separator Style",
                       "resposive-block-editor-addons"
                     )}
-                    value={separatorStyle}
+                    className="rbea-border-style-selector"
+                    selected={separatorStyle}
                     onChange={(value) =>
                       setAttributes({ separatorStyle: value })
                     }
@@ -767,6 +793,10 @@ if (!gridIsRadiusValueUpdated) {
                         label: __("Ridge", "resposive-block-editor-addons"),
                       },
                     ]}
+                  /> */}
+                  <RbeaSeparatorStyleTabControl
+                    selected={separatorStyle}
+                    onChange={(value) => setAttributes({ separatorStyle: value })}
                   />
                   {"none" !== separatorStyle && (
                     <Fragment>

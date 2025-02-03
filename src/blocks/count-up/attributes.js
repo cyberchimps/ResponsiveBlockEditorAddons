@@ -491,5 +491,17 @@ const attributes = {
   dateTypographyColor: {
     type: "string",
   },
+  contentAlignMobile: {
+    type: "string",
+    default: "center",
+  },
+  contentAlignTablet: {
+    type: "string",
+    default: "center",
+  },
+  isAlignmentValueUpdated: {
+    type: "boolean",
+    default: false,
+  }
 };
 export default attributes;

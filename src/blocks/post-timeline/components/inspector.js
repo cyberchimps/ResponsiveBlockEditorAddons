@@ -10,6 +10,7 @@ import RbeaRangeControl from "../../../utils/components/rbea-range-control";
 import RbeaColorControl from "../../../utils/components/rbea-color-control";
 import RbeaTabRadioControl from "../../../utils/components/rbea-tab-radio-control";
 import RbeaBorderRadiusControl from "../../../settings-components/RbeaBorderRadiusControl";
+import stackOnIcons from "../../../utils/components/rbea-tab-radio-control/rbea-stack-on-icons";
 
 /**
  * Inspector Controls
@@ -27,7 +28,7 @@ import ResponsiveBlocksIcon from "../../../ResponsiveBlocksIcon.json";
 import renderSVG from "../../../renderIcon";
 
 // Import block components
-const { InspectorControls, ColorPalette, PanelColorSettings } = wp.blockEditor;
+const { InspectorControls, ColorPalette, PanelColorSettings, AlignmentToolbar } = wp.blockEditor;
 
 // Import Inspector components
 const {
@@ -40,6 +41,7 @@ const {
   TabPanel,
   Icon,
   Dashicon,
+  BaseControl,
 } = wp.components;
 let svg_icons = Object.keys(ResponsiveBlocksIcon);
 
@@ -406,24 +408,28 @@ export default class Inspector extends Component {
                 onChange={(value) => setPostTimelineContentType(value)}
               />
 
-              <QueryControls
-                {...{ order, orderBy }}
-                numberOfItems={attributes.postsToShow}
-                onNumberOfItemsChange={(value) =>
-                  setAttributes({ postsToShow: value })
-                }
-              />
-              <SelectControl
-                label={__("Order By", "responsive-block-editor-addons")}
-                value={attributes.orderBy}
-                onChange={(value) => setAttributes({ orderBy: value })}
-                options={[
-                  { value: "date", label: __("Date", "responsive-block-editor-addons") },
-                  { value: "title", label: __("Title", "responsive-block-editor-addons") },
-                  { value: "rand", label: __("Random", "responsive-block-editor-addons") },
-                  { value: "menu_order", label: __("Menu Order", "responsive-block-editor-addons") },
-                ]}
-              />
+              <div className="rbea-post-timeline-order-by-control-container">
+                <QueryControls
+                  {...{ order, orderBy }}
+                  numberOfItems={attributes.postsToShow}
+                  onNumberOfItemsChange={(value) =>
+                    setAttributes({ postsToShow: value })
+                  }
+                />
+              </div>
+              <div className = "rbea-repeat-selector-wrapper">
+                <RbeaTabRadioControl
+                  label={__("Order By", "responsive-block-editor-addons")}
+                  value={attributes.orderBy}
+                  onChange={(value) => setAttributes({ orderBy: value })}
+                  options={[
+                    { value: "date", label: __("Date", "responsive-block-editor-addons") },
+                    { value: "title", label: __("Title", "responsive-block-editor-addons") },
+                    { value: "rand", label: __("Random", "responsive-block-editor-addons") },
+                    { value: "menu_order", label: __("Menu Order", "responsive-block-editor-addons") },
+                  ]}
+                />
+              </div>
               <RbeaTabRadioControl
                 label={__("Order", "responsive-block-editor-addons")}
                 value={attributes.order}
@@ -448,7 +454,7 @@ export default class Inspector extends Component {
                   attrNameTemplate="block%s"
                   {...this.props}
                 />
-              <RbeaTabRadioControl
+              {/* <RbeaTabRadioControl
                 label={__("Orientation", "responsive-block-editor-addons")}
                 value={attributes.timelinAlignment}
                 onChange={(value) => setAttributes({ timelinAlignment: value })}
@@ -466,7 +472,20 @@ export default class Inspector extends Component {
                     label: __("Right", "responsive-block-editor-addons"),
                   },
                 ]}
-              />
+              /> */}
+                <BaseControl>
+                  <p>
+                    {__("Orientation", "responsive-block-editor-addons")}
+                  </p>
+                  <div className="responsive-block-editor-addons-alignment">
+                    <AlignmentToolbar
+                      value={attributes.timelinAlignment}
+                      onChange={(value) => setAttributes({ timelinAlignment: value })}
+                      controls={["left", "center", "right"]}
+                      isCollapsed={false}
+                    />
+                  </div>
+                </BaseControl>
               <RbeaTabRadioControl
                 label={__("Arrow Alignment", "responsive-block-editor-addons")}
                 value={attributes.arrowlinAlignment}
@@ -493,16 +512,14 @@ export default class Inspector extends Component {
                 value={attributes.stack}
                 options={[
                   {
-                    value: "none",
-                    label: __("None", "responsive-block-editor-addons"),
-                  },
-                  {
                     value: "tablet",
                     label: __("Tablet", "responsive-block-editor-addons"),
+                    icon: stackOnIcons.tablet,
                   },
                   {
                     value: "mobile",
                     label: __("Mobile", "responsive-block-editor-addons"),
+                    icon: stackOnIcons.mobile,
                   },
                 ]}
                 onChange={(value) => setAttributes({ stack: value })}
@@ -510,6 +527,10 @@ export default class Inspector extends Component {
                   "Note: Choose on what breakpoint the columns will stack.",
                   "responsive-block-editor-addons"
                 )}
+                defaultValue={"none"}
+                allowReset={true}
+								hasIcon={true}
+								optionHasBorder={true}
               />
             </PanelBody>
             <PanelBody
@@ -556,16 +577,18 @@ export default class Inspector extends Component {
                 }
               />
               {attributes.displayPostImage && (
-                <SelectControl
-                  label={__("Image Size", "responsive-block-editor-addons")}
-                  value={imageSizeValue()}
-                  options={imageSizeOptions}
-                  onChange={(value) =>
-                    this.props.setAttributes({
-                      imageSize: value,
-                    })
-                  }
-                />
+                <div className = "rbea-repeat-selector-wrapper">
+                  <RbeaTabRadioControl
+                    label={__("Image Size", "responsive-block-editor-addons")}
+                    value={imageSizeValue()}
+                    options={imageSizeOptions}
+                    onChange={(value) =>
+                      this.props.setAttributes({
+                        imageSize: value,
+                      })
+                    }
+                  />
+                </div>
               )}
               <ToggleControl
                 label={__("Display Title", "responsive-block-editor-addons")}
@@ -722,8 +745,9 @@ export default class Inspector extends Component {
               title={__("Connector Settings", "responsive-block-editor-addons")}
               initialOpen={false}
             >
-              <hr className="responsive-block-editor-addons-editor__separator" />
-              <FontIconPicker {...icon_props} />
+              <div className="responsive-block-editor-addons-font-icon-picker-container">
+                <FontIconPicker {...icon_props} />
+              </div>
               <RbeaRangeControl
                 label={__("Icon Size", "responsive-block-editor-addons")}
                 value={attributes.iconSize}
@@ -769,18 +793,36 @@ export default class Inspector extends Component {
                 initialOpen={true}
               >
                 <TabPanel
-                  className="rbea-inspect-tabs rbea-inspect-tabs-col-2"
+                  className="responsive-block-editor-addons-inspect-tabs 
+                  responsive-block-editor-addons-inspect-tabs-col-2  
+                  responsive-block-editor-addons-color-inspect-tabs"
                   activeClass="active-tab"
+                  initialTabName="normal" // Set the default active tab here
                   tabs={[
+                    {
+                      name: "empty-1",
+                      title: __("", "responsive-block-editor-addons"),
+                      className: "responsive-block-editor-addons-empty-tab",
+                    },
                     {
                       name: "normal",
                       title: __("Normal", "responsive-block-editor-addons"),
-                      className: "rbea-normal-tab",
+                      className: "responsive-block-editor-addons-normal-tab",
+                    },
+                    {
+                      name: "empty-2",
+                      title: __("", "responsive-block-editor-addons"),
+                      className: "responsive-block-editor-addons-empty-tab-middle",
                     },
                     {
                       name: "focus",
                       title: __("Focus", "responsive-block-editor-addons"),
-                      className: "rbea-focus-tab",
+                      className: "responsive-block-editor-addons-hover-tab",
+                    },
+                    {
+                      name: "empty-3",
+                      title: __("", "responsive-block-editor-addons"),
+                      className: "responsive-block-editor-addons-empty-tab",
                     },
                   ]}
                 >
@@ -826,7 +868,7 @@ export default class Inspector extends Component {
                           />
                         </PanelBody>
                       );
-                    } else {
+                    } else if ("normal" === tabName.name) {
                       tabout = (
                         <PanelBody
                           title={__("Color Settings", "responsive-block-editor-addons")}
@@ -866,6 +908,8 @@ export default class Inspector extends Component {
                           />
                         </PanelBody>
                       );
+                    } else {
+                      tabout = emptyColorControl;
                     }
                     return <div>{tabout}</div>;
                   }}
@@ -893,18 +937,36 @@ export default class Inspector extends Component {
                   initialOpen={false}
                 >
                   <TabPanel
-                    className="responsive-block-editor-addons-inspect-tabs responsive-block-editor-addons-inspect-tabs-col-2"
+                    className="responsive-block-editor-addons-inspect-tabs 
+                    responsive-block-editor-addons-inspect-tabs-col-2  
+                    responsive-block-editor-addons-color-inspect-tabs"
                     activeClass="active-tab"
+                    initialTabName="normal" // Set the default active tab here
                     tabs={[
                       {
+                        name: "empty-1",
+                        title: __("", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-empty-tab",
+                      },
+                      {
                         name: "normal",
-                        title: __("Normal"),
+                        title: __("Normal", "responsive-block-editor-addons"),
                         className: "responsive-block-editor-addons-normal-tab",
                       },
                       {
+                        name: "empty-2",
+                        title: __("", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-empty-tab-middle",
+                      },
+                      {
                         name: "hover",
-                        title: __("Hover"),
+                        title: __("Hover", "responsive-block-editor-addons"),
                         className: "responsive-block-editor-addons-hover-tab",
+                      },
+                      {
+                        name: "empty-3",
+                        title: __("", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-empty-tab",
                       },
                     ]}
                   >
@@ -927,7 +989,7 @@ export default class Inspector extends Component {
                             />
                           </Fragment>
                         );
-                      } else {
+                      } else if ("hover" === tabName.name) {
                         btn_color_tab = (
                           <Fragment>
                             <RbeaColorControl
@@ -944,6 +1006,8 @@ export default class Inspector extends Component {
                             />
                           </Fragment>
                         );
+                      } else {
+                        btn_color_tab = emptyColorControl;
                       }
                       return <div>{btn_color_tab}</div>;
                     }}

@@ -281,7 +281,7 @@ class LatestPostsBlock extends Component {
     var content_align_class = AlignClass(this.props.attributes, 0); // Get classname for layout alignment
     var day_align_class = DayAlignClass(this.props.attributes, 0); // Get classname for day alignment.
 
-    let taxonomyListOptions = [{ value: "", label: __("Select Taxonomy", "responsive-block-editor-addons") }];
+    let taxonomyListOptions = [];
 
     let categoryListOptions = [{ value: "", label: __("All", "responsive-block-editor-addons") }];
 
@@ -306,7 +306,7 @@ class LatestPostsBlock extends Component {
     const queryControls = (
       <PanelBody title={__("Query", "responsive-block-editor-addons")} initialOpen={true}>
           {"" != taxonomyList && (
-            <SelectControl
+            <RbeaTabRadioControl
               label={__("Taxonomy", "responsive-block-editor-addons")}
               value={attributes.taxonomyType}
               onChange={(value) => this.onSelectTaxonomyType(value)}

@@ -304,7 +304,6 @@ const attributes = {
   },
   buttonbackgroundType: {
     type: "string",
-    default: "color",
   },
   buttoncolorLocation1: {
     type: "number",
@@ -835,5 +834,57 @@ const attributes = {
   subpriceBottomSpacingTablet: {
     type: 'number',
   },
+  ctaButtonTopPadding: {
+    type: "number",
+    default: 15,
+  },
+  ctaButtonBottomPadding: {
+    type: "number",
+    default: 15,
+  },
+  ctaButtonLeftPadding: {
+    type: "number",
+    default: 30,
+  },
+  ctaButtonRightPadding: {
+    type: "number",
+    default: 30,
+  },
+  ctaButtonTopPaddingTablet: {
+    type: "number",
+    default: 15,
+  },
+  ctaButtonBottomPaddingTablet: {
+    type: "number",
+    default: 15,
+  },
+  ctaButtonRightPaddingTablet: {
+    type: "number",
+    default: 30,
+  },
+  ctaButtonLeftPaddingTablet: {
+    type: "number",
+    default: 30,
+  },
+  ctaButtonTopPaddingMobile: {
+    type: "number",
+    default: 15,
+  },
+  ctaButtonBottomPaddingMobile: {
+    type: "number",
+    default: 15,
+  },
+  ctaButtonLeftPaddingMobile: {
+    type: "number",
+    default: 30,
+  },
+  ctaButtonRightPaddingMobile: {
+    type: "number",
+    default: 30,
+  },
+  isCtaButtonPaddingMarginValueUpdated : {
+    type: "boolean",
+    default: false,
+  }
 };
 export default attributes;

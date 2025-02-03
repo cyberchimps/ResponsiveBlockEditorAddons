@@ -1,6 +1,9 @@
 .rbea-inspector-tab {
     .rbea-separator-style-control {
         margin-bottom: 24px;
+        .rbea-control__header {
+            margin-bottom: 0px;
+        }
         .rbea-separator-style-selector {
             label {
                 width: 100%;
@@ -36,7 +39,7 @@
             .components-flex.components-h-stack.components-v-stack {
                 display: grid;
                 grid-template-columns: repeat(4, 1fr);
-                row-gap: 0px;
+                row-gap: 3px;
                 column-gap: 3px;
             }
 

@@ -175,7 +175,9 @@ function EditorStyles(props) {
   backgroundSizeMobile,
   contentTypographyColor,
   titleTypographyColor,
-  nameTypographyColor
+  nameTypographyColor,
+  testimonialCiteAlignTablet,
+  testimonialCiteAlignMobile,
   } = props.attributes;
 
   var boxShadowPositionCSS = boxShadowPosition;
@@ -275,6 +277,7 @@ function EditorStyles(props) {
     },
     " .responsive-block-editor-addons-testimonial-info": {
       "margin-bottom": generateCSSUnit(titleBottomSpacing, "px"),
+      "text-align": testimonialCiteAlign,
     },
     " .responsive-block-editor-addons-testimonial-info .responsive-block-editor-addons-testimonial-inner-block .responsive-block-editor-addons-testimonial-avatar-wrap": {
       "padding-right": generateCSSUnit(imageSpacing, "px"),
@@ -315,17 +318,6 @@ function EditorStyles(props) {
       "box-shadow": `${hoverboxShadowHOffset}px ${hoverboxShadowVOffset}px ${hoverboxShadowBlur}px ${hoverboxShadowSpread}px ${hoverboxShadowColor} ${hoverboxShadowPositionCSS}`,
     },
     " .responsive-block-editor-addons-block-testimonial": {
-      "background-position": backgroundPosition,
-      "background-attachment": backgroundAttachment,
-      "background-repeat": backgroundRepeat,
-      "background-size": backgroundSize,
-      "color": testimonialTextColor,
-      "border-style": borderStyle !== "empty" && blockBorderStyle === "none" ? borderStyle : blockBorderStyle,//For compatibility with v1.3.2
-      "border-width": borderWidth !== 999 && blockBorderWidth === 1 ? generateCSSUnit(borderWidth, "px") : generateCSSUnit(blockBorderWidth, "px"),//For compatibility with v1.3.2
-      "border-top-left-radius": generateCSSUnit(blockTopRadius, "px"),
-      "border-top-right-radius": generateCSSUnit(blockRightRadius, "px"),
-      "border-bottom-right-radius": generateCSSUnit(blockBottomRadius, "px"),
-      "border-bottom-left-radius": generateCSSUnit(blockLeftRadius, "px"),
       "background-color":
         backgroundType == "color"
           ? `${hexToRgba(backgroundColor || "#fff", imgopacity || 0)}`
@@ -343,6 +335,17 @@ function EditorStyles(props) {
         : backgroundType === "image"
         ? updatedBackgroundImage
         : undefined,
+      "background-position": backgroundPosition,
+      "background-attachment": backgroundAttachment,
+      "background-repeat": backgroundRepeat,
+      "background-size": backgroundSize,
+      "color": testimonialTextColor,
+      "border-style": borderStyle !== "empty" && blockBorderStyle === "none" ? borderStyle : blockBorderStyle,//For compatibility with v1.3.2
+      "border-width": borderWidth !== 999 && blockBorderWidth === 1 ? generateCSSUnit(borderWidth, "px") : generateCSSUnit(blockBorderWidth, "px"),//For compatibility with v1.3.2
+      "border-top-left-radius": generateCSSUnit(blockTopRadius, "px"),
+      "border-top-right-radius": generateCSSUnit(blockRightRadius, "px"),
+      "border-bottom-right-radius": generateCSSUnit(blockBottomRadius, "px"),
+      "border-bottom-left-radius": generateCSSUnit(blockLeftRadius, "px"),
       "box-shadow":
         generateCSSUnit(boxShadowHOffset, "px") +
         " " +
@@ -399,6 +402,7 @@ function EditorStyles(props) {
 	  },
     " .responsive-block-editor-addons-testimonial-info": {
       "margin-bottom": generateCSSUnit(titleBottomSpacingMobile, "px"),
+      "text-align": testimonialCiteAlignMobile,
     },
     " .responsive-block-editor-addons-testimonial-info .responsive-block-editor-addons-testimonial-inner-block .responsive-block-editor-addons-testimonial-avatar-wrap": {
       "padding-right": generateCSSUnit(imageSpacingMobile, "px"),
@@ -464,6 +468,7 @@ function EditorStyles(props) {
 	  },
     " .responsive-block-editor-addons-testimonial-info": {
       "margin-bottom": generateCSSUnit(titleBottomSpacingTablet, "px"),
+      "text-align": testimonialCiteAlignTablet,
     },
     " .responsive-block-editor-addons-testimonial-info .responsive-block-editor-addons-testimonial-inner-block .responsive-block-editor-addons-testimonial-avatar-wrap": {
       "padding-right": generateCSSUnit(imageSpacingTablet, "px"),

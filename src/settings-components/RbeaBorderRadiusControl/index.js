@@ -8,7 +8,7 @@ export default function RbeaBorderRadiusControl (props) {
     return (
         <>  
         <TabPanel
-            className="responsive-size-type-field-tabs rbea-responsive-controls responsive-size-type-field__common-tabs  responsive-inline-margin"
+            className="responsive-size-type-field-tabs rbea-responsive-controls responsive-size-type-field__common-tabs responsive-inline-margin rbea-responsive-border-radius-control-tabs"
             activeClass="active-tab"
             tabs={[
                 {

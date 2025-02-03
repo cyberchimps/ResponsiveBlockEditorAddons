@@ -22,6 +22,7 @@ const save = ({ attributes, className }) => {
     captions,
     gutter,
     gutterMobile,
+    gutterTablet,
     linkTo,
     lightbox,
     rel,
@@ -40,6 +41,7 @@ const save = ({ attributes, className }) => {
   const masonryClasses = classnames({
     [`has-gutter-${gutter}`]: gutter > 0,
     [`has-gutter-mobile-${gutterMobile}`]: gutterMobile > 0,
+    [`has-gutter-tablet-${gutterTablet}`]: gutterTablet > 0,
   });
 
   const masonryStyles = {

@@ -1,4 +1,20 @@
 .rbea-tab-radio-control-wrapper {
+  .rbea-tab-radio-control-header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .rbea-control__header-controls-container {
+      .components-button.rbea-reset {
+        .dashicons-image-rotate {
+          font-size: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+  }
   display: flex;
   flex-direction: column;
   margin-bottom: 24px;
@@ -9,6 +25,7 @@
     line-height: 16.41px;
     text-align: left;
     color: #666;
+    margin-bottom: 5px;
   }
   .rbea-tab-radio-options {
     display: flex;
@@ -17,6 +34,10 @@
     flex-direction: row;
     width: 100%;
     align-items: center;
+    box-shadow: inset 0 0 0 0.5px #C9C8C8;
+    border-radius: 6px;
+    box-sizing: border-box;
+    gap: 0px;
 
     .rbea-tab-radio-option {
       font-family: Roboto;
@@ -30,29 +51,67 @@
       display: block;
       flex: 1;
       height: 32px;
-      border: 1px solid #ccc;
-      border-left: none;
+      border: unset;
+      border-radius: 0;
       cursor: pointer;
+      box-shadow: inset 0 0 0 0.5px #C9C8C8;
+
+      .dashicons {
+        font-family: "Dashicons";
+        font-size: 16px; /* Or adjust size as needed */
+        line-height: 16px;
+      }
+      
+      .rbea-tab-radio-option-border {
+        width: 100%;
+      }
+    }
+
+    .rbea-tab-radio-option.rbea-text-decoration-underline-control {
+      text-decoration: underline;
+    }
+
+    .rbea-tab-radio-option.rbea-text-decoration-overline-control {
+      text-decoration: overline;
+    }
+
+    .rbea-tab-radio-option.rbea-text-decoration-line-through-control {
+      text-decoration: line-through;
     }
     
     .rbea-tab-radio-option:first-child {
-      border-left: 1px solid #ccc;
-      border-top-left-radius: 6px;
-      border-bottom-left-radius: 6px;
+      border-radius: 6px 0px 0px 0px;
     }
     .rbea-tab-radio-option:last-child {
-      border-top-right-radius: 6px;
-      border-bottom-right-radius: 6px;
+      border-radius: 0px 0px 6px 0px;
     }
     .rbea-tab-radio-option.is-active {
       background-color: #007CBA;
       color: white;
+      box-shadow: inset 0 0 0 0.5px #007CBA;
+      border-color: #007CBA;
     }
 
   }
 }
 
 .rbea-tab-radio-control-wrapper-with-icon {
+  .rbea-tab-radio-control-header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .rbea-control__header-controls-container {
+      .components-button.rbea-reset {
+        .dashicons-image-rotate {
+          font-size: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+  }
   display: flex;
   flex-direction: column;
   margin-bottom: 24px;
@@ -63,6 +122,7 @@
     line-height: 16.41px;
     text-align: left;
     color: #666;
+    margin-bottom: 5px;
   }
   .rbea-tab-radio-options {
     display: flex;
@@ -79,6 +139,28 @@
       display: block;
       flex: 1;
       cursor: pointer;
+
+      .dashicons {
+        font-family: "Dashicons";
+        font-size: 16px; /* Or adjust size as needed */
+        line-height: 16px;
+      }  
+
+      .rbea-tab-radio-option-border {
+        width: 100%;
+      }
+    }
+
+    .rbea-tab-radio-option.rbea-text-decoration-underline-control {
+      text-decoration: underline;
+    }
+
+    .rbea-tab-radio-option.rbea-text-decoration-overline-control {
+      text-decoration: overline;
+    }
+
+    .rbea-tab-radio-option.rbea-text-decoration-line-through-control {
+      text-decoration: line-through;
     }
     
     .rbea-tab-radio-option.is-active {

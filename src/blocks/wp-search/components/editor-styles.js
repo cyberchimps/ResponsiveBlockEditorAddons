@@ -96,10 +96,11 @@
      blockRightPaddingMobile,
      blockRightPaddingTablet,
      inputTypographyColor,
+     widthType,
    } = props.attributes;
 
    let width;
-   width = inputWidthType === "px" ? generateCSSUnit(inputWidth, "px") : `${inputWidth}%`;
+   width = widthType === "px" ? generateCSSUnit(inputWidth, "px") : `${inputWidth}%`;
 
    var boxShadowPositionCSS = boxShadowPosition;
    if ("outset" === boxShadowPosition) {

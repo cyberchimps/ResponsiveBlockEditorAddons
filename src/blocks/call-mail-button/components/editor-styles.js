@@ -60,6 +60,7 @@
      hideWidget,
      hideWidgetTablet,
      hideWidgetMobile,
+     buttonStyleToggle,
    } = props.attributes;
 
    let buttonWidthCSS = "fixed" === buttonWidthType ? "fit-content" : "flexible" === buttonWidthType ? generateCSSUnit(buttonWidth, "px") : generateCSSUnit(100, "%");
@@ -68,11 +69,11 @@
 
    let buttonBorder = `1px solid ${buttonColor}`;
    let buttonBorderHover = `1px solid ${buttonColorHover}`;
-   let buttonBorderRadius = buttonRounded ? generateCSSUnit(buttonRadius, "px") : 0;
-   let textColor = buttonTransparent ? buttonColor : buttonTextColor;
-   let buttonBackground = buttonTransparent ? "" : buttonColor;
-   let textColorHover = buttonTransparent ? buttonColorHover : buttonTextColorHover;
-   let buttonBackgroundHover = buttonTransparent ? "" : buttonColorHover;
+   let buttonBorderRadius = buttonStyleToggle === "rounded" ? generateCSSUnit(buttonRadius, "px") : 0;
+   let textColor = buttonStyleToggle === "transparent" ? buttonColor : buttonTextColor;
+   let buttonBackground = buttonStyleToggle === "transparent" ? "" : buttonColor;
+   let textColorHover = buttonStyleToggle === "transparent" ? buttonColorHover : buttonTextColorHover;
+   let buttonBackgroundHover = buttonStyleToggle === "transparent" ? "" : buttonColorHover;
 
    let justifyButtonDirection = 'flex-start';
    if(buttonAlign === 'center') {

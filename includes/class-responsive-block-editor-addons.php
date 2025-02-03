@@ -1129,7 +1129,7 @@ class Responsive_Block_Editor_Addons {
 		} elseif ( false === (bool) get_transient( 'responsive_block_editor_addons_ask_review_flag' ) && false === get_option( 'responsive_block_editor_addons_review_notice_dismissed' ) ) {
 			$image_url = plugins_url( 'admin/images/responsive-blocks.svg', __DIR__ );
 			echo sprintf(
-				'<div class="notice rbea-notice-warning rbea-ask-for-review-notice">
+				'<div class="notice notice-info rbea-ask-for-review-notice">
 					<div class="rbea-notice-content-wrapper">
 						<div class="rbea-notice-image">
 							<img src="%8$s" class="custom-logo" alt="Responsive Blocks" itemprop="logo">
@@ -1423,7 +1423,6 @@ class Responsive_Block_Editor_Addons {
 	 * @since 1.7.9
 	 */
 	public function rba_form_block_processing() {
-
 		register_rest_route(
 			'wp/v2',
 			'/rba_process_form',
@@ -1524,16 +1523,4 @@ class Responsive_Block_Editor_Addons {
 		);
 	}
 
-	/**
-	 * Get allowed HTML title tag.
-	 *
-	 * @param string $title_Tag HTML tag of title.
-	 * @param array  $allowed_array Array of allowed HTML tags.
-	 * @param string $default_tag Default HTML tag.
-	 * @since 1.8.4
-	 * @return string $title_Tag | $default_tag.
-	 */
-	public function rbea_post_title_tag_allowed_html( $title_Tag, $allowed_array, $default_tag ) {
-		return in_array( $title_Tag, $allowed_array, true ) ? sanitize_key( $title_Tag ) : $default_tag;
-	}
 }

@@ -10,6 +10,8 @@ function EditorStyles(props) {
   const {
     block_id,
     gutter,
+    gutterMobile,
+    gutterTablet,
     responsiveHeight,
     blockBorderWidth,
     blockBorderColor,
@@ -122,6 +124,10 @@ function EditorStyles(props) {
       'margin-left': generateCSSUnit(blockLeftMarginMobile, "px"),
     },
     " .responsive-block-editor-addons-gallery--item": {
+      "margin-left":
+        gutterMobile > 0 && !responsiveHeight ? gutterMobile + "px" : undefined,
+      "margin-right":
+        gutterMobile > 0 && !responsiveHeight ? gutterMobile + "px" : undefined,
       "border-top-left-radius": generateCSSUnit(blockTopRadiusMobile, "px"),
       "border-top-right-radius": generateCSSUnit(blockRightRadiusMobile, "px"),
       "border-bottom-right-radius": generateCSSUnit(blockBottomRadiusMobile, "px"),
@@ -142,6 +148,10 @@ function EditorStyles(props) {
       'margin-left': generateCSSUnit(blockLeftMarginTablet, "px"),
     },
     " .responsive-block-editor-addons-gallery--item": {
+      "margin-left":
+        gutterTablet > 0 && !responsiveHeight ? gutterTablet + "px" : undefined,
+      "margin-right":
+        gutterTablet > 0 && !responsiveHeight ? gutterTablet + "px" : undefined,
       "border-top-left-radius": generateCSSUnit(blockTopRadiusTablet, "px"),
       "border-top-right-radius": generateCSSUnit(blockRightRadiusTablet, "px"),
       "border-bottom-right-radius": generateCSSUnit(blockBottomRadiusTablet, "px"),

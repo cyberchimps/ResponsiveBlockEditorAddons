@@ -116,10 +116,7 @@ export default class Inspector extends Component {
       <InspectorControls key="inspector">
         <InspectorTabs hasStyle={false}>
           <InspectorTab key={'content'}>
-            <PanelBody
-              title={__("Settings" ,"responsive-block-editor-addons")}
-              initialOpen={true}
-            >
+            <PanelBody>
               <TextControl
                 label={__("HTML Anchor", "responsive-block-editor-addons")}
                 type="text"

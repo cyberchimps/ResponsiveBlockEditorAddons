@@ -324,10 +324,7 @@ export default class Inspector extends Component {
 			<InspectorControls key="inspector">
 				<InspectorTabs>
 					<InspectorTab key={'content'}>
-						<PanelBody
-							title={__("General", "responsive-block-editor-addons")}
-							initialOpen={false}
-						>
+						<PanelBody>
 							<RbeaRangeControl
 								label={__("Progress Percentage", "responsive-block-editor-addons")}
 								value={progressBarValue}
@@ -357,72 +354,74 @@ export default class Inspector extends Component {
 							/>
 							{progressBarStyle === "horizontal" && (
 								<Fragment>
-									<SelectControl
-										label={__("Horizontal Progress Bar Style", "responsive-block-editor-addons")}
-										value={horizontalProgressBarStyle}
-										options={[
-											{
-												value: "plain",
-												label: __("Plain", "responsive-block-editor-addons"),
-											},
-											{
-												value: "striped",
-												label: __("Striped", "responsive-block-editor-addons"),
-											},
-											{
-												value: "animatedstriped",
-												label: __("Animated Striped", "responsive-block-editor-addons"),
-											},
-										]}
-										onChange={(value) => setAttributes({ horizontalProgressBarStyle: value })}
-									/>
-									<ToggleControl
-										label={__("Top Title Enable", "responsive-block-editor-addons")}
-										checked={progressBarTopTitleEnable}
-										onChange={(value) =>
-											setAttributes({ progressBarTopTitleEnable: !progressBarTopTitleEnable })
-										}
-									/>
-									<ToggleControl
-										label={__("Top Value Enable", "responsive-block-editor-addons")}
-										checked={progressBarTopValueEnable}
-										onChange={(value) =>
-											setAttributes({ progressBarTopValueEnable: !progressBarTopValueEnable })
-										}
-									/>
-									{(horizontalProgressBarStyle !== "striped" && horizontalProgressBarStyle !== "animatedstriped") && (
-										<Fragment>
-											<ToggleControl
-												label={__("Inner Title Enable", "responsive-block-editor-addons")}
-												checked={progressBarInnerTitleEnable}
-												onChange={(value) =>
-													setAttributes({ progressBarInnerTitleEnable: !progressBarInnerTitleEnable })
-												}
+										<div className="responsive-block-editor-addons-tab-select-container">
+											<RbeaTabRadioControl
+												label={__("Horizontal Progress Bar Style", "responsive-block-editor-addons")}
+												value={horizontalProgressBarStyle}
+												options={[
+													{
+														value: "plain",
+														label: __("Plain", "responsive-block-editor-addons"),
+													},
+													{
+														value: "striped",
+														label: __("Striped", "responsive-block-editor-addons"),
+													},
+													{
+														value: "animatedstriped",
+														label: __("Animated Striped", "responsive-block-editor-addons"),
+													},
+												]}
+												onChange={(value) => setAttributes({ horizontalProgressBarStyle: value })}
 											/>
-											<ToggleControl
-												label={__("Inner Value Enable", "responsive-block-editor-addons")}
-												checked={progressBarInnerValueEnable}
-												onChange={(value) =>
-													setAttributes({ progressBarInnerValueEnable: !progressBarInnerValueEnable })
-												}
-											/>
-										</Fragment>
-									)}
-									<ToggleControl
-										label={__("Bottom Title Enable", "responsive-block-editor-addons")}
-										checked={progressBarBottomTitleEnable}
-										onChange={(value) =>
-											setAttributes({ progressBarBottomTitleEnable: !progressBarBottomTitleEnable })
-										}
-									/>
-									<ToggleControl
-										label={__("Bottom Value Enable", "responsive-block-editor-addons")}
-										checked={progressBarBottomValueEnable}
-										onChange={(value) =>
-											setAttributes({ progressBarBottomValueEnable: !progressBarBottomValueEnable })
-										}
-									/>
-								</Fragment>
+										</div>
+										<ToggleControl
+											label={__("Top Title Enable", "responsive-block-editor-addons")}
+											checked={progressBarTopTitleEnable}
+											onChange={(value) =>
+												setAttributes({ progressBarTopTitleEnable: !progressBarTopTitleEnable })
+											}
+										/>
+										<ToggleControl
+											label={__("Top Value Enable", "responsive-block-editor-addons")}
+											checked={progressBarTopValueEnable}
+											onChange={(value) =>
+												setAttributes({ progressBarTopValueEnable: !progressBarTopValueEnable })
+											}
+										/>
+										{(horizontalProgressBarStyle !== "striped" && horizontalProgressBarStyle !== "animatedstriped") && (
+											<Fragment>
+												<ToggleControl
+													label={__("Inner Title Enable", "responsive-block-editor-addons")}
+													checked={progressBarInnerTitleEnable}
+													onChange={(value) =>
+														setAttributes({ progressBarInnerTitleEnable: !progressBarInnerTitleEnable })
+													}
+												/>
+												<ToggleControl
+													label={__("Inner Value Enable", "responsive-block-editor-addons")}
+													checked={progressBarInnerValueEnable}
+													onChange={(value) =>
+														setAttributes({ progressBarInnerValueEnable: !progressBarInnerValueEnable })
+													}
+												/>
+											</Fragment>
+										)}
+										<ToggleControl
+											label={__("Bottom Title Enable", "responsive-block-editor-addons")}
+											checked={progressBarBottomTitleEnable}
+											onChange={(value) =>
+												setAttributes({ progressBarBottomTitleEnable: !progressBarBottomTitleEnable })
+											}
+										/>
+										<ToggleControl
+											label={__("Bottom Value Enable", "responsive-block-editor-addons")}
+											checked={progressBarBottomValueEnable}
+											onChange={(value) =>
+												setAttributes({ progressBarBottomValueEnable: !progressBarBottomValueEnable })
+											}
+										/>
+									</Fragment>
 							)}
 							{progressBarStyle === "circular" && (
 								<Fragment>

@@ -21,6 +21,7 @@ import RbeaTabRadioControl from "../../../utils/components/rbea-tab-radio-contro
 import RbeaBackgroundTypeControl from "../../../utils/components/rbea-background-type-control";
 import RbeaColorControl from "../../../utils/components/rbea-color-control";
 import RbeaBlockBorderHelperControl from "../../../settings-components/RbeaBlockBorderSettings";
+import RbeaMediaUploadControl from "../../../utils/components/rbea-media-upload-control";
 
 // Setup the block
 const { __ } = wp.i18n;
@@ -221,6 +222,40 @@ export default class Inspector extends Component {
         blockIsTypographyColorValueUpdated,
         titleTypographyColor,
         descTypographyColor,
+        backgroundColor,
+        backgroundImage,
+
+        ctaButtonTopPadding,
+        ctaButtonBottomPadding,
+        ctaButtonLeftPadding,
+        ctaButtonRightPadding,
+        ctaButtonTopPaddingTablet,
+        ctaButtonBottomPaddingTablet,
+        ctaButtonRightPaddingTablet,
+        ctaButtonLeftPaddingTablet,
+        ctaButtonTopPaddingMobile,
+        ctaButtonBottomPaddingMobile,
+        ctaButtonLeftPaddingMobile,
+        ctaButtonRightPaddingMobile,
+        isCtaButtonPaddingMarginValueUpdated,
+
+        ctaBorderStyle,
+        ctaBorderWidth,
+        ctaBorderRadius,
+        ctaBlockTopRadius,
+        ctaBlockRightRadius,
+        ctaBlockBottomRadius,
+        ctaBlockLeftRadius,
+        ctaBlockTopRadiusTablet,
+        ctaBlockRightRadiusTablet,
+        ctaBlockBottomRadiusTablet,
+        ctaBlockLeftRadiusTablet,
+        ctaBlockTopRadiusMobile,
+        ctaBlockRightRadiusMobile,
+        ctaBlockBottomRadiusMobile,
+        ctaBlockLeftRadiusMobile,
+        ctaBlockIsRadiusControlConnected,
+        isCtaButtonBorderRadiusValueUpdated,
       },
       setAttributes,
     } = this.props;
@@ -730,7 +765,8 @@ export default class Inspector extends Component {
               {"color" == backgroundType && (
                 <Fragment>
                   <ColorBackgroundControl {...this.props} />
-                  <RbeaRangeControl
+                  {(backgroundColor && backgroundColor != '') && (
+                    <RbeaRangeControl
                     label={__("Opacity", "responsive-block-editor-addons")}
                     value={columnBackColorOpacity}
                     onChange={(value) =>
@@ -743,6 +779,7 @@ export default class Inspector extends Component {
                     max={100}
                     allowReset
                   />
+                  )}
                 </Fragment>
               )}
               {"gradient" == backgroundType && (
@@ -751,30 +788,24 @@ export default class Inspector extends Component {
                     {...this.props}
                     showHoverGradient={false}
                   />
-                  <RbeaRangeControl
-                    label={__("Opacity", "responsive-block-editor-addons")}
-                    value={columnBackColorOpacity}
-                    onChange={(value) =>
-                      setAttributes({
-                        columnBackColorOpacity:
-                          value !== undefined ? value : 100,
-                      })
-                    }
-                    min={0}
-                    max={100}
-                    allowReset
-                  />
                 </Fragment>
               )}
               {"image" == backgroundType && (
                 <Fragment>
-                  <ImageBackgroundControl
-                    {...this.props}
-                    showSomeImageOptions={false}
-                    showMoreImageOptions={false}
-                    showOverlayOptions={false}
+                  <RbeaMediaUploadControl
+                    label={__('Image', 'responsive-block-editor-addons')}
+                    value={{
+                        url: backgroundImage || '',
+                    }}
+                    onChange={(newValue) => {
+                        setAttributes({
+                            backgroundImage: newValue.url,
+                        });
+                    }}
+                    mediaType={'image'}
                   />
-                  <RbeaRangeControl
+                  {backgroundImage && (
+                    <RbeaRangeControl
                     label={__("Opacity", "responsive-block-editor-addons")}
                     value={opacity}
                     onChange={(value) =>
@@ -786,6 +817,7 @@ export default class Inspector extends Component {
                     max={100}
                     allowReset
                   />
+                  )}
                 </Fragment>
               )}
             </PanelBody>

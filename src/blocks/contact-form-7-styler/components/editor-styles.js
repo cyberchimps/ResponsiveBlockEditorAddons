@@ -320,6 +320,20 @@
      labelBottomSpacing,
      labelBottomSpacingMobile,
      labelBottomSpacingTablet,
+
+     ctaButtonTopPadding,
+      ctaButtonBottomPadding,
+      ctaButtonLeftPadding,
+      ctaButtonRightPadding,
+      ctaButtonTopPaddingTablet,
+      ctaButtonBottomPaddingTablet,
+      ctaButtonRightPaddingTablet,
+      ctaButtonLeftPaddingTablet,
+      ctaButtonTopPaddingMobile,
+      ctaButtonBottomPaddingMobile,
+      ctaButtonLeftPaddingMobile,
+      ctaButtonRightPaddingMobile,
+      isCtaButtonPaddingMarginValueUpdated
    } = props.attributes;
 
 
@@ -810,10 +824,10 @@
       "background-image": backgroundImageGradient,
       "background-color": btnColor + "!important",     
       color: ctaColor + "!important",
-      "padding-left": generateCSSUnit(ctaHpadding, "px"),
-      "padding-right": generateCSSUnit(ctaHpadding, "px"),
-      "padding-top": generateCSSUnit(ctaVpadding, "px"),
-      "padding-bottom": generateCSSUnit(ctaVpadding, "px"),
+      "padding-left": generateCSSUnit(ctaButtonLeftPadding, "px"),
+      "padding-right": generateCSSUnit(ctaButtonRightPadding, "px"),
+      "padding-top": generateCSSUnit(ctaButtonTopPadding, "px"),
+      "padding-bottom": generateCSSUnit(ctaButtonBottomPadding, "px"),
       "margin":"auto",
       "margin-left":generateCSSUnit(ctaButtonmarginleft, "px"),
       "margin-right":generateCSSUnit(ctaButtonmarginright, "px"),
@@ -934,10 +948,10 @@
     //Submit button
 		' .wpcf7 input.wpcf7-form-control.wpcf7-submit': {			
       "font-size": generateCSSUnit(submitButtonFontSizeMobile, "px"),
-      "padding-left": generateCSSUnit(ctaHpaddingMobile, "px"),
-      "padding-right": generateCSSUnit(ctaHpaddingMobile, "px"),
-      "padding-top": generateCSSUnit(ctaVpaddingMobile, "px"),
-      "padding-bottom": generateCSSUnit(ctaVpaddingMobile, "px"),
+      "padding-left": generateCSSUnit(ctaButtonLeftPaddingMobile, "px"),
+      "padding-right": generateCSSUnit(ctaButtonRightPaddingMobile, "px"),
+      "padding-top": generateCSSUnit(ctaButtonTopPaddingMobile, "px"),
+      "padding-bottom": generateCSSUnit(ctaButtonBottomPaddingMobile, "px"),
       "margin":"auto",
       "margin-left":generateCSSUnit(ctaButtonmarginleftMobile, "px"),
       "margin-right":generateCSSUnit(ctaButtonmarginrightMobile, "px"),
@@ -1065,10 +1079,10 @@
     //Submit button
 		' .wpcf7 input.wpcf7-form-control.wpcf7-submit': {			
       "font-size": generateCSSUnit(submitButtonFontSizeTablet, "px"),
-      "padding-left": generateCSSUnit(ctaHpaddingTablet, "px"),
-      "padding-right": generateCSSUnit(ctaHpaddingTablet, "px"),
-      "padding-top": generateCSSUnit(ctaVpaddingTablet, "px"),
-      "padding-bottom": generateCSSUnit(ctaVpaddingTablet, "px"),
+      "padding-left": generateCSSUnit(ctaButtonLeftPaddingTablet, "px"),
+      "padding-right": generateCSSUnit(ctaButtonRightPaddingTablet, "px"),
+      "padding-top": generateCSSUnit(ctaButtonTopPaddingTablet, "px"),
+      "padding-bottom": generateCSSUnit(ctaButtonBottomPaddingTablet, "px"),
       "margin":"auto",
       "margin-left":generateCSSUnit(ctaButtonmarginleftTablet, "px"),
       "margin-right":generateCSSUnit(ctaButtonmarginrightTablet, "px"),

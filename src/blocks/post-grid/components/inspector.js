@@ -323,16 +323,8 @@ export default class Inspector extends Component {
     // Check the post type
     const isPost = "post" === attributes.postType;
 
-    // Add instruction text to the select
-    const abImageSizeSelect = {
-      value: "selectimage",
-      label: __("Select image size", "responsive-block-editor-addons"),
-    };
-
     // Get the image size options
     const imageSizeOptions = this.imageSizeSelect();
-
-    imageSizeOptions.unshift(abImageSizeSelect);
 
     const imageSizeValue = () => {
       for (let i = 0; i < imageSizeOptions.length; i++) {
@@ -507,17 +499,19 @@ export default class Inspector extends Component {
                   setAttributes({ postsToShow: value })
                 }
               />
-              <SelectControl
-                label={__("Order By", "responsive-block-editor-addons")}
-                value={attributes.orderBy}
-                onChange={(value) => setAttributes({ orderBy: value })}
-                options={[
-                  { value: "date", label: __("Date", "responsive-block-editor-addons") },
-                  { value: "title", label: __("Title", "responsive-block-editor-addons") },
-                  { value: "rand", label: __("Random", "responsive-block-editor-addons") },
-                  { value: "menu_order", label: __("Menu Order", "responsive-block-editor-addons") },
-                ]}
-              />
+              <div className = "rbea-repeat-selector-wrapper">
+                <RbeaTabRadioControl
+                  label={__("Order By", "responsive-block-editor-addons")}
+                  value={attributes.orderBy}
+                  onChange={(value) => setAttributes({ orderBy: value })}
+                  options={[
+                    { value: "date", label: __("Date", "responsive-block-editor-addons") },
+                    { value: "title", label: __("Title", "responsive-block-editor-addons") },
+                    { value: "rand", label: __("Random", "responsive-block-editor-addons") },
+                    { value: "menu_order", label: __("Menu Order", "responsive-block-editor-addons") },
+                  ]}
+                />
+              </div>
               <RbeaTabRadioControl
                 label={__("Order", "responsive-block-editor-addons")}
                 value={attributes.order}
@@ -848,17 +842,19 @@ export default class Inspector extends Component {
               </TabPanel>,
               ]}
               {attributes.displayPostImage && [
-                <SelectControl
-                key="imageSizeControl"
-                  label={__("Image Size", "responsive-block-editor-addons")}
-                  value={imageSizeValue()}
-                  options={imageSizeOptions}
-                  onChange={(value) =>
-                    this.props.setAttributes({
-                      imageSize: value,
-                    })
-                  }
-                />,
+                <div className = "rbea-repeat-selector-wrapper">
+                  <RbeaTabRadioControl
+                  key="imageSizeControl"
+                    label={__("Image Size", "responsive-block-editor-addons")}
+                    value={imageSizeValue()}
+                    options={imageSizeOptions}
+                    onChange={(value) =>
+                      this.props.setAttributes({
+                        imageSize: value,
+                      })
+                    }
+                  />
+                </div>,
                 <RbeaTabRadioControl
                 key="imagePositionControl"  
                 label={__("Image Position", "responsive-block-editor-addons")}

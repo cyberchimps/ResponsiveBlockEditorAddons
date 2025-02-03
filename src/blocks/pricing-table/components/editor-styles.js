@@ -211,6 +211,19 @@ function EditorStyles(props) {
     subpriceBottomSpacing,
     subpriceBottomSpacingMobile,
     subpriceBottomSpacingTablet,
+
+    ctaButtonTopPadding,
+    ctaButtonBottomPadding,
+    ctaButtonLeftPadding,
+    ctaButtonRightPadding,
+    ctaButtonTopPaddingTablet,
+    ctaButtonBottomPaddingTablet,
+    ctaButtonRightPaddingTablet,
+    ctaButtonLeftPaddingTablet,
+    ctaButtonTopPaddingMobile,
+    ctaButtonBottomPaddingMobile,
+    ctaButtonLeftPaddingMobile,
+    ctaButtonRightPaddingMobile,
   } = props.attributes;
 
   var boxShadowPositionCSS = boxShadowPosition;
@@ -243,6 +256,7 @@ function EditorStyles(props) {
   let imgopacity = opacity / 100;
   let blockimgopacity = blockopacity / 100;
   let columnbackcoloropacity = columnBackColorOpacity / 100;
+  let gradientOpacity = opacity / 100;
 
   let alignStyle = "center";
   if ("left" == blockAlign) {
@@ -260,10 +274,10 @@ function EditorStyles(props) {
       "margin-left": "left" == blockAlign ? 0 : "",
       "margin-right": "right" == blockAlign ? 0 : "",
       "margin-bottom": generateCSSUnit(buttonSpace, "px"),
-      "padding-left": generateCSSUnit(ctaHpadding, "px"),
-      "padding-right": generateCSSUnit(ctaHpadding, "px"),
-      "padding-top": generateCSSUnit(ctaVpadding, "px"),
-      "padding-bottom": generateCSSUnit(ctaVpadding, "px"),
+      "padding-left": generateCSSUnit(ctaButtonLeftPadding, "px"),
+      "padding-right": generateCSSUnit(ctaButtonRightPadding, "px"),
+      "padding-top": generateCSSUnit(ctaButtonTopPadding, "px"),
+      "padding-bottom": generateCSSUnit(ctaButtonBottomPadding, "px"),
       "border-color": ctaBorderColor,
       "border-radius": generateCSSUnit(ctaBorderRadius, "px"),
       "border-width": generateCSSUnit(ctaBorderWidth, "px"),
@@ -363,11 +377,11 @@ function EditorStyles(props) {
           ? generateBackgroundImageEffect(
               `${hexToRgba(
                 backgroundColor1 || "#fff",
-                columnbackcoloropacity || 0
+                gradientOpacity || 0
               )}`,
               `${hexToRgba(
                 backgroundColor2 || "#fff",
-                columnbackcoloropacity || 0
+                gradientOpacity || 0
               )}`,
               gradientDirection,
               colorLocation1,
@@ -503,10 +517,10 @@ function EditorStyles(props) {
       "margin-bottom": generateCSSUnit(featuresBottomSpacingMobile, "px"),
     },
     " .wp-block-responsive-block-editor-addons-pricing-table-item__button": {
-      "padding-left": generateCSSUnit(ctaHpaddingMobile, "px"),
-      "padding-right": generateCSSUnit(ctaHpaddingMobile, "px"),
-      "padding-top": generateCSSUnit(ctaVpaddingMobile, "px"),
-      "padding-bottom": generateCSSUnit(ctaVpaddingMobile, "px"),
+      "padding-left": generateCSSUnit(ctaButtonLeftPaddingMobile, "px"),
+      "padding-right": generateCSSUnit(ctaButtonRightPaddingMobile, "px"),
+      "padding-top": generateCSSUnit(ctaButtonTopPaddingMobile, "px"),
+      "padding-bottom": generateCSSUnit(ctaButtonBottomPaddingMobile, "px"),
       "font-size": generateCSSUnit(ctaFontSizeMobile, "px"),
       "margin-bottom": generateCSSUnit(buttonSpaceMobile, "px"),
     },
@@ -562,10 +576,10 @@ function EditorStyles(props) {
       "margin-bottom": generateCSSUnit(featuresBottomSpacingTablet, "px"),
     },
     " .wp-block-responsive-block-editor-addons-pricing-table-item__button": {
-      "padding-left": generateCSSUnit(ctaHpaddingTablet, "px"),
-      "padding-right": generateCSSUnit(ctaHpaddingTablet, "px"),
-      "padding-top": generateCSSUnit(ctaVpaddingTablet, "px"),
-      "padding-bottom": generateCSSUnit(ctaVpaddingTablet, "px"),
+      "padding-left": generateCSSUnit(ctaButtonLeftPaddingTablet, "px"),
+      "padding-right": generateCSSUnit(ctaButtonRightPaddingTablet, "px"),
+      "padding-top": generateCSSUnit(ctaButtonTopPaddingTablet, "px"),
+      "padding-bottom": generateCSSUnit(ctaButtonBottomPaddingTablet, "px"),
       "font-size": generateCSSUnit(ctaFontSizeTablet, "px"),
       "margin-bottom": generateCSSUnit(buttonSpaceTablet, "px"),
     },

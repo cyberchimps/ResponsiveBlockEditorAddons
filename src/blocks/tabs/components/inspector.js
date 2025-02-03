@@ -268,10 +268,7 @@ export default class Inspector extends Component {
       <InspectorControls key="controls">
         <InspectorTabs>
           <InspectorTab key={"content"}>
-            <PanelBody
-              title={__("Tabs", "responsive-block-editor-addons")}
-              initialOpen={true}
-            >
+            <PanelBody>
               <Fragment>
                 <RbeaTabRadioControl
                   label={__("Position", "responsive-block-editor-addons")}
@@ -373,45 +370,79 @@ export default class Inspector extends Component {
               />
               
               {"color" == backgroundType && (
-                <TabPanel
-                  className="responsive-block-editor-addons-inspect-tabs responsive-block-editor-addons-inspect-tabs-col-2"
-                  activeClass="active-tab"
-                  tabs={[
-                    {
-                      name: "normal",
-                      title: __("Normal", "responsive-block-editor-addons"),
-                      className: "responsive-block-editor-addons-normal-tab",
+                <Fragment>
+                  <TabPanel
+                    className="responsive-block-editor-addons-inspect-tabs 
+                    responsive-block-editor-addons-inspect-tabs-col-2  
+                    responsive-block-editor-addons-color-inspect-tabs"
+                    activeClass="active-tab"
+                    initialTabName="normal" // Set the default active tab here
+                    tabs={[
+                      {
+                        name: "empty-1",
+                        title: __("", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-empty-tab",
                     },
                     {
-                      name: "hover",
-                      title: __("Hover", "responsive-block-editor-addons"),
-                      className: "responsive-block-editor-addons-hover-tab",
+                        name: "normal",
+                        title: __("Normal", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-normal-tab",
                     },
-                  ]}
-                >
-                  {(tabName) => {
-                    let btn_color_tab;
-                    if ("normal" === tabName.name) {
-                      btn_color_tab = (
-                        <Fragment>
-                          <ColorBackgroundControl {...this.props} />
-                        </Fragment>
-                      );
-                    } else {
-                      btn_color_tab = (
-                        <Fragment>
-                          <RbeaColorControl
-                            label = {__("Hover Background Color", "responsive-block-editor-addons")}
-                            colorValue={backgroundHoverColor}
-                            onChange={(colorValue) => setAttributes({ backgroundHoverColor: colorValue })}
-                            resetColor={() => setAttributes({ backgroundHoverColor: "" })}
-                          />
-                        </Fragment>
-                      );
+                    {
+                        name: "empty-2",
+                        title: __("", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-empty-tab-middle",
+                    },
+                    {
+                        name: "hover",
+                        title: __("Hover", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-hover-tab",
+                    },
+                    {
+                        name: "empty-3",
+                        title: __("", "responsive-block-editor-addons"),
+                        className: "responsive-block-editor-addons-empty-tab",
+                    },
+                    ]}
+                  >
+                    {(tabName) => {
+                      let btn_color_tab;
+                      if ("normal" === tabName.name) {
+                        btn_color_tab = (
+                          <Fragment>
+                            <ColorBackgroundControl {...this.props} />
+                          </Fragment>
+                        );
+                      } else if ("hover" === tabName.name) {
+                        btn_color_tab = (
+                          <Fragment>
+                            <RbeaColorControl
+                              label = {__("Hover Background Color", "responsive-block-editor-addons")}
+                              colorValue={backgroundHoverColor}
+                              onChange={(colorValue) => setAttributes({ backgroundHoverColor: colorValue })}
+                              resetColor={() => setAttributes({ backgroundHoverColor: "" })}
+                            />
+                          </Fragment>
+                        );
+                      } else {
+                        btn_color_tab = this.props.values.emptyColorControl;
+                      }
+                      return <div>{btn_color_tab}</div>;
+                    }}
+                  </TabPanel>
+                  {(backgroundColor && backgroundColor != '') && (
+                    <RbeaRangeControl
+                    label={__("Opacity", "responsive-block-editor-addons")}
+                    value={opacity}
+                    onChange={(value) =>
+                      setAttributes({ opacity: value !== undefined ? value : 20 })
                     }
-                    return <div>{btn_color_tab}</div>;
-                  }}
-                </TabPanel>
+                    min={0}
+                    max={100}
+                    allowReset
+                  />
+                  )}
+                </Fragment>
               )}
               {"gradient" == backgroundType && (
                 <GradientBackgroundControl
@@ -419,17 +450,47 @@ export default class Inspector extends Component {
                   showHoverGradient={true}
                 />
               )}
-              <RbeaRangeControl
-                label={__("Opacity", "responsive-block-editor-addons")}
-                value={opacity}
-                onChange={(value) =>
-                  setAttributes({ opacity: value !== undefined ? value : 20 })
-                }
-                min={0}
-                max={100}
-                allowReset
+              
+            </PanelBody>
+            <PanelBody
+              title={__("Border", "responsive-block-editor-addons")}
+              initialOpen={false}
+            >
+              <RbeaBlockBorderHelperControl
+                attrNameTemplate="block%s"
+                values={{
+                  radius: blockBorderRadius,
+                  style: blockBorderStyle,
+                  width: blockBorderWidth,
+                  color: blockBorderColor,
+                }}
+                setAttributes={setAttributes}
+                {...this.props}
               />
             </PanelBody>
+            <PanelBody title={__("Box Shadow", "responsive-block-editor-addons")}
+								initialOpen={false}
+							>
+								<BoxShadowControl
+									setAttributes={setAttributes}
+									label={__("Box Shadow", "responsive-block-editor-addons")}
+									boxShadowColor={{ value: boxShadowColor, label: __("Color", "responsive-block-editor-addons") }}
+									boxShadowHOffset={{
+										value: boxShadowHOffset,
+										label: __("Horizontal", "responsive-block-editor-addons"),
+									}}
+									boxShadowVOffset={{
+										value: boxShadowVOffset,
+										label: __("Vertical", "responsive-block-editor-addons"),
+									}}
+									boxShadowBlur={{ value: boxShadowBlur, label: __("Blur", "responsive-block-editor-addons") }}
+									boxShadowSpread={{ value: boxShadowSpread, label: __("Spread", "responsive-block-editor-addons") }}
+									boxShadowPosition={{
+										value: boxShadowPosition,
+										label: __("Position", "responsive-block-editor-addons"),
+									}}
+								/>
+							</PanelBody>
             <TypographyHelperControl
                 title={__("Title Typography", "responsive-block-editor-addons")}
                 attrNameTemplate="tabTitle%s"
@@ -617,45 +678,6 @@ export default class Inspector extends Component {
                 onChange={(value) => setAttributes({ tabsZindex: value })}
               />
             </InspectorAdvancedControls> */}
-            <PanelBody
-              title={__("Border", "responsive-block-editor-addons")}
-              initialOpen={false}
-            >
-              <RbeaBlockBorderHelperControl
-                attrNameTemplate="block%s"
-                values={{
-                  radius: blockBorderRadius,
-                  style: blockBorderStyle,
-                  width: blockBorderWidth,
-                  color: blockBorderColor,
-                }}
-                setAttributes={setAttributes}
-                {...this.props}
-              />
-              <PanelBody title={__("Box Shadow", "responsive-block-editor-addons")}
-								initialOpen={false}
-							>
-								<BoxShadowControl
-									setAttributes={setAttributes}
-									label={__("Box Shadow", "responsive-block-editor-addons")}
-									boxShadowColor={{ value: boxShadowColor, label: __("Color", "responsive-block-editor-addons") }}
-									boxShadowHOffset={{
-										value: boxShadowHOffset,
-										label: __("Horizontal", "responsive-block-editor-addons"),
-									}}
-									boxShadowVOffset={{
-										value: boxShadowVOffset,
-										label: __("Vertical", "responsive-block-editor-addons"),
-									}}
-									boxShadowBlur={{ value: boxShadowBlur, label: __("Blur", "responsive-block-editor-addons") }}
-									boxShadowSpread={{ value: boxShadowSpread, label: __("Spread", "responsive-block-editor-addons") }}
-									boxShadowPosition={{
-										value: boxShadowPosition,
-										label: __("Position", "responsive-block-editor-addons"),
-									}}
-								/>
-							</PanelBody>
-            </PanelBody>
             <PanelBody
               title={__("Z Index", "responsive-block-editor-addons")}
               initialOpen={false}

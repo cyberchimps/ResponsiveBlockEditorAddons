@@ -523,6 +523,78 @@ const attributes = {
   titleBottomSpacingTablet: {
     type: "number",
   },
+  contentAlignMobile: {
+    type: "string",
+    default: "center",
+  },
+  contentAlignTablet: {
+    type: "string",
+    default: "center",
+  },
+  verticalAlignmentMobile: {
+    type: "string",
+    default: "center",
+  },
+  verticalAlignmentTablet: {
+    type: "string",
+    default: "center",
+  },
+  IsAlignmentValueUpdated: {
+    type: "boolean",
+    default: false,
+  },
+  boxLeftPadding: {
+    type: "number",
+    default: 15,
+  },
+  boxRightPadding: {
+    type: "number",
+    default: 15,
+  },
+  boxBottomPadding: {
+    type: "number",
+    default: 15,
+  },
+  boxTopPadding: {
+    type: "number",
+    default: 15,
+  },
+  boxLeftPaddingTablet: {
+    type: "number",
+    default: 15,
+  },
+  boxRightPaddingTablet: {
+    type: "number",
+    default: 15,
+  },
+  boxBottomPaddingTablet: {
+    type: "number",
+    default: 15,
+  },
+  boxTopPaddingTablet: {
+    type: "number",
+    default: 15,
+  },
+  boxLeftPaddingMobile: {
+    type: "number",
+    default: 15,
+  },
+  boxRightPaddingMobile: {
+    type: "number",
+    default: 15,
+  },
+  boxBottomPaddingMobile: {
+    type: "number",
+    default: 15,
+  },
+  boxTopPaddingMobile: {
+    type: "number",
+    default: 15,
+  },
+  blockIsPaddingValueUpdated: {
+    type: "boolean",
+    default: false,
+  }
 };
 
 export default attributes;

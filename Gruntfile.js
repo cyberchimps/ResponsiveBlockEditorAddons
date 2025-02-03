@@ -23,6 +23,7 @@ module.exports = function( grunt ) {
                             'admin/**',
                             'dist/**',
                             'includes/**',
+                            'helper/**',
                             'assets/**',
                             'readme.txt',
                             'src/**',

@@ -168,9 +168,7 @@ class Inspector extends Component {
         <InspectorControls>
           <InspectorTabs>
             <InspectorTab key="content">
-              <PanelBody
-                title={__("Divider settings", "responsive-block-editor-addons")}
-              >
+              <PanelBody>
                 <ResponsiveBaseControl
                   {...this.props}
                   label={__(
@@ -233,11 +231,13 @@ class Inspector extends Component {
               <PanelBody
                 title={__("Shape Styles", "responsive-block-editor-addons")}
               >
-                <RadioControl
-                  selected={design}
-                  options={fixedOptions}
-                  onChange={(value) => setAttributes({ design: value })}
-                />
+                <div className="rbea-shape-divider-control-container">
+                  <RadioControl
+                    selected={design}
+                    options={fixedOptions}
+                    onChange={(value) => setAttributes({ design: value })}
+                  />
+                </div>
               </PanelBody>
               <PanelBody
                 title={__("Shape Color", "responsive-block-editor-addons")}
@@ -313,7 +313,7 @@ class Inspector extends Component {
                     />
                     <RbeaRangeControl
                       label={__(
-                        "Gradient Direction",
+                        "Angle",
                         "responsive-block-editor-addons"
                       )}
                       value={gradientDirection}

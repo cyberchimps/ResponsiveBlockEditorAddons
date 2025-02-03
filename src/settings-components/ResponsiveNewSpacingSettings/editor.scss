@@ -45,14 +45,14 @@
       &.rbea-spacing-control-disconnected {
         border-color: #E1E1E1;
         background-color: #ffffff;
-        color: #959595;
-    }
+        color: #007CBA;
+      }
 
       &.rbea-spacing-control-connected {
         border-color: #E1E1E1;
         color: #FFFFFF;
         background: #007CBA;   
-    }
+      }
     }
     .rbea-spacing-control__input-labels {
       display: flex;
@@ -142,8 +142,9 @@
 
     & .components-tab-panel__tabs {
         position: relative;
-        text-align: center;
-        margin-left: -20px;
+        text-align: right;
+        margin-left: 0px;
+        margin-right: 20px;
         top: 3px;
     }
 }

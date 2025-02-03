@@ -65,6 +65,10 @@ const GalleryAttributes = {
     type: "number",
     default: 15,
   },
+  gutterTablet: {
+    type: "number",
+    default: 15,
+  },
   radius: {
     type: "number",
     default: 0,

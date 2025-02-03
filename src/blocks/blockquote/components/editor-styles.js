@@ -16,6 +16,8 @@ function EditorStyles(props) {
     quoteFontWeight,
     quoteLineHeight,
     quoteAlign,
+    quoteAlignMobile,
+    quoteAlignTablet,
     quoteSize,
     quoteColor,
     quoteHposition,
@@ -197,6 +199,7 @@ function EditorStyles(props) {
   var mobile_selectors = {
     "": {
       'opacity': hideWidgetMobile ? 0.2 : 1,
+      "text-align": quoteAlignMobile,
       "padding-left": generateCSSUnit(blockLeftPaddingMobile, "px"),
       "padding-right": generateCSSUnit(blockRightPaddingMobile, "px"),
       "padding-top": generateCSSUnit(blockTopPaddingMobile, "px"),
@@ -230,6 +233,7 @@ function EditorStyles(props) {
   var tablet_selectors = {
     "": {
       'opacity': hideWidgetTablet ? 0.2 : 1,
+      "text-align": quoteAlignTablet,
       "padding-left": generateCSSUnit(blockLeftPaddingTablet, "px"),
       "padding-right": generateCSSUnit(blockRightPaddingTablet, "px"),
       "padding-top": generateCSSUnit(blockTopPaddingTablet, "px"),

@@ -155,6 +155,18 @@ function EditorStyles(props) {
     buttonRightPaddingMobile,
     buttonRightPaddingTablet,
     popupTextTypographyTypographyColor,
+    popupTopPadding,
+    popupTopPaddingMobile,
+    popupTopPaddingTablet,
+    popupBottomPadding,
+    popupBottomPaddingMobile,
+    popupBottomPaddingTablet,
+    popupLeftPadding,
+    popupLeftPaddingMobile,
+    popupLeftPaddingTablet,
+    popupRightPadding,
+    popupRightPaddingMobile,
+    popupRightPaddingTablet,
   } = props.attributes;
 
   const popupScreenPositions = {
@@ -352,10 +364,10 @@ function EditorStyles(props) {
     " .responsive-block-editor-addons-popup-modal-content": {
       "width": generateCSSUnit(popupContainerWidth, "px"),
       "height": 'auto' !== popupHeightType ? generateCSSUnit(popupHeightCustom, "px") : 'auto',
-      "padding-top": generateCSSUnit(popupPaddingTop, "px"),
-      "padding-right": generateCSSUnit(popupPaddingRight, "px"),
-      "padding-bottom": generateCSSUnit(popupPaddingBottom, "px"),
-      "padding-left": generateCSSUnit(popupPaddingLeft, "px"),
+      "padding-top": generateCSSUnit(popupTopPadding, "px"),
+      "padding-right": generateCSSUnit(popupRightPadding, "px"),
+      "padding-bottom": generateCSSUnit(popupBottomPadding, "px"),
+      "padding-left": generateCSSUnit(popupLeftPadding, "px"),
       ...desktop,
       ...popupContainerBackground,
       "border-style": popupBlockBorderStyle,
@@ -409,10 +421,10 @@ function EditorStyles(props) {
     " .responsive-block-editor-addons-popup-modal-content": {
       "width": generateCSSUnit(popupContainerWidthMobile, "px"),
       "height": 'auto' !== popupHeightType ? generateCSSUnit(popupHeightCustomMobile, "px") : 'auto',
-      "padding-top": generateCSSUnit(popupPaddingTopMobile, "px"),
-      "padding-right": generateCSSUnit(popupPaddingRightMobile, "px"),
-      "padding-bottom": generateCSSUnit(popupPaddingBottomMobile, "px"),
-      "padding-left": generateCSSUnit(popupPaddingLeftMobile, "px"),
+      "padding-top": generateCSSUnit(popupTopPaddingMobile, "px"),
+      "padding-right": generateCSSUnit(popupRightPaddingMobile, "px"),
+      "padding-bottom": generateCSSUnit(popupBottomPaddingMobile, "px"),
+      "padding-left": generateCSSUnit(popupLeftPaddingMobile, "px"),
       "border-top-left-radius": generateCSSUnit(popupBlockTopRadiusMobile, "px"),
       "border-top-right-radius": generateCSSUnit(popupBlockRightRadiusMobile, "px"),
       "border-bottom-right-radius": generateCSSUnit(popupBlockBottomRadiusMobile, "px"),
@@ -452,10 +464,10 @@ function EditorStyles(props) {
     " .responsive-block-editor-addons-popup-modal-content": {
       "width": generateCSSUnit(popupContainerWidthTablet, "px"),
       "height": 'auto' !== popupHeightType ? generateCSSUnit(popupHeightCustomTablet, "px") : 'auto',
-      "padding-top": generateCSSUnit(popupPaddingTopTablet, "px"),
-      "padding-right": generateCSSUnit(popupPaddingRightTablet, "px"),
-      "padding-bottom": generateCSSUnit(popupPaddingBottomTablet, "px"),
-      "padding-left": generateCSSUnit(popupPaddingLeftTablet, "px"),
+      "padding-top": generateCSSUnit(popupTopPaddingTablet, "px"),
+      "padding-right": generateCSSUnit(popupRightPaddingTablet, "px"),
+      "padding-bottom": generateCSSUnit(popupBottomPaddingTablet, "px"),
+      "padding-left": generateCSSUnit(popupLeftPaddingTablet, "px"),
       "border-top-left-radius": generateCSSUnit(popupBlockTopRadiusTablet, "px"),
       "border-top-right-radius": generateCSSUnit(popupBlockRightRadiusTablet, "px"),
       "border-bottom-right-radius": generateCSSUnit(popupBlockBottomRadiusTablet, "px"),
@@ -474,6 +486,7 @@ function EditorStyles(props) {
       'margin-right': generateCSSUnit(buttonRightMargin, "px"),
       'margin-bottom': generateCSSUnit(buttonBottomMargin, "px"),
       'margin-left': generateCSSUnit(buttonLeftMargin, "px"),
+      'justify-content': popupTriggerAlign,
     };
     mobile_selectors[" .responsive-block-editor-addons-popup-trigger-wrap"]= {
       'padding-top': generateCSSUnit(buttonTopPaddingMobile, "px"),
@@ -484,6 +497,7 @@ function EditorStyles(props) {
       'margin-right': generateCSSUnit(buttonRightMarginMobile, "px"),
       'margin-bottom': generateCSSUnit(buttonBottomMarginMobile, "px"),
       'margin-left': generateCSSUnit(buttonLeftMarginMobile, "px"),
+      'justify-content': popupTriggerAlignMobile,
     };
     tablet_selectors[" .responsive-block-editor-addons-popup-trigger-wrap"]= {
       'padding-top': generateCSSUnit(buttonTopPaddingTablet, "px"),
@@ -494,6 +508,7 @@ function EditorStyles(props) {
       'margin-right': generateCSSUnit(buttonRightMarginTablet, "px"),
       'margin-bottom': generateCSSUnit(buttonBottomMarginTablet, "px"),
       'margin-left': generateCSSUnit(buttonLeftMarginTablet, "px"),
+      "justify-content": popupTriggerAlignTablet,
     };
   }
 

@@ -165,6 +165,16 @@ function EditorStyles(props) {
   ctaTextBottomSpacing,
   ctaTextBottomSpacingMobile,
   ctaTextBottomSpacingTablet,
+  backgroundPosition,
+  backgroundPositionMobile,
+  backgroundPositionTablet,
+  backgroundAttachment,
+  backgroundRepeat,
+  backgroundSize,
+  backgroundSizeTablet,
+  backgroundSizeMobile,
+  imagePositionTab,
+  imageSizeTab,
   } = props.attributes;
 
   let updatedButtonBackgroundColor = "";
@@ -280,9 +290,9 @@ function EditorStyles(props) {
     " .responsive-block-editor-addons-cta-image-wrap .responsive-block-editor-addons-cta-image": {
       "background-image": imgURL !== "empty" && backgroundImage === "" ? imgURL : (backgroundImage ? `url(${backgroundImage})` : null), // For compatibility with v1.3.2.
       "height": 100 + "%",
-      "background-position": imagePosition !== "empty" && backgroundImagePosition === "center center" ? imagePosition : backgroundImagePosition, // For compatibility with v1.3.2.
-      "background-repeat": imageRepeat !== "empty" && backgroundImageRepeat === "no-repeat" ? imageRepeat : backgroundImageRepeat, // For compatibility with v1.3.2.
-      "background-size": thumbsize !== "empty" && backgroundImageSize === "cover" ? thumbsize : backgroundImageSize, // For compatibility with v1.3.2.
+      "background-position": imagePosition !== "empty" && backgroundPosition === "center center" ? imagePosition : backgroundPosition, // For compatibility with v1.3.2.
+      "background-repeat": imageRepeat !== "empty" && backgroundRepeat === "no-repeat" ? imageRepeat : backgroundRepeat, // For compatibility with v1.3.2.
+      "background-size": thumbsize !== "empty" && backgroundSize === "cover" ? thumbsize : backgroundSize, // For compatibility with v1.3.2.
       "border-top-left-radius": generateCSSUnit(blockTopRadius, "px"),
       "border-top-right-radius": generateCSSUnit(blockRightRadius, "px"),
       "border-bottom-right-radius": generateCSSUnit(blockBottomRadius, "px"),
@@ -384,6 +394,8 @@ function EditorStyles(props) {
       "border-top-right-radius": generateCSSUnit(blockRightRadiusMobile, "px"),
       "border-bottom-right-radius": generateCSSUnit(blockBottomRadiusMobile, "px"),
       "border-bottom-left-radius": generateCSSUnit(blockLeftRadiusMobile, "px"),
+      "background-position": imagePosition !== "empty" && backgroundPositionMobile === "center center" ? imagePosition : backgroundPositionMobile, // For compatibility with v1.3.2.
+      "background-size": thumbsize !== "empty" && backgroundSizeMobile === "cover" ? thumbsize : backgroundSizeMobile, // For compatibility with v1.3.2.
     },
   };
 
@@ -433,6 +445,8 @@ function EditorStyles(props) {
       "border-top-right-radius": generateCSSUnit(blockRightRadiusTablet, "px"),
       "border-bottom-right-radius": generateCSSUnit(blockBottomRadiusTablet, "px"),
       "border-bottom-left-radius": generateCSSUnit(blockLeftRadiusTablet, "px"),
+      "background-position": imagePosition !== "empty" && backgroundPositionTablet === "center center" ? imagePosition : backgroundPositionTablet, // For compatibility with v1.3.2.
+      "background-size": thumbsize !== "empty" && backgroundSizeTablet === "cover" ? thumbsize : backgroundSizeTablet, // For compatibility with v1.3.2.
     },
   };
 

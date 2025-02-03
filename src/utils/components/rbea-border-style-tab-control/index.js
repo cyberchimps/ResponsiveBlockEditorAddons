@@ -33,25 +33,25 @@ const RbeaBorderStyleTabControl = ({ selected, onChange }) => {
   return (
     <Fragment>
         <div className = "rbea-border-syle-control">
-        <div className="rbea-control__header">
-            <div className="uag-responsive-label-wrap">
-                <span className="uag-control-label"> {__("Border Style", "responsive-block-editor-addons")}</span>
-            </div>
-            <div className="rbea-control__actions">
-                <div tabIndex="0">
-                    <button type="button" className="components-button rbea-reset is-secondary is-small" disabled="" onClick={handleOnReset}>
-                        <span className="dashicon dashicons dashicons-image-rotate"></span>
-                    </button>
+            <div className="rbea-control__header">
+                <div className="uag-responsive-label-wrap">
+                    <span className="uag-control-label"> {__("Border Style", "responsive-block-editor-addons")}</span>
+                </div>
+                <div className="rbea-control__actions">
+                    <div tabIndex="0">
+                        <button type="button" className="components-button rbea-reset is-secondary is-small" disabled="" onClick={handleOnReset}>
+                            <span className="dashicon dashicons dashicons-image-rotate"></span>
+                        </button>
+                    </div>
                 </div>
             </div>
+            <RadioControl 
+                className = "rbea-border-style-selector"
+                selected={selected}
+                options = {fixedOptions}
+                onChange={onChange}
+            />
         </div>
-        <RadioControl 
-            className = "rbea-border-style-selector"
-            selected={selected}
-            options = {fixedOptions}
-            onChange={onChange}
-        />
-    </div>
    </Fragment>
   );
 };

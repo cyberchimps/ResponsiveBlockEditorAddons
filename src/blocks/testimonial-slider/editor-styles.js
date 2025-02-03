@@ -151,6 +151,21 @@ function EditorStyles(props) {
   nameBottomSpacing,
   nameBottomSpacingMobile,
   nameBottomSpacingTablet,
+  backgroundPosition,
+  backgroundPositionMobile,
+  backgroundPositionTablet,
+  backgroundSizeTablet,
+  backgroundSizeMobile,
+  imagePositionTab,
+  imageSizeTab,
+  backgroundImageValueUpdated,
+
+  backgroundType,
+  backgroundColor1,
+  gradientDirection,
+  backgroundColor2,
+  colorLocation1,
+  colorLocation2,
   } = props.attributes;
 
   var img_align = "center";
@@ -161,36 +176,80 @@ function EditorStyles(props) {
     img_align = "flex-end";
   }
 
-  let updatedBackgroundImage = "";
-  let backgroundImageEffect = "";
-  let imgopacity = backgroundOpacity / 100;
+  // let updatedBackgroundImage = "";
+  // let backgroundImageEffect = "";
+  // let imgopacity = backgroundOpacity / 100;
 
-  if (backgroundImage) {
-    updatedBackgroundImage = `linear-gradient(${hexToRgba(
+  // if (backgroundImage) {
+  //   updatedBackgroundImage = `linear-gradient(${hexToRgba(
+  //     backgroundImageColor || "#fff",
+  //     imgopacity || 0
+  //   )},${hexToRgba(
+  //     backgroundImageColor || "#fff",
+  //     imgopacity || 0
+  //   )}),url(${backgroundImage})`;
+  //   backgroundImageEffect = "";
+  //   if (gradientOverlayType === "linear") {
+  //     backgroundImageEffect = generateBackgroundImageEffect(
+  //       `${hexToRgba(gradientOverlayColor1 || "#fff", imgopacity || 0)}`,
+  //       `${hexToRgba(gradientOverlayColor2 || "#fff", imgopacity || 0)}`,
+  //       gradientOverlayAngle,
+  //       gradientOverlayLocation1,
+  //       gradientOverlayLocation2
+  //     );
+  //   }
+  //   else {
+  //     backgroundImageEffect = `radial-gradient( at ${gradientOverlayPosition}, ${hexToRgba(
+  //       gradientOverlayColor1 || "#fff",
+  //       imgopacity || 0
+  //     )} ${gradientOverlayLocation1}%, ${hexToRgba(
+  //       gradientOverlayColor2 || "#fff",
+  //       imgopacity || 0
+  //     )} ${gradientOverlayLocation2}%)`;
+  //   }
+  // }
+
+
+  // New Background Image
+  let imgopacity = opacity / 100;
+
+  let updatedBackgroundImage = `url(${backgroundImage})`;
+  let backgroundImageEffect = "";
+  let colorType = "";
+  if (overlayType === "color" || overlayType === "") {
+    let colorType = `${hexToRgba(
       backgroundImageColor || "#fff",
       imgopacity || 0
-    )},${hexToRgba(
-      backgroundImageColor || "#fff",
-      imgopacity || 0
-    )}),url(${backgroundImage})`;
-    backgroundImageEffect = "";
-    if (gradientOverlayType === "linear") {
-      backgroundImageEffect = generateBackgroundImageEffect(
-        `${hexToRgba(gradientOverlayColor1 || "#fff", imgopacity || 0)}`,
-        `${hexToRgba(gradientOverlayColor2 || "#fff", imgopacity || 0)}`,
-        gradientOverlayAngle,
-        gradientOverlayLocation1,
-        gradientOverlayLocation2
-      );
+    )}`;
+
+    if(backgroundImage) {
+      updatedBackgroundImage = `linear-gradient(${hexToRgba(
+        backgroundImageColor || "#fff",
+        imgopacity || 0
+      )},${hexToRgba(
+        backgroundImageColor || "#fff",
+        imgopacity || 0
+      )}),url(${backgroundImage})`;
     }
-    else {
+    backgroundImageEffect = "";
+  }else {
+    if (gradientOverlayType === "linear") {
+      backgroundImageEffect = `linear-gradient(${gradientOverlayAngle}deg, ${hexToRgba(
+        gradientOverlayColor1 || "#fff",
+        imgopacity || 0
+      )} ${gradientOverlayLocation1}%, ${hexToRgba(
+        gradientOverlayColor2 || "#fff",
+        imgopacity || 0
+      )} ${gradientOverlayLocation2}%),url(${backgroundImage})`;
+    }
+    if (gradientOverlayType === "radial") {
       backgroundImageEffect = `radial-gradient( at ${gradientOverlayPosition}, ${hexToRgba(
         gradientOverlayColor1 || "#fff",
         imgopacity || 0
       )} ${gradientOverlayLocation1}%, ${hexToRgba(
         gradientOverlayColor2 || "#fff",
         imgopacity || 0
-      )} ${gradientOverlayLocation2}%)`;
+      )} ${gradientOverlayLocation2}%),url(${backgroundImage})`;
     }
   }
 
@@ -263,22 +322,29 @@ function EditorStyles(props) {
       color: descTypographyColor,
       "margin-bottom": generateCSSUnit(descBottomSpacing, "px"),
     },
-    " .responsive-block-editor-addons-testimonial__wrap.responsive-block-editor-addons-tm__bg-type-color .responsive-block-editor-addons-tm__content": {
-      "background-color": backgroundColor,
-    },
-    " .responsive-block-editor-addons-testimonial__wrap.responsive-block-editor-addons-tm__bg-type-image .responsive-block-editor-addons-tm__content": {
-      "background-image": updatedBackgroundImage,
-      "background-position": backgroundImagePosition,
-      "background-attachment": backgroundAttachment,
-      "background-repeat": backgroundRepeat !== "empty" && backgroundImageRepeat === "no-repeat" ? backgroundRepeat : backgroundImageRepeat, // For compatibility with v1.3.2.
-      "background-size": backgroundSize !== "empty" && backgroundImageSize === "cover" ? backgroundSize : backgroundImageSize, // For compatibility with v1.3.2.
-    },
     " .responsive-block-editor-addons-testimonial__wrap.responsive-block-editor-addons-tm__bg-type-image .responsive-block-editor-addons-tm__overlay": {
+      "background-position": backgroundPosition,
+      "background-attachment": backgroundAttachment,
+      "background-repeat": backgroundRepeat,
+      "background-size": backgroundSize,
       "background-color":
-        overlayType == "color"
+        backgroundType == "color"
           ? `${hexToRgba(backgroundColor || "#fff", imgopacity || 0)}`
           : undefined,
-      "background-image": backgroundImageEffect,
+      "background-image": backgroundType === "image" && overlayType === "gradient"
+        ? backgroundImageEffect
+        : backgroundType === "gradient"
+        ? generateBackgroundImageEffect(
+            `${hexToRgba(backgroundColor1 || "#fff", imgopacity || 0)}`,
+            `${hexToRgba(backgroundColor2 || "#fff", imgopacity || 0)}`,
+            gradientDirection,
+            colorLocation1,
+            colorLocation2
+          )
+        : backgroundType === "image"
+        ? updatedBackgroundImage
+        : undefined,
+      opacity: backgroundType === "image" ? imgopacity : '',
     },
   };
 

@@ -178,8 +178,8 @@
 }
 
 .responsive-size-type-field-tabs {
-  margin-bottom: 24px;
-  margin-top: 24px;
+  margin-bottom: 16px;
+  margin-top: 16px;
 }
 .responsive-size-type-field__common-tabs .components-tab-panel__tabs {
   margin-bottom: -34px;
@@ -295,6 +295,7 @@
    display: flex;
    justify-content: space-between;
    align-items: center;
+   margin-bottom: 16px;
 
    .rbea-section-size-control-tab-selector{
     width: fit-content;
@@ -312,50 +313,51 @@
 }
 
 .rbea-inspector-tab{
-.rbea-repeat-selector-wrapper  {
-  .rbea-tab-radio-options{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr); 
-    gap: 0; 
-    border: 1px solid #C9C8C8!important ;
-    border-radius: 6px; 
-    overflow: hidden;
+  .rbea-repeat-selector-wrapper  {
+    .rbea-tab-radio-control-wrapper {
+      .rbea-tab-radio-options{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr); 
+        gap: 0;
+        box-shadow: inset 0 0 0 0.5px #C9C8C8;
+        border-radius: 6px; 
+        overflow: hidden;
+        box-sizing: border-box;
+      
+        .rbea-tab-radio-option  {
+          font-family: Roboto;
+          color: #666;
+          font-size: 13px;
+          font-weight: 400;
+          line-height: 16.41px;
+          text-align: center;
+          padding-top: 8px;
+          padding-bottom: 8px; 
+          display: block;
+          flex: 1;
+          height: 32px;
+          border: unset;
+          border-radius: 0;
+          cursor: pointer;
+          box-shadow: inset 0 0 0 0.5px #C9C8C8;
+        }
+      
+        .rbea-tab-radio-option:first-child {
+          border-radius: 6px 0px 0px 0px;
+        }
+        .rbea-tab-radio-option:last-child {
+          border-radius: 0px 0px 6px 0px;
+        }
+        .rbea-tab-radio-option.is-active {
+          background-color: #007CBA;
+          color: white;
+          box-shadow: inset 0 0 0 0.5px #007CBA;
+          border-color: #007CBA;
+        }
+      }
+    }
   }
-
-  .rbea-tab-radio-option  {
-    border: 1px solid #C9C8C8!important ;
-  }
-  
-  .rbea-tab-radio-options :nth-child(1), 
-  .rbea-tab-radio-options :nth-child(2) {
-    border-bottom: none !important ; 
-  }
-  
-  .rbea-tab-radio-options :nth-child(1) {
-    border: none !important; 
-    border-bottom-left-radius: 0px !important;
-    border-right: 1px solid #C9C8C8!important ;
-  }
-  
-  .rbea-tab-radio-options :nth-child(2) {
-    border: none !important; 
-    border-bottom-right-radius: 0px !important;
-    border-bottom: 1px solid #C9C8C8!important ;
-  }
-  
-  .rbea-tab-radio-options :nth-child(3) {
-    border: none !important; 
-    border-top-left-radius: 0px !important;
-    border-top: 1px solid #C9C8C8!important ;
-  }
-  
-  .rbea-tab-radio-options :nth-child(4) {
-    border: none !important; 
-    border-top-right-radius: 0px !important;
-    border-left: 1px solid #C9C8C8!important ;
-  }
-}
 }
 
 .rbea-inspector-tab>.rbea-Z-index-control-tabs , .rbea-inspector-tab>.rbea-range-control {

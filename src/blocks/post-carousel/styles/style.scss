@@ -395,3 +395,16 @@ ul.slick-dots li button:before {
     }
   }
 }
+
+.responsive-block-editor-addons-post-carousel-tab-select-container {
+  .rbea-tab-radio-control-wrapper {
+		.rbea-tab-radio-options {
+			.rbea-tab-radio-option {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 50px;
+			}
+		}
+	}
+}

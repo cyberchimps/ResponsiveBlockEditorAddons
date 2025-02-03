@@ -8,7 +8,7 @@ import './styles/editor.scss';
 
 const RbeaWidthRangeControl = ( props ) => {
     const { value, onChange, min = 0, max = 100, label = '', initialPosition = 0 ,resetFallbackValue = 0 ,
-        allowReset = true, extraControls = false, separatorWidthType, setAttributes, ...restProps} = props;
+        allowReset = true, extraControls = false, widthType, setAttributes, ...restProps} = props;
 
     const [currentValue, setCurrentValue] = useState(value !== undefined ? value : initialPosition);
 
@@ -34,9 +34,9 @@ const RbeaWidthRangeControl = ( props ) => {
                               key={"px"}
                               className="responsive-block-editor-addons-size-btn"
                               size='small'
-                              isPrimary={separatorWidthType === "px"}
-                              aria-pressed={separatorWidthType === "px"}
-                              onClick={() => setAttributes({ separatorWidthType: "px" })}
+                              isPrimary={widthType === "px"}
+                              aria-pressed={widthType === "px"}
+                              onClick={() => setAttributes({ widthType: "px" })}
                             >
                                 {"px"}
                             </Button>
@@ -44,9 +44,9 @@ const RbeaWidthRangeControl = ( props ) => {
                               key={"%"}
                               className="responsive-block-editor-addons-size-btn"
                               size='small'
-                              isPrimary={separatorWidthType === "%"}
-                              aria-pressed={separatorWidthType === "%"}
-                              onClick={() => setAttributes({ separatorWidthType: "%" })}
+                              isPrimary={widthType === "%"}
+                              aria-pressed={widthType === "%"}
+                              onClick={() => setAttributes({ widthType: "%" })}
                             >
                               {"%"}
                             </Button>

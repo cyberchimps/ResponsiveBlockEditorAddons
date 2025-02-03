@@ -36,3 +36,24 @@
 .responsive-block-editor-addons-cta-inspector-media.components-button {
   padding: 8px;
 }
+
+.responsive-block-editor-addons-font-icon-picker-container {
+  margin-bottom: 24px;
+}
+
+.components-base-control {
+  .components-base-control__field {
+    .components-select-control {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.rbea-font-weight-control-container {
+  .components-input-control__container {
+		max-width: 105px;
+	}
+}

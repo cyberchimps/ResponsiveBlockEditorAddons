@@ -17,6 +17,7 @@ import RbeaBackgroundTypeControl from "../../../../utils/components/rbea-backgro
 import ResponsiveNewMarginControl from "../../../../settings-components/ResponsiveNewSpacingSettings/ResponsiveNewMarginControl";
 import ResponsiveNewPaddingControl from "../../../../settings-components/ResponsiveNewSpacingSettings/ResponsiveNewPaddingControl";
 import RbeaBorderRadiusControl from "../../../../settings-components/RbeaBorderRadiusControl";
+import GradientBackgroundControl from "../../../../settings-components/BlockBackgroundSettings/GradientBackgroundSettings";
 
 import borderStyleIcons from "../icons/border-style-icons";
 
@@ -518,7 +519,7 @@ export default class Inspector extends Component {
 												initialTabName="normal" // Set the default active tab here
 												tabs={[
 													{
-														name: "empty",
+														name: "empty-1",
 														title: __("", "responsive-block-editor-addons"),
 														className: "responsive-block-editor-addons-empty-tab",
 													},
@@ -528,9 +529,9 @@ export default class Inspector extends Component {
 														className: "responsive-block-editor-addons-normal-tab",
 													},
 													{
-														name: "empty",
+														name: "empty-2",
 														title: __("", "responsive-block-editor-addons"),
-														className: "responsive-block-editor-addons-empty-tab",
+														className: "responsive-block-editor-addons-empty-tab-middle",
 													},
 													{
 														name: "hover",
@@ -538,7 +539,7 @@ export default class Inspector extends Component {
 														className: "responsive-block-editor-addons-hover-tab",
 													},
 													{
-														name: "empty",
+														name: "empty-3",
 														title: __("", "responsive-block-editor-addons"),
 														className: "responsive-block-editor-addons-empty-tab",
 													},
@@ -556,70 +557,24 @@ export default class Inspector extends Component {
 													return <div>{color_tab}</div>;
 												}}
 											</TabPanel>
-											<RbeaRangeControl
+											{(background && background != '') && (
+												<RbeaRangeControl
 												label={__("Opacity", "responsive-block-editor-addons")}
 												value={opacity}
 												onChange={(value) => setAttributes({ opacity: value })}
 												min={0}
 												max={100}
 											/>
+											)}
 										</>
 									)}
 									{"gradient" == backgroundType && (
 										<Fragment>
-											<RbeaColorControl
-												label={__("Color 1", "responsive-block-editor-addons")}
-												colorValue={backgroundColor1}
-												onChange={(colorValue) =>
-													setAttributes({ backgroundColor1: colorValue })
-												}
-												resetColor={() => setAttributes({ backgroundColor1: "" })}
-											/>
-											<RbeaColorControl
-												label={__("Color 2", "responsive-block-editor-addons")}
-												colorValue={backgroundColor2}
-												onChange={(colorValue) =>
-													setAttributes({ backgroundColor2: colorValue })
-												}
-												resetColor={() => setAttributes({ backgroundColor2: "" })}
-											/>
-											<RbeaRangeControl
-												label={__(
-													"Color Location 1",
-													"responsive-block-editor-addons"
-												)}
-												value={colorLocation1}
-												min={0}
-												max={100}
-												onChange={(value) =>
-													setAttributes({ colorLocation1: value })
-												}
-											/>
-											<RbeaRangeControl
-												label={__(
-													"Color Location 2",
-													"responsive-block-editor-addons"
-												)}
-												value={colorLocation2}
-												min={0}
-												max={100}
-												onChange={(value) =>
-													setAttributes({ colorLocation2: value })
-												}
-											/>
-											<RbeaRangeControl
-												label={__(
-													"Gradient Direction",
-													"responsive-block-editor-addons"
-												)}
-												value={gradientDirection}
-												min={0}
-												max={100}
-												onChange={(value) =>
-													setAttributes({ gradientDirection: value })
-												}
-											/>
-										</Fragment>
+										<GradientBackgroundControl
+										  {...this.props}
+										  showHoverGradient={false}
+										/>
+									  </Fragment>
 									)}
 								</PanelBody>
 							</Fragment>
@@ -700,7 +655,7 @@ export default class Inspector extends Component {
 									initialTabName="normal" // Set the default active tab here
 									tabs={[
 										{
-											name: "empty",
+											name: "empty-1",
 											title: __("", "responsive-block-editor-addons"),
 											className: "responsive-block-editor-addons-empty-tab",
 										},
@@ -710,9 +665,9 @@ export default class Inspector extends Component {
 											className: "responsive-block-editor-addons-normal-tab",
 										},
 										{
-											name: "empty",
+											name: "empty-2",
 											title: __("", "responsive-block-editor-addons"),
-											className: "responsive-block-editor-addons-empty-tab",
+											className: "responsive-block-editor-addons-empty-tab-middle",
 										},
 										{
 											name: "hover",
@@ -720,7 +675,7 @@ export default class Inspector extends Component {
 											className: "responsive-block-editor-addons-hover-tab",
 										},
 										{
-											name: "empty",
+											name: "empty-3",
 											title: __("", "responsive-block-editor-addons"),
 											className: "responsive-block-editor-addons-empty-tab",
 										},
@@ -785,7 +740,7 @@ export default class Inspector extends Component {
 										initialTabName="normal" // Set the default active tab here
 										tabs={[
 											{
-												name: "empty",
+												name: "empty-1",
 												title: __("", "responsive-block-editor-addons"),
 												className: "responsive-block-editor-addons-empty-tab",
 											},
@@ -795,9 +750,9 @@ export default class Inspector extends Component {
 												className: "responsive-block-editor-addons-normal-tab",
 											},
 											{
-												name: "empty",
+												name: "empty-2",
 												title: __("", "responsive-block-editor-addons"),
-												className: "responsive-block-editor-addons-empty-tab",
+												className: "responsive-block-editor-addons-empty-tab-middle",
 											},
 											{
 												name: "hover",
@@ -805,7 +760,7 @@ export default class Inspector extends Component {
 												className: "responsive-block-editor-addons-hover-tab",
 											},
 											{
-												name: "empty",
+												name: "empty-3",
 												title: __("", "responsive-block-editor-addons"),
 												className: "responsive-block-editor-addons-empty-tab",
 											},

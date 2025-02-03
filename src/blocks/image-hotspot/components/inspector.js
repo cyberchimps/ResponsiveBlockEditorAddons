@@ -283,28 +283,28 @@ class Inspector extends Component {
               });
             }}
           />
-          <BaseControl
-            label={__("Hotspot Icon", "responsive-block-editor-addons")}
-          >
-            <FontIconPicker
-              icons={svg_icons}
-              renderFunc={renderSVG}
-              theme="default"
-              value={imagePointsParsed[index].icon}
-              onChange={(value) => {
-                handleUpdateData({ icon: value }, index);
-                handleStateChange({
-                  updateHotspot: true,
-                  activeHotspot: true,
-                });
-              }}
-              isMulti={false}
-              noSelectedPlaceholder={__(
-                "Select Icon",
-                "responsive-block-editor-addons"
-              )}
-            />
-          </BaseControl>
+            <BaseControl
+              label={__("Hotspot Icon", "responsive-block-editor-addons")}
+            >
+                <FontIconPicker
+                  icons={svg_icons}
+                  renderFunc={renderSVG}
+                  theme="default"
+                  value={imagePointsParsed[index].icon}
+                  onChange={(value) => {
+                    handleUpdateData({ icon: value }, index);
+                    handleStateChange({
+                      updateHotspot: true,
+                      activeHotspot: true,
+                    });
+                  }}
+                  isMulti={false}
+                  noSelectedPlaceholder={__(
+                    "Select Icon",
+                    "responsive-block-editor-addons"
+                  )}
+                />
+            </BaseControl>
           <RbeaColorControl
             label = {__("Hotspot Background", "responsive-block-editor-addons")}
             colorValue={points[index].backgroundColor}
@@ -692,21 +692,23 @@ class Inspector extends Component {
                     setAttributes({ tooltipTrigger })
                   }
                 />
-                <p className="components-base-control__label">
-                  {__("Hotspot Icon", "responsive-block-editor-addons")}
-                </p>
-                <FontIconPicker
-                  icons={svg_icons}
-                  renderFunc={renderSVG}
-                  theme="default"
-                  value={hotspotIcon}
-                  onChange={(value) => setAttributes({ hotspotIcon: value })}
-                  isMulti={false}
-                  noSelectedPlaceholder={__(
-                    "Select Icon",
-                    "responsive-block-editor-addons"
-                  )}
-                />
+                <div className="rbea-image-hotspot-hotspot-icon-container">
+                  <p className="components-base-control__label">
+                    {__("Hotspot Icon", "responsive-block-editor-addons")}
+                  </p>
+                  <FontIconPicker
+                    icons={svg_icons}
+                    renderFunc={renderSVG}
+                    theme="default"
+                    value={hotspotIcon}
+                    onChange={(value) => setAttributes({ hotspotIcon: value })}
+                    isMulti={false}
+                    noSelectedPlaceholder={__(
+                      "Select Icon",
+                      "responsive-block-editor-addons"
+                    )}
+                  />
+                </div>
                 <RbeaRangeControl
                   label={__("Hotspot Size", "responsive-block-editor-addons")}
                   value={hotspotSize}
@@ -764,58 +766,6 @@ class Inspector extends Component {
                   min={0}
                   max={100}
                   allowReset
-                />
-              </PanelBody>
-              <PanelBody
-                title={__("Spacing", 'responsive-block-editor-addons')}
-                initialOpen={false}
-              >
-                <ResponsiveNewPaddingControl
-                  attrNameTemplate="block%s"
-                  resetValues={blockPaddingResetValues}
-                  {...this.props}
-                />
-                <ResponsiveNewMarginControl
-                  attrNameTemplate="block%s"
-                  resetValues={blockMarginResetValues}
-                  {...this.props}
-                />
-              </PanelBody>
-            </InspectorTab>
-            <InspectorTab key={"advance"}>
-              <PanelBody
-              title={__("Responsive Conditions", "responsive-block-editor-addons")}
-              initialOpen={false}
-              >
-                <ToggleControl
-                  label={__(
-                  "Hide on Desktop",
-                  "responsive-block-editor-addons"
-                  )}
-                  checked={hideWidget}
-                  onChange={(value) =>
-                  setAttributes({ hideWidget: !hideWidget })
-                  }
-                />
-                <ToggleControl
-                  label={__(
-                  "Hide on Tablet",
-                  "responsive-block-editor-addons"
-                  )}
-                  checked={hideWidgetTablet}
-                  onChange={(value) =>
-                  setAttributes({ hideWidgetTablet: !hideWidgetTablet })
-                  }
-                />
-                <ToggleControl
-                  label={__(
-                  "Hide on Mobile",
-                  "responsive-block-editor-addons"
-                  )}
-                  checked={hideWidgetMobile}
-                  onChange={(value) =>
-                  setAttributes({ hideWidgetMobile: !hideWidgetMobile })
-                  }
                 />
               </PanelBody>
               <PanelBody
@@ -906,6 +856,58 @@ class Inspector extends Component {
                     />
                   </Fragment>
                 )}
+              </PanelBody>
+              <PanelBody
+                title={__("Spacing", 'responsive-block-editor-addons')}
+                initialOpen={false}
+              >
+                <ResponsiveNewPaddingControl
+                  attrNameTemplate="block%s"
+                  resetValues={blockPaddingResetValues}
+                  {...this.props}
+                />
+                <ResponsiveNewMarginControl
+                  attrNameTemplate="block%s"
+                  resetValues={blockMarginResetValues}
+                  {...this.props}
+                />
+              </PanelBody>
+            </InspectorTab>
+            <InspectorTab key={"advance"}>
+              <PanelBody
+              title={__("Responsive Conditions", "responsive-block-editor-addons")}
+              initialOpen={false}
+              >
+                <ToggleControl
+                  label={__(
+                  "Hide on Desktop",
+                  "responsive-block-editor-addons"
+                  )}
+                  checked={hideWidget}
+                  onChange={(value) =>
+                  setAttributes({ hideWidget: !hideWidget })
+                  }
+                />
+                <ToggleControl
+                  label={__(
+                  "Hide on Tablet",
+                  "responsive-block-editor-addons"
+                  )}
+                  checked={hideWidgetTablet}
+                  onChange={(value) =>
+                  setAttributes({ hideWidgetTablet: !hideWidgetTablet })
+                  }
+                />
+                <ToggleControl
+                  label={__(
+                  "Hide on Mobile",
+                  "responsive-block-editor-addons"
+                  )}
+                  checked={hideWidgetMobile}
+                  onChange={(value) =>
+                  setAttributes({ hideWidgetMobile: !hideWidgetMobile })
+                  }
+                />
               </PanelBody>
               <PanelBody
               title={__("Z Index", "responsive-block-editor-addons")}

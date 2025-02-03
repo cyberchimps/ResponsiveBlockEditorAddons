@@ -49,16 +49,16 @@ export default class Save extends Component {
               }
 
               {popupTrigger && popupTrigger === 'click' && popupTriggerType === 'text' &&
-                <p className="responsive-block-editor-addons-popup-text-trigger responsive-popup-trigger-anchor responsive-block-editor-addons-popup-modal-trigger">{popupTextTrigger}</p>
+                <p className="responsive-block-editor-addons-popup-text-trigger responsive-popup-trigger-anchor responsive-block-editor-addons-popup-modal-trigger" data-trigger-id={`trigger-${block_id}`}>{popupTextTrigger}</p>
               }
 
               {popupTrigger && popupTrigger === 'click' && popupTriggerType === 'icon' &&
-                <div className="responsive-block-editor-addons-popup-modal-trigger responsive-popup-trigger-anchor responsive-block-editor-addons-popup-icon-trigger">
+                <div className="responsive-block-editor-addons-popup-modal-trigger responsive-popup-trigger-anchor responsive-block-editor-addons-popup-icon-trigger" data-trigger-id={`trigger-${block_id}`}>
                   {renderSVG(popupIconTrigger)}
                 </div>
               }
 
-              {popupTrigger && popupTrigger === 'click' && popupTriggerType === 'image' && popupImageTrigger != undefined && <img className="responsive-block-editor-addons-popup-modal-trigger responsive-popup-trigger-anchor responsive-block-editor-addons-popup-image-trigger" src={popupImageTrigger} alt="popupImageTrigger" />}
+              {popupTrigger && popupTrigger === 'click' && popupTriggerType === 'image' && popupImageTrigger != undefined && <img className="responsive-block-editor-addons-popup-modal-trigger responsive-popup-trigger-anchor responsive-block-editor-addons-popup-image-trigger" data-trigger-id={`trigger-${block_id}`} src={popupImageTrigger} alt="popupImageTrigger" />}
 
             </div>
 

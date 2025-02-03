@@ -95,10 +95,7 @@ export default function ResponsiveNewPaddingControlHelper (props) {
             'rbea-spacing-control-connected': isSpaceControlConnected,
         },
         'dashicons',
-        {
-            'dashicons-editor-unlink': !isSpaceControlConnected,
-            'dashicons-admin-links': isSpaceControlConnected,
-        },
+        'dashicons-admin-links',
     );
 
     return (

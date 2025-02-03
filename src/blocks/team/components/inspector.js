@@ -17,6 +17,10 @@ import RbeaRangeControl from "../../../utils/components/rbea-range-control";
 import RbeaColorControl from "../../../utils/components/rbea-color-control";
 import RbeaTabRadioControl from "../../../utils/components/rbea-tab-radio-control";
 import RbeaBorderRadiusControl from "../../../settings-components/RbeaBorderRadiusControl";
+import RbeaBackgroundTypeControl from "../../../utils/components/rbea-background-type-control";
+import RbeaMediaUploadControl from "../../../utils/components/rbea-media-upload-control";
+import RbeaAngleRangeControl from "../../../utils/components/rbea-angle-range-control";
+import stackOnIcons from "../../../utils/components/rbea-tab-radio-control/rbea-stack-on-icons";
 
 // Setup the block
 const { __ } = wp.i18n;
@@ -36,6 +40,7 @@ const {
   ToggleControl,
   TabPanel,
   Dashicon,
+  RadioControl,
 } = wp.components;
 import BoxShadowControl from "../../../utils/components/box-shadow";
 import fontOptions from "../../../utils/googlefonts";
@@ -290,6 +295,28 @@ export default class Inspector extends Component {
         titleBottomSpacing,
         titleBottomSpacingMobile,
         titleBottomSpacingTablet,
+        
+        backgroundType,
+        backgroundPosition,
+        backgroundPositionMobile,
+        backgroundPositionTablet,
+        overlayType,
+        backgroundImageColor,
+        gradientOverlayColor1,
+        gradientOverlayLocation1,
+        gradientOverlayColor2,
+        gradientOverlayLocation2,
+        gradientOverlayType,
+        gradientOverlayAngle,
+        gradientOverlayPosition,
+        backgroundColor1,
+        imagePositionTab,
+        imageSizeTab,
+        backgroundSize,
+        backgroundSizeTablet,
+        backgroundSizeMobile,
+        backgroundRepeat,
+        backgroundImageValueUpdated,
       },
       setAttributes,
     } = this.props;
@@ -409,20 +436,42 @@ export default class Inspector extends Component {
         </Fragment>
       );
 
+      const emptyColorControl = (
+        <div className="responsive-block-editor-addons-empty-color-control"></div>
+      );
+
       return (
         <TabPanel
-          className="responsive-block-editor-addons-inspect-tabs responsive-block-editor-addons-inspect-tabs-col-2"
-          activeClass="active-tab"
+        className="responsive-block-editor-addons-inspect-tabs 
+        responsive-block-editor-addons-inspect-tabs-col-2  
+        responsive-block-editor-addons-color-inspect-tabs"
+        activeClass="active-tab"
+        initialTabName="normal" // Set the default active tab here
           tabs={[
+            {
+              name: "empty-1",
+              title: __("", "responsive-block-editor-addons"),
+              className: "responsive-block-editor-addons-empty-tab",
+            },
             {
               name: "normal",
               title: __("Normal", "responsive-block-editor-addons"),
               className: "responsive-block-editor-addons-normal-tab",
             },
             {
+              name: "empty-2",
+              title: __("", "responsive-block-editor-addons"),
+              className: "responsive-block-editor-addons-empty-tab-middle",
+            },
+            {
               name: "hover",
               title: __("Hover", "responsive-block-editor-addons"),
               className: "responsive-block-editor-addons-hover-tab",
+            },
+            {
+              name: "empty-3",
+              title: __("", "responsive-block-editor-addons"),
+              className: "responsive-block-editor-addons-empty-tab",
             },
           ]}
         >
@@ -430,8 +479,10 @@ export default class Inspector extends Component {
             let color_tab;
             if ("normal" === tabName.name) {
               color_tab = socialColors;
-            } else {
+            } else if ("hover" === tabName.name) {
               color_tab = socialColorsHover;
+            } else {
+              color_tab = emptyColorControl;
             }
             return <div>{color_tab}</div>;
           }}
@@ -504,6 +555,21 @@ export default class Inspector extends Component {
       this.props.setAttributes({blockIsTypographyColorValueUpdated: true});
     }
 
+    const imagePositionOptions = [
+      { value: "top left", label: <div className = "rbea-background-image-positon-control-option">{__("Top Left", "responsive-block-editor-addons")}</div> },
+      { value: "top center", label: <div className = "rbea-background-image-positon-control-option">{__("Top Center", "responsive-block-editor-addons")}</div> },
+      { value: "top right", label: <div className = "rbea-background-image-positon-control-option">{__("Top Right", "responsive-block-editor-addons")}</div> },
+      { value: "center left", label: <div className = "rbea-background-image-positon-control-option">{__("Center Left", "responsive-block-editor-addons")}</div> },
+      { value: "center center", label: <div className = "rbea-background-image-positon-control-option">{__("Center Center", "responsive-block-editor-addons")}</div> },
+      { value: "center right", label: <div className = "rbea-background-image-positon-control-option">{__("Center Right", "responsive-block-editor-addons")}</div> },
+      { value: "bottom left", label: <div className = "rbea-background-image-positon-control-option">{__("Bottom Left", "responsive-block-editor-addons")}</div> },
+      { value: "bottom center", label: <div className = "rbea-background-image-positon-control-option">{__("Bottom Center", "responsive-block-editor-addons")}</div> },
+      { value: "bottom right", label: <div className = "rbea-background-image-positon-control-option">{__("Bottom Right", "responsive-block-editor-addons")}</div> },
+    ];
+
+    // Background image URL
+    let background_image_url = backgroundImage || '';
+
     return (
       <InspectorControls key="inspector">
         <InspectorTabs>
@@ -555,16 +621,14 @@ export default class Inspector extends Component {
                 value={stack}
                 options={[
                   {
-                    value: "none",
-                    label: __("None", "responsive-block-editor-addons"),
-                  },
-                  {
                     value: "tablet",
                     label: __("Tablet", "responsive-block-editor-addons"),
+                    icon: stackOnIcons.tablet,
                   },
                   {
                     value: "mobile",
                     label: __("Mobile", "responsive-block-editor-addons"),
+                    icon: stackOnIcons.mobile,
                   },
                 ]}
                 onChange={(value) => setAttributes({ stack: value })}
@@ -572,6 +636,10 @@ export default class Inspector extends Component {
                   "Note: Choose on what breakpoint the team cards will stack.",
                   "responsive-block-editor-addons"
                 )}
+                defaultValue={"none"}
+                allowReset={true}
+								hasIcon={true}
+								optionHasBorder={true}
               />
               {count > 1 && (
                 <RbeaTabRadioControl
@@ -581,6 +649,25 @@ export default class Inspector extends Component {
                   onChange={(newGutter) => setAttributes({ gutter: newGutter })}
                 />
               )}
+              <RbeaRangeControl
+                label={__("Padding", "responsive-block-editor-addons")}
+                value={padding}
+                onChange={(value) =>
+                  this.props.setAttributes({
+                    padding: value,
+                  })
+                }
+                min={0}
+                max={50}
+                step={1}
+              />
+              <PanelBody
+                title={__(
+                  "Box Shadow",
+                  "responsive-block-editor-addons"
+                )}
+                initialOpen={false}
+              >
               <BoxShadowControl
                 setAttributes={setAttributes}
                 label={__("Box Shadow", "responsive-block-editor-addons")}
@@ -606,81 +693,6 @@ export default class Inspector extends Component {
                   label: __("Position", "responsive-block-editor-addons"),
                 }}
               />
-              <RbeaRangeControl
-                label={__("Border Width", "responsive-block-editor-addons")}
-                value={borderWidth}
-                onChange={(value) =>
-                  this.props.setAttributes({
-                    borderWidth: value,
-                  })
-                }
-                min={0}
-                max={50}
-                step={1}
-              />
-              <RbeaBorderRadiusControl
-                attrNameTemplate="block%s"
-                {...this.props}
-              />
-              <RbeaRangeControl
-                label={__("Padding", "responsive-block-editor-addons")}
-                value={padding}
-                onChange={(value) =>
-                  this.props.setAttributes({
-                    padding: value,
-                  })
-                }
-                min={0}
-                max={50}
-                step={1}
-              />
-              <PanelBody
-                title={__(
-                  "Column Background",
-                  "responsive-block-editor-addons"
-                )}
-                initialOpen={false}
-              >
-                <ColorBackgroundControl {...this.props} />
-                <RbeaRangeControl
-                  label={__(
-                    "Background Color Opacity",
-                    "responsive-block-editor-addons"
-                  )}
-                  value={opacity}
-                  onChange={(value) =>
-                    this.props.setAttributes({
-                      opacity: value !== undefined ? value : 50,
-                    })
-                  }
-                  min={0}
-                  max={100}
-                  allowReset
-                />
-                <ToggleControl
-                  label="Gradient Background"
-                  checked={bgGradient}
-                  onChange={() =>
-                    this.props.setAttributes({
-                      bgGradient: !bgGradient,
-                    })
-                  }
-                />
-                {bgGradient && (
-                  <Fragment>
-                    <GradientBackgroundControl
-                      {...this.props}
-                      showHoverGradient={false}
-                      showColorOne={false}
-                    />
-                  </Fragment>
-                )}
-                <ImageBackgroundControl
-                  {...this.props}
-                  showSomeImageOptions={true}
-                  showMoreImageOptions={true}
-                  showOverlayOptions={false}
-                />
               </PanelBody>
             </PanelBody>
 
@@ -866,6 +878,405 @@ export default class Inspector extends Component {
             </PanelBody>
           </InspectorTab>
           <InspectorTab key={"style"}>
+          <PanelBody
+                title={__(
+                  "Column Background",
+                  "responsive-block-editor-addons"
+                )}
+                initialOpen={false}
+              >
+                {<RbeaBackgroundTypeControl
+                label = {"Type"}
+                selectedValue={backgroundType}
+                options={[
+                  { label: "color", value: "color" },
+                  { label: "gradient", value: "gradient" },
+                  { label: "image",value: "image" },
+                ]}
+                onChange={(value) => setAttributes({ backgroundType: value })}
+              />}
+                {"color" == backgroundType && (
+                  <Fragment>
+                    <RbeaColorControl
+                      label = {"Color"}
+                      colorValue={backgroundColor}
+                      onChange={(newColor) => setAttributes({ backgroundColor: newColor })}
+                      resetColor={() => setAttributes({ backgroundColor: "" })}
+                    />
+                    {(backgroundColor && backgroundColor != '') && (
+                      <RbeaRangeControl
+                        label={__("Opacity", "responsive-block-editor-addons")}
+                        value={opacity}
+                        onChange={(value) =>
+                          setAttributes({ opacity: value !== undefined ? value : 20 })
+                        }
+                        min={0}
+                        max={100}
+                      />
+                    )}
+                  </Fragment>
+                )}
+                {"gradient" == backgroundType && (
+                  <Fragment>
+                    <GradientBackgroundControl
+                      {...this.props}
+                      showHoverGradient={false}
+                    />
+                  </Fragment>
+                )}
+                {"image" == backgroundType && (
+                <Fragment>
+                    <RbeaMediaUploadControl
+                      label={__('Image', 'responsive-block-editor-addons')}
+                      value={{
+                          url: backgroundImage || '',
+                      }}
+                      onChange={(newValue) => {
+                          setAttributes({
+                              backgroundImage: newValue.url,
+                          });
+                      }}
+                      mediaType={'image'}
+                    />
+                  {backgroundImage && (
+                    <Fragment>
+                      <div className = "rbea-tab-selector-label-wrapper">
+                      <label className  = "rbea-background-image-positon-control-label">{__("Image Position", "responsive-block-editor-addons")}</label>
+                      <TabPanel
+                        className=" responsive-size-type-field-tabs  responsive-size-type-field__common-tabs  responsive-inline-margin"
+                        activeClass="active-tab"
+                        tabs={[
+                          {
+                            name: "desktop",
+                            title: <Dashicon icon="desktop" />,
+                            className:
+                              " responsive-desktop-tab  responsive-responsive-tabs",
+                          },
+                          {
+                            name: "tablet",
+                            title: <Dashicon icon="tablet" />,
+                            className:
+                              " responsive-tablet-tab  responsive-responsive-tabs",
+                          },
+                          {
+                            name: "mobile",
+                            title: <Dashicon icon="smartphone" />,
+                            className:
+                              " responsive-mobile-tab  responsive-responsive-tabs",
+                          },
+                        ]}
+                      >
+                        {(tab) => {
+                          if ("mobile" === tab.name) {
+                            setAttributes({ imagePositionTab: "mobile" });
+                          } else if ("tablet" === tab.name) {
+                            setAttributes({ imagePositionTab: "tablet" });
+                          } else {
+                            setAttributes({ imagePositionTab: "desktop" });
+                          }
+                        }}
+                      </TabPanel>
+                      </div>
+                        <Fragment>
+                          <div className = "rbea-background-image-positon-control"
+                          style={{
+                            backgroundImage: `url(${background_image_url})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition:  'center',
+                          }}>
+                          { imagePositionTab === "desktop" && 
+                              <RadioControl 
+                                className = "rbea-background-image-positon-control-options"
+                                selected={backgroundPosition}
+                                options={imagePositionOptions}
+                                onChange={(value) =>
+                                  setAttributes({ backgroundPosition: value })
+                                }
+                              />
+                          }
+                          {imagePositionTab === "tablet" &&
+                             <RadioControl 
+                                className = "rbea-background-image-positon-control-options"
+                                selected={backgroundPositionTablet}
+                                options={imagePositionOptions}
+                                onChange={(value) =>
+                                  setAttributes({ backgroundPositionTablet: value })
+                                }
+                            />
+                          }
+                          {imagePositionTab === "mobile" && 
+                            <RadioControl 
+                                className = "rbea-background-image-positon-control-options"
+                                selected={backgroundPositionMobile}
+                                options={imagePositionOptions}
+                                onChange={(value) =>
+                                  setAttributes({ backgroundPositionMobile: value })
+                                }
+                            />
+                          }
+                          </div>
+                        </Fragment>
+                      <RbeaTabRadioControl
+                        label={__("Attachment", "responsive-block-editor-addons")}
+                        value={backgroundAttachment}
+                        onChange={(value) =>
+                          setAttributes({ backgroundAttachment: value })
+                        }
+                        options={[
+                          { value: "scroll", label: __("Scroll", "responsive-block-editor-addons") },
+                          { value: "fixed", label: __("Fixed", "responsive-block-editor-addons") },
+                        ]}
+                        defaultValue={"fixed"}
+                      />
+                     <div className = "rbea-tab-selector-label-wrapper">
+                     <label>{__("Size", "responsive-block-editor-addons")}</label>
+                      <TabPanel
+                        className=" responsive-size-type-field-tabs  responsive-size-type-field__common-tabs  responsive-inline-margin rbea-section-size-control-tab-selector"
+                        activeClass="active-tab"
+                        tabs={[
+                          {
+                            name: "desktop",
+                            title: <Dashicon icon="desktop" />,
+                            className:
+                              " responsive-desktop-tab  responsive-responsive-tabs",
+                          },
+                          {
+                            name: "tablet",
+                            title: <Dashicon icon="tablet" />,
+                            className:
+                              " responsive-tablet-tab  responsive-responsive-tabs",
+                          },
+                          {
+                            name: "mobile",
+                            title: <Dashicon icon="smartphone" />,
+                            className:
+                              " responsive-mobile-tab  responsive-responsive-tabs",
+                          },
+                        ]}
+                      >
+                        {(tab) => {
+                          if ("mobile" === tab.name) {
+                            setAttributes({ imageSizeTab: "mobile" });
+                          } else if ("tablet" === tab.name) {
+                            setAttributes({ imageSizeTab: "tablet" });
+                          } else {
+                            setAttributes({ imageSizeTab: "desktop" });
+                          }
+                        }}
+                      </TabPanel>
+                      </div>
+                      {imageSizeTab === "desktop" && (
+                        <>
+                        <RbeaTabRadioControl
+                          label={__("", "responsive-block-editor-addons")}
+                          value={backgroundSize}
+                          onChange={(value) =>
+                            setAttributes({ backgroundSize: value })
+                          }
+                          options={[
+                            { value: "auto", label: __("Auto", "responsive-block-editor-addons") },
+                            { value: "cover", label: __("Cover", "responsive-block-editor-addons") },
+                            { value: "contain", label: __("Contain", "responsive-block-editor-addons") },
+                          ]}
+                          defaultValue={"cover"}
+                        />
+                      </>
+                      )}
+                      {imageSizeTab === "tablet" && (
+                        <RbeaTabRadioControl
+                        label={__("", "responsive-block-editor-addons")}
+                        value={backgroundSizeTablet}
+                        onChange={(value) =>
+                          setAttributes({ backgroundSizeTablet: value })
+                        }
+                        options={[
+                          { value: "auto", label: __("Auto", "responsive-block-editor-addons") },
+                          { value: "cover", label: __("Cover", "responsive-block-editor-addons") },
+                          { value: "contain", label: __("Contain", "responsive-block-editor-addons") },
+                        ]}
+                        defaultValue={"cover"}
+                        />
+                      )}
+                      {imageSizeTab === "mobile" && (
+                        <RbeaTabRadioControl
+                          label={__("", "responsive-block-editor-addons")}
+                          value={backgroundSizeMobile}
+                          onChange={(value) =>
+                            setAttributes({ backgroundSizeMobile: value })
+                          }
+                          options={[
+                            { value: "auto", label: __("Auto", "responsive-block-editor-addons") },
+                            { value: "cover", label: __("Cover", "responsive-block-editor-addons") },
+                            { value: "contain", label: __("Contain", "responsive-block-editor-addons") },
+                          ]}
+                          defaultValue={"cover"}
+                        />
+                      )}
+                      <div className = "rbea-repeat-selector-wrapper">
+                      <RbeaTabRadioControl
+                        label={__("Repeat", "responsive-block-editor-addons")}
+                        value={backgroundRepeat}
+                        onChange={(value) =>
+                          setAttributes({ backgroundRepeat: value })
+                        }
+                        options={[
+                          { value: "no-repeat", label: __("No Repeat", "responsive-block-editor-addons") },
+                          { value: "repeat", label: __("Repeat", "responsive-block-editor-addons") },
+                          { value: "repeat-x", label: __("Repeat-x", "responsive-block-editor-addons") },
+                          { value: "repeat-y", label: __("Repeat-y", "responsive-block-editor-addons") },
+                        ]}
+                        defaultValue={"no-repeat"}
+                      /></div>
+                      <RbeaBackgroundTypeControl
+                        label={__("Overlay Type", "responsive-block-editor-addons")}
+                        value={overlayType}
+                        onChange={(value) =>
+                          setAttributes({ overlayType: value })
+                        }
+                        options={[
+                          { label: "color", value: "color" },
+                          { label: "gradient", value: "gradient" },
+                        ]}
+                      />
+                      {overlayType == "color" && (
+                        <Fragment>
+                          <RbeaColorControl
+                            label = {__("Overlay Color", "responsive-block-editor-addons")}
+                            colorValue={backgroundImageColor}
+                            onChange={(colorValue) =>
+                              setAttributes({
+                                backgroundImageColor: colorValue,
+                              })
+                            }
+                            resetColor={() => setAttributes({ backgroundImageColor: "" })}
+                          />
+                        </Fragment>
+                      )}
+
+                      {"gradient" == overlayType && (
+                        <Fragment>
+                          <RbeaColorControl
+                            label = {"Color 1"}
+                            colorValue={gradientOverlayColor1}
+                            onChange={(colorValue) =>
+                              setAttributes({
+                                gradientOverlayColor1: colorValue,
+                              })
+                            }
+                            resetColor={() => setAttributes({ gradientOverlayColor1: "" })}
+                          />
+                          <RbeaColorControl
+                            label = {"Color 2"}
+                            colorValue={gradientOverlayColor2}
+                            onChange={(colorValue) =>
+                              setAttributes({
+                                gradientOverlayColor2: colorValue,
+                              })
+                            }
+                            resetColor={() => setAttributes({ gradientOverlayColor2: "" })}
+                          />
+                          <RbeaTabRadioControl
+                            label={__("Type", "responsive-block-editor-addons")}
+                            value={gradientOverlayType}
+                            onChange={(value) =>
+                              setAttributes({ gradientOverlayType: value })
+                            }
+                            options={[
+                              { value: "linear", label: __("Linear", "responsive-block-editor-addons") },
+                              { value: "radial", label: __("Radial", "responsive-block-editor-addons") },
+                            ]}
+                            defaultValue={"linear"}
+                          />
+                          <RbeaRangeControl
+                            label={__("Color Location 1", "responsive-block-editor-addons")}
+                            value={gradientOverlayLocation1}
+                            onChange={(value) =>
+                              setAttributes({ gradientOverlayLocation1: value })
+                            }
+                            min={0}
+                            max={100}
+                          />
+                          <RbeaRangeControl
+                            label={__("Color Location 2", "responsive-block-editor-addons")}
+                            value={gradientOverlayLocation2}
+                            onChange={(value) =>
+                              setAttributes({ gradientOverlayLocation2: value })
+                            }
+                            min={0}
+                            max={100}
+                          />
+                          {"linear" == gradientOverlayType && (
+                            <RbeaAngleRangeControl
+                              label={__("Angle", "responsive-block-editor-addons")}
+                              value={gradientOverlayAngle}
+                              onChange={(value) =>
+                                setAttributes({ gradientOverlayAngle: value })
+                              }
+                              min={0}
+                              max={360}
+                            />
+                          )}
+                          {"radial" == gradientOverlayType && (
+                            <SelectControl
+                              label={__("Type", "responsive-block-editor-addons")}
+                              value={gradientOverlayPosition}
+                              onChange={(value) =>
+                                setAttributes({
+                                  gradientOverlayPosition: value,
+                                })
+                              }
+                              options={[
+                                {
+                                  value: "center center",
+                                  label: __("Center Center", "responsive-block-editor-addons"),
+                                },
+                                {
+                                  value: "center left",
+                                  label: __("Center Left", "responsive-block-editor-addons"),
+                                },
+                                {
+                                  value: "center right",
+                                  label: __("Center Right", "responsive-block-editor-addons"),
+                                },
+                                {
+                                  value: "top center",
+                                  label: __("Top Center", "responsive-block-editor-addons"),
+                                },
+                                { value: "top left", label: __("Top Left", "responsive-block-editor-addons") },
+                                { value: "top right", label: __("Top Right", "responsive-block-editor-addons") },
+                                {
+                                  value: "bottom center",
+                                  label: __("Bottom Center", "responsive-block-editor-addons"),
+                                },
+                                {
+                                  value: "bottom left",
+                                  label: __("Bottom Left", "responsive-block-editor-addons"),
+                                },
+                                {
+                                  value: "bottom right",
+                                  label: __("Bottom Right", "responsive-block-editor-addons"),
+                                },
+                              ]}
+                            />
+                          )}
+                        </Fragment>
+                      )}
+                    </Fragment>
+                  )}
+                  {backgroundImage && (
+                    <RbeaRangeControl
+                    label={__("Opacity", "responsive-block-editor-addons")}
+                    value={opacity}
+                    onChange={(value) =>
+                      setAttributes({ opacity: value !== undefined ? value : 20 })
+                    }
+                    min={0}
+                    max={100}
+                  />
+                  )}
+                </Fragment>
+              )}
+              </PanelBody>
               <TypographyHelperControl
                 title={__("Title Typography", "responsive-block-editor-addons")}
                 attrNameTemplate="title%s"
@@ -938,6 +1349,30 @@ export default class Inspector extends Component {
                 setAttributes={setAttributes}
                 {...this.props}
               />
+              <PanelBody
+                title={__(
+                  "Border",
+                  "responsive-block-editor-addons"
+                )}
+                initialOpen={false}
+              >
+              <RbeaRangeControl
+                label={__("Border Width", "responsive-block-editor-addons")}
+                value={borderWidth}
+                onChange={(value) =>
+                  this.props.setAttributes({
+                    borderWidth: value,
+                  })
+                }
+                min={0}
+                max={50}
+                step={1}
+              />
+              <RbeaBorderRadiusControl
+                attrNameTemplate="block%s"
+                {...this.props}
+              />
+              </PanelBody>
             <PanelBody
               title={__("Color Settings", "responsive-block-editor-addons")}
               initialOpen={false}

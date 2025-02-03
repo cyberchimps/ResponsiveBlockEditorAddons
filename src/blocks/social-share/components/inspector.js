@@ -139,6 +139,20 @@ export default class Inspector extends Component {
         blockIsPaddingControlConnected,
         blockIsTypographyColorValueUpdated,
         labelTypographyColor,
+
+        iconContainerTopPadding,
+        iconContainerBottomPadding,
+        iconContainerLeftPadding,
+        iconContainerRightPadding,
+        iconContainerTopPaddingTablet,
+        iconContainerBottomPaddingTablet,
+        iconContainerRightPaddingTablet,
+        iconContainerLeftPaddingTablet,
+        iconContainerTopPaddingMobile,
+        iconContainerBottomPaddingMobile,
+        iconContainerLeftPaddingMobile,
+        iconContainerRightPaddingMobile,
+        isCtaButtonPaddingMarginValueUpdated,
       },
       setAttributes,
     } = this.props;
@@ -171,6 +185,21 @@ export default class Inspector extends Component {
       paddingMobileRight: 0,
       paddingMobileBottom: 0,
       paddingMobileLeft: 0,
+    }
+
+    const iconContainerPaddingResetValues = {
+      paddingTop: 5,
+      paddingRight: 5,
+      paddingBottom: 5,
+      paddingLeft: 5,
+      paddingTabletTop: 5,
+      paddingTabletRight: 5,
+      paddingTabletBottom: 5,
+      paddingTabletLeft: 5,
+      paddingMobileTop: 5,
+      paddingMobileRight: 5,
+      paddingMobileBottom: 5,
+      paddingMobileLeft: 5,
     }
 
     const iconColumnsOptions = [
@@ -235,10 +264,10 @@ export default class Inspector extends Component {
     ];
 
     const skinOptions = [
-      {
-        value: "default",
-        label: __("Default", "responsive-block-editor-addons"),
-      },
+      // {
+      //   value: "default",
+      //   label: __("Default", "responsive-block-editor-addons"),
+      // },
       {
         value: "flat",
         label: __("Flat", "responsive-block-editor-addons"),
@@ -324,6 +353,28 @@ export default class Inspector extends Component {
       this.props.setAttributes({blockIsRadiusValueUpdated: true});
     }
 
+    // backward compatibility for icon container padding control
+
+    if (!isCtaButtonPaddingMarginValueUpdated) {
+      this.props.setAttributes(
+        {
+          iconContainerTopPadding:          iconContainerHeight !== undefined ? iconContainerHeight : iconContainerTopPadding,
+          iconContainerBottomPadding:       iconContainerHeight !== undefined ? iconContainerHeight : iconContainerBottomPadding,
+          iconContainerLeftPadding:         iconContainerSize !== undefined ? iconContainerSize : iconContainerLeftPadding,
+          iconContainerRightPadding:        iconContainerSize !== undefined ? iconContainerSize : iconContainerRightPadding,
+          iconContainerTopPaddingTablet:    iconContainerHeight !== undefined ? iconContainerHeight : iconContainerTopPaddingTablet,
+          iconContainerBottomPaddingTablet: iconContainerHeight !== undefined ? iconContainerHeight : iconContainerBottomPaddingTablet,
+          iconContainerRightPaddingTablet:  iconContainerSize !== undefined ? iconContainerSize : iconContainerRightPaddingTablet,
+          iconContainerLeftPaddingTablet:   iconContainerSize !== undefined ? iconContainerSize : iconContainerLeftPaddingTablet,
+          iconContainerTopPaddingMobile:    iconContainerHeight !== undefined ? iconContainerHeight : iconContainerTopPaddingMobile,
+          iconContainerBottomPaddingMobile: iconContainerHeight !== undefined ? iconContainerHeight : iconContainerBottomPaddingMobile,
+          iconContainerLeftPaddingMobile:   iconContainerSize !== undefined ? iconContainerSize : iconContainerLeftPaddingMobile,
+          iconContainerRightPaddingMobile:  iconContainerSize !== undefined ? iconContainerSize : iconContainerRightPaddingMobile,
+        }
+      )
+      this.props.setAttributes({isCtaButtonPaddingMarginValueUpdated: true});
+    }
+
     // backward compatibility for typography color control
     if (!blockIsTypographyColorValueUpdated) {
       this.props.setAttributes(
@@ -339,16 +390,17 @@ export default class Inspector extends Component {
       <InspectorControls key="inspector">
         <InspectorTabs>
           <InspectorTab key={"content"}>
-            <PanelBody
-              title={__("Share Buttons", "responsive-block-editor-addons")}
-              initialOpen={true}
-            >
-              <SelectControl
-                label={__("Skin", "responsive-block-editor-addons")}
-                value={skin}
-                onChange={(value) => handleSkinChange(value)}
-                options={skinOptions}
-              />
+            <PanelBody>
+              <div className="responsive-block-editor-addons-tab-select-container">
+                <RbeaTabRadioControl
+                  label={__("Skin", "responsive-block-editor-addons")}
+                  value={skin}
+                  onChange={(value) => handleSkinChange(value)}
+                  options={skinOptions}
+                  defaultValue={"default"}
+                  allowReset={true}
+                />
+              </div>
               {skin !== "default" && skin !== "minimal" && (
                 <RbeaTabRadioControl
                   label={__("Shape", "responsive-block-editor-addons")}
@@ -357,6 +409,8 @@ export default class Inspector extends Component {
                   options={iconShapeOptions}
                 />
               )}
+              <div className = "rbea-tab-selector-label-wrapper">
+              <label>{__("Columns", "responsive-block-editor-addons")}</label>
               <TabPanel
                 className=" responsive-size-type-field-tabs  responsive-size-type-field__common-tabs  responsive-inline-margin"
                 activeClass="active-tab"
@@ -401,10 +455,11 @@ export default class Inspector extends Component {
                   return <div>{tabout}</div>;
                 }}
               </TabPanel>
+              </div>
               {currentColumnTab === 'mobile' && <Fragment>
                   <RbeaTabRadioControl
                     label={__(
-                      "Columns Mobile",
+                      "",
                       "responsive-block-editor-addons"
                     )}
                     value={iconColumnsMobile}
@@ -418,7 +473,7 @@ export default class Inspector extends Component {
               {currentColumnTab === 'tablet' && <Fragment>
                   <RbeaTabRadioControl
                     label={__(
-                      "Columns Tablet",
+                      "",
                       "responsive-block-editor-addons"
                     )}
                     value={iconColumnsTablet}
@@ -432,7 +487,7 @@ export default class Inspector extends Component {
               {currentColumnTab === 'desktop' && <Fragment>
                   <RbeaTabRadioControl
                     label={__(
-                      "Columns",
+                      "",
                       "responsive-block-editor-addons"
                     )}
                     value={iconColumns}
@@ -518,45 +573,72 @@ export default class Inspector extends Component {
               <Fragment>
                 <ColorBackgroundControl {...this.props} />
               </Fragment>
-              <RbeaRangeControl
-                label={__("Opacity", "responsive-block-editor-addons")}
-                value={opacity}
-                onChange={(value) =>
-                  setAttributes({
-                    opacity: value !== undefined ? value : 100,
-                  })
-                }
-                min={0}
-                max={100}
-                allowReset
+              {backgroundColor && (
+                  <RbeaRangeControl
+                    label={__("Opacity", "responsive-block-editor-addons")}
+                    value={opacity}
+                    onChange={(value) =>
+                      setAttributes({
+                        opacity: value !== undefined ? value : 100,
+                      })
+                    }
+                    min={0}
+                    max={100}
+                    allowReset
+                  />
+              )}
+            </PanelBody>
+            <PanelBody
+              title={__("Border Settings", "responsive-block-editor-addons")}
+              initialOpen={false}
+            >
+              <RbeaBlockBorderHelperControl
+                attrNameTemplate="block%s"
+                values={{
+                  radius: blockBorderRadius,
+                  style: blockBorderStyle,
+                  width: blockBorderWidth,
+                  color: blockBorderColor,
+                }}
+                setAttributes={setAttributes}
+                {...this.props}
+              />
+            </PanelBody>
+            <PanelBody
+              title={__("Box Shadow", "responsive-block-editor-addons")}
+              initialOpen={false}
+            >
+              <BoxShadowControl
+                setAttributes={setAttributes}
+                label={__("Box Shadow", "responsive-block-editor-addons")}
+                boxShadowColor={{ value: boxShadowColor, label: __("Color", "responsive-block-editor-addons") }}
+                boxShadowHOffset={{
+                  value: boxShadowHOffset,
+                  label: __("Horizontal", "responsive-block-editor-addons"),
+                }}
+                boxShadowVOffset={{
+                  value: boxShadowVOffset,
+                  label: __("Vertical", "responsive-block-editor-addons"),
+                }}
+                boxShadowBlur={{ value: boxShadowBlur, label: __("Blur", "responsive-block-editor-addons") }}
+                boxShadowSpread={{
+                  value: boxShadowSpread,
+                  label: __("Spread", "responsive-block-editor-addons"),
+                }}
+                boxShadowPosition={{
+                  value: boxShadowPosition,
+                  label: __("Position", "responsive-block-editor-addons"),
+                }}
               />
             </PanelBody>
             <PanelBody
               title={__("Padding", "responsive-block-editor-addons")}
               initialOpen={false}
             >
-              <RbeaRangeControl
-                label={__(
-                  "Horizontal Padding",
-                  "responsive-block-editor-addons"
-                )}
-                value={iconContainerSize}
-                onChange={(value) =>
-                  setAttributes({ iconContainerSize: value })
-                }
-                min={0}
-                max={200}
-                allowReset
-              />
-              <RbeaRangeControl
-                label={__("Vertical Padding", "responsive-block-editor-addons")}
-                value={iconContainerHeight}
-                onChange={(value) =>
-                  setAttributes({ iconContainerHeight: value })
-                }
-                min={0}
-                max={100}
-                allowReset
+              <ResponsiveNewPaddingControl
+                attrNameTemplate="iconContainer%s"
+                resetValues={iconContainerPaddingResetValues}
+                {...this.props}
               />
             </PanelBody>
             <PanelBody
@@ -663,44 +745,6 @@ export default class Inspector extends Component {
                 onChange={(value) =>
                 setAttributes({ hideWidgetMobile: !hideWidgetMobile })
                 }
-              />
-            </PanelBody>
-            <PanelBody
-              title={__("Border Settings", "responsive-block-editor-addons")}
-              initialOpen={false}
-            >
-              <RbeaBlockBorderHelperControl
-                attrNameTemplate="block%s"
-                values={{
-                  radius: blockBorderRadius,
-                  style: blockBorderStyle,
-                  width: blockBorderWidth,
-                  color: blockBorderColor,
-                }}
-                setAttributes={setAttributes}
-                {...this.props}
-              />
-              <BoxShadowControl
-                setAttributes={setAttributes}
-                label={__("Box Shadow", "responsive-block-editor-addons")}
-                boxShadowColor={{ value: boxShadowColor, label: __("Color", "responsive-block-editor-addons") }}
-                boxShadowHOffset={{
-                  value: boxShadowHOffset,
-                  label: __("Horizontal", "responsive-block-editor-addons"),
-                }}
-                boxShadowVOffset={{
-                  value: boxShadowVOffset,
-                  label: __("Vertical", "responsive-block-editor-addons"),
-                }}
-                boxShadowBlur={{ value: boxShadowBlur, label: __("Blur", "responsive-block-editor-addons") }}
-                boxShadowSpread={{
-                  value: boxShadowSpread,
-                  label: __("Spread", "responsive-block-editor-addons"),
-                }}
-                boxShadowPosition={{
-                  value: boxShadowPosition,
-                  label: __("Position", "responsive-block-editor-addons"),
-                }}
               />
             </PanelBody>
             <PanelBody

@@ -80,7 +80,7 @@ class LatestPostsBlock extends Component {
     // Check if there are posts
     const hasPosts = Array.isArray(latestPosts) && latestPosts.length;
 
-    let taxonomyListOptions = [{ value: "", label: __("Select Taxonomy", "responsive-block-editor-addons") }];
+    let taxonomyListOptions = [];
 
     let categoryListOptions = [{ value: "", label: __("All", "responsive-block-editor-addons") }];
 
@@ -181,12 +181,12 @@ class LatestPostsBlock extends Component {
 			  />
 			  </Fragment>
 			  {"" != taxonomyList && (
-				<SelectControl
-				  label={__("Taxonomy", "responsive-block-editor-addons")}
-				  value={attributes.taxonomyType}
-				  onChange={(value) => this.onSelectTaxonomyType(value)}
-				  options={taxonomyListOptions}
-				/>
+          <RbeaTabRadioControl
+            label={__("Taxonomy", "responsive-block-editor-addons")}
+            value={attributes.taxonomyType}
+            onChange={(value) => this.onSelectTaxonomyType(value)}
+            options={taxonomyListOptions}
+          />
 			  )}
 			  {"" != categoriesList && (
 				<Fragment>

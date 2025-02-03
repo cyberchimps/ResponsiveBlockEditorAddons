@@ -145,6 +145,18 @@ function EditorStyles(props) {
     imageRightPaddingTablet,
     layoverHeadingTypographyColor,
     captionTypographyColor,
+    captionTopMargin,
+    captionBottomMargin,
+    captionLeftMargin,
+    captionRightMargin,
+    captionTopMarginTablet,
+    captionBottomMarginTablet,
+    captionLeftMarginTablet,
+    captionRightMarginTablet,
+    captionTopMarginMobile,
+    captionBottomMarginMobile,
+    captionLeftMarginMobile,
+    captionRightMarginMobile,
   } = props.attributes;
   var base_url = window.location.origin;
   var filtervalue =
@@ -281,10 +293,10 @@ function EditorStyles(props) {
       "letter-spacing": generateCSSUnit(captionLetterSpacing, "px"),
       "text-transform": captionTextTransform,
       "color": captionTypographyColor,
-      "margin-top": generateCSSUnit(captiontopmargin, "px"),
-      "margin-bottom": generateCSSUnit(captionbottommargin, "px"),
-      "margin-left": generateCSSUnit(captionleftmargin, "px"),
-      "margin-right": generateCSSUnit(captionrightmargin, "px"),
+      "margin-top": generateCSSUnit(captionTopMargin, "px"),
+      "margin-bottom": generateCSSUnit(captionBottomMargin, "px"),
+      "margin-left": generateCSSUnit(captionLeftMargin, "px"),
+      "margin-right": generateCSSUnit(captionRightMargin, "px"),
     },
     "  .img-main-block:hover figure": {
       "box-shadow":
@@ -356,10 +368,10 @@ function EditorStyles(props) {
     " .responsive-img-caption ": {
       "text-align": captionimageAlignmentTablet,
       "font-size": captionFontSizeTablet,
-      "margin-top": generateCSSUnit(captiontopmarginTablet, "px"),
-      "margin-bottom": generateCSSUnit(captionbottommarginTablet, "px"),
-      "margin-left": generateCSSUnit(captionleftmarginTablet, "px"),
-      "margin-right": generateCSSUnit(captionrightmarginTablet, "px"),
+      "margin-top": generateCSSUnit(captionTopMarginTablet, "px"),
+      "margin-bottom": generateCSSUnit(captionBottomMarginTablet, "px"),
+      "margin-left": generateCSSUnit(captionLeftMarginTablet, "px"),
+      "margin-right": generateCSSUnit(captionRightMarginTablet, "px"),
     },
     " .responsive-image-block-description": {
       "border-top-left-radius": generateCSSUnit(layoverimageTopRadiusTablet, "px"),
@@ -418,10 +430,10 @@ function EditorStyles(props) {
     " .responsive-img-caption ": {
       "text-align": captionimageAlignmentMobile,
       "font-size": captionFontSizeMobile,
-      "margin-top": generateCSSUnit(captiontopmarginMobile, "px"),
-      "margin-bottom": generateCSSUnit(captionbottommarginMobile, "px"),
-      "margin-left": generateCSSUnit(captionleftmarginMobile, "px"),
-      "margin-right": generateCSSUnit(captionrightmarginMobile, "px"),
+      "margin-top": generateCSSUnit(captionTopMarginMobile, "px"),
+      "margin-bottom": generateCSSUnit(captionBottomMarginMobile, "px"),
+      "margin-left": generateCSSUnit(captionLeftMarginMobile, "px"),
+      "margin-right": generateCSSUnit(captionRightMarginMobile, "px"),
     },
     " .responsive-image-block-description": {
       "border-top-left-radius": generateCSSUnit(layoverimageTopRadiusMobile, "px"),

@@ -16,13 +16,15 @@ import RbeaTabRadioControl from "../../../utils/components/rbea-tab-radio-contro
  * WordPress dependencies
  */
 import { __ } from "@wordpress/i18n";
-import { Component } from "@wordpress/element";
+import { Component, Fragment } from "@wordpress/element";
 import { InspectorControls } from "@wordpress/block-editor";
 import {
 	PanelBody,
 	RangeControl,
 	ToggleControl,
 	SelectControl,
+	TabPanel,
+	Dashicon,
 } from "@wordpress/components";
 
 /**
@@ -94,6 +96,8 @@ class Inspector extends Component {
 			captions,
 			captionStyle,
 			gutter,
+			gutterMobile,
+			gutterTablet,
 			radius,
 			lightbox,
 			linkTo,
@@ -163,7 +167,10 @@ class Inspector extends Component {
 						<PanelBody
 							title={__("Masonry settings", "responsive-block-editor-addons")}
 						>
+							<div className="rbea-gallery-masonry-slider-control-container">
 							<ResponsiveTabsControl {...this.props} />
+							</div>
+							<div className="rbea-gallery-masonry-slider-control-container">
 							<RbeaRangeControl
 									label={__("Columns", "responsive-block-editor-addons")}
 									aria-label={__(
@@ -176,24 +183,30 @@ class Inspector extends Component {
 									max={10}
 									step={1}
 								/>
+								</div>
+							<div className="rbea-gallery-masonry-slider-control-container">
 							<RbeaRangeControl
-              label={__("Custom Height", "responsive-block-editor-addons")}
-              value={customHeight}
-              onChange={this.setCustomHeight}
-              min={0}
-              max={1000}
-              step={1}
-            />
-
-            <RbeaRangeControl
-              label={__("Custom Width", "responsive-block-editor-addons")}
-              value={customWidth}
-              onChange={(value) => this.setCustomWidth(value)}
-              min={0}
-              max={1000}
-              step={1}
-            />	
+            				  label={__("Custom Height", "responsive-block-editor-addons")}
+            				  value={customHeight}
+            				  onChange={this.setCustomHeight}
+            				  min={0}
+            				  max={1000}
+            				  step={1}
+            				/>
+							</div>
+							
+							<div className="rbea-gallery-masonry-slider-control-container">
+            				<RbeaRangeControl
+            				  label={__("Custom Width", "responsive-block-editor-addons")}
+            				  value={customWidth}
+            				  onChange={(value) => this.setCustomWidth(value)}
+            				  min={0}
+            				  max={1000}
+            				  step={1}
+            				/>	
+							</div>
 							{gutter > 0 && (
+								<div className="rbea-gallery-masonry-slider-control-container">
 								<RbeaRangeControl
 									label={__("Rounded corners", "responsive-block-editor-addons")}
 									aria-label={__(
@@ -206,6 +219,7 @@ class Inspector extends Component {
 									max={20}
 									step={1}
 								/>
+								</div>
 							)}
 
 							<ToggleControl
